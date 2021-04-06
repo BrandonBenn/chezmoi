@@ -1,0 +1,99 @@
+general {
+        colors = true
+        interval = 5
+        color_good = "#519F50"
+        color_degraded = "#FBB829"
+        color_bad = "#EF2F27"
+}
+
+order += "run_watch VPN"
+order += "wireless _first_"
+order += "run_watch bluetooth"
+order += "volume master"
+order += "battery all"
+order += "load"
+order += "cpu_usage"
+order += "disk /"
+order += "tztime local"
+
+# status icons require font awesome (https://fontawesome.com/v4.7.0/cheatsheet/)
+wireless _first_ {
+        format_up = " %essid"
+        format_down = " "
+        separator = "true"
+        align = "center"
+        separator_block_width = 15
+}
+
+battery all {
+        format = "%status %percentage"
+        status_chr = ""
+        status_bat = ""
+        status_unk = ""
+        low_threshold = "10"
+        threshold_type = "percentage"
+        separator = "true"
+        align = "center"
+        separator_block_width = 15
+}
+
+tztime local {
+        format = " %b %d //  %-I:%M"
+        separator = "true"
+        align = "center"
+        separator_block_width = 15
+}
+
+load {
+        format = " %1min"
+        separator = "false"
+        align = "center"
+        separator_block_width = 10
+}
+
+disk "/" {
+        format = " %avail"
+        low_threshold = "5"
+        threshold_type = "percentage_avail"
+        format_below_threshold = " %avail"
+        separator = "true"
+        align = "center"
+        separator_block_width = 15
+}
+
+run_watch VPN {
+        format = ""
+        format_down = ""
+        # file containing the PID of an openvpn process
+        # varies by system, check i3status guide on pids (https://i3wm.org/i3status/manpage.html)
+         pidfile = "/var/run/openvpn/mullvad_us_dal.pid"
+        separator = "false"
+        align = "center"
+}
+
+run_watch bluetooth {
+        format = ""
+        format_down = ""
+        # file containing the PID of a bluetooth process
+        # varies by system, check i3status guide on pids (https://i3wm.org/i3status/manpage.html)
+        pidfile = "/var/run/udev/data/+bluetooth\:hci0"
+        separator = "true"
+        align = "center"
+        separator_block_width = 15
+}
+
+volume master {
+        format = " %volume"
+        format_muted = "  %volume"
+        # device varies by system, check i3status guide on devices (https://i3wm.org/i3status/manpage.html)
+        separator = "true"
+        align = "center"
+        separator_block_width = 15
+}
+
+cpu_usage {
+        format = " %usage"
+        separator = "false"
+        align = "center"
+        separator_block_width = 10
+}
