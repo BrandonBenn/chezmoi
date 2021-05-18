@@ -1,0 +1,27 @@
+bind "set completion-ignore-case on"
+bind "set completion-map-case on"
+bind "set show-all-if-ambiguous on"
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+
+complete -cf man which sudo
+shopt -s histappend
+shopt -s cmdhist
+shopt -s autocd
+shopt -s dirspell
+shopt -s cdspell
+
+PROMPT_COMMAND='history -a'
+HISTSIZE=500000
+HISTFILESIZE=100000
+HISTCONTROL="erasedups:ignoreboth"
+HISTTIMEFORMAT='%F %T '
+export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history"
+
+command -v starship &> /dev/null && {
+  source <("/usr/bin/starship" init bash --print-full-init)
+}
+
+rm() { trash "$@"; }
+cd() { builtin cd "$@" && command ls -F --color=auto; }
+ls() { printf "${PWD}\n" && command ls -F --color=auto "$@"; }
