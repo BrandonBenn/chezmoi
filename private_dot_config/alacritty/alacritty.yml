@@ -1,0 +1,24 @@
+# copy from themes/ to theme.yml
+import:
+  - ~/.config/alacritty/theme.yml
+  - ~/.config/alacritty/local.yml
+
+font:
+  normal:
+    family: IBM Plex Mono
+    style: Medium
+
+  bold:
+    family: IBM Plex Mono
+    style: Bold
+
+  italic:
+    family: IBM Plex Mono
+    style: Italic
+
+  bold_italic:
+    family: IBM Plex Mono
+    style: Bold Italic
+
+  size: 14
+
