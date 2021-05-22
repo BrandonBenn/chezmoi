@@ -1,0 +1,5 @@
+[user]
+	email = me@brandonbenn.xyz
+	name  = Brandon Duval Benn
+[commit]
+	template = ~/.config/git/template
