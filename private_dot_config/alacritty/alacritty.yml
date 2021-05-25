@@ -3,22 +3,27 @@ import:
   - ~/.config/alacritty/theme.yml
   - ~/.config/alacritty/local.yml
 
+shell:
+  program: /bin/zsh
+  args:
+    - -l
+    - -c
+    - "tmux"
+
 font:
+  size: 14
   normal:
-    family: IBM Plex Mono
-    style: Medium
+    family: JetBrains Mono
+    style: Regular
 
   bold:
-    family: IBM Plex Mono
+    family: JetBrains Mono
     style: Bold
 
   italic:
-    family: IBM Plex Mono
+    family: JetBrains Mono
     style: Italic
 
   bold_italic:
-    family: IBM Plex Mono
+    family: JetBrains Mono
     style: Bold Italic
-
-  size: 14
-
