@@ -1,8 +1,4 @@
 bindkey -e
-typeset -U PATH path
-path=(~/bin "$path[@]")
-export PATH
-
 setopt hist_ignore_all_dups
 setopt hist_ignore_space
 autoload -Uz compinit && compinit
@@ -12,17 +8,21 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '^x^e' edit-command-line
 
-. /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ||:
-. /etc/profile.d/autojump.sh ||:
-
-PROMPT='%F{gray}%B%~%b%f %# '
-
 e() { emacsclient -c -a "emacs" "$@" & disown; }
 alias rm='trash'
 alias pacman='sudo pacman'
 alias ls='ls -F --color=auto'
-alias GET='http get'
-alias PUT='http put'
-alias POST='http post'
 
-eval "$(rbenv init -)"
+. /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ||:
+. /usr/share/z/z.sh ||:
+
+[ -d ~/.asdf ] || {
+    git clone --depth=1\
+        https://github.com/asdf-vm/asdf.git\
+        ~/.asdf --branch v0.8.1
+}
+
+. ~/.asdf/asdf.sh
+fpath=(${ASDF_DIR}/completions $fpath)
+autoload -Uz compinit
+compinit

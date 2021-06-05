@@ -1,3 +1,7 @@
+typeset -U PATH path
+path=(~/bin "$path[@]")
+export PATH
+export PROMPT='%F{gray}%B%~%b%f %# '
 export PROMPT_COMMAND='history -a'
 export HISTCONTROL="erasedups:ignoreboth"
 export HISTTIMEFORMAT='%F %T '
@@ -6,4 +10,3 @@ export HISTSIZE=500000
 export HISTFILESIZE=100000
 export SAVEHIST=$HISTSIZE
 export HISTFILE=~/.cache/zsh_history
-
