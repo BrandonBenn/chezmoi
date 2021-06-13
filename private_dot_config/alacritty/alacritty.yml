@@ -4,7 +4,7 @@ import:
   - ~/.config/alacritty/local.yml
 
 shell:
-  program: /bin/zsh
+  program: /bin/sh
   args:
     - -l
     - -c
