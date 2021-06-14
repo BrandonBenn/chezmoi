@@ -9,7 +9,6 @@ end
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'https://git.sr.ht/~romainl/vim-bruin'
-  use 'https://github.com/cideM/yui'
   use 'junegunn/vim-easy-align'
   use 'tpope/vim-commentary'
   use 'junegunn/goyo.vim'
@@ -21,4 +20,5 @@ require('packer').startup(function(use)
   use 'hrsh7th/vim-vsnip'
   use 'hrsh7th/vim-vsnip-integ'
   use 'rafamadriz/friendly-snippets'
+  use 'https://github.com/dag/vim-fish'
 end)
