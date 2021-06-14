@@ -7,6 +7,8 @@ set backspace=indent,eol,start
 set relativenumber number
 set autochdir
 
+autocmd BufWritePre * :%s/\s\+$//e
+
 command! Buffers Telescope buffers
 command! Finder  Telescope file_browser
 command! Files   Telescope find_files
@@ -17,15 +19,13 @@ nmap L $
 nmap <localleader>; :update<cr>
 nmap <localleader>bd :bd<cr>
 nmap <localleader>noh :noh<cr>
-nmap <localleader>q :x<cr>
+nmap <localleader>q :q<cr>
 nmap <Leader>R :runtime! ~/.config/nvim/*/*<cr>
 nmap <Leader>b :Buffers<cr>
 nmap <C-p> :Files<cr>
 nmap <Leader>g :Goyo<cr>
 nmap <leader>y "+y
-vmap <leader>y "+y
 nmap <leader>Y gg"+yG
+nmap <leader>p "+p
 xmap ga <Plug>(EasyAlign)
 vmap <localleader> :Commentary<cr>
-
-autocmd BufWritePre * :%s/\s\+$//e
