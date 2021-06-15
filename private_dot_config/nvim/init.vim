@@ -14,13 +14,12 @@ command! Finder  Telescope file_browser
 command! Files   Telescope find_files
 command! Grep    Telescope live_grep
 
-nmap H ^
 nmap L $
+nmap H ^
 nmap <localleader>; :update<cr>
 nmap <localleader>bd :bd<cr>
 nmap <localleader>noh :noh<cr>
 nmap <localleader>q :q<cr>
-nmap <Leader>R :runtime! ~/.config/nvim/*/*<cr>
 nmap <Leader>b :Buffers<cr>
 nmap <C-p> :Files<cr>
 nmap <Leader>g :Goyo<cr>
