@@ -9,18 +9,17 @@ opt.nu   = true
 opt.acd  = true
 opt.rnu  = true
 opt.udf  = true
+opt.scs  = true
 opt.udir = '/tmp/nvim/undo'
 cmd([[autocmd BufWritePre * :%s/\s\+$//e]])
 map('n', 'L', '$')
 map('n', 'H', '^')
-map('n', '<leader>w', ':update<cr>')
-map('n', '<leader>bd', ':bd<cr>')
-map('n', '<leader>noh', ':noh<cr>')
-map('n', '<leader>q', ':q<cr>')
-map('n', '<Leader>bb', ':Buffers<cr>')
-map('n', '<leader>f', ':Files<cr>')
-map('n', '<Leader>g', ':Goyo<cr>')
-map('n', '<leader>y', '"+y')
-map('n', '<leader>Y', 'gg"+yG')
-map('n', '<leader>p', '"+p')
+map('n', '<leader>;',  ':')
+map('n', '<leader>w',  ':update<cr>')
+map('n', '<leader>f',  ':Files<cr>')
+map('n', '<Leader>g',  ':ZenMode<cr>')
+map('n', '<leader>y',  '"+y')
+map('n', '<leader>Y',  'gg"+yG')
+map('n', '<leader>p',  '"+p')
+map('n', '<Leader>b', ':Buffers<cr>')
 map('v', 'ga', ':EasyAlign<cr>')
