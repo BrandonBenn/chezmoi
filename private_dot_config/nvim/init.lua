@@ -3,6 +3,7 @@ cmd 'color bruin'
 g.mapleader = ';'
 opt.ls   = 0
 opt.cwh  = 1
+opt.smd  = false
 opt.tgc  = true
 opt.nu   = true
 opt.acd  = true
