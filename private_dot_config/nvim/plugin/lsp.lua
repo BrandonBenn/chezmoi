@@ -1,11 +1,4 @@
-local servers = { "solargraph" }
-
-local status, nvim_lsp = pcall(require, 'lspconfig')
-if not status then
-    print('lspconfig not initialized')
-    return
-end
-
+local nvim_lsp = require 'lspconfig'
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport = {
@@ -17,10 +10,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 }
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-  local function map(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
+local on_attach = function(client)
   -- Mappings.
   local opts = { noremap=true, silent=true }
   -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -40,11 +30,16 @@ local on_attach = function(client, bufnr)
   map('n', '<leader>f',  ':GitFiles<CR>', opts)
 end
 
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
+nvim_lsp.solargraph.setup {
     capabilities = capabilities,
-    on_attach = on_attach
-  }
-end
+    on_attach    = on_attach
+}
+
+local sumneko_root_path = fn.stdpath('cache')..'/lspconfig/sumneko_lua/lua-language-server'
+local sumneko_binary = '/usr/bin/lua-language-server'
+
+nvim_lsp.sumneko_lua.setup {
+    capabilities = capabilities,
+    on_attach    = on_attach,
+    cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
+}
