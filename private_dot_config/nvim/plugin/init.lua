@@ -13,14 +13,15 @@ require('packer').startup(function(use)
   use 'tpope/vim-commentary'
   use 'tpope/vim-dispatch'
   use 'tpope/vim-fugitive'
+  use 'tpope/vim-vinegar'
   use 'tpope/vim-endwise'
+  use 'pbrisbin/vim-mkdir'
   use 'junegunn/fzf.vim'
-  use 'folke/zen-mode.nvim'
+  use 'junegunn/goyo.vim'
   use 'dag/vim-fish'
   use 'neovim/nvim-lspconfig'
-  use 'hrsh7th/vim-vsnip-integ'
-  use 'hrsh7th/nvim-compe'
-  use 'hrsh7th/vim-vsnip'
-  use { 'jghauser/mkdir.nvim',
-    config = function() require('mkdir') end }
+  use {'Shougo/deoplete.nvim', run = ':UpdateRemotePlugins',
+  requires = 'Shougo/deoplete-lsp'}
+  use {'Shougo/neosnippet.vim',
+  requires = 'Shougo/neosnippet-snippets'}
 end)

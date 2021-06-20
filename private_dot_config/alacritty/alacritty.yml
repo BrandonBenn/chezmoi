@@ -1,8 +1,3 @@
-# copy from themes/ to theme.yml
-import:
-  - ~/.config/alacritty/theme.yml
-  - ~/.config/alacritty/local.yml
-
 shell:
   program: /bin/sh
   args:
@@ -11,19 +6,19 @@ shell:
     - "tmux"
 
 font:
-  size: 14
+  size: 13
   normal:
     family: JetBrains Mono
     style: Regular
-
   bold:
     family: JetBrains Mono
     style: Bold
-
   italic:
     family: JetBrains Mono
     style: Italic
-
   bold_italic:
     family: JetBrains Mono
     style: Bold Italic
+
+import:
+  - ~/.config/alacritty/theme.yml # copy from themes/ to theme.yml
