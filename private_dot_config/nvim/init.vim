@@ -14,8 +14,10 @@ nmap <leader>y "+y
 nmap <leader>Y gg"+yG
 nmap <leader>p "+p
 nmap <Leader>b :Buffers<cr>
+nmap <leader>= :Neoformat<cr>
 xmap ga :EasyAlign<cr>
-let g:deoplete#enable_at_startup=1
+let g:deoplete#enable_at_startup = 1
+let g:neoformat_try_formatprg    = 1
 imap <C-j>     <Plug>(neosnippet_expand_or_jump)
 smap <C-j>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-j>     <Plug>(neosnippet_expand_target)
