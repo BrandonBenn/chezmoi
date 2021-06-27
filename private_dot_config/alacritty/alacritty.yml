@@ -8,16 +8,16 @@ shell:
 font:
   size: 13
   normal:
-    family: JetBrains Mono
-    style: Regular
+    family: SF Mono
+    style: Medium
   bold:
-    family: JetBrains Mono
+    family: SF Mono
     style: Bold
   italic:
-    family: JetBrains Mono
+    family: SF Mono
     style: Italic
   bold_italic:
-    family: JetBrains Mono
+    family: SF Mono
     style: Bold Italic
 
 import:

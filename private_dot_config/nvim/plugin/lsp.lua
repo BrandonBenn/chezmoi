@@ -30,6 +30,12 @@ local on_attach = function(client)
   map('n', '<leader>f',  ':GitFiles<CR>', opts)
 end
 
+nvim_lsp.tsserver.setup {
+    settings = {documentFormatting = true},
+    capabilities = capabilities,
+    on_attach    = on_attach
+}
+
 nvim_lsp.solargraph.setup {
     capabilities = capabilities,
     on_attach    = on_attach
