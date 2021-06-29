@@ -29,12 +29,21 @@ cmd [[nnoremap <silent><leader>w :update<cr>]]
 cmd [[nnoremap <silent><leader>f :Files<cr>]]
 cmd [[nnoremap <silent><Leader>h :History<cr>]]
 cmd [[nnoremap <silent><Leader>g :ZenMode<cr>]]
+cmd [[vnoremap <silent><leader>y "+y]]
 cmd [[nnoremap <silent><leader>y "+y]]
 cmd [[nnoremap <silent><leader>Y gg"+yG]]
 cmd [[nnoremap <silent><leader>p "+p]]
 cmd [[nnoremap <silent><Leader>b :Buffers<cr>]]
-cmd [[nnoremap <silent><leader>= :Autoformat<cr>]]
+cmd [[nnoremap <silent><Tab>   :bnext<cr>]]
+cmd [[nnoremap <silent><S-Tab> :bprev<cr>]]
 cmd [[xnoremap ga :EasyAlign<cr>]]
 cmd [[imap <C-j>     <Plug>(neosnippet_expand_or_jump)]]
 cmd [[smap <C-j>     <Plug>(neosnippet_expand_or_jump)]]
 cmd [[xmap <C-j>     <Plug>(neosnippet_expand_target)]]
+cmd [[autocmd TermOpen * setlocal nonumber norelativenumber]]
+cmd ([[
+augroup FormatAutogroup
+  autocmd!
+  autocmd BufWritePost *.rb Autoformat
+augroup END
+]], true)

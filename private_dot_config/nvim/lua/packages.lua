@@ -30,8 +30,7 @@ require('packer').startup(function(use)
   use {'Shougo/neosnippet.vim',
   requires = 'Shougo/neosnippet-snippets'}
   use 'ThePrimeagen/vim-be-good'
-  use 'akinsho/nvim-bufferline.lua'
+  use 'ap/vim-buftabline'
 end)
 
-require("bufferline").setup{}
-require("lsp")
+require("config/lsp")
