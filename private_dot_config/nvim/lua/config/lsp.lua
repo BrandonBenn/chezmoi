@@ -36,14 +36,8 @@ lsp.tsserver.setup {
 }
 
 lsp.solargraph.setup {
+    settings = {documentFormatting = true},
     capabilities = capabilities,
     on_attach    = on_attach
 }
 
-local sumneko_root_path = vim.fn.stdpath('cache')..'/lspconfig/sumneko_lua/lua-language-server'
-local sumneko_binary = '/usr/bin/lua-language-server'
-lsp.sumneko_lua.setup {
-    capabilities = capabilities,
-    on_attach    = on_attach,
-    cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
-}

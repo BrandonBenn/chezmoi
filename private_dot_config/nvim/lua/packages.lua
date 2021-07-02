@@ -17,20 +17,26 @@ require('packer').startup(function(use)
   use 'tpope/vim-commentary'
   use 'tpope/vim-dispatch'
   use 'tpope/vim-surround'
-  use 'tpope/vim-vinegar'
   use 'tpope/vim-endwise'
+  use 'tpope/vim-eunuch'
   use 'pbrisbin/vim-mkdir'
+  use 'mcchrish/nnn.vim'
   use 'junegunn/fzf.vim'
   use 'folke/zen-mode.nvim'
-  use 'TimUntersberger/neogit'
   use 'vim-autoformat/vim-autoformat'
-  use 'dag/vim-fish'
   use 'neovim/nvim-lspconfig'
-  use {'Shougo/deoplete.nvim', run = ':UpdateRemotePlugins', requires = 'Shougo/deoplete-lsp'}
-  use {'Shougo/neosnippet.vim',
-  requires = 'Shougo/neosnippet-snippets'}
+  use 'hrsh7th/nvim-compe'
+  use 'SirVer/ultisnips'
   use 'ThePrimeagen/vim-be-good'
   use 'ap/vim-buftabline'
+  use 'jiangmiao/auto-pairs'
+  use 'tversteeg/registers.nvim'
 end)
 
 require("config/lsp")
+require("config/compe")
+require('nnn').setup{
+    set_default_mappings = false,
+    session = 'global',
+    layout = { window = { width = 0.4,  height = 0.4, xoffset = 0.6 } }
+}

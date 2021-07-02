@@ -17,9 +17,9 @@ opt.swapfile = false
 opt.exrc = true
 opt.wrap = false
 opt.mouse = "a"
+opt.completeopt = "menuone,noselect"
 
 g['netrw_liststyle'] = 3
-g['deoplete#enable_at_startup'] = 1
 
 cmd [[color bruin]]
 cmd [[autocmd BufWritePre * :RemoveTrailingSpaces]]
@@ -40,10 +40,5 @@ cmd [[xnoremap ga :EasyAlign<cr>]]
 cmd [[imap <C-j>     <Plug>(neosnippet_expand_or_jump)]]
 cmd [[smap <C-j>     <Plug>(neosnippet_expand_or_jump)]]
 cmd [[xmap <C-j>     <Plug>(neosnippet_expand_target)]]
-cmd [[autocmd TermOpen * setlocal nonumber norelativenumber]]
-cmd ([[
-augroup FormatAutogroup
-  autocmd!
-  autocmd BufWritePost *.rb Autoformat
-augroup END
-]], true)
+
+require("config/terminal")
