@@ -12,16 +12,12 @@ else
 fi
 
 # Aliases
-alias ls="ls ${lsflags}"
 alias ll="ls ${lsflags} -l"
 alias la="ls ${lsflags} -la"
-alias ,="cd .."
-alias m="less"
+alias rm="trash"
 
 # More suitable for .zshenv
 EDITOR=nvim
-PROMPT='%n@%m %3~%(!.#.$)%(?.. [%?]) '
-
 # History settings
 HISTFILE=~/.cache/history.zsh
 HISTSIZE=10000
@@ -37,6 +33,9 @@ setopt hist_reduce_blanks       # Remove extra blanks from each command added to
 setopt hist_verify              # Don't execute immediately upon history expansion
 setopt inc_append_history       # Write to history file immediately, not when shell quits
 setopt share_history            # Share history among all sessions
+
+# Prompt
+autoload -Uz promptinit && promptinit && prompt walters
 
 # Tab completion
 autoload -Uz compinit && compinit
@@ -58,8 +57,6 @@ path+=(.)                       # append current directory to path (controversia
 # BINDKEY
 bindkey -e
 bindkey '\e[3~' delete-char
-bindkey '^p' history-search-backward
-bindkey '^n' history-search-forward
 bindkey ' '  magic-space
 
 # PLUGINS
@@ -70,14 +67,5 @@ else
     . /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 
-## ASDF
-# Location of the asdf scripts.
-[[ -d /opt/asdf-vm ]] && ASDF_DIR=/opt/asdf-vm || ASDF_DIR="$ASDF_DATA_DIR"
-export ASDF_DIR
 
-[[ -d $ASDF_DIR ]] || {
-    echo "asdf is not installed. Run the following command to install:\n
-    `git clone https://github.com/asdf-vm/asdf.git $ASDF_DIR --branch v0.8.1`"
-}
-
-source "$ASDF_DIR"/asdf.sh
+eval "$(frum init)" ||:  # Ruby version manager
