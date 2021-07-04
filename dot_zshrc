@@ -35,7 +35,7 @@ setopt inc_append_history       # Write to history file immediately, not when sh
 setopt share_history            # Share history among all sessions
 
 # Prompt
-autoload -Uz promptinit && promptinit && prompt walters
+autoload -Uz promptinit && promptinit && prompt suse
 
 # Tab completion
 autoload -Uz compinit && compinit
@@ -58,6 +58,8 @@ path+=(.)                       # append current directory to path (controversia
 bindkey -e
 bindkey '\e[3~' delete-char
 bindkey ' '  magic-space
+insert-sudo() { zle beginning-of-line; zle -U "sudo " }
+zle -N insert-sudo insert-sudo && bindkey '^[E' insert-sudo
 
 # PLUGINS
 eval "$(zoxide init zsh)"
