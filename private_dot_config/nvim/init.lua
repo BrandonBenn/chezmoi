@@ -30,10 +30,7 @@ vim.cmd([[command! ToggleMouse execute 'lua toggle_mouse()']])
 require 'packages'
 vim.cmd [[color bruin]]
 vim.cmd [[autocmd BufWritePre * :RemoveTrailingSpaces]]
-vim.cmd [[nnoremap <silent><leader>f :Files<cr>]]
-vim.cmd [[nnoremap <silent><Leader>h :History<cr>]]
 vim.cmd [[nnoremap <silent><Leader>g :ZenMode<cr>]]
-vim.cmd [[nnoremap <silent><Leader>b :Buffers<cr>]]
 vim.cmd [[xnoremap <silent>ga :EasyAlign<cr>]]
 vim.cmd [[nnoremap <silent><Tab>   :BufferLineCycleNext<cr>]]
 vim.cmd [[nnoremap <silent><S-Tab> :BufferLineCyclePrev<cr>]]

@@ -16,7 +16,6 @@ require('packer').startup(function(use)
   use 'tpope/vim-endwise'
   use 'tpope/vim-eunuch'
   use 'pbrisbin/vim-mkdir'
-  use { 'junegunn/fzf.vim', requires = {'junegunn/fzf', run = './install --all'} }
   use 'folke/zen-mode.nvim'
   use 'vim-autoformat/vim-autoformat'
   use 'neovim/nvim-lspconfig'
@@ -27,8 +26,13 @@ require('packer').startup(function(use)
   use 'glepnir/lspsaga.nvim'
   use 'jiangmiao/auto-pairs'
   use 'tversteeg/registers.nvim'
+  use {
+      'nvim-telescope/telescope.nvim',
+      requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+  }
 end)
 
+require("packages/telescope")
 require("packages/lsp")
 require("packages/compe")
 
