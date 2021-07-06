@@ -18,23 +18,27 @@ require('packer').startup(function(use)
   use 'pbrisbin/vim-mkdir'
   use 'folke/zen-mode.nvim'
   use 'vim-autoformat/vim-autoformat'
-  use 'neovim/nvim-lspconfig'
-  use 'hrsh7th/nvim-compe'
   use 'SirVer/ultisnips'
   use 'ThePrimeagen/vim-be-good'
-  use 'akinsho/nvim-bufferline.lua'
-  use 'glepnir/lspsaga.nvim'
   use 'jiangmiao/auto-pairs'
-  use 'tversteeg/registers.nvim'
   use {
-      'nvim-telescope/telescope.nvim',
-      requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+      'akinsho/nvim-bufferline.lua',
+      config = require("bufferline").setup{}
+  }
+  use {
+      'glepnir/lspsaga.nvim',
+      config = require('lspsaga').init_lsp_saga()
+  }
+  use {
+      'neovim/nvim-lspconfig',
+      config = require('packages.lsp')
+  }
+  use {
+      'hrsh7th/nvim-compe',
+      config = require('packages.compe')
+  }
+  use {
+      'nvim-telescope/telescope.nvim', requires = {'nvim-lua/popup.nvim'},
+      config = require('packages.telescope')
   }
 end)
-
-require("packages/telescope")
-require("packages/lsp")
-require("packages/compe")
-
-require("bufferline").setup{}
-require('lspsaga').init_lsp_saga()
