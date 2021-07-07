@@ -16,7 +16,6 @@ vim.o.swapfile = false
 vim.o.exrc = true
 vim.o.wrap = false
 vim.o.completeopt = "menuone,noselect"
-vim.g['netrw_liststyle'] = 3
 
 require 'utils'
 require 'terminal'
@@ -25,7 +24,7 @@ vim.cmd [[vnoremap <silent><leader>y "+y]]
 vim.cmd [[nnoremap <silent><leader>y "+y]]
 vim.cmd [[nnoremap <silent><leader>Y gg"+yG]]
 vim.cmd [[nnoremap <silent><leader>w :update<cr>]]
-vim.cmd([[command! ToggleMouse execute 'lua toggle_mouse()']])
+vim.cmd [[command! ToggleMouse execute 'lua toggle_mouse()']]
 
 require 'packages'
 vim.cmd [[color bruin]]

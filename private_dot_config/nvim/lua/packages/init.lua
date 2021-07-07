@@ -12,7 +12,6 @@ require('packer').startup(function(use)
   use 'tpope/vim-commentary'
   use 'tpope/vim-dispatch'
   use 'tpope/vim-surround'
-  use 'tpope/vim-vinegar'
   use 'tpope/vim-endwise'
   use 'tpope/vim-eunuch'
   use 'pbrisbin/vim-mkdir'
@@ -21,6 +20,7 @@ require('packer').startup(function(use)
   use 'SirVer/ultisnips'
   use 'ThePrimeagen/vim-be-good'
   use 'jiangmiao/auto-pairs'
+  use 'justinmk/vim-dirvish'
   use {
       'akinsho/nvim-bufferline.lua',
       config = require("bufferline").setup{}
