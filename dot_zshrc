@@ -57,12 +57,9 @@ zle -N edit-command-line
 bindkey "^X^E" edit-command-line
 
 # PLUGINS
-eval "$(zoxide init zsh)"
-if [[ -d /usr/share/zsh/ ]]; then
-    . /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-else
-    . /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-fi
+(( $+commands[brew] )) && prefix=/usr/local/share || prefix=/usr/share/zsh/plugins
+. $prefix/zsh-autosuggestions/zsh-autosuggestions.zsh ||:
 
-
+eval "$(zoxide init zsh)" ||: # Fast CD command
 eval "$(frum init)" ||:  # Ruby version manager
+eval "$(fnm env)" ||: # Node.js version manager

@@ -19,6 +19,10 @@ vim.o.completeopt = "menuone,noselect"
 
 require 'utils'
 require 'terminal'
+vim.cmd [[nnoremap H ^]]
+vim.cmd [[nnoremap L $]]
+vim.cmd [[nnoremap <silent><Tab>   :bnext<cr>]]
+vim.cmd [[nnoremap <silent><S-Tab> :bprev<cr>]]
 vim.cmd [[nnoremap <silent><leader>p "+p]]
 vim.cmd [[vnoremap <silent><leader>y "+y]]
 vim.cmd [[nnoremap <silent><leader>y "+y]]
@@ -31,5 +35,3 @@ vim.cmd [[color bruin]]
 vim.cmd [[autocmd BufWritePre * :RemoveTrailingSpaces]]
 vim.cmd [[nnoremap <silent><Leader>g :ZenMode<cr>]]
 vim.cmd [[xnoremap <silent>ga :EasyAlign<cr>]]
-vim.cmd [[nnoremap <silent><Tab>   :BufferLineCycleNext<cr>]]
-vim.cmd [[nnoremap <silent><S-Tab> :BufferLineCyclePrev<cr>]]

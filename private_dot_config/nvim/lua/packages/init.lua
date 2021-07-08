@@ -10,6 +10,7 @@ require('packer').startup(function(use)
   use 'https://git.sr.ht/~romainl/vim-bruin'
   use 'junegunn/vim-easy-align'
   use 'tpope/vim-commentary'
+  use 'tpope/vim-fugitive'
   use 'tpope/vim-dispatch'
   use 'tpope/vim-surround'
   use 'tpope/vim-endwise'
@@ -21,10 +22,8 @@ require('packer').startup(function(use)
   use 'ThePrimeagen/vim-be-good'
   use 'jiangmiao/auto-pairs'
   use 'justinmk/vim-dirvish'
-  use {
-      'akinsho/nvim-bufferline.lua',
-      config = require("bufferline").setup{}
-  }
+  use 'lukas-reineke/indent-blankline.nvim'
+  use 'ap/vim-buftabline'
   use {
       'glepnir/lspsaga.nvim',
       config = require('lspsaga').init_lsp_saga()
