@@ -1,5 +1,5 @@
 -- Install package manager
-local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.cmd('!git clone --depth=1 https://github.com/wbthomason/packer.nvim ' .. install_path)
 end
@@ -10,7 +10,7 @@ require('packer').startup(function(use)
   use 'https://git.sr.ht/~romainl/vim-bruin'
   use 'junegunn/vim-easy-align'
   use 'tpope/vim-commentary'
-  use 'tpope/vim-fugitive'
+  use 'TimUntersberger/neogit'
   use 'tpope/vim-dispatch'
   use 'tpope/vim-surround'
   use 'tpope/vim-endwise'
@@ -22,22 +22,22 @@ require('packer').startup(function(use)
   use 'ThePrimeagen/vim-be-good'
   use 'jiangmiao/auto-pairs'
   use 'justinmk/vim-dirvish'
-  use 'lukas-reineke/indent-blankline.nvim'
+  -- use 'lukas-reineke/indent-blankline.nvim'
   use 'ap/vim-buftabline'
   use {
       'glepnir/lspsaga.nvim',
-      config = require('lspsaga').init_lsp_saga()
+      config = require('packages.lspsaga').setup()
   }
   use {
       'neovim/nvim-lspconfig',
-      config = require('packages.lsp')
+      config = require('packages.lsp').setup()
   }
   use {
       'hrsh7th/nvim-compe',
-      config = require('packages.compe')
+      config = require('packages.compe').setup()
   }
   use {
       'nvim-telescope/telescope.nvim', requires = {'nvim-lua/popup.nvim'},
-      config = require('packages.telescope')
+      config = require('packages.telescope').setup()
   }
 end)

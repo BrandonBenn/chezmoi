@@ -1,7 +1,13 @@
-export EDITOR=nvim
-export VISUAL=$EDITOR
-export TERM=xterm-256color
-
 typeset -U PATH path
 path=(~/.local/bin ~/bin "$path[@]")
+
 export PATH
+export EDITOR=nvim
+export VISUAL=${EDITOR}
+export TERM=xterm-256color
+export HISTFILE=~/.cache/history.zsh
+export HISTSIZE=10000
+export SAVEHIST=10000
+
+declare -A ZINIT  # initial Zinit's hash definition
+ZINIT[HOME_DIR]=~/.local/share/zinit

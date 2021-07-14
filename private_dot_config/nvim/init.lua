@@ -1,4 +1,4 @@
-vim.g.mapleader = ';'
+vim.g.mapleader = ' '
 vim.o.showmode = false
 vim.o.termguicolors = true
 vim.o.relativenumber = true
@@ -23,11 +23,13 @@ vim.cmd [[nnoremap H ^]]
 vim.cmd [[nnoremap L $]]
 vim.cmd [[nnoremap <silent><Tab>   :bnext<cr>]]
 vim.cmd [[nnoremap <silent><S-Tab> :bprev<cr>]]
+vim.cmd [[nnoremap <silent>;w :update<cr>]]
+vim.cmd [[nnoremap <silent>;bd :bd<cr>]]
+vim.cmd [[nnoremap <silent>;noh :noh<cr>]]
 vim.cmd [[nnoremap <silent><leader>p "+p]]
 vim.cmd [[vnoremap <silent><leader>y "+y]]
 vim.cmd [[nnoremap <silent><leader>y "+y]]
 vim.cmd [[nnoremap <silent><leader>Y gg"+yG]]
-vim.cmd [[nnoremap <silent><leader>w :update<cr>]]
 vim.cmd [[command! ToggleMouse execute 'lua toggle_mouse()']]
 
 require 'packages'
