@@ -10,7 +10,6 @@ require('packer').startup(function(use)
   use 'https://git.sr.ht/~romainl/vim-bruin'
   use 'junegunn/vim-easy-align'
   use 'tpope/vim-commentary'
-  use 'TimUntersberger/neogit'
   use 'tpope/vim-dispatch'
   use 'tpope/vim-surround'
   use 'tpope/vim-endwise'
