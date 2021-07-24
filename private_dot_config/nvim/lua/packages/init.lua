@@ -16,27 +16,27 @@ require('packer').startup(function(use)
   use 'tpope/vim-eunuch'
   use 'pbrisbin/vim-mkdir'
   use 'folke/zen-mode.nvim'
-  use 'vim-autoformat/vim-autoformat'
   use 'SirVer/ultisnips'
-  use 'ThePrimeagen/vim-be-good'
   use 'jiangmiao/auto-pairs'
   use 'justinmk/vim-dirvish'
-  -- use 'lukas-reineke/indent-blankline.nvim'
   use 'ap/vim-buftabline'
+  use 'sbdchd/neoformat'
+  use 'vim-crystal/vim-crystal'
   use {
       'glepnir/lspsaga.nvim',
-      config = require('packages.lspsaga').setup()
+      config = function() require('packages.lspsaga').setup() end
   }
   use {
       'neovim/nvim-lspconfig',
-      config = require('packages.lsp').setup()
+      config = function() require('packages.lsp').setup() end
   }
   use {
       'hrsh7th/nvim-compe',
-      config = require('packages.compe').setup()
+      config = function() require('packages.compe').setup() end
   }
   use {
-      'nvim-telescope/telescope.nvim', requires = {'nvim-lua/popup.nvim'},
-      config = require('packages.telescope').setup()
+      'nvim-telescope/telescope.nvim',
+      requires = {'nvim-lua/popup.nvim'},
+      config = function() require('packages.telescope').setup() end
   }
 end)

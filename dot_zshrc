@@ -1,8 +1,10 @@
-autoload -Uz promptinit && promptinit && prompt suse
+PROMPT='%F{green}%n%f@%F{magenta}%m%f %F{blue}%B%~%b%f %# '
+RPROMPT='[%F{yellow}%?%f]'
 # Aliases
 alias ls='ls -F'
 alias ll="ls -lgh"
 alias la="ll -a"
+alias n="nnn -Cd; source $NNN_TMPFILE; rm -f $NNN_TMPFILE"
 # History settings
 setopt share_history                # Share history among all sessions
 setopt append_history               # allow multiple sessions to append to one history
@@ -30,6 +32,6 @@ source $ZINIT[HOME_DIR]/zinit.zsh
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light mattmc3/zsh-safe-rm
+zinit load agkozak/zsh-z
 
-eval "$(zoxide init zsh)" ||:       # Fast CD command
-source /opt/asdf-vm/asdf.sh
+. /opt/asdf-vm/asdf.sh 2>/dev/null ||:

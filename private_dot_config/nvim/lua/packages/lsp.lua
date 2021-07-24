@@ -46,6 +46,13 @@ function M.setup()
         on_attach    = on_attach
     }
 
+    lsp.crystalline.setup {
+        settings = {documentFormatting = true},
+        capabilities = capabilities,
+        on_attach    = on_attach
+    }
+
+
     -- Map :Format to vim.lsp.buf.formatting()
     vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
 end

@@ -30,10 +30,11 @@ vim.cmd [[nnoremap <silent><leader>p "+p]]
 vim.cmd [[vnoremap <silent><leader>y "+y]]
 vim.cmd [[nnoremap <silent><leader>y "+y]]
 vim.cmd [[nnoremap <silent><leader>Y gg"+yG]]
+vim.cmd [[vnoremap < <gv]]
+vim.cmd [[vnoremap > >gv]]
 vim.cmd [[command! ToggleMouse execute 'lua toggle_mouse()']]
 
 require 'packages'
 vim.cmd [[color bruin]]
-vim.cmd [[autocmd BufWritePre * :RemoveTrailingSpaces]]
 vim.cmd [[nnoremap <silent><Leader>g :ZenMode<cr>]]
 vim.cmd [[xnoremap <silent>ga :EasyAlign<cr>]]
