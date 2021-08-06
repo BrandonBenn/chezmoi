@@ -2,14 +2,28 @@ local M = {}
 
 function M.setup()
     require('telescope').setup{
+        defaults = {
+            initial_mode = "insert",
+            layout_strategy = "center",
+            layout_config = {
+                height = 50
+            }
+        },
+        extensions = {
+            fzf = {
+                override_generic_sorter = false, -- override the generic sorter
+                override_file_sorter = true,     -- override the file sorter
+                case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+            }
+        },
         pickers = {
-            find_files = { theme = "dropdown", previewer = false, sort_lastused = true, },
-            git_files  = { theme = "dropdown", previewer = false, sort_lastused = true, },
-            oldfiles   = { theme = "dropdown", previewer = false, sort_lastused = true, },
-            live_grep  = { theme = "dropdown" },
+            fd        = { previewer = false, sort_lastused = true },
+            commands  = { theme = "ivy", sort_lastused = true },
+            git_files = { previewer = false, sort_lastused = true },
+            oldfiles  = { previewer = false, sort_lastused = true },
             lsp_references = { theme = "dropdown" },
             buffers = {
-                theme = "dropdown", previewer = false, sort_lastused = true,
+                previewer = false, sort_lastused = true,
                 mappings = { n = { ["dd"] = require("telescope.actions").delete_buffer } }
             }
         }
@@ -17,7 +31,7 @@ function M.setup()
 
     function project_files()
         if not pcall(require'telescope.builtin'.git_files) then
-            require'telescope.builtin'.find_files()
+            require'telescope.builtin'.fd()
         end
     end
 
@@ -46,6 +60,7 @@ function M.setup()
     vim.cmd([[command! FNotes execute 'lua find_notes()' ]])
     vim.cmd([[command! GNotes execute 'lua grep_notes()' ]])
 
+    vim.cmd[[nnoremap <silent>;x :Telescope commands<cr>]]
     vim.cmd[[nnoremap <silent><Leader>f :Telescope find_files<cr>]]
     vim.cmd[[nnoremap <silent><Leader><Leader> :Telescope buffers<cr>]]
     vim.cmd[[nnoremap <silent><C-p> :lua project_files()<cr>]]

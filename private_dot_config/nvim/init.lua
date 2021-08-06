@@ -21,8 +21,11 @@ require 'utils'
 require 'terminal'
 vim.cmd [[nnoremap H ^]]
 vim.cmd [[nnoremap L $]]
-vim.cmd [[nnoremap <silent><Tab>   :bnext<cr>]]
+vim.cmd [[nnoremap <silent><C-j> :cnext<cr>]]
+vim.cmd [[nnoremap <silent><C-k> :cprev<cr>]]
+vim.cmd [[nnoremap <silent><Tab> :bnext<cr>]]
 vim.cmd [[nnoremap <silent><S-Tab> :bprev<cr>]]
+vim.cmd [[nnoremap <silent>;q :quitall<cr>]]
 vim.cmd [[nnoremap <silent>;w :update<cr>]]
 vim.cmd [[nnoremap <silent>;bd :bd<cr>]]
 vim.cmd [[nnoremap <silent>;noh :noh<cr>]]
@@ -37,4 +40,5 @@ vim.cmd [[command! ToggleMouse execute 'lua toggle_mouse()']]
 require 'packages'
 vim.cmd [[color bruin]]
 vim.cmd [[nnoremap <silent><Leader>g :ZenMode<cr>]]
+vim.cmd [[nnoremap <silent>;f :Neoformat<cr>]]
 vim.cmd [[xnoremap <silent>ga :EasyAlign<cr>]]

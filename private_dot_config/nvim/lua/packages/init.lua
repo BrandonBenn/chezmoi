@@ -11,7 +11,6 @@ require('packer').startup(function(use)
   use 'junegunn/vim-easy-align'
   use 'tpope/vim-commentary'
   use 'tpope/vim-dispatch'
-  use 'tpope/vim-surround'
   use 'tpope/vim-endwise'
   use 'tpope/vim-eunuch'
   use 'pbrisbin/vim-mkdir'
@@ -22,6 +21,18 @@ require('packer').startup(function(use)
   use 'ap/vim-buftabline'
   use 'sbdchd/neoformat'
   use 'vim-crystal/vim-crystal'
+  use 'editorconfig/editorconfig-vim'
+  use 'machakann/vim-sandwich'
+  use 'APZelos/blamer.nvim'
+  use 'simrat39/rust-tools.nvim'
+  use{
+      "aserowy/tmux.nvim",
+      config = function() require('packages.tmux').setup() end
+  }
+  use {
+      'nvim-treesitter/nvim-treesitter',
+      run = ':TSUpdate'
+  }
   use {
       'glepnir/lspsaga.nvim',
       config = function() require('packages.lspsaga').setup() end
@@ -36,7 +47,8 @@ require('packer').startup(function(use)
   }
   use {
       'nvim-telescope/telescope.nvim',
-      requires = {'nvim-lua/popup.nvim'},
+      requires = {{'nvim-lua/popup.nvim'}, {
+          'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}},
       config = function() require('packages.telescope').setup() end
   }
 end)
