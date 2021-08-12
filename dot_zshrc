@@ -10,6 +10,7 @@ PROMPT=$'\n'' ${PWD/#$HOME/~} %B${vcs_info_msg_0_}%b'$'\n'' λ '
 alias ls="ls -F"
 alias ll="ls -Flgh"
 alias la="ll -Fa"
+alias c="clear"
 cd () { builtin cd "$@" ; }
 rm () { (( $+commands[trash] )) && trash "$@" 2>/dev/null || command rm "$@" ; }
 

@@ -24,9 +24,9 @@ require('packer').startup(function(use)
   use 'editorconfig/editorconfig-vim'
   use 'machakann/vim-sandwich'
   use 'APZelos/blamer.nvim'
-  use 'simrat39/rust-tools.nvim'
+  use 'mattn/emmet-vim'
   use{
-      "aserowy/tmux.nvim",
+      "numToStr/Navigator.nvim",
       config = function() require('packages.tmux').setup() end
   }
   use {

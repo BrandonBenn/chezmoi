@@ -1,24 +1,21 @@
 local M = {}
 
 function M.setup()
-        require("tmux").setup({
-            -- overwrite default configuration
-            -- here, e.g. to enable default bindings
-            copy_sync = {
-                -- enables copy sync and overwrites all register actions to
-                -- sync registers *, +, unnamed, and 0 till 9 from tmux in advance
-                enable = true,
-            },
-            navigation = {
-                -- enables default keybindings (C-hjkl) for normal mode
-                enable_default_keybindings = true,
-            },
-            resize = {
-                -- enables default keybindings (A-hjkl) for normal mode
-                enable_default_keybindings = true,
-            }
-        })
-end
+    -- Configuration
+    require('Navigator').setup({
+        auto_save = 'current',
+        disable_on_zoom = true
+    })
 
+    -- Keybindings
+    local map = vim.api.nvim_set_keymap
+    local opts = { noremap = true, silent = true }
+
+    map('n', "<A-h>", "<CMD>lua require('Navigator').left()<CR>", opts)
+    map('n', "<A-k>", "<CMD>lua require('Navigator').up()<CR>", opts)
+    map('n', "<A-l>", "<CMD>lua require('Navigator').right()<CR>", opts)
+    map('n', "<A-j>", "<CMD>lua require('Navigator').down()<CR>", opts)
+    map('n', "<A-p>", "<CMD>lua require('Navigator').previous()<CR>", opts)
+end
 
 return M
