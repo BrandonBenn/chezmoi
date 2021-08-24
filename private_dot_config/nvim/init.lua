@@ -8,14 +8,13 @@ vim.o.number = true
 vim.o.expandtab = true
 vim.o.smartindent = true
 vim.o.tabstop  = 4
-vim.o.shiftwidth  = 4
-vim.o.softtabstop = 4
+vim.o.shiftwidth  = 4 vim.o.softtabstop = 4
 vim.o.laststatus = 0
 vim.o.udir = '/tmp/nvim/undo'
 vim.o.swapfile = false
 vim.o.exrc = true
 vim.o.wrap = false
-vim.o.completeopt = "menuone,noselect"
+vim.o.completeopt = "menuone,noselect,noinsert"
 
 require 'utils'
 require 'terminal'
@@ -42,3 +41,4 @@ vim.cmd [[color bruin]]
 vim.cmd [[nnoremap <silent><Leader>g :ZenMode<cr>]]
 vim.cmd [[nnoremap <silent>;f :Neoformat<cr>]]
 vim.cmd [[xnoremap <silent>ga :EasyAlign<cr>]]
+vim.g.coq_settings = { auto_start = "shut-up" }

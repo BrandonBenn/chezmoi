@@ -8,24 +8,21 @@ end
 require('packer').startup(function(use)
   use { 'wbthomason/packer.nvim', requires = {'nvim-lua/plenary.nvim'}}
   use 'https://git.sr.ht/~romainl/vim-bruin'
+  use 'editorconfig/editorconfig-vim'
   use 'junegunn/vim-easy-align'
   use 'tpope/vim-commentary'
   use 'tpope/vim-dispatch'
   use 'tpope/vim-endwise'
   use 'tpope/vim-eunuch'
   use 'pbrisbin/vim-mkdir'
-  use 'folke/zen-mode.nvim'
-  use 'SirVer/ultisnips'
   use 'jiangmiao/auto-pairs'
   use 'justinmk/vim-dirvish'
   use 'ap/vim-buftabline'
   use 'sbdchd/neoformat'
   use 'vim-crystal/vim-crystal'
-  use 'editorconfig/editorconfig-vim'
   use 'machakann/vim-sandwich'
   use 'APZelos/blamer.nvim'
-  use 'zah/nim.vim'
-  use{
+  use {
       "numToStr/Navigator.nvim",
       config = function() require('packages.tmux').setup() end
   }
@@ -34,16 +31,8 @@ require('packer').startup(function(use)
       run = ':TSUpdate'
   }
   use {
-      'glepnir/lspsaga.nvim',
-      config = function() require('packages.lspsaga').setup() end
-  }
-  use {
       'neovim/nvim-lspconfig',
       config = function() require('packages.lsp').setup() end
-  }
-  use {
-      'hrsh7th/nvim-compe',
-      config = function() require('packages.compe').setup() end
   }
   use {
       'nvim-telescope/telescope.nvim',
@@ -51,4 +40,6 @@ require('packer').startup(function(use)
           'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}},
       config = function() require('packages.telescope').setup() end
   }
+  use { 'ms-jpq/coq_nvim', branch = 'coq' }
+  use { 'ms-jpq/coq.artifacts', branch = 'artifacts'} -- 9000+ Snippets
 end)
