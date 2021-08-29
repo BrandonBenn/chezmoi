@@ -1,5 +1,5 @@
 typeset -U PATH path
-path=(~/.local/bin ~/bin ~/.asdf/shims ~/.asdf/installs/python/3.9.6/bin "$path[@]")
+path=(~/.local/bin ~/bin ~/.asdf/shims ~/.nimble/bin ~/.asdf/installs/python/3.9.6/bin "$path[@]")
 
 export PATH
 export XDG_DATA_HOME=~/.local/share

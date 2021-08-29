@@ -6,18 +6,18 @@ shell:
     - "tmux"
 
 font:
-  size: 13
+  size: 14
   normal:
-    family: SF Mono
+    family: Fantasque Sans Mono
     style: Medium
   bold:
-    family: SF Mono
+    family: Fantasque Sans Mono
     style: Bold
   italic:
-    family: SF Mono
+    family: Fantasque Sans Mono
     style: Italic
   bold_italic:
-    family: SF Mono
+    family: Fantasque Sans Mono
     style: Bold Italic
 
 import:

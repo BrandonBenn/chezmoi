@@ -23,7 +23,7 @@ function M.setup()
     vim.cmd [[nnoremap <silent>g0    :lua vim.lsp.buf.document_symbol()<CR>]]
     vim.cmd [[nnoremap <silent>gW    :lua vim.lsp.buf.workspace_symbol()<CR>]]
 
-    local servers = {'rust_analyzer', 'crystalline', 'clangd', 'solargraph'}
+    local servers = {'nimls', 'crystalline', 'clangd', 'solargraph'}
     for _, server in ipairs(servers) do
         lsp[server].setup {
             settings = {documentFormatting = true},

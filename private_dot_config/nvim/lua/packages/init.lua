@@ -22,6 +22,7 @@ require('packer').startup(function(use)
   use 'vim-crystal/vim-crystal'
   use 'machakann/vim-sandwich'
   use 'APZelos/blamer.nvim'
+  use 'alaviss/nim.nvim'
   use {
       "numToStr/Navigator.nvim",
       config = function() require('packages.tmux').setup() end
