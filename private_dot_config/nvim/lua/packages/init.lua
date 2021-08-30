@@ -7,7 +7,7 @@ end
 -- Setup package manager
 require('packer').startup(function(use)
   use { 'wbthomason/packer.nvim', requires = {'nvim-lua/plenary.nvim'}}
-  use 'https://git.sr.ht/~romainl/vim-bruin'
+  use 'https://gitlab.com/th3lusive/typography.vim'
   use 'editorconfig/editorconfig-vim'
   use 'junegunn/vim-easy-align'
   use 'tpope/vim-commentary'
@@ -22,7 +22,7 @@ require('packer').startup(function(use)
   use 'vim-crystal/vim-crystal'
   use 'machakann/vim-sandwich'
   use 'APZelos/blamer.nvim'
-  use 'alaviss/nim.nvim'
+  use 'mfussenegger/nvim-lint'
   use {
       "numToStr/Navigator.nvim",
       config = function() require('packages.tmux').setup() end

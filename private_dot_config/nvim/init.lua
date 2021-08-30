@@ -37,7 +37,7 @@ vim.cmd [[vnoremap > >gv]]
 vim.cmd [[command! ToggleMouse execute 'lua toggle_mouse()']]
 
 require 'packages'
-vim.cmd [[color bruin]]
+vim.cmd [[color typograph]]
 vim.cmd [[nnoremap <silent><Leader>g :ZenMode<cr>]]
 vim.cmd [[nnoremap <silent>;f :Neoformat<cr>]]
 vim.cmd [[xnoremap <silent>ga :EasyAlign<cr>]]
