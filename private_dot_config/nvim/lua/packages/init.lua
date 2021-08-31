@@ -22,7 +22,8 @@ require('packer').startup(function(use)
   use 'vim-crystal/vim-crystal'
   use 'machakann/vim-sandwich'
   use 'APZelos/blamer.nvim'
-  use 'mfussenegger/nvim-lint'
+  use { 'ms-jpq/coq_nvim', branch = 'coq' }
+  use { 'ms-jpq/coq.artifacts', branch = 'artifacts'} -- 9000+ Snippets
   use {
       "numToStr/Navigator.nvim",
       config = function() require('packages.tmux').setup() end
@@ -41,6 +42,4 @@ require('packer').startup(function(use)
           'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}},
       config = function() require('packages.telescope').setup() end
   }
-  use { 'ms-jpq/coq_nvim', branch = 'coq' }
-  use { 'ms-jpq/coq.artifacts', branch = 'artifacts'} -- 9000+ Snippets
 end)
