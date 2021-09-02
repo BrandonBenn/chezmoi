@@ -41,4 +41,5 @@ vim.cmd [[color typograph]]
 vim.cmd [[nnoremap <silent><Leader>g :ZenMode<cr>]]
 vim.cmd [[nnoremap <silent>;f :Neoformat<cr>]]
 vim.cmd [[xnoremap <silent>ga :EasyAlign<cr>]]
+vim.cmd [[nnoremap <silent>- :CHADopen<cr>]]
 vim.g.coq_settings = { auto_start = "shut-up" }

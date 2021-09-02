@@ -16,14 +16,15 @@ require('packer').startup(function(use)
   use 'tpope/vim-eunuch'
   use 'pbrisbin/vim-mkdir'
   use 'jiangmiao/auto-pairs'
-  use 'justinmk/vim-dirvish'
   use 'ap/vim-buftabline'
   use 'sbdchd/neoformat'
-  use 'vim-crystal/vim-crystal'
+  use 'alaviss/nim.nvim'
   use 'machakann/vim-sandwich'
   use 'APZelos/blamer.nvim'
-  use { 'ms-jpq/coq_nvim', branch = 'coq' }
+  use 'ziglang/zig.vim'
+  use { 'ms-jpq/coq_nvim', branch = 'dev' }
   use { 'ms-jpq/coq.artifacts', branch = 'artifacts'} -- 9000+ Snippets
+  use { 'ms-jpq/chadtree', branch = 'dev', run = 'python3 -m chadtree deps' }
   use {
       "numToStr/Navigator.nvim",
       config = function() require('packages.tmux').setup() end
