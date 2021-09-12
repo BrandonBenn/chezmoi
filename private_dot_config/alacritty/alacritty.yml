@@ -1,0 +1,26 @@
+shell:
+  program: /bin/sh
+  args:
+    - -l
+    - -c
+    - "tmux"
+
+window:
+  decorations: none
+font:
+  size: 14
+  normal:
+    family: Fira Code
+    style: Regular
+  bold:
+    family: Fira Code
+    style: Bold
+  italic:
+    family: Fira Code
+    style: Italic
+  bold_italic:
+    family: Fira Code
+    style: Bold Italic
+
+import:
+  - ~/.config/alacritty/theme.yml # copy from themes/ to theme.yml
