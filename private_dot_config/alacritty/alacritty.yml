@@ -5,8 +5,6 @@ shell:
     - -c
     - "tmux"
 
-window:
-  decorations: none
 font:
   size: 14
   normal:
