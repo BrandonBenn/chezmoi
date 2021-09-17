@@ -6,7 +6,7 @@ shell:
     - "tmux"
 
 font:
-  size: 14
+  size: 12
   normal:
     family: JetBrains Mono
     style: Regular
@@ -19,6 +19,9 @@ font:
   bold_italic:
     family: JetBrains Mono
     style: Bold Italic
+
+key_bindings:
+  - { key: Return,   mods: Alt, action: ToggleFullscreen }
 
 import:
   - ~/.config/alacritty/theme.yml # copy from themes/ to theme.yml
