@@ -41,6 +41,5 @@ vim.cmd [[color typograph]]
 vim.cmd [[nnoremap <silent><Leader>g :ZenMode<cr>]]
 vim.cmd [[nnoremap <silent>;f :Neoformat<cr>]]
 vim.cmd [[xnoremap <silent>ga :EasyAlign<cr>]]
-vim.cmd [[nnoremap <silent><leader>; :CHADopen<cr>]]
+vim.cmd [[nnoremap <silent><leader>; :NnnPicker %:p:h<cr>]]
 vim.g.coq_settings = { auto_start = "shut-up" }
-vim.g.chadtree_settings = { theme = { icon_glyph_set = "ascii" }, view = { width = 100 } }

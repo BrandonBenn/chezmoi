@@ -24,7 +24,10 @@ require('packer').startup(function(use)
   use 'ziglang/zig.vim'
   use { 'ms-jpq/coq_nvim', branch = 'coq' }
   use { 'ms-jpq/coq.artifacts', branch = 'artifacts'} -- 9000+ Snippets
-  use { 'ms-jpq/chadtree', branch = 'chad', run = 'python3 -m chadtree deps' }
+  use {
+      'mcchrish/nnn.vim',
+      config = function() require('nnn').setup({}) end
+  }
   use {
       'crispgm/nvim-go',
       config = function() require('go').setup({}) end
