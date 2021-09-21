@@ -18,7 +18,6 @@ require('packer').startup(function(use)
   use 'jiangmiao/auto-pairs'
   use 'ap/vim-buftabline'
   use 'sbdchd/neoformat'
-  use 'alaviss/nim.nvim'
   use 'machakann/vim-sandwich'
   use 'APZelos/blamer.nvim'
   use 'ziglang/zig.vim'
@@ -31,14 +30,6 @@ require('packer').startup(function(use)
   use {
       'crispgm/nvim-go',
       config = function() require('go').setup({}) end
-  }
-  use {
-      "numToStr/Navigator.nvim",
-      config = function() require('packages.tmux').setup() end
-  }
-  use {
-      'nvim-treesitter/nvim-treesitter',
-      run = ':TSUpdate'
   }
   use {
       'neovim/nvim-lspconfig',
