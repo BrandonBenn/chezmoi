@@ -32,6 +32,10 @@ require('packer').startup(function(use)
       config = function() require('go').setup({}) end
   }
   use {
+      'nvim-treesitter/nvim-treesitter',
+      run = ':TSUpdate'
+  }
+  use {
       'neovim/nvim-lspconfig',
       config = function() require('packages.lsp').setup() end
   }
