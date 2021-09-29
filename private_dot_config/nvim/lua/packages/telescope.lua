@@ -60,11 +60,11 @@ function M.setup()
     vim.cmd([[command! FNotes execute 'lua find_notes()' ]])
     vim.cmd([[command! GNotes execute 'lua grep_notes()' ]])
 
-    vim.cmd[[nnoremap <silent>;x :Telescope commands<cr>]]
+    vim.cmd[[nnoremap <silent><C-S-p> :Telescope commands<cr>]]
     vim.cmd[[nnoremap <silent><Leader>f :Telescope find_files<cr>]]
     vim.cmd[[nnoremap <silent><Leader><Leader> :Telescope buffers<cr>]]
     vim.cmd[[nnoremap <silent><C-p> :lua project_files()<cr>]]
-    vim.cmd[[nnoremap <silent><C-f> :Telescope live_grep<cr>]]
+    vim.cmd[[nnoremap <silent><C-S-s> :Telescope live_grep<cr>]]
     vim.cmd[[nnoremap <silent><Leader>h :Telescope oldfiles<cr>]]
 end
 

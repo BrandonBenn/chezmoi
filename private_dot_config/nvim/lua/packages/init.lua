@@ -7,7 +7,13 @@ end
 -- Setup package manager
 require('packer').startup(function(use)
   use { 'wbthomason/packer.nvim', requires = {'nvim-lua/plenary.nvim'}}
-  use 'https://gitlab.com/th3lusive/typography.vim'
+  -- Language Support
+  use 'ziglang/zig.vim'
+  use { 'crispgm/nvim-go', config = function() require('go').setup({}) end }
+
+  -- Editing
+  use 'sbdchd/neoformat'
+  use 'machakann/vim-sandwich'
   use 'editorconfig/editorconfig-vim'
   use 'junegunn/vim-easy-align'
   use 'tpope/vim-commentary'
@@ -16,21 +22,23 @@ require('packer').startup(function(use)
   use 'tpope/vim-eunuch'
   use 'pbrisbin/vim-mkdir'
   use 'jiangmiao/auto-pairs'
-  use 'ap/vim-buftabline'
-  use 'sbdchd/neoformat'
-  use 'machakann/vim-sandwich'
-  use 'APZelos/blamer.nvim'
-  use 'ziglang/zig.vim'
   use { 'ms-jpq/coq_nvim', branch = 'coq' }
   use { 'ms-jpq/coq.artifacts', branch = 'artifacts'} -- 9000+ Snippets
+
+  -- UI 
+  use 'https://gitlab.com/th3lusive/typography.vim'
+  use 'ap/vim-buftabline'
+  use 'APZelos/blamer.nvim'
   use {
-      'mcchrish/nnn.vim',
-      config = function() require('nnn').setup({}) end
+      'nvim-telescope/telescope.nvim',
+      requires = {{'nvim-lua/popup.nvim'}, {
+          'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}},
+      config = function() require('packages.telescope').setup() end
   }
-  use {
-      'crispgm/nvim-go',
-      config = function() require('go').setup({}) end
-  }
+  use { 'mcchrish/nnn.vim', config = function() require('nnn').setup({}) end }
+  use { "folke/zen-mode.nvim", config = function() require("zen-mode").setup({}) end }
+
+  -- LSP
   use {
       'nvim-treesitter/nvim-treesitter',
       run = ':TSUpdate'
@@ -38,11 +46,5 @@ require('packer').startup(function(use)
   use {
       'neovim/nvim-lspconfig',
       config = function() require('packages.lsp').setup() end
-  }
-  use {
-      'nvim-telescope/telescope.nvim',
-      requires = {{'nvim-lua/popup.nvim'}, {
-          'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}},
-      config = function() require('packages.telescope').setup() end
   }
 end)
