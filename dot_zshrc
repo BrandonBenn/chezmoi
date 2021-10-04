@@ -4,13 +4,12 @@ precmd() { vcs_info }
 zstyle ':vcs_info:git:*' formats 'on %b'
 # Set up the prompt (with git branch name)
 setopt PROMPT_SUBST
-PROMPT=$'\n'' ${PWD/#$HOME/~} %B${vcs_info_msg_0_}%b'$'\n'' λ '
+PROMPT=$'\n'' ${PWD/#$HOME/~} %B${vcs_info_msg_0_}%b'$'\n''-> '
 
 # Aliases
 alias ls="ls -F"
 alias ll="ls -Flgh"
 alias la="ll -Fa"
-alias c="clear"
 alias b='buku --suggest'
 cd () { builtin cd "$@" ; }
 rm () { (( $+commands[trash] )) && trash "$@" 2>/dev/null || command rm "$@" ; }

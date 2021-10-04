@@ -64,7 +64,7 @@ function M.setup()
     vim.cmd[[nnoremap <silent><Leader>f :Telescope find_files<cr>]]
     vim.cmd[[nnoremap <silent><Leader><Leader> :Telescope buffers<cr>]]
     vim.cmd[[nnoremap <silent><C-p> :lua project_files()<cr>]]
-    vim.cmd[[nnoremap <silent><C-S-s> :Telescope live_grep<cr>]]
+    vim.cmd[[nnoremap <silent><C-f> :Telescope live_grep<cr>]]
     vim.cmd[[nnoremap <silent><Leader>h :Telescope oldfiles<cr>]]
 end
 

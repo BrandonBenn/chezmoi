@@ -9,7 +9,12 @@ require('packer').startup(function(use)
   use { 'wbthomason/packer.nvim', requires = {'nvim-lua/plenary.nvim'}}
   -- Language Support
   use 'ziglang/zig.vim'
-  use { 'crispgm/nvim-go', config = function() require('go').setup({}) end }
+  use { 
+      'ray-x/go.nvim',
+      config = function() require('go').setup({
+        goimport = 'gopls', gofmt = 'gopls',
+      }) end 
+  }
 
   -- Editing
   use 'sbdchd/neoformat'
@@ -26,6 +31,7 @@ require('packer').startup(function(use)
   use { 'ms-jpq/coq.artifacts', branch = 'artifacts'} -- 9000+ Snippets
 
   -- UI 
+  use 'metakirby5/codi.vim'
   use 'https://gitlab.com/th3lusive/typography.vim'
   use 'ap/vim-buftabline'
   use 'APZelos/blamer.nvim'

@@ -1,7 +1,5 @@
-typeset -U PATH path
-path=(~/.local/bin ~/bin ~/.asdf/shims ~/.nimble/bin ~/.asdf/installs/python/3.9.6/bin  ~/.asdf/installs/nodejs/14.17.6/.npm/lib/node_modules "$path[@]")
+export GOPATH=~/.asdf/installs/golang/1.17.1/packages
 
-export PATH
 export XDG_DATA_HOME=~/.local/share
 export EDITOR=nvim
 export VISUAL=$EDITOR
@@ -9,5 +7,18 @@ export TERM=xterm-256color
 export HISTFILE=~/.cache/history.zsh
 export HISTSIZE=10000
 export SAVEHIST=10000
+
+typeset -U PATH path
+path=(
+    ~/.local/bin 
+    ~/bin
+    "$GOPATH/bin"
+    ~/.asdf/shims
+    ~/.asdf/installs/python/3.9.6/bin
+    ~/.asdf/installs/nodejs/14.18.0/.npm/lib/node_modules
+    "$path[@]"
+)
+
+export PATH
 declare -A ZINIT  # initial Zinit's hash definition
 ZINIT[HOME_DIR]=~/.local/share/zinit
