@@ -16,6 +16,7 @@ vim.o.swapfile = false
 vim.o.exrc = true
 vim.o.wrap = false
 vim.o.completeopt = "menuone,noselect,noinsert"
+vim.o.inccommand = "nosplit"
 
 require 'utils'
 require 'terminal'
