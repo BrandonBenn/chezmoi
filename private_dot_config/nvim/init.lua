@@ -44,5 +44,7 @@ vim.cmd [[nnoremap <silent><Leader>g :ZenMode<cr>]]
 vim.cmd [[nnoremap <silent>;f :Neoformat<cr>]]
 vim.cmd [[xnoremap <silent>ga :EasyAlign<cr>]]
 vim.cmd [[nnoremap <silent><leader>; :NnnPicker %:p:h<cr>]]
+vim.cmd [[vnoremap <silent><C-c> :TREPLSendSelection]]
+vim.cmd [[nnoremap <silent><C-c> :TREPLSendLine]]
 vim.g.coq_settings = { auto_start = "shut-up" }
 vim.g.slime_target = 'neovim'

@@ -31,7 +31,6 @@ require('packer').startup(function(use)
   use { 'ms-jpq/coq.artifacts', branch = 'artifacts'} -- 9000+ Snippets
 
   -- UI 
-  use 'metakirby5/codi.vim'
   use 'https://gitlab.com/th3lusive/typography.vim'
   use 'ap/vim-buftabline'
   use 'APZelos/blamer.nvim'
