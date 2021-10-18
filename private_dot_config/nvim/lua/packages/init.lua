@@ -6,8 +6,7 @@ end
 
 -- Setup package manager
 require('packer').startup(function(use)
-  use { 'wbthomason/packer.nvim', requires = {'nvim-lua/plenary.nvim'}}
-  -- Language Support
+  use { 'wbthomason/packer.nvim', requires = {'nvim-lua/plenary.nvim'}} -- Language Support
   use 'ziglang/zig.vim'
   use { 
       'ray-x/go.nvim',
@@ -32,16 +31,22 @@ require('packer').startup(function(use)
 
   -- UI 
   use 'https://gitlab.com/th3lusive/typography.vim'
-  use 'ap/vim-buftabline'
   use 'APZelos/blamer.nvim'
+  use {
+      'luukvbaal/nnn.nvim',
+      config = function()
+          require("nnn").setup({
+              picker = { style = { width = 0.5, height = 0.5, xoffset = 0.8 } },
+              replace_netrw = "picker"
+          })
+      end
+  }
   use {
       'nvim-telescope/telescope.nvim',
       requires = {{'nvim-lua/popup.nvim'}, {
           'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}},
       config = function() require('packages.telescope').setup() end
   }
-  use { 'mcchrish/nnn.vim', config = function() require('nnn').setup({}) end }
-  use { "folke/zen-mode.nvim", config = function() require("zen-mode").setup({}) end }
 
   -- LSP
   use {
