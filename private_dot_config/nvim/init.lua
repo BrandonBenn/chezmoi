@@ -60,10 +60,8 @@ toggle_mouse = function()
 end
 vim.cmd [[command! ToggleMouse execute 'lua toggle_mouse()']]
 
-local fn = vim.fn
-local install_path = fn.stdpath('data') .. '/site/pack/paqs/start/paq-nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system({'git', 'clone', '--depth=1', 'https://github.com/savq/paq-nvim.git', install_path})
+if vim.fn.empty(vim.fn.glob(vim.fn.stdpath('data') .. '/site/pack/paqs/start/paq-nvim')) > 0 then
+  vim.fn.system({'git', 'clone', '--depth=1', 'https://github.com/savq/paq-nvim.git', install_path})
 end
 
 -- Plugins
@@ -72,6 +70,7 @@ require "paq" {
     "nvim-lua/plenary.nvim";
     "neovim/nvim-lspconfig";
     {url="https://gitlab.com/th3lusive/typography.vim"};
+    "ap/vim-buftabline";
     "sbdchd/neoformat";
     "machakann/vim-sandwich";
     "editorconfig/editorconfig-vim";
@@ -105,10 +104,6 @@ vim.cmd [[nnoremap <silent><C-A-n> :NnnExplorer %:p:h<cr>]]
 vim.cmd [[nnoremap <silent><C-A-p> :NnnPicker %:p:h<cr>]]
 vim.cmd([[ command! Gitui FloatermNew gitui ]])
 
-require("nnn").setup({
-    picker = { style = { width = 0.5, height = 0.5, xoffset = 0.8 } },
-    replace_netrw = "picker"
-})
 
 require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
 local lsp = require 'lspconfig'
