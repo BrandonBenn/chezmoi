@@ -67,8 +67,8 @@ require "paq" {
     "pbrisbin/vim-mkdir";
     "jiangmiao/auto-pairs";
     "APZelos/blamer.nvim";
-    { "ms-jpq/coq_nvim", branch="coq" };
-    { "ms-jpq/coq.artifacts", branch="artifacts"};
+    {"ms-jpq/coq_nvim", branch="coq", run = function() require("coq").deps() end};
+    {"ms-jpq/coq.artifacts", branch="artifacts"};
     "nvim-lua/popup.nvim";
     "numtostr/FTerm.nvim";
     "ziglang/zig.vim";
@@ -84,8 +84,9 @@ vim.cmd [[color typograph | set background=light]]
 vim.cmd [[nnoremap <silent>;f :Neoformat<cr>]]
 vim.cmd [[xnoremap <silent>ga :EasyAlign<cr>]]
 vim.cmd [[nnoremap <silent><C-A-p> :NnnPicker %:p:h<cr>]]
-vim.cmd [[nnoremap <silent><C-\> :lua require('FTerm').toggle()<CR>]]
-vim.cmd([[ command! Gitui lua require("FTerm"):new({ cmd = "gitui" }):open()<CR> ]])
+vim.cmd [[nnoremap <silent><C-\> :lua require('FTerm').toggle()<CR>]] vim.cmd([[command! Gitui lua require("FTerm"):new({ cmd = "gitui" }):open()<CR> ]])
+
+require("coq").Now("--shut-up")
 
 require("nnn").setup({
     replace_netrw = 1,
