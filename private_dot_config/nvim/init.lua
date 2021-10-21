@@ -36,10 +36,16 @@ vim.cmd [[vnoremap < <gv]]
 vim.cmd [[vnoremap > >gv]]
 vim.cmd [[autocmd TermOpen * setlocal nonumber norelativenumber]]
 vim.cmd [[tnoremap <Esc> <C-\><C-n>]]
+-- Editor
 
+
+-- Paq Installation
 if vim.fn.empty(vim.fn.glob(vim.fn.stdpath('data') .. '/site/pack/paqs/start/paq-nvim')) > 0 then
   vim.fn.system({'git', 'clone', '--depth=1', 'https://github.com/savq/paq-nvim.git', install_path})
 end
+-- Paq Installation
+
+
 
 -- Plugins
 require "paq" {
@@ -64,23 +70,30 @@ require "paq" {
     { "ms-jpq/coq_nvim", branch="coq" };
     { "ms-jpq/coq.artifacts", branch="artifacts"};
     "nvim-lua/popup.nvim";
-    "voldikss/vim-floaterm";
+    "numtostr/FTerm.nvim";
     "ziglang/zig.vim";
-    { 
-        "ray-x/go.nvim",
-        run = function() require('go').setup({
-            goimport = 'gopls', gofmt = 'gopls',
-        }) end 
+    {"ray-x/go.nvim",
+    run = function() require('go').setup({
+	    goimport = 'gopls', gofmt = 'gopls',
+    }) end 
     };
 }
+-- Plugins
 
 vim.cmd [[color typograph | set background=light]]
 vim.cmd [[nnoremap <silent>;f :Neoformat<cr>]]
 vim.cmd [[xnoremap <silent>ga :EasyAlign<cr>]]
 vim.cmd [[nnoremap <silent><C-A-p> :NnnPicker %:p:h<cr>]]
-vim.cmd([[ command! Gitui FloatermNew gitui ]])
+vim.cmd [[nnoremap <silent><C-\> :lua require('FTerm').toggle()<CR>]]
+vim.cmd([[ command! Gitui lua require("FTerm"):new({ cmd = "gitui" }):open()<CR> ]])
+
+require("nnn").setup({
+    replace_netrw = 1,
+    layout = { window = { width = 0.3, height = 0.4 } }
+})
 
 
+-- LSP Configuration
 require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
 local lsp = require 'lspconfig'
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -93,6 +106,15 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     }
 }
 
+local servers = {'gopls', 'zls', 'pyright','clangd', 'solargraph'}
+for _, server in ipairs(servers) do
+    lsp[server].setup {
+        settings = {documentFormatting = true},
+        capabilities = capabilities,
+        on_attach = on_attach
+    }
+end
+
 vim.cmd [[nnoremap <silent><F2>  :lua vim.lsp.buf.rename()<CR>]]
 vim.cmd [[nnoremap <silent>gd    :lua vim.lsp.buf.declaration()<CR>]]
 vim.cmd [[noremap  <silent><c-]> :lua vim.lsp.buf.definition()<CR>]]
@@ -104,11 +126,4 @@ vim.cmd [[nnoremap <silent>gr    :lua vim.lsp.buf.references()<CR>]]
 vim.cmd [[nnoremap <silent>g0    :lua vim.lsp.buf.document_symbol()<CR>]]
 vim.cmd [[nnoremap <silent>gW    :lua vim.lsp.buf.workspace_symbol()<CR>]]
 vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
-local servers = {'gopls', 'zls', 'pyright','clangd', 'solargraph'}
-for _, server in ipairs(servers) do
-    lsp[server].setup {
-        settings = {documentFormatting = true},
-        capabilities = capabilities,
-        on_attach = on_attach
-    }
-end
+-- LSP Configuration
