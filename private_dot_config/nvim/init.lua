@@ -87,7 +87,7 @@ vim.cmd [[nnoremap <silent>;f :Neoformat<cr>]]
 vim.cmd [[xnoremap <silent>ga :EasyAlign<cr>]]
 vim.cmd [[nnoremap <silent><C-A-p> :NnnPicker %:p:h<cr>]]
 vim.cmd [[nnoremap <silent><C-\> :lua require('FTerm').toggle()<CR>]] 
-vim.cmd([[command! Gitui lua require("FTerm"):new({ cmd = "gitui" }):open()<CR> ]])
+vim.cmd [[command! Gitui lua require("FTerm"):new({ cmd = "gitui" }):open()<CR> ]]
 
 require("coq").Now("--shut-up")
 
