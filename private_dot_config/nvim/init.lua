@@ -28,9 +28,9 @@ vim.cmd [[nnoremap <silent>;q :quitall<cr>]]
 vim.cmd [[nnoremap <silent>;w :update<cr>]]
 vim.cmd [[nnoremap <silent>;bd :bd<cr>]]
 vim.cmd [[nnoremap <silent>;noh :noh<cr>]]
+vim.cmd [[nnoremap <silent><leader>p "+p]]
 vim.cmd [[vnoremap <silent><leader>y "+y]]
 vim.cmd [[nnoremap <silent><leader>y "+y]]
-vim.cmd [[vnoremap <silent><leader>p "+p]]
 vim.cmd [[nnoremap <silent><leader>Y gg"+yG]]
 vim.cmd [[vnoremap < <gv]]
 vim.cmd [[vnoremap > >gv]]
@@ -44,7 +44,6 @@ if vim.fn.empty(vim.fn.glob(vim.fn.stdpath('data') .. '/site/pack/paqs/start/paq
   vim.fn.system({'git', 'clone', '--depth=1', 'https://github.com/savq/paq-nvim.git', install_path})
 end
 -- Paq Installation
-
 
 
 -- Plugins
@@ -67,7 +66,10 @@ require "paq" {
     "pbrisbin/vim-mkdir";
     "jiangmiao/auto-pairs";
     "APZelos/blamer.nvim";
-    {"ms-jpq/coq_nvim", branch="coq", run = function() require("coq").deps() end};
+    {"ms-jpq/coq_nvim", branch="coq", 
+    run = function() 
+        require("coq").deps()
+    end};
     {"ms-jpq/coq.artifacts", branch="artifacts"};
     "nvim-lua/popup.nvim";
     "numtostr/FTerm.nvim";
@@ -75,16 +77,15 @@ require "paq" {
     {"ray-x/go.nvim",
     run = function() require('go').setup({
 	    goimport = 'gopls', gofmt = 'gopls',
-    }) end 
-    };
+    }) end};
 }
--- Plugins
 
 vim.cmd [[color typograph | set background=light]]
 vim.cmd [[nnoremap <silent>;f :Neoformat<cr>]]
 vim.cmd [[xnoremap <silent>ga :EasyAlign<cr>]]
 vim.cmd [[nnoremap <silent><C-A-p> :NnnPicker %:p:h<cr>]]
-vim.cmd [[nnoremap <silent><C-\> :lua require('FTerm').toggle()<CR>]] vim.cmd([[command! Gitui lua require("FTerm"):new({ cmd = "gitui" }):open()<CR> ]])
+vim.cmd [[nnoremap <silent><C-\> :lua require('FTerm').toggle()<CR>]] 
+vim.cmd([[command! Gitui lua require("FTerm"):new({ cmd = "gitui" }):open()<CR> ]])
 
 require("coq").Now("--shut-up")
 
@@ -92,6 +93,7 @@ require("nnn").setup({
     replace_netrw = 1,
     layout = { window = { width = 0.3, height = 0.4 } }
 })
+-- Plugins
 
 
 -- LSP Configuration
