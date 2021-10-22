@@ -81,6 +81,8 @@ require "paq" {
 }
 
 vim.cmd [[color typograph | set background=light]]
+vim.cmd [[nnoremap <silent><C-p> :Files<cr>]]
+vim.cmd [[nnoremap <silent><A-h> :History<cr>]]
 vim.cmd [[nnoremap <silent>;f :Neoformat<cr>]]
 vim.cmd [[xnoremap <silent>ga :EasyAlign<cr>]]
 vim.cmd [[nnoremap <silent><C-A-p> :NnnPicker %:p:h<cr>]]
