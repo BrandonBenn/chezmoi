@@ -1,0 +1,22 @@
+#!/bin/sh -e
+
+#
+# battery (daemon)
+#
+
+while true; do
+    bat_dir=/sys/class/power_supply/BAT0
+    [ -d "$bat_dir" ] || exit 1
+
+    read -r capacity < "$bat_dir/capacity"
+    read -r status   < "$bat_dir/status"
+
+    printf '%s%% [%s]\n' "$capacity" "$status"
+
+    [ "$1" = "daemon" ] || exit 1
+
+    [ "$capacity" -ge 50 ] ||
+        notify-send -t 10000 -u critical "Battery: ${capacity}% [${status}]"
+
+    sleep "$((capacity / 10))m"
+done & disown
