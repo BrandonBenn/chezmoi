@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+oneshot() { [ -n "$(pgrep -f "$1")" ] || "$@" & disown; }
+
+gsettings set org.gnome.desktop.interface font-name "FreeSans 14"
+
+oneshot mako
+battery daemon
