@@ -40,7 +40,8 @@ vim.cmd [[tnoremap <Esc> <C-\><C-n>]]
 
 
 -- Paq Installation
-if vim.fn.empty(vim.fn.glob(vim.fn.stdpath('data') .. '/site/pack/paqs/start/paq-nvim')) > 0 then
+local install_path = vim.fn.stdpath('data') .. '/site/pack/paqs/start/paq-nvim'
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.fn.system({'git', 'clone', '--depth=1', 'https://github.com/savq/paq-nvim.git', install_path})
 end
 -- Paq Installation
@@ -99,7 +100,6 @@ require("nnn").setup({
 
 
 -- LSP Configuration
-require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
 local lsp = require 'lspconfig'
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
