@@ -83,6 +83,7 @@ for_window {
   [title="(?:Open|Save) (?:File|Folder|As)"] floating enable
   [app_id="org.gnome.Nautilus"] floating enable
   [app_id="mpv"] floating enable
+  [app_id="top"] move container to workspace 10
   [app_id="^(firefox|chromium)$"] move container to workspace 2
 }
 
@@ -96,6 +97,7 @@ exec {
   kitty
   mako
   battery daemon
+  kitty --class=top btop
   swayidle -w timeout 300 'swaylock -f -c 666666' \
          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
          before-sleep 'swaylock -f -c 666666'
