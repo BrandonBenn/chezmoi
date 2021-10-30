@@ -18,4 +18,4 @@ PATH=$PATH:~/.asdf/installs/nodejs/14.18.0/.npm/lib/node_modules
 export PATH
 
 printf 'start wayland? '
-! read -r || exec hikari 2>/dev/null
+! read -r || exec sway 2>/dev/null

@@ -19,4 +19,4 @@ while true; do
         notify-send -t 10000 -u critical "Battery: ${capacity}% [${status}]"
 
     sleep "$((capacity / 10))m"
-done & disown
+done
