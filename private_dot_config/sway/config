@@ -14,7 +14,7 @@ default_border pixel 2
 default_floating_border pixel 2
 smart_borders on
 
-output "eDP-1" scale 1.3
+output "eDP-1" scale 1.1
 output * bg #000000 solid_color
 input "type:keyboard" xkb_options "caps:escape"
 input * {
@@ -24,8 +24,8 @@ input * {
 
 bindsym {
   $mod+Escape exec swaylock -f -c 666666
-  $mod+Shift+e exec swaynag -t warning -m 'Exit sway?' -b 'Yes' 'swaymsg exit'
-  $mod+d exec kitty sway-launcher-desktop
+  $mod+Shift+e exec swaymsg exit
+  $mod+d exec kitty --class=launcher sway-launcher-desktop
   $mod+Return exec kitty
   $mod+q kill
   $mod+Shift+c reload
@@ -50,6 +50,7 @@ bindsym {
   $mod+Shift+8 move container to workspace number 8
   $mod+Shift+9 move container to workspace number 9
   $mod+Shift+0 move container to workspace number 10
+  $mod+Tab workspace back_and_forth
   $mod+space focus mode_toggle
   $mod+Shift+space floating toggle
   $mod+g splitt
@@ -84,6 +85,7 @@ for_window {
   [app_id="org.gnome.Nautilus"] floating enable
   [app_id="mpv"] floating enable
   [app_id="top"] move container to workspace 10
+  [app_id="launcher"] floating enable, sticky enable, resize set 15 ppt 30 ppt
   [app_id="^(firefox|chromium)$"] move container to workspace 2
 }
 
@@ -93,11 +95,12 @@ exec_always {
 }
 
 exec {
-  firefox
+  chromium
   kitty
   mako
   battery daemon
   kitty --class=top btop
+  dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
   swayidle -w timeout 300 'swaylock -f -c 666666' \
          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
          before-sleep 'swaylock -f -c 666666'
