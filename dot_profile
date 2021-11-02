@@ -16,6 +16,3 @@ PATH=$PATH:~/.asdf/shims
 PATH=$PATH:~/.asdf/installs/python/3.9.6/bin
 PATH=$PATH:~/.asdf/installs/nodejs/14.18.0/.npm/lib/node_modules
 export PATH
-
-printf 'start wayland? '
-! read -r || exec sway 2>/dev/null

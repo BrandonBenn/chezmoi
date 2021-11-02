@@ -15,8 +15,10 @@ while true; do
 
     [ "$1" = "daemon" ] || exit 1
 
-    [ "$capacity" -ge 30 ] ||
-        notify-send -t 10000 -u critical "Battery: ${capacity}% [${status}]"
+    duration=$((capacity > 30 ? capacity : 10))
 
-    sleep "$((capacity / 10))m"
+    [ "$capacity" -ge 30 ] ||
+        notify-send -t $(( duration * 00 )) -u critical "Battery: ${capacity}% [${status}]"
+
+    sleep "$duration"
 done
