@@ -57,6 +57,7 @@ require "paq" {
     "sbdchd/neoformat";
     "mcchrish/nnn.vim";
     "nvim-telescope/telescope.nvim";
+    {"nvim-telescope/telescope-fzf-native.nvim", run = "make" };
     "tpope/vim-fugitive";
     "machakann/vim-sandwich";
     "junegunn/vim-easy-align";
@@ -86,11 +87,11 @@ vim.cmd [[nnoremap <silent><C-p> :Telescope find_files<cr>]]
 vim.cmd [[nnoremap <silent><A-h> :Telescope oldfiles theme=dropdown<cr>]]
 vim.cmd [[nnoremap <silent>;f :Neoformat<cr>]]
 vim.cmd [[xnoremap <silent>ga :EasyAlign<cr>]]
-vim.cmd [[nnoremap <silent><C-A-p> :NnnPicker %:p:h<cr>]]
+vim.cmd [[nnoremap <silent>- :NnnPicker %:p:h<cr>]]
 vim.cmd [[command! Term lua require('FTerm').toggle()<CR>]] 
 
+require('telescope').load_extension('fzf')
 require("coq").Now("--shut-up")
-
 require("nnn").setup({
     replace_netrw = 1,
     layout = { window = { width = 0.3, height = 0.4 } }
