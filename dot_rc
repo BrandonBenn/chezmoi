@@ -23,4 +23,5 @@ n () {
 }
 
 eval "$(zoxide init posix --hook prompt)"
+[ ! -f /opt/asdf-vm/asdf.sh ] || . /opt/asdf-vm/asdf.sh
 export PS1="$ "

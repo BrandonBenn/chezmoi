@@ -27,8 +27,8 @@ vim.cmd [[nnoremap <silent><Tab> :bnext<cr>]]
 vim.cmd [[nnoremap <silent><S-Tab> :bprev<cr>]]
 vim.cmd [[nnoremap <silent>;q :quitall<cr>]]
 vim.cmd [[nnoremap <silent>;w :update<cr>]]
-vim.cmd [[nnoremap <silent>;bd :bd<cr>]]
-vim.cmd [[nnoremap <silent>;noh :noh<cr>]]
+vim.cmd [[nnoremap <silent>;d :bd<cr>]]
+vim.cmd [[nnoremap <silent>;nh :noh<cr>]]
 vim.cmd [[nnoremap <silent><leader>p "+p]]
 vim.cmd [[vnoremap <silent><leader>y "+y]]
 vim.cmd [[nnoremap <silent><leader>y "+y]]
@@ -55,9 +55,9 @@ require "paq" {
     {url="https://gitlab.com/th3lusive/typography.vim"};
     "ap/vim-buftabline";
     "sbdchd/neoformat";
-    {"junegunn/fzf", run='./install --bin'};
-    "junegunn/fzf.vim";
     "mcchrish/nnn.vim";
+    "nvim-telescope/telescope.nvim";
+    "tpope/vim-fugitive";
     "machakann/vim-sandwich";
     "junegunn/vim-easy-align";
     "tpope/vim-commentary";
@@ -82,13 +82,12 @@ require "paq" {
 }
 
 vim.cmd [[color typograph | set background=light]]
-vim.cmd [[nnoremap <silent><C-p> :Files<cr>]]
-vim.cmd [[nnoremap <silent><A-h> :History<cr>]]
+vim.cmd [[nnoremap <silent><C-p> :Telescope find_files<cr>]]
+vim.cmd [[nnoremap <silent><A-h> :Telescope oldfiles theme=dropdown<cr>]]
 vim.cmd [[nnoremap <silent>;f :Neoformat<cr>]]
 vim.cmd [[xnoremap <silent>ga :EasyAlign<cr>]]
 vim.cmd [[nnoremap <silent><C-A-p> :NnnPicker %:p:h<cr>]]
 vim.cmd [[command! Term lua require('FTerm').toggle()<CR>]] 
-vim.cmd [[command! Gitui lua require("FTerm"):new({ cmd = "gitui" }):open()<CR> ]]
 
 require("coq").Now("--shut-up")
 
