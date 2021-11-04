@@ -1,40 +1,40 @@
-#! /bin/sh
+#! /bin/sh -ef
 
+# NAME
 # git-spinoff: spin current work off into a new branch
 #
-# usage is:
+# SYNOPSIS
+# git spinoff <branchname>
 #
-#    git spinoff <branchname>
-#
+# DESCRIPTION
 # which creates a new branch named <branchname> pointing to the
 # current commit, ready for new commits if the index and/or work
 # tree are dirty, and restoring the current branch to its upstream,
 # provided that we are in fact on a branch now that has an upstream.
 
-die() {
-    echo "fatal: $@" 1>&2
+[ -n "$1" ] || {
+    printf "SYNOPSIS: git spinoff <new branch>\n" 1>&2
     exit 1
 }
 
-# check arguments
-case $# in
-1) newbranch="$1";;
-*) echo "usage: git spinoff <newbranch>" 1>&2; exit 1;;
-esac
+new_branch="$1"
 
 # make sure we are on a branch that has an upstream
-fullbranch=$(git symbolic-ref -q HEAD) ||
-    die "existing branch is detached; there's nothing to restore"
-branch=${fullbranch#refs/heads/}
-upstream=$(git rev-parse -q --verify @{u}) ||
-    die "existing branch $branch has no upstream: there's nowhere to restore-to"
+full_branch=$(git symbolic-ref -q HEAD) || {
+    printf "existing branch is detached; nothing to restore" 1>&2
+    exit 1
+}
+
+branch=${full_branch#refs/heads/}
+upstream=$(git rev-parse -q --verify "@{u}") || {
+    printf "existing branch %s has no upstream." "$branch" 1>&2
+    exit 1
+}
 
 # now create and check out out the new branch, or quit if we can't
-git checkout -b "$newbranch" || exit $?
+git checkout -b "$new_branch" || exit "$?"
 
 # last, re-adjust the previous branch (which is no longer the current
 # branch since we are on the new one we created) to point to its own
 # upstream (if this fails, ignore the failure!)
-git update-ref -m \
-    "git spinoff: re-point $branch to ${branch}@{upstream}" \
-    $fullbranch $upstream
+git update-ref -m "git spinoff: re-point $branch to ${branch}@{upstream}" "$full_branch" "$upstream"
