@@ -57,7 +57,6 @@ require "paq" {
     "sbdchd/neoformat";
     "mcchrish/nnn.vim";
     "nvim-telescope/telescope.nvim";
-    {"nvim-telescope/telescope-fzf-native.nvim", run = "make" };
     "tpope/vim-fugitive";
     "machakann/vim-sandwich";
     "junegunn/vim-easy-align";
@@ -83,53 +82,53 @@ require "paq" {
 }
 
 vim.cmd [[color typograph | set background=light]]
-vim.cmd [[nnoremap <silent><C-p> :Telescope find_files<cr>]]
+vim.cmd [[nnoremap <silent><C-p> :Telescope find_files theme=ivy<cr>]]
 vim.cmd [[nnoremap <silent><A-h> :Telescope oldfiles theme=dropdown<cr>]]
+vim.cmd [[nnoremap <silent><A-g> :Telescope grep_string theme=dropdown<cr>]]
 vim.cmd [[nnoremap <silent>;f :Neoformat<cr>]]
 vim.cmd [[xnoremap <silent>ga :EasyAlign<cr>]]
 vim.cmd [[nnoremap <silent>- :NnnPicker %:p:h<cr>]]
 vim.cmd [[command! Term lua require('FTerm').toggle()<CR>]] 
-
-require('telescope').load_extension('fzf')
-require("coq").Now("--shut-up")
+vim.cmd [[autocmd InsertEnter * lua require("coq").Now("--shut-up")]]
 require("nnn").setup({
     replace_netrw = 1,
     layout = { window = { width = 0.3, height = 0.4 } }
 })
 -- Plugins
 
-
 -- LSP Configuration
-require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
-local lsp = require 'lspconfig'
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = {
-        'documentation',
-        'detail',
-        'additionalTextEdits',
+function init_lsp()
+    local servers = {'gopls', 'zls', 'pyright','clangd', 'solargraph'}
+    local lsp = require 'lspconfig'
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+    capabilities.textDocument.completion.completionItem.resolveSupport = {
+        properties = {
+            'documentation',
+            'detail',
+            'additionalTextEdits',
+        }
     }
-}
 
-local servers = {'gopls', 'zls', 'pyright','clangd', 'solargraph'}
-for _, server in ipairs(servers) do
-    lsp[server].setup {
-        settings = {documentFormatting = true},
-        capabilities = capabilities,
-        on_attach = on_attach
-    }
+    for _, server in ipairs(servers) do
+        lsp[server].setup {
+            settings = {documentFormatting = true},
+            capabilities = capabilities,
+            on_attach = on_attach
+        }
+    end
+
+    vim.cmd [[nnoremap <silent><F2>  :lua vim.lsp.buf.rename()<CR>]]
+    vim.cmd [[nnoremap <silent>gd    :lua vim.lsp.buf.declaration()<CR>]]
+    vim.cmd [[noremap  <silent><c-]> :lua vim.lsp.buf.definition()<CR>]]
+    vim.cmd [[nnoremap <silent>K     :lua vim.lsp.buf.hover()<CR>]]
+    vim.cmd [[nnoremap <silent>gD    :lua vim.lsp.buf.implementation()<CR>]]
+    vim.cmd [[noremap  <silent><c-k> :lua vim.lsp.buf.signature_help()<CR>]]
+    vim.cmd [[nnoremap <silent>1gD   :lua vim.lsp.buf.type_definition()<CR>]]
+    vim.cmd [[nnoremap <silent>gr    :lua vim.lsp.buf.references()<CR>]]
+    vim.cmd [[nnoremap <silent>g0    :lua vim.lsp.buf.document_symbol()<CR>]]
+    vim.cmd [[nnoremap <silent>gW    :lua vim.lsp.buf.workspace_symbol()<CR>]]
+    vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
 end
-
-vim.cmd [[nnoremap <silent><F2>  :lua vim.lsp.buf.rename()<CR>]]
-vim.cmd [[nnoremap <silent>gd    :lua vim.lsp.buf.declaration()<CR>]]
-vim.cmd [[noremap  <silent><c-]> :lua vim.lsp.buf.definition()<CR>]]
-vim.cmd [[nnoremap <silent>K     :lua vim.lsp.buf.hover()<CR>]]
-vim.cmd [[nnoremap <silent>gD    :lua vim.lsp.buf.implementation()<CR>]]
-vim.cmd [[noremap  <silent><c-k> :lua vim.lsp.buf.signature_help()<CR>]]
-vim.cmd [[nnoremap <silent>1gD   :lua vim.lsp.buf.type_definition()<CR>]]
-vim.cmd [[nnoremap <silent>gr    :lua vim.lsp.buf.references()<CR>]]
-vim.cmd [[nnoremap <silent>g0    :lua vim.lsp.buf.document_symbol()<CR>]]
-vim.cmd [[nnoremap <silent>gW    :lua vim.lsp.buf.workspace_symbol()<CR>]]
-vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
+vim.cmd [[autocmd InsertEnter * lua init_lsp()]]
 -- LSP Configuration
