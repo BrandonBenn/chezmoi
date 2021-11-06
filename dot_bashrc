@@ -1,0 +1,27 @@
+alias ls="ls -F"
+alias ll="ls -Flgh"
+alias la="ll -Fa"
+alias b='buku --suggest'
+alias rm="trash"
+cd () { builtin cd "$@" ; }
+n () {
+    # Block nesting of nnn in subshells
+    if [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ]; then
+        echo "nnn is already running"
+        return
+    fi
+
+    export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+    export NO_COLOR=1
+
+    nnn -e "$@"
+
+    if [ -f "$NNN_TMPFILE" ]; then
+            . "$NNN_TMPFILE"
+            rm -f "$NNN_TMPFILE" > /dev/null
+    fi
+}
+
+eval "$(zoxide init posix --hook prompt)"
+[ ! -f /opt/asdf-vm/asdf.sh ] || . /opt/asdf-vm/asdf.sh
+export PS1="$ "
