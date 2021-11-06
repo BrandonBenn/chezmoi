@@ -41,8 +41,10 @@ vim.cmd [[tnoremap <Esc> <C-\><C-n>]]
 
 
 -- Paq Installation
-if vim.fn.empty(vim.fn.glob(vim.fn.stdpath('data') .. '/site/pack/paqs/start/paq-nvim')) > 0 then
-  vim.fn.system({'git', 'clone', '--depth=1', 'https://github.com/savq/paq-nvim.git', install_path})
+local fn = vim.fn
+local install_path = fn.stdpath('data') .. '/site/pack/paqs/start/paq-nvim'
+if fn.empty(fn.glob(install_path)) > 0 then
+  fn.system({'git', 'clone', '--depth=1', 'https://github.com/savq/paq-nvim.git', install_path})
 end
 -- Paq Installation
 
