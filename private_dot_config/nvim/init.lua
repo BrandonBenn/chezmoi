@@ -68,9 +68,9 @@ function(use)
         config = function() vim.cmd 'colorscheme typograph' end
     }
     use {
-        'sbdchd/neoformat', cmd = 'Neoformat',
+        'sbdchd/neoformat',
         config = function()
-            vim.cmd 'nnoremap <silent><leader> :Neoformat<cr>'
+            vim.cmd 'nnoremap <silent>;f :Neoformat<cr>'
         end
     }
     use {
@@ -78,7 +78,7 @@ function(use)
         config = function()
             vim.cmd 'nnoremap <silent><C-p> :Telescope find_files theme=ivy<cr>'
             vim.cmd 'nnoremap <silent><A-h> :Telescope oldfiles theme=dropdown<cr>'
-            vim.cmd 'nnoremap <silent><A-g> :Telescope grep_string theme=dropdown<cr>'
+            vim.cmd 'nnoremap <silent><A-g> :Telescope live_grep theme=dropdown<cr>'
         end,
         requires = {
             'nvim-telescope/telescope-fzf-native.nvim', run = 'make',
@@ -86,16 +86,15 @@ function(use)
         }
     }
     use {
-        'junegunn/vim-easy-align', cmd = 'EasyAlign',
+        'junegunn/vim-easy-align',
         config = function()
             vim.cmd 'xnoremap <silent>ga :EasyAlign<cr>'
         end
     }
     use {
         'mcchrish/nnn.vim',
-        cmd = 'NnnPicker',
         config = function()
-            vim.cmd 'nnoremap <silent>- :NnnPicker %:p:h<cr>'
+            vim.cmd [[nnoremap <silent>- :NnnPicker %:p:h<cr>]]
             require("nnn").setup({
                 replace_netrw = 1,
                 layout = { window = { width = 0.3, height = 0.4 } }
@@ -143,6 +142,7 @@ function(use)
             vim.cmd 'nnoremap <silent>g0    :lua vim.lsp.buf.document_symbol()<CR>'
             vim.cmd 'nnoremap <silent>gW    :lua vim.lsp.buf.workspace_symbol()<CR>'
             vim.cmd 'command! Format execute "lua vim.lsp.buf.formatting()"'
+            vim.cmd 'nnoremap <silent>;f :Format<cr>'
         end
     }
 
