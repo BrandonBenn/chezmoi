@@ -54,14 +54,15 @@ function(use)
     use 'machakann/vim-sandwich'
     use 'jiangmiao/auto-pairs'
     use 'tpope/vim-commentary'
-    use 'APZelos/blamer.nvim'
     use 'nvim-lua/popup.nvim'
     use 'pbrisbin/vim-mkdir'
-    use 'tpope/vim-dispatch'
     use 'ap/vim-buftabline'
     use 'tpope/vim-endwise'
     use 'tpope/vim-eunuch'
     use 'ziglang/zig.vim'
+
+    use {'tpope/vim-dispatch', cmd = 'Dispatch'}
+    use {'APZelos/blamer.nvim', cmd = 'BlamerToggle'}
 
     use {
         'https://gitlab.com/th3lusive/typography.vim',
@@ -94,7 +95,7 @@ function(use)
     use {
         'mcchrish/nnn.vim',
         config = function()
-            vim.cmd [[nnoremap <silent>- :NnnPicker %:p:h<cr>]]
+            vim.cmd 'nnoremap <silent>- :NnnPicker %:p:h<cr>'
             require("nnn").setup({
                 replace_netrw = 1,
                 layout = { window = { width = 0.3, height = 0.4 } }
@@ -150,5 +151,12 @@ function(use)
     if packer_bootstrap then
         require('packer').sync()
     end
+
+    vim.cmd([[
+        augroup packer_user_config
+        autocmd!
+        autocmd BufWritePost ~/.config/nvim/init.lua source % | PackerCompile
+        augroup end
+    ]])
 end)
 
