@@ -69,6 +69,10 @@ function(use)
         config = function() vim.cmd 'colorscheme typograph' end
     }
     use {
+        'justinmk/vim-dirvish',
+        requires = {'roginfarrer/vim-dirvish-dovish'}
+    }
+    use {
         'sbdchd/neoformat',
         config = function()
             vim.cmd 'nnoremap <silent>;f :Neoformat<cr>'
@@ -90,16 +94,6 @@ function(use)
         'junegunn/vim-easy-align',
         config = function()
             vim.cmd 'xnoremap <silent>ga :EasyAlign<cr>'
-        end
-    }
-    use {
-        'mcchrish/nnn.vim',
-        config = function()
-            vim.cmd 'nnoremap <silent>- :NnnPicker %:p:h<cr>'
-            require("nnn").setup({
-                replace_netrw = 1,
-                layout = { window = { width = 0.3, height = 0.4 } }
-            })
         end
     }
     use {
