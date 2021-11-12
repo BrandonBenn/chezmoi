@@ -9,7 +9,7 @@ vim.o.number = true
 vim.o.expandtab = true
 vim.o.smartindent = true
 vim.o.tabstop  = 4
-vim.o.shiftwidth = 4 
+vim.o.shiftwidth = 4
 vim.o.softtabstop = 4
 vim.o.laststatus = 0
 vim.o.udir = '/tmp/nvim/undo'
@@ -39,10 +39,10 @@ vim.cmd [[autocmd TermOpen * setlocal nonumber norelativenumber]]
 vim.cmd [[tnoremap <Esc> <C-\><C-n>]]
 
 -- PLUGIN MANAGER INSTALLATION
-local fn = vim.fn
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-    packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+    packer_bootstrap = vim.fn.system({'git', 'clone', '--depth', '1',
+    'https://github.com/wbthomason/packer.nvim', install_path})
 end
 
 -- Plugins
@@ -103,6 +103,17 @@ function(use)
         config = function() require 'coq'.Now('-s') end
     }
     use {
+        'mfussenegger/nvim-lint', ft = {'bash', 'sh', 'lua'},
+        config = function()
+            local lint = require'lint'
+            lint.linters_by_ft = {
+                sh = {'shellcheck'},
+                lua = {'luacheck'}
+            }
+            lint.try_lint()
+        end
+    }
+    use {
         'neovim/nvim-lspconfig',
         ft = {'go', 'c', 'cpp', 'zig', 'ruby', 'python'},
         config = function()
@@ -153,4 +164,3 @@ function(use)
         augroup end
     ]])
 end)
-
