@@ -38,16 +38,18 @@ vim.cmd [[vnoremap > >gv]]
 vim.cmd [[autocmd TermOpen * setlocal nonumber norelativenumber]]
 vim.cmd [[tnoremap <Esc> <C-\><C-n>]]
 
+-- Setup for github.com/mhinz/neovim-remote
+-- For opening files from within :terminal without starting a nested nvim
+-- process.
+if vim.env.NVIM_LISTEN_ADDRESS then
+    vim.env.EDITOR = "nvr --remote"
+    vim.env.GIT_EDITOR = "nvr -cc split --remote-wait"
+end
+
 -- PLUGIN MANAGER INSTALLATION
 local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     bootstrap = os.execute("git clone --depth 1 https://github.com/wbthomason/packer.nvim " .. install_path)
-end
-
-if vim.env.NVIM_LISTEN_ADDRESS then
-    vim.env.EDITOR = "nvr --remote"
-    vim.env.GIT_EDITOR = "nvr -cc split --remote-wait"
-    print("Listening on " .. vim.env.NVIM_LISTEN_ADDRESS)
 end
 
 -- Plugins
