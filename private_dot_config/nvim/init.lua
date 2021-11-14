@@ -44,6 +44,12 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     bootstrap = os.execute("git clone --depth 1 https://github.com/wbthomason/packer.nvim " .. install_path)
 end
 
+if vim.env.NVIM_LISTEN_ADDRESS then
+    vim.env.EDITOR = "nvr --remote"
+    vim.env.GIT_EDITOR = "nvr -cc split --remote-wait"
+    print("Listening on " .. vim.env.NVIM_LISTEN_ADDRESS)
+end
+
 -- Plugins
 return require("packer").startup(
     function(use)
@@ -70,8 +76,19 @@ return require("packer").startup(
             end
         }
         use {
-            "justinmk/vim-dirvish",
-            requires = {"roginfarrer/vim-dirvish-dovish"}
+            "mcchrish/nnn.vim",
+            config = function()
+                vim.cmd "tnoremap <C-A-n> <cmd>NnnExplorer<CR>"
+                vim.cmd "nnoremap <C-A-n> <cmd>NnnExplorer %:p:h<CR>"
+                vim.cmd "tnoremap <C-A-p> <cmd>NnnPicker<CR>"
+                vim.cmd "nnoremap <C-A-p> <cmd>NnnPicker<CR>"
+                require "nnn".setup(
+                    {
+                        replace_netrw = 1,
+                        layout = {window = {width = 0.4, height = 0.6}}
+                    }
+                )
+            end
         }
         use {
             "sbdchd/neoformat",
@@ -115,12 +132,11 @@ return require("packer").startup(
             "mfussenegger/nvim-lint",
             ft = {"bash", "sh", "lua"},
             config = function()
-                local lint = require "lint"
-                lint.linters_by_ft = {
+                require "lint".linters_by_ft = {
                     sh = {"shellcheck"},
                     lua = {"luacheck"}
                 }
-                lint.try_lint()
+                vim.cmd "au BufWritePost <buffer> lua require'lint'.try_lint()"
             end
         }
         use {
@@ -141,9 +157,9 @@ return require("packer").startup(
 
                 for _, server in ipairs(servers) do
                     lsp[server].setup {
-                        settings = {documentFormatting = true},
+                        on_attach = on_attach,
                         capabilities = capabilities,
-                        on_attach = on_attach
+                        settings = {documentFormatting = true}
                     }
                 end
 
