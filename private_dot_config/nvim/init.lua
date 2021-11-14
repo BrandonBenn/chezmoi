@@ -19,24 +19,24 @@ vim.o.wrap = false
 vim.o.scrolloff = 999
 vim.o.completeopt = "menuone,noselect,noinsert"
 vim.o.inccommand = "nosplit"
-vim.cmd [[nnoremap H ^]]
-vim.cmd [[nnoremap L $]]
-vim.cmd [[nnoremap <silent><C-j> :cnext<cr>]]
-vim.cmd [[nnoremap <silent><C-k> :cprev<cr>]]
-vim.cmd [[nnoremap <silent><Tab> :bnext<cr>]]
-vim.cmd [[nnoremap <silent><S-Tab> :bprev<cr>]]
-vim.cmd [[nnoremap <silent>;q :quitall<cr>]]
-vim.cmd [[nnoremap <silent>;w :update<cr>]]
-vim.cmd [[nnoremap <silent>;d :bd<cr>]]
-vim.cmd [[nnoremap <silent>;nh :noh<cr>]]
-vim.cmd [[nnoremap <silent><leader>p "+p]]
-vim.cmd [[vnoremap <silent><leader>y "+y]]
-vim.cmd [[nnoremap <silent><leader>y "+y]]
-vim.cmd [[nnoremap <silent><leader>Y gg"+yG]]
-vim.cmd [[vnoremap < <gv]]
-vim.cmd [[vnoremap > >gv]]
-vim.cmd [[autocmd TermOpen * setlocal nonumber norelativenumber]]
-vim.cmd [[tnoremap <Esc> <C-\><C-n>]]
+vim.cmd "nnoremap H ^"
+vim.cmd "nnoremap L $"
+vim.cmd "nnoremap <silent><C-j> :cnext<cr>"
+vim.cmd "nnoremap <silent><C-k> :cprev<cr>"
+vim.cmd "nnoremap <silent><Tab> :bnext<cr>"
+vim.cmd "nnoremap <silent><S-Tab> :bprev<cr>"
+vim.cmd "nnoremap <silent>;q :quitall<cr>"
+vim.cmd "nnoremap <silent>;w :update<cr>"
+vim.cmd "nnoremap <silent>;d :bd<cr>"
+vim.cmd "nnoremap <silent>;nh :noh<cr>"
+vim.cmd 'nnoremap <silent><leader>p "+p'
+vim.cmd 'vnoremap <silent><leader>y "+y'
+vim.cmd 'nnoremap <silent><leader>y "+y'
+vim.cmd 'nnoremap <silent><leader>Y gg"+yG'
+vim.cmd "vnoremap < <gv"
+vim.cmd "vnoremap > >gv"
+vim.cmd "autocmd TermOpen * setlocal nonumber norelativenumber"
+vim.cmd "tnoremap <Esc> <C-\\><C-n>"
 
 -- Setup for github.com/mhinz/neovim-remote
 -- For opening files from within :terminal without starting a nested nvim
@@ -76,6 +76,7 @@ return require("packer").startup(
             "https://gitlab.com/th3lusive/typography.vim",
             config = function()
                 vim.cmd "colorscheme typograph"
+                vim.o.background = "light"
             end
         }
         use {
