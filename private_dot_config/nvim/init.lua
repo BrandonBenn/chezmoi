@@ -70,6 +70,7 @@ return require("packer").startup(
 
         use {"tpope/vim-dispatch", cmd = "Dispatch"}
         use {"APZelos/blamer.nvim", cmd = "BlamerToggle"}
+        use { 'michaelb/sniprun', run = 'bash ./install.sh'}
 
         use {
             "https://gitlab.com/th3lusive/typography.vim",
