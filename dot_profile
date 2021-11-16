@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 export GOPATH=~/.asdf/installs/golang/1.17.1/packages
 export XDG_DATA_HOME=~/.local/share
 export EDITOR=nvim
@@ -6,8 +8,6 @@ export TERM=xterm-256color
 export HISTFILE=~/.cache/history
 export HISTSIZE=10000
 export SAVEHIST=10000
-export XDG_RUNTIME_DIR=/run/user/$(id -u)
-export ENV=~/.rc
 PATH=$PATH:~/.local/bin 
 PATH=$PATH:~/bin
 PATH=$PATH:"$GOPATH"/bin

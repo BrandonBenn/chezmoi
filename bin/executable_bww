@@ -12,6 +12,7 @@ ensure_installed() {
 }
 
 bw_items() {
+    bw login
     bw list items | jq '.[].name' --raw-output |
         fzf --cycle --layout=reverse --border --ansi \
             --preview 'bw get item {} | jq'
