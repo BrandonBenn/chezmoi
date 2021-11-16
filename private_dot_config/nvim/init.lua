@@ -1,24 +1,26 @@
 -- VANILLA VIM CONFIGURATION
-vim.g.mapleader = " "
-vim.o.showmode = false
-vim.o.termguicolors = true
-vim.o.relativenumber = true
-vim.o.hidden = true
-vim.o.undofile = true
-vim.o.number = true
-vim.o.expandtab = true
-vim.o.smartindent = true
-vim.o.tabstop = 4
-vim.o.shiftwidth = 4
-vim.o.softtabstop = 4
-vim.o.laststatus = 0
-vim.o.udir = "/tmp/nvim/undo"
-vim.o.swapfile = false
-vim.o.exrc = true
-vim.o.wrap = false
-vim.o.scrolloff = 999
-vim.o.completeopt = "menuone,noselect,noinsert"
-vim.o.inccommand = "nosplit"
+local set, let = vim.o, vim.g
+let.mapleader = " "
+set.showmode = false
+set.termguicolors = true
+set.relativenumber = true
+set.hidden = true
+set.undofile = true
+set.number = true
+set.expandtab = true
+set.smartindent = true
+set.tabstop = 4
+set.shiftwidth = 4
+set.softtabstop = 4
+set.laststatus = 0
+set.udir = "/tmp/nvim/undo"
+set.swapfile = false
+set.exrc = true
+set.wrap = false
+set.scrolloff = 999
+set.completeopt = "menuone,noselect,noinsert"
+set.inccommand = "nosplit"
+
 vim.cmd [[nnoremap H ^]]
 vim.cmd [[nnoremap L $]]
 vim.cmd [[nnoremap <silent><C-j> :cnext<cr>]]
@@ -35,12 +37,11 @@ vim.cmd [[nnoremap <silent><leader>y "+y]]
 vim.cmd [[nnoremap <silent><leader>Y gg"+yG]]
 vim.cmd [[vnoremap < <gv]]
 vim.cmd [[vnoremap > >gv]]
-vim.cmd [[autocmd TermOpen * setlocal nonumber norelativenumber]]
 vim.cmd [[tnoremap <Esc> <C-\><C-n>]]
+vim.cmd [[autocmd TermOpen * setlocal nonumber norelativenumber]]
 
--- Setup for github.com/mhinz/neovim-remote
--- For opening files from within :terminal without starting a nested nvim
--- process.
+-- Setup for github.com/mhinz/neovim-remote For opening files from within
+-- :terminal without starting a nested nvim process.
 if vim.env.NVIM_LISTEN_ADDRESS then
     vim.env.EDITOR = "nvr --remote"
     vim.env.GIT_EDITOR = "nvr -cc split --remote-wait"
@@ -81,12 +82,13 @@ return require("packer").startup(
         use {
             "mcchrish/nnn.vim",
             config = function()
-                vim.cmd "tnoremap <C-A-n> <cmd>NnnExplorer<CR>"
+                vim.cmd "tnoremap <C-A-n> <cmd>NnnExplorer %:p:h<CR>"
                 vim.cmd "nnoremap <C-A-n> <cmd>NnnExplorer %:p:h<CR>"
                 vim.cmd "tnoremap <C-A-p> <cmd>NnnPicker<CR>"
                 vim.cmd "nnoremap <C-A-p> <cmd>NnnPicker<CR>"
                 require "nnn".setup(
                     {
+                        command = "nnn -C",
                         replace_netrw = 1,
                         layout = {window = {width = 0.4, height = 0.6}}
                     }
