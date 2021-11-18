@@ -72,6 +72,20 @@ return require("packer").startup(
         use {"tpope/vim-dispatch", cmd = "Dispatch"}
         use {"APZelos/blamer.nvim", cmd = "BlamerToggle"}
         use {
+            "ygm2/rooter.nvim",
+            config = function()
+                let.rooter_pattern = {
+                    ".git",
+                    ".luacheckrc",
+                    "Gemfile",
+                    "Makefile",
+                    "node_modules",
+                    "CMakeLists.txt"
+                }
+                let.outermost_root = true
+            end
+        }
+        use {
             "michaelb/sniprun",
             run = "bash ./install.sh",
             config = function()
