@@ -70,7 +70,17 @@ return require("packer").startup(
         use "ziglang/zig.vim"
 
         use {"tpope/vim-dispatch", cmd = "Dispatch"}
+
         use {"APZelos/blamer.nvim", cmd = "BlamerToggle"}
+
+        use {
+            "TimUntersberger/neogit",
+            config = function()
+                require("neogit").setup()
+                cmd [[nnoremap <silent>;gg  <cmd>:Neogit<CR>]]
+            end
+        }
+
         use {
             "ygm2/rooter.nvim",
             config = function()
