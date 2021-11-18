@@ -1,6 +1,16 @@
--- VANILLA VIM CONFIGURATION
+local Utils = require("utils")
+
+exprnnoremap = Utils.exprnnoremap
+nnoremap = Utils.nnoremap
+vnoremap = Utils.vnoremap
+xnoremap = Utils.xnoremap
+inoremap = Utils.inoremap
+tnoremap = Utils.tnoremap
+autocmd = Utils.autocmd
 set, let, cmd = vim.o, vim.g, vim.cmd
+
 let.mapleader = " "
+let.maplocalleader = ";"
 set.showmode = false
 set.termguicolors = true
 set.relativenumber = true
@@ -21,24 +31,27 @@ set.scrolloff = 999
 set.completeopt = "menuone,noselect,noinsert"
 set.inccommand = "nosplit"
 
-cmd [[nnoremap H ^]]
-cmd [[nnoremap L $]]
-cmd [[nnoremap <silent><C-j> :cnext<cr>]]
-cmd [[nnoremap <silent><C-k> :cprev<cr>]]
-cmd [[nnoremap <silent><Tab> :bnext<cr>]]
-cmd [[nnoremap <silent><S-Tab> :bprev<cr>]]
-cmd [[nnoremap <silent>;q :quitall<cr>]]
-cmd [[nnoremap <silent>;w :update<cr>]]
-cmd [[nnoremap <silent>;d :bd<cr>]]
-cmd [[nnoremap <silent>;nh :noh<cr>]]
-cmd [[nnoremap <silent><leader>p "+p]]
-cmd [[vnoremap <silent><leader>y "+y]]
-cmd [[nnoremap <silent><leader>y "+y]]
-cmd [[nnoremap <silent><leader>Y gg"+yG]]
-cmd [[vnoremap < <gv]]
-cmd [[vnoremap > >gv]]
-cmd [[tnoremap <Esc> <C-\><C-n>]]
-cmd [[autocmd TermOpen * setlocal nonumber norelativenumber]]
+nnoremap("H", "^")
+nnoremap("L", "$")
+nnoremap("<C-j>", ":cnext<cr>")
+nnoremap("<C-k>", ":cprev<cr>")
+nnoremap("b]", ":bnext<cr>")
+nnoremap("b[", ":bprev<cr>")
+nnoremap("<localleader>q", ":quitall<cr>")
+nnoremap("<localleader>w", ":update<cr>")
+nnoremap("<localleader>d", ":bd<cr>")
+nnoremap("<localleader>nh", ":noh<cr>")
+nnoremap("<leader>p", '"+p')
+nnoremap("<leader>y", '"+y')
+nnoremap("<leader>y", '"+y')
+nnoremap("<leader>Y", 'gg"+yG')
+vnoremap("<", "<gv")
+vnoremap(">", ">gv")
+tnoremap("<Esc>", "<C-\\><C-n>")
+tnoremap("<Esc>", "<C-\\><C-n>")
+tnoremap("<A-`>", "<C-\\><C-n> :ToggleTerm<CR>")
+nnoremap("<A-`>", ":ToggleTerm<CR>")
+autocmd("TermOpen * setlocal nonumber norelativenumber")
 
 -- Setup for github.com/mhinz/neovim-remote For opening files from within
 -- :terminal without starting a nested nvim process.
@@ -74,34 +87,12 @@ return require("packer").startup(
         use {"APZelos/blamer.nvim", cmd = "BlamerToggle"}
 
         use {
-            "TimUntersberger/neogit",
-            config = function()
-                require("neogit").setup()
-                cmd [[nnoremap <silent>;gg  <cmd>:Neogit<CR>]]
-            end
-        }
-
-        use {
-            "ygm2/rooter.nvim",
-            config = function()
-                let.rooter_pattern = {
-                    ".git",
-                    ".luacheckrc",
-                    "Gemfile",
-                    "Makefile",
-                    "node_modules",
-                    "CMakeLists.txt"
-                }
-                let.outermost_root = true
-            end
-        }
-        use {
             "michaelb/sniprun",
             run = "bash ./install.sh",
             config = function()
-                cmd [[nnoremap <silent>;ee  <cmd>:SnipRun<CR>]]
-                cmd [[nnoremap <silent>;ew  <cmd>:SnipClose<CR>]]
-                cmd [[xnoremap <silent>;ee  <cmd>:SnipRun<CR>]]
+                nnoremap("<localleader>ee", ":SnipRun<CR>")
+                nnoremap("<localleader>ew", ":SnipClose<CR>")
+                xnoremap("<localleader>ee", ":SnipRun<CR>")
             end
         }
 
@@ -114,10 +105,10 @@ return require("packer").startup(
         use {
             "mcchrish/nnn.vim",
             config = function()
-                cmd "tnoremap <C-A-n> <cmd>NnnExplorer %:p:h<CR>"
-                cmd "nnoremap <C-A-n> <cmd>NnnExplorer %:p:h<CR>"
-                cmd "tnoremap <C-A-p> <cmd>NnnPicker<CR>"
-                cmd "nnoremap <C-A-p> <cmd>NnnPicker<CR>"
+                tnoremap("<C-A-n>", ":NnnExplorer %:p:h<CR>")
+                nnoremap("<C-A-n>", ":NnnExplorer %:p:h<CR>")
+                tnoremap("<C-A-p>", ":NnnPicker<CR>")
+                nnoremap("<C-A-p>", ":NnnPicker<CR>")
                 require "nnn".setup(
                     {
                         command = "nnn -C",
@@ -136,9 +127,9 @@ return require("packer").startup(
         use {
             "nvim-telescope/telescope.nvim",
             config = function()
-                cmd "nnoremap <silent><C-p> :Telescope find_files theme=ivy<cr>"
-                cmd "nnoremap <silent><A-h> :Telescope oldfiles theme=dropdown<cr>"
-                cmd "nnoremap <silent><A-g> :Telescope live_grep theme=dropdown<cr>"
+                nnoremap("<C-p>", ":Telescope find_files theme=ivy<cr>")
+                nnoremap("<A-h>", ":Telescope oldfiles theme=dropdown<cr>")
+                nnoremap("<A-g>", ":Telescope live_grep theme=dropdown<cr>")
             end,
             requires = {
                 "nvim-telescope/telescope-fzf-native.nvim",
@@ -151,7 +142,7 @@ return require("packer").startup(
         use {
             "junegunn/vim-easy-align",
             config = function()
-                vim.cmd "xnoremap <silent>ga :EasyAlign<cr>"
+                xnoremap("ga", ":EasyAlign<cr>")
             end
         }
         use {
@@ -173,7 +164,7 @@ return require("packer").startup(
                     sh = {"shellcheck"},
                     lua = {"luacheck"}
                 }
-                cmd [[au BufWritePost <buffer> lua require'lint'.try_lint()]]
+                autocmd [[BufWritePost <buffer> lua require'lint'.try_lint()]]
             end
         }
         use {
@@ -200,18 +191,19 @@ return require("packer").startup(
                     }
                 end
 
-                cmd [[nnoremap <silent><F2>  :lua vim.lsp.buf.rename()<CR>]]
-                cmd [[nnoremap <silent>gd    :lua vim.lsp.buf.declaration()<CR>]]
-                cmd [[noremap  <silent><c-]> :lua vim.lsp.buf.definition()<CR>]]
-                cmd [[nnoremap <silent>K     :lua vim.lsp.buf.hover()<CR>]]
-                cmd [[nnoremap <silent>gD    :lua vim.lsp.buf.implementation()<CR>]]
-                cmd [[nnoremap <silent><c-k> :lua vim.lsp.buf.signature_help()<CR>]]
-                cmd [[nnoremap <silent>1gD   :lua vim.lsp.buf.type_definition()<CR>]]
-                cmd [[nnoremap <silent>gr    :lua vim.lsp.buf.references()<CR>]]
-                cmd [[nnoremap <silent>g0    :lua vim.lsp.buf.document_symbol()<CR>]]
-                cmd [[nnoremap <silent>gW    :lua vim.lsp.buf.workspace_symbol()<CR>]]
+                nnoremap("<F2>", [[:lua vim.lsp.buf.rename()<CR>]])
+                nnoremap("gd", [[:lua vim.lsp.buf.declaration()<CR>]])
+                nnoremap("<c-]>", [[:lua vim.lsp.buf.definition()<CR>]])
+                nnoremap("K", [[:lua vim.lsp.buf.hover()<CR>]])
+                nnoremap("gD", [[:lua vim.lsp.buf.implementation()<CR>]])
+                nnoremap("<c-k>", [[:lua vim.lsp.buf.signature_help()<CR>]])
+                nnoremap("1gD", [[:lua vim.lsp.buf.type_definition()<CR>]])
+                nnoremap("gr", [[:lua vim.lsp.buf.references()<CR>]])
+                nnoremap("g0", [[:lua vim.lsp.buf.document_symbol()<CR>]])
+                nnoremap("gW", [[:lua vim.lsp.buf.workspace_symbol()<CR>]])
+
                 cmd [[command! Format execute "lua vim.lsp.buf.formatting()"]]
-                cmd [[nnoremap <silent>;f :Format<cr>]]
+                nnoremap(";f", ":Format<cr>")
             end
         }
 
