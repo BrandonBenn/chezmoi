@@ -1,5 +1,5 @@
 -- VANILLA VIM CONFIGURATION
-local set, let = vim.o, vim.g
+set, let, cmd = vim.o, vim.g, vim.cmd
 let.mapleader = " "
 set.showmode = false
 set.termguicolors = true
@@ -21,24 +21,24 @@ set.scrolloff = 999
 set.completeopt = "menuone,noselect,noinsert"
 set.inccommand = "nosplit"
 
-vim.cmd [[nnoremap H ^]]
-vim.cmd [[nnoremap L $]]
-vim.cmd [[nnoremap <silent><C-j> :cnext<cr>]]
-vim.cmd [[nnoremap <silent><C-k> :cprev<cr>]]
-vim.cmd [[nnoremap <silent><Tab> :bnext<cr>]]
-vim.cmd [[nnoremap <silent><S-Tab> :bprev<cr>]]
-vim.cmd [[nnoremap <silent>;q :quitall<cr>]]
-vim.cmd [[nnoremap <silent>;w :update<cr>]]
-vim.cmd [[nnoremap <silent>;d :bd<cr>]]
-vim.cmd [[nnoremap <silent>;nh :noh<cr>]]
-vim.cmd [[nnoremap <silent><leader>p "+p]]
-vim.cmd [[vnoremap <silent><leader>y "+y]]
-vim.cmd [[nnoremap <silent><leader>y "+y]]
-vim.cmd [[nnoremap <silent><leader>Y gg"+yG]]
-vim.cmd [[vnoremap < <gv]]
-vim.cmd [[vnoremap > >gv]]
-vim.cmd [[tnoremap <Esc> <C-\><C-n>]]
-vim.cmd [[autocmd TermOpen * setlocal nonumber norelativenumber]]
+cmd [[nnoremap H ^]]
+cmd [[nnoremap L $]]
+cmd [[nnoremap <silent><C-j> :cnext<cr>]]
+cmd [[nnoremap <silent><C-k> :cprev<cr>]]
+cmd [[nnoremap <silent><Tab> :bnext<cr>]]
+cmd [[nnoremap <silent><S-Tab> :bprev<cr>]]
+cmd [[nnoremap <silent>;q :quitall<cr>]]
+cmd [[nnoremap <silent>;w :update<cr>]]
+cmd [[nnoremap <silent>;d :bd<cr>]]
+cmd [[nnoremap <silent>;nh :noh<cr>]]
+cmd [[nnoremap <silent><leader>p "+p]]
+cmd [[vnoremap <silent><leader>y "+y]]
+cmd [[nnoremap <silent><leader>y "+y]]
+cmd [[nnoremap <silent><leader>Y gg"+yG]]
+cmd [[vnoremap < <gv]]
+cmd [[vnoremap > >gv]]
+cmd [[tnoremap <Esc> <C-\><C-n>]]
+cmd [[autocmd TermOpen * setlocal nonumber norelativenumber]]
 
 -- Setup for github.com/mhinz/neovim-remote For opening files from within
 -- :terminal without starting a nested nvim process.
@@ -59,19 +59,27 @@ return require("packer").startup(
         use "wbthomason/packer.nvim" -- Packer can manage itself
         use "nvim-lua/plenary.nvim" -- Dependency of many plugins
 
-        use "machakann/vim-sandwich"
+        use "ap/vim-buftabline"
         use "jiangmiao/auto-pairs"
-        use "tpope/vim-commentary"
+        use "machakann/vim-sandwich"
         use "nvim-lua/popup.nvim"
         use "pbrisbin/vim-mkdir"
-        use "ap/vim-buftabline"
+        use "tpope/vim-commentary"
         use "tpope/vim-endwise"
         use "tpope/vim-eunuch"
         use "ziglang/zig.vim"
 
         use {"tpope/vim-dispatch", cmd = "Dispatch"}
         use {"APZelos/blamer.nvim", cmd = "BlamerToggle"}
-        use {"michaelb/sniprun", run = "bash ./install.sh"}
+        use {
+            "michaelb/sniprun",
+            run = "bash ./install.sh",
+            config = function()
+                cmd [[nnoremap <silent>;ee  <cmd>:SnipRun<CR>]]
+                cmd [[nnoremap <silent>;ew  <cmd>:SnipClose<CR>]]
+                cmd [[xnoremap <silent>;ee  <cmd>:SnipRun<CR>]]
+            end
+        }
 
         use {
             "https://gitlab.com/th3lusive/typography.vim",
@@ -82,10 +90,10 @@ return require("packer").startup(
         use {
             "mcchrish/nnn.vim",
             config = function()
-                vim.cmd "tnoremap <C-A-n> <cmd>NnnExplorer %:p:h<CR>"
-                vim.cmd "nnoremap <C-A-n> <cmd>NnnExplorer %:p:h<CR>"
-                vim.cmd "tnoremap <C-A-p> <cmd>NnnPicker<CR>"
-                vim.cmd "nnoremap <C-A-p> <cmd>NnnPicker<CR>"
+                cmd "tnoremap <C-A-n> <cmd>NnnExplorer %:p:h<CR>"
+                cmd "nnoremap <C-A-n> <cmd>NnnExplorer %:p:h<CR>"
+                cmd "tnoremap <C-A-p> <cmd>NnnPicker<CR>"
+                cmd "nnoremap <C-A-p> <cmd>NnnPicker<CR>"
                 require "nnn".setup(
                     {
                         command = "nnn -C",
@@ -104,9 +112,9 @@ return require("packer").startup(
         use {
             "nvim-telescope/telescope.nvim",
             config = function()
-                vim.cmd "nnoremap <silent><C-p> :Telescope find_files theme=ivy<cr>"
-                vim.cmd "nnoremap <silent><A-h> :Telescope oldfiles theme=dropdown<cr>"
-                vim.cmd "nnoremap <silent><A-g> :Telescope live_grep theme=dropdown<cr>"
+                cmd "nnoremap <silent><C-p> :Telescope find_files theme=ivy<cr>"
+                cmd "nnoremap <silent><A-h> :Telescope oldfiles theme=dropdown<cr>"
+                cmd "nnoremap <silent><A-g> :Telescope live_grep theme=dropdown<cr>"
             end,
             requires = {
                 "nvim-telescope/telescope-fzf-native.nvim",
@@ -141,7 +149,7 @@ return require("packer").startup(
                     sh = {"shellcheck"},
                     lua = {"luacheck"}
                 }
-                vim.cmd "au BufWritePost <buffer> lua require'lint'.try_lint()"
+                cmd [[au BufWritePost <buffer> lua require'lint'.try_lint()]]
             end
         }
         use {
@@ -168,18 +176,18 @@ return require("packer").startup(
                     }
                 end
 
-                vim.cmd "nnoremap <silent><F2>  :lua vim.lsp.buf.rename()<CR>"
-                vim.cmd "nnoremap <silent>gd    :lua vim.lsp.buf.declaration()<CR>"
-                vim.cmd "noremap  <silent><c-]> :lua vim.lsp.buf.definition()<CR>"
-                vim.cmd "nnoremap <silent>K     :lua vim.lsp.buf.hover()<CR>"
-                vim.cmd "nnoremap <silent>gD    :lua vim.lsp.buf.implementation()<CR>"
-                vim.cmd "nnoremap <silent><c-k> :lua vim.lsp.buf.signature_help()<CR>"
-                vim.cmd "nnoremap <silent>1gD   :lua vim.lsp.buf.type_definition()<CR>"
-                vim.cmd "nnoremap <silent>gr    :lua vim.lsp.buf.references()<CR>"
-                vim.cmd "nnoremap <silent>g0    :lua vim.lsp.buf.document_symbol()<CR>"
-                vim.cmd "nnoremap <silent>gW    :lua vim.lsp.buf.workspace_symbol()<CR>"
-                vim.cmd 'command! Format execute "lua vim.lsp.buf.formatting()"'
-                vim.cmd "nnoremap <silent>;f :Format<cr>"
+                cmd [[nnoremap <silent><F2>  :lua vim.lsp.buf.rename()<CR>]]
+                cmd [[nnoremap <silent>gd    :lua vim.lsp.buf.declaration()<CR>]]
+                cmd [[noremap  <silent><c-]> :lua vim.lsp.buf.definition()<CR>]]
+                cmd [[nnoremap <silent>K     :lua vim.lsp.buf.hover()<CR>]]
+                cmd [[nnoremap <silent>gD    :lua vim.lsp.buf.implementation()<CR>]]
+                cmd [[nnoremap <silent><c-k> :lua vim.lsp.buf.signature_help()<CR>]]
+                cmd [[nnoremap <silent>1gD   :lua vim.lsp.buf.type_definition()<CR>]]
+                cmd [[nnoremap <silent>gr    :lua vim.lsp.buf.references()<CR>]]
+                cmd [[nnoremap <silent>g0    :lua vim.lsp.buf.document_symbol()<CR>]]
+                cmd [[nnoremap <silent>gW    :lua vim.lsp.buf.workspace_symbol()<CR>]]
+                cmd [[command! Format execute "lua vim.lsp.buf.formatting()"]]
+                cmd [[nnoremap <silent>;f :Format<cr>]]
             end
         }
 
@@ -188,7 +196,7 @@ return require("packer").startup(
             require("packer").sync()
         end
 
-        vim.cmd(
+        cmd(
             [[
         augroup packer_user_config
         autocmd!
