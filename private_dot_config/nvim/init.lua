@@ -60,6 +60,11 @@ if vim.env.NVIM_LISTEN_ADDRESS then
     vim.env.GIT_EDITOR = "nvr -cc split --remote-wait"
 end
 
+if vim.fn.exists("g:gnvim") == 1 then
+    vim.cmd [[set guifont=JetBrains\ Mono:h12]]
+    set.background = "light"
+end
+
 -- PLUGIN MANAGER INSTALLATION
 local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
@@ -127,9 +132,52 @@ return require("packer").startup(
         use {
             "nvim-telescope/telescope.nvim",
             config = function()
-                nnoremap("<C-p>", ":Telescope find_files theme=ivy<cr>")
-                nnoremap("<A-h>", ":Telescope oldfiles theme=dropdown<cr>")
-                nnoremap("<A-g>", ":Telescope live_grep theme=dropdown<cr>")
+                telescope = require "telescope.builtin"
+                local action_layout = require("telescope.actions.layout")
+                require("telescope").setup {
+                    defaults = {
+                        mappings = {
+                            n = {
+                                ["<M-p>"] = action_layout.toggle_preview
+                            },
+                            i = {
+                                ["<M-p>"] = action_layout.toggle_preview,
+                            }
+                        }
+                    },
+                    pickers = {
+                        find_files = {
+                            theme = "ivy",
+                            previewer = false
+                        },
+                        git_files = {
+                            theme = "ivy",
+                            previewer = false
+                        },
+                        oldfiles = {
+                            theme = "ivy",
+                            previewer = false
+                        },
+                        live_grep = {
+                            theme = "dropdown",
+                            height = 0.8,
+                            width = 0.8
+                        }
+                    }
+                }
+
+                live_greps = telescope.live_greps
+                oldfiles = telescope.oldfiles
+                project_files = function()
+                    local ok = pcall(telescope.git_files)
+                    if not ok then
+                        telescope.find_files()
+                    end
+                end
+
+                nnoremap("<C-p>", ":lua project_files()<cr>")
+                nnoremap("<A-h>", ":lua oldfiles()<cr>")
+                nnoremap("<A-g>", ":lua live_grep()<cr>")
             end,
             requires = {
                 "nvim-telescope/telescope-fzf-native.nvim",
