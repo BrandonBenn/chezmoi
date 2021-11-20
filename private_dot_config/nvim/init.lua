@@ -100,27 +100,10 @@ return require("packer").startup(
                 xnoremap("<localleader>ee", ":SnipRun<CR>")
             end
         }
-
         use {
             "https://gitlab.com/th3lusive/typography.vim",
             config = function()
                 vim.cmd "colorscheme typograph"
-            end
-        }
-        use {
-            "mcchrish/nnn.vim",
-            config = function()
-                tnoremap("<C-A-n>", ":NnnExplorer %:p:h<CR>")
-                nnoremap("<C-A-n>", ":NnnExplorer %:p:h<CR>")
-                tnoremap("<C-A-p>", ":NnnPicker<CR>")
-                nnoremap("<C-A-p>", ":NnnPicker<CR>")
-                require "nnn".setup(
-                    {
-                        command = "nnn -C",
-                        replace_netrw = 1,
-                        layout = {window = {width = 0.4, height = 0.6}}
-                    }
-                )
             end
         }
         use {
@@ -141,7 +124,7 @@ return require("packer").startup(
                                 ["<M-p>"] = action_layout.toggle_preview
                             },
                             i = {
-                                ["<M-p>"] = action_layout.toggle_preview,
+                                ["<M-p>"] = action_layout.toggle_preview
                             }
                         }
                     },
@@ -193,13 +176,29 @@ return require("packer").startup(
                 xnoremap("ga", ":EasyAlign<cr>")
             end
         }
+
+        use {
+            "ms-jpq/chadtree",
+            branch = "chad",
+            run = "python3 -m chadtree deps",
+            config = function()
+                let.chadtree_settings = {
+                    view = {
+                        open_direction = "right"
+                    },
+                    theme = {
+                        icon_glyph_set = "ascii"
+                    }
+                }
+                nnoremap("<leader>v", ":CHADopen<cr>")
+            end
+        }
+
         use {
             "ms-jpq/coq_nvim",
             branch = "coq",
             requires = {"ms-jpq/coq.artifacts", branch = "artifacts"},
-            run = function()
-                require "coq".deps()
-            end,
+            run = "python3 -m coq deps",
             config = function()
                 require "coq".Now("-s")
             end
