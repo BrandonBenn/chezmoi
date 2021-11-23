@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+VARIABLE_FONT='Roboto 11'
+MONOSPACE_FONT='JetBrains Mono 11'
+TERMINAL=kitty
+
+GNOME_EXTENSIONS=(
+    just-perfection-desktopjust-perfection.v16.shell-extension.zip
+    clipboard-indicatortudmotu.com.v39.shell-extension.zip
+)
+
+for extension in "${GNOME_EXTENSIONS[@]}"; do
+    url="https://extensions.gnome.org/extension-data/$extension"
+    printf "Installing extension: %s\n" "$extension"
+    gnome-extensions install "$url" 2>/dev/null
+done
+
+gsettings set org.gnome.shell enabled-extensions "['just-perfection-desktop@just-perfection', 'clipboard-indicator@tudmotu.com']"
+gsettings set org.gnome.desktop.wm.keybindings close "['<Super>q']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-center "['<Super>c']"
+gsettings set org.gnome.desktop.wm.keybindings maximize-vertically "['<Super>minus']"
+gsettings set org.gnome.desktop.wm.keybindings toggle-maximized "['<Super>Up']"
+gsettings set org.gnome.desktop.background primary-color ""
+gsettings set org.gnome.desktop.wm.keybindings cycle-windows "['<Super>Tab']"
+gsettings set org.gnome.desktop.input-sources xkb-options "['terminate:ctrl_alt_bksp', 'caps:escape']"
+gsettings set org.gnome.mutter center-new-windows true
+gsettings set org.gnome.desktop.interface font-name "$VARIABLE_FONT"
+gsettings set org.gnome.desktop.interface monospace-font-name "$MONOSPACE_FONT"
+gsettings set org.gnome.desktop.default-applications.terminal exec "$TERMINAL"
+gsettings set org.gnome.desktop.default-applications.terminal exec-arg '-e'
