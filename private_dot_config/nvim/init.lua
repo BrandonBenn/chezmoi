@@ -75,12 +75,13 @@ end
 return require("packer").startup(
     function(use)
         use "wbthomason/packer.nvim" -- Packer can manage itself
-        use "nvim-lua/plenary.nvim" -- Dependency of many plugins
 
-        use "ap/vim-buftabline"
+        -- Dependency of many plugins
+        use "nvim-lua/plenary.nvim"
+        use "nvim-lua/popup.nvim"
+
         use "jiangmiao/auto-pairs"
         use "machakann/vim-sandwich"
-        use "nvim-lua/popup.nvim"
         use "pbrisbin/vim-mkdir"
         use "tpope/vim-commentary"
         use "tpope/vim-endwise"
@@ -91,6 +92,15 @@ return require("packer").startup(
 
         use {"APZelos/blamer.nvim", cmd = "BlamerToggle"}
 
+        use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
+
+        use {
+            "https://gitlab.com/th3lusive/typography.vim",
+            config = function()
+                cmd "colorscheme typograph"
+            end
+        }
+
         use {
             "michaelb/sniprun",
             run = "bash ./install.sh",
@@ -100,22 +110,33 @@ return require("packer").startup(
                 xnoremap("<localleader>ee", ":SnipRun<CR>")
             end
         }
-        use {
-            "https://gitlab.com/th3lusive/typography.vim",
-            config = function()
-                vim.cmd "colorscheme typograph"
-            end
-        }
+
         use {
             "sbdchd/neoformat",
             config = function()
-                vim.cmd "nnoremap <silent>;f :Neoformat<cr>"
+                nnoremap("<localleader>f", ":Neoformat<cr>")
             end
         }
+
+        use {
+            "folke/zen-mode.nvim",
+            config = function()
+                require("zen-mode").setup {
+                    window = {
+                        options = {
+                            number = true,
+                            relativenumber = true
+                        }
+                    }
+                }
+                nnoremap("<localleader>z", ":ZenMode<cr>")
+            end
+        }
+
         use {
             "nvim-telescope/telescope.nvim",
             config = function()
-                telescope = require "telescope.builtin"
+                local telescope = require "telescope.builtin"
                 local action_layout = require("telescope.actions.layout")
                 require("telescope").setup {
                     defaults = {
@@ -141,6 +162,10 @@ return require("packer").startup(
                             theme = "ivy",
                             previewer = false
                         },
+                        buffers = {
+                            theme = "dropdown",
+                            previewer = false
+                        },
                         live_grep = {
                             theme = "dropdown",
                             height = 0.8,
@@ -149,27 +174,30 @@ return require("packer").startup(
                     }
                 }
 
-                live_greps = telescope.live_greps
-                oldfiles = telescope.oldfiles
                 project_files = function()
                     local ok = pcall(telescope.git_files)
                     if not ok then
                         telescope.find_files()
                     end
                 end
+                cmd [[command! ProjectFiles execute "lua project_files()"]]
 
-                nnoremap("<C-p>", ":lua project_files()<cr>")
-                nnoremap("<A-h>", ":lua oldfiles()<cr>")
-                nnoremap("<A-g>", ":lua live_grep()<cr>")
+                nnoremap("<C-p>", ":ProjectFiles<cr>")
+                nnoremap("<A-h>", ":Telescope oldfiles<cr>")
+                nnoremap("<A-g>", ":Telescope live_grep<cr>")
+                nnoremap("<A-b>", ":Telescope buffers<cr>")
             end,
             requires = {
-                "nvim-telescope/telescope-fzf-native.nvim",
-                run = "make",
-                config = function()
-                    require "telescope".load_extension("fzf")
-                end
+                {
+                    "jvgrootveld/telescope-zoxide",
+                    config = function()
+                        require "telescope".load_extension("zoxide")
+                        nnoremap("<localleader>cd", ":Telescope zoxide list theme=dropdown<CR>")
+                    end
+                }
             }
         }
+
         use {
             "junegunn/vim-easy-align",
             config = function()
@@ -178,26 +206,10 @@ return require("packer").startup(
         }
 
         use {
-            "ms-jpq/chadtree",
-            branch = "chad",
-            run = "python3 -m chadtree deps",
-            config = function()
-                let.chadtree_settings = {
-                    view = {
-                        open_direction = "right"
-                    },
-                    theme = {
-                        icon_glyph_set = "ascii"
-                    }
-                }
-                nnoremap("<leader>v", ":CHADopen<cr>")
-            end
-        }
-
-        use {
             "ms-jpq/coq_nvim",
             branch = "coq",
             requires = {"ms-jpq/coq.artifacts", branch = "artifacts"},
+            event = "VimEnter",
             run = "python3 -m coq deps",
             config = function()
                 require "coq".Now("-s")
@@ -214,6 +226,7 @@ return require("packer").startup(
                 autocmd [[BufWritePost <buffer> lua require'lint'.try_lint()]]
             end
         }
+
         use {
             "neovim/nvim-lspconfig",
             ft = {"go", "c", "cpp", "zig", "ruby", "python"},
