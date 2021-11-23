@@ -62,223 +62,257 @@ end
 
 if vim.fn.exists("g:gnvim") == 1 then
     vim.cmd [[set guifont=JetBrains\ Mono:h12]]
-    set.background = "light"
-end
-
--- PLUGIN MANAGER INSTALLATION
-local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    bootstrap = os.execute("git clone --depth 1 https://github.com/wbthomason/packer.nvim " .. install_path)
 end
 
 -- Plugins
-return require("packer").startup(
-    function(use)
-        use "wbthomason/packer.nvim" -- Packer can manage itself
+local function load_plugins()
+    require("packer").startup(
+        function(use)
+            use "wbthomason/packer.nvim" -- Packer can manage itself
 
-        -- Dependency of many plugins
-        use "nvim-lua/plenary.nvim"
-        use "nvim-lua/popup.nvim"
+            -- Dependency of many plugins
+            use "nvim-lua/plenary.nvim"
+            use "nvim-lua/popup.nvim"
 
-        use "jiangmiao/auto-pairs"
-        use "machakann/vim-sandwich"
-        use "pbrisbin/vim-mkdir"
-        use "tpope/vim-commentary"
-        use "tpope/vim-endwise"
-        use "tpope/vim-eunuch"
-        use "ziglang/zig.vim"
+            use "jiangmiao/auto-pairs"
+            use "machakann/vim-sandwich"
+            use "pbrisbin/vim-mkdir"
+            use "tpope/vim-commentary"
+            use "tpope/vim-endwise"
+            use "tpope/vim-eunuch"
+            use "ziglang/zig.vim"
 
-        use {"tpope/vim-dispatch", cmd = "Dispatch"}
+            use {"github/copilot.vim", cmd = "Copilot"}
 
-        use {"APZelos/blamer.nvim", cmd = "BlamerToggle"}
+            use {"APZelos/blamer.nvim", cmd = "BlamerToggle"}
 
-        use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
+            use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
 
-        use {
-            "https://gitlab.com/th3lusive/typography.vim",
-            config = function()
-                cmd "colorscheme typograph"
-            end
-        }
+            use {
+                "mcchrish/zenbones.nvim",
+                requires = "rktjmp/lush.nvim",
+                config = function()
+                    local color = "zenwritten"
+                    if vim.env.NEOVIM_COLORSCHEME then
+                        color = vim.env.NEOVIM_COLORSCHEME
+                    end
+                    set.background = "light"
+                    cmd(string.format("colorscheme %s", color))
+                end
+            }
 
-        use {
-            "michaelb/sniprun",
-            run = "bash ./install.sh",
-            config = function()
-                nnoremap("<localleader>ee", ":SnipRun<CR>")
-                nnoremap("<localleader>ew", ":SnipClose<CR>")
-                xnoremap("<localleader>ee", ":SnipRun<CR>")
-            end
-        }
+            use {
+                "sbdchd/neoformat",
+                config = function()
+                    nnoremap("<localleader>f", ":Neoformat<cr>")
+                end
+            }
 
-        use {
-            "sbdchd/neoformat",
-            config = function()
-                nnoremap("<localleader>f", ":Neoformat<cr>")
-            end
-        }
-
-        use {
-            "folke/zen-mode.nvim",
-            config = function()
-                require("zen-mode").setup {
-                    window = {
-                        options = {
-                            number = true,
-                            relativenumber = true
-                        }
-                    }
-                }
-                nnoremap("<localleader>z", ":ZenMode<cr>")
-            end
-        }
-
-        use {
-            "nvim-telescope/telescope.nvim",
-            config = function()
-                local telescope = require "telescope.builtin"
-                local action_layout = require("telescope.actions.layout")
-                require("telescope").setup {
-                    defaults = {
-                        mappings = {
-                            n = {
-                                ["<M-p>"] = action_layout.toggle_preview
-                            },
-                            i = {
-                                ["<M-p>"] = action_layout.toggle_preview
+            use {
+                "folke/zen-mode.nvim",
+                config = function()
+                    require("zen-mode").setup {
+                        window = {
+                            options = {
+                                number = true,
+                                relativenumber = true
                             }
                         }
-                    },
-                    pickers = {
-                        find_files = {
-                            theme = "ivy",
-                            previewer = false
+                    }
+                    nnoremap("<localleader>z", ":ZenMode<cr>")
+                end
+            }
+
+            use {
+                "nvim-telescope/telescope.nvim",
+                config = function()
+                    local telescope = require "telescope.builtin"
+                    local action_layout = require("telescope.actions.layout")
+                    require("telescope").setup {
+                        defaults = {
+                            mappings = {
+                                n = {
+                                    ["<M-p>"] = action_layout.toggle_preview
+                                },
+                                i = {
+                                    ["<M-p>"] = action_layout.toggle_preview
+                                }
+                            }
                         },
-                        git_files = {
-                            theme = "ivy",
-                            previewer = false
-                        },
-                        oldfiles = {
-                            theme = "ivy",
-                            previewer = false
-                        },
-                        buffers = {
-                            theme = "dropdown",
-                            previewer = false
-                        },
-                        live_grep = {
-                            theme = "dropdown",
-                            height = 0.8,
-                            width = 0.8
+                        pickers = {
+                            find_files = {
+                                theme = "ivy",
+                                previewer = false
+                            },
+                            git_files = {
+                                theme = "ivy",
+                                previewer = false
+                            },
+                            oldfiles = {
+                                theme = "ivy",
+                                previewer = false
+                            },
+                            buffers = {
+                                theme = "dropdown",
+                                previewer = false
+                            },
+                            live_grep = {
+                                theme = "dropdown",
+                                height = 0.8,
+                                width = 0.8
+                            }
                         }
                     }
-                }
 
-                project_files = function()
-                    local ok = pcall(telescope.git_files)
-                    if not ok then
-                        telescope.find_files()
+                    project_files = function()
+                        local ok = pcall(telescope.git_files)
+                        if not ok then
+                            telescope.find_files()
+                        end
                     end
-                end
-                cmd [[command! ProjectFiles execute "lua project_files()"]]
-
-                nnoremap("<C-p>", ":ProjectFiles<cr>")
-                nnoremap("<A-h>", ":Telescope oldfiles<cr>")
-                nnoremap("<A-g>", ":Telescope live_grep<cr>")
-                nnoremap("<A-b>", ":Telescope buffers<cr>")
-            end,
-            requires = {
-                {
-                    "jvgrootveld/telescope-zoxide",
-                    config = function()
-                        require "telescope".load_extension("zoxide")
-                        nnoremap("<localleader>cd", ":Telescope zoxide list theme=dropdown<CR>")
-                    end
+                    cmd [[command! ProjectFiles execute "lua project_files()"]]
+                    nnoremap("<C-p>", ":ProjectFiles<cr>")
+                    nnoremap("<A-h>", ":Telescope oldfiles<cr>")
+                    nnoremap("<A-g>", ":Telescope live_grep<cr>")
+                    nnoremap("<A-b>", ":Telescope buffers<cr>")
+                end,
+                requires = {
+                    {
+                        "jvgrootveld/telescope-zoxide",
+                        config = function()
+                            require "telescope".load_extension("zoxide")
+                            nnoremap("<localleader>cd", ":Telescope zoxide list theme=dropdown<CR>")
+                        end
+                    }
                 }
             }
-        }
 
-        use {
-            "junegunn/vim-easy-align",
-            config = function()
-                xnoremap("ga", ":EasyAlign<cr>")
-            end
-        }
+            use {
+                "junegunn/vim-easy-align",
+                config = function()
+                    xnoremap("ga", ":EasyAlign<cr>")
+                end
+            }
 
-        use {
-            "ms-jpq/coq_nvim",
-            branch = "coq",
-            requires = {"ms-jpq/coq.artifacts", branch = "artifacts"},
-            event = "VimEnter",
-            run = "python3 -m coq deps",
-            config = function()
-                require "coq".Now("-s")
-            end
-        }
-        use {
-            "mfussenegger/nvim-lint",
-            ft = {"bash", "sh", "lua"},
-            config = function()
-                require "lint".linters_by_ft = {
-                    sh = {"shellcheck"},
-                    lua = {"luacheck"}
-                }
-                autocmd [[BufWritePost <buffer> lua require'lint'.try_lint()]]
-            end
-        }
-
-        use {
-            "neovim/nvim-lspconfig",
-            ft = {"go", "c", "cpp", "zig", "ruby", "python"},
-            config = function()
-                local servers = {"gopls", "zls", "pyright", "clangd", "solargraph"}
-                local lsp = require "lspconfig"
-                local capabilities = vim.lsp.protocol.make_client_capabilities()
-                capabilities.textDocument.completion.completionItem.snippetSupport = true
-                capabilities.textDocument.completion.completionItem.resolveSupport = {
-                    properties = {
-                        "documentation",
-                        "detail",
-                        "additionalTextEdits"
-                    }
-                }
-
-                for _, server in ipairs(servers) do
-                    lsp[server].setup {
-                        on_attach = on_attach,
-                        capabilities = capabilities,
-                        settings = {documentFormatting = true}
+            use {
+                "hrsh7th/nvim-cmp",
+                requires = {
+                    {"hrsh7th/cmp-buffer"},
+                    {"hrsh7th/cmp-cmdline"},
+                    {"hrsh7th/cmp-nvim-lua"},
+                    {"hrsh7th/cmp-path"},
+                    {"saadparwaiz1/cmp_luasnip", requires = "L3MON4D3/LuaSnip"}
+                },
+                config = function()
+                    local cmp = require "cmp"
+                    cmp.setup {
+                        completion = {
+                            completeopt = "menu,menuone,noinsert"
+                        },
+                        mapping = {
+                            ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+                            ["<C-f>"] = cmp.mapping.scroll_docs(4),
+                            ["<A-Space>"] = cmp.mapping.complete(),
+                            ["<C-e>"] = cmp.mapping.close(),
+                            ["<C-y>"] = cmp.mapping.confirm {
+                                select = true,
+                                behaviour = cmp.ConfirmBehavior.Insert
+                            }
+                        },
+                        sources = {
+                            {name = "nvim_lua"},
+                            {name = "nvim_lsp"},
+                            {name = "path"},
+                            {name = "luasnip"},
+                            {name = "buffer", keyword_lenght = 4}
+                        },
+                        snippet = {
+                            expand = function(args)
+                                require("luasnip").lsp_expand(args.body)
+                            end
+                        },
+                        experimental = {
+                            native_menu = true
+                        }
                     }
                 end
+            }
 
-                nnoremap("<F2>", [[:lua vim.lsp.buf.rename()<CR>]])
-                nnoremap("gd", [[:lua vim.lsp.buf.declaration()<CR>]])
-                nnoremap("<c-]>", [[:lua vim.lsp.buf.definition()<CR>]])
-                nnoremap("K", [[:lua vim.lsp.buf.hover()<CR>]])
-                nnoremap("gD", [[:lua vim.lsp.buf.implementation()<CR>]])
-                nnoremap("<c-k>", [[:lua vim.lsp.buf.signature_help()<CR>]])
-                nnoremap("1gD", [[:lua vim.lsp.buf.type_definition()<CR>]])
-                nnoremap("gr", [[:lua vim.lsp.buf.references()<CR>]])
-                nnoremap("g0", [[:lua vim.lsp.buf.document_symbol()<CR>]])
-                nnoremap("gW", [[:lua vim.lsp.buf.workspace_symbol()<CR>]])
+            use {
+                "mfussenegger/nvim-lint",
+                ft = {"bash", "sh", "lua"},
+                config = function()
+                    require "lint".linters_by_ft = {
+                        sh = {"shellcheck"},
+                        lua = {"luacheck"}
+                    }
+                    autocmd [[BufWritePost <buffer> lua require'lint'.try_lint()]]
+                end
+            }
 
-                cmd [[command! Format execute "lua vim.lsp.buf.formatting()"]]
-                nnoremap(";f", ":Format<cr>")
-            end
-        }
+            use {
+                "neovim/nvim-lspconfig",
+                requires = {"hrsh7th/cmp-nvim-lsp"},
+                ft = {"go", "c", "cpp", "zig", "ruby", "python"},
+                config = function()
+                    local servers = {"gopls", "zls", "pyright", "clangd", "solargraph"}
+                    local lsp = require "lspconfig"
+                    local capabilities =
+                        require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+                    capabilities.textDocument.completion.completionItem.snippetSupport = true
+                    capabilities.textDocument.completion.completionItem.resolveSupport = {
+                        properties = {
+                            "documentation",
+                            "detail",
+                            "additionalTextEdits"
+                        }
+                    }
 
-        -- Automatically set up configuration after cloning packer.nvim
-        if bootstrap then
-            require("packer").sync()
+                    local on_attach = function()
+                        nnoremap("<F2>", [[:lua vim.lsp.buf.rename()<CR>]])
+                        nnoremap("gd", [[:lua vim.lsp.buf.declaration()<CR>]])
+                        nnoremap("<c-]>", [[:lua vim.lsp.buf.definition()<CR>]])
+                        nnoremap("K", [[:lua vim.lsp.buf.hover()<CR>]])
+                        nnoremap("gD", [[:lua vim.lsp.buf.implementation()<CR>]])
+                        nnoremap("<c-k>", [[:lua vim.lsp.buf.signature_help()<CR>]])
+                        nnoremap("1gD", [[:lua vim.lsp.buf.type_definition()<CR>]])
+                        nnoremap("gr", [[:lua vim.lsp.buf.references()<CR>]])
+                        nnoremap("g0", [[:lua vim.lsp.buf.document_symbol()<CR>]])
+                        nnoremap("gW", [[:lua vim.lsp.buf.workspace_symbol()<CR>]])
+                        cmd [[command! Format execute "lua vim.lsp.buf.formatting()"]]
+                        nnoremap(";f", ":Format<cr>")
+                    end
+
+                    for _, server in ipairs(servers) do
+                        lsp[server].setup {
+                            on_attach = on_attach,
+                            capabilities = capabilities,
+                            settings = {documentFormatting = true}
+                        }
+                    end
+                end
+            }
         end
+    )
+end
 
-        cmd(
-            [[
+-- PLUGIN MANAGER INSTALLATION
+-- Automatically set up configuration after cloning packer.nvim
+local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+if vim.fn.isdirectory(install_path) == 1 then
+    load_plugins()
+    cmd(
+        [[
         augroup packer_user_config
         autocmd!
         autocmd BufWritePost ~/.config/nvim/init.lua source % | PackerCompile
         augroup end
     ]]
-        )
-    end
-)
+    )
+else
+    vim.fn.system {"git", "clone", "https://github.com/wbthomason/packer.nvim", install_path}
+    cmd [[packloadall]]
+    load_plugins()
+    require("packer").sync()
+end
+-- vim:ts=2:sw=2:ai:foldmethod=marker:foldlevel=0:
