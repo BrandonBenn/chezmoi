@@ -1,0 +1,11 @@
+bar {
+    font pango:FreeSans, FontAwesome 10
+    position top
+    mode hide 
+    status_command i3status-rs ~/.config/sway/i3status-rs
+    colors {
+        statusline #111111
+        background #F5F4F3
+        inactive_workspace #32323200 #32323200 #5c5c5c
+    }
+}
