@@ -5,7 +5,7 @@ set $down  j
 set $up    k
 set $right l
 set $term kitty -e fish
-set $menu kitty --class "launcher" -e sway-launcher-desktop
+set $menu j4-dmenu-desktop --dmenu='bemenu -i -p "" --fn "FreeSans 11" --hb "#f7f6f4"' --term=kitty
 set $lock swaylock -f -c 999999
 
 title_align center
