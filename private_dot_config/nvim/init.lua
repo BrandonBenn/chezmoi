@@ -77,7 +77,6 @@ local function load_plugins()
             use "jiangmiao/auto-pairs"
             use "machakann/vim-sandwich"
             use "pbrisbin/vim-mkdir"
-            use "tpope/vim-commentary"
             use "tpope/vim-endwise"
             use "tpope/vim-eunuch"
             use "ziglang/zig.vim"
@@ -89,15 +88,16 @@ local function load_plugins()
             use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
 
             use {
-                "mcchrish/zenbones.nvim",
-                requires = "rktjmp/lush.nvim",
+                "https://gitlab.com/th3lusive/typography.vim",
                 config = function()
-                    local color = "zenwritten"
-                    if vim.env.NEOVIM_COLORSCHEME then
-                        color = vim.env.NEOVIM_COLORSCHEME
-                    end
-                    set.background = "light"
-                    cmd(string.format("colorscheme %s", color))
+                    cmd [[colorscheme typograph]]
+                end
+            }
+
+            use {
+                "numToStr/Comment.nvim",
+                config = function()
+                    require('Comment').setup()
                 end
             }
 

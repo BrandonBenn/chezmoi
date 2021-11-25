@@ -9,7 +9,7 @@ set $menu j4-dmenu-desktop --dmenu='bemenu -i -p "" --fn "FreeSans 11" --hb "#f7
 set $lock swaylock -f -c 999999
 
 title_align center
-default_border pixel 2
+default_border pixel 4
 smart_borders on
 
 font "$FONT 11"

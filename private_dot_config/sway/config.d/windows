@@ -1,6 +1,6 @@
 # class                   border  backgr. text    indicator child_border
-client.focused           #F5F4F3 #F5F4F3 #111111 #F5F4F3   #F5F4F3
-
+client.focused           #dddad6 #dddad6 #111111 #d3869b   #dddad6
+client.unfocused         #f6f5f4 #f6f5f4 #111111 #f6f5f4   #f6f5f4
 
 # Wayland default floats
 for_window [app_id="gnome-(calendar|calculator|power-statistics|control-center)"] floating enable
