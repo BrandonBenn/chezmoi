@@ -23,7 +23,6 @@ input type:touchpad {
    middle_emulation enabled
 }
 
-
 exec_always {
     gsettings set $gnome-schema gtk-theme 'Adwaita'
     gsettings set $gnome-schema icon-theme 'Adwaita'
@@ -35,5 +34,6 @@ exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec dbus-update-activation-environment 2>/dev/null && dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec swayidle -w timeout 300 "$lock" timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep "$lock"
 exec fcitx5
+exec gammastep -l 23.6:120.9 6000:3000
 
 include ~/.config/sway/config.d/*

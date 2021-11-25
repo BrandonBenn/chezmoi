@@ -1,7 +1,6 @@
 bar {
     font pango:FreeSans, FontAwesome 11 
     position bottom
-    mode hide 
     height 18
     status_command i3status-rs ~/.config/sway/i3status-rs
     colors {
