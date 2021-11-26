@@ -49,8 +49,6 @@ vnoremap("<", "<gv")
 vnoremap(">", ">gv")
 tnoremap("<Esc>", "<C-\\><C-n>")
 tnoremap("<Esc>", "<C-\\><C-n>")
-tnoremap("<A-`>", "<C-\\><C-n> :ToggleTerm<CR>")
-nnoremap("<A-`>", ":ToggleTerm<CR>")
 autocmd("TermOpen * setlocal nonumber norelativenumber")
 
 -- Setup for github.com/mhinz/neovim-remote For opening files from within
@@ -105,6 +103,43 @@ local function load_plugins()
                 "sbdchd/neoformat",
                 config = function()
                     nnoremap("<localleader>f", ":Neoformat<cr>")
+                end
+            }
+
+            use {
+                "kyazdani42/nvim-tree.lua",
+                config = function()
+                    require "nvim-tree".setup {
+                        view = {
+                            side = "right",
+                            auto_resize = false
+                        }
+                    }
+                nnoremap("<leader>f", ":NvimTreeToggle<cr>")
+                end
+            }
+
+            use {
+                "numToStr/FTerm.nvim",
+                config = function()
+                    local fterm = require("FTerm")
+                    local gitui =
+                        fterm:new(
+                        {
+                            ft = "fterm_gitui", -- You can also override the default filetype, if you want
+                            cmd = "gitui",
+                            dimensions = {
+                                height = 0.9,
+                                width = 0.9
+                            }
+                        }
+                    )
+
+                    function _G.gitui()
+                        gitui:toggle()
+                    end
+
+                    nnoremap("<leader>gg", ":call v:lua.gitui()<cr>")
                 end
             }
 
@@ -164,13 +199,14 @@ local function load_plugins()
                         }
                     }
 
-                    project_files = function()
+                    function _G.project_files()
                         local ok = pcall(telescope.git_files)
                         if not ok then
                             telescope.find_files()
                         end
                     end
-                    cmd [[command! ProjectFiles execute "lua project_files()"]]
+
+                    cmd [[command! ProjectFiles execute "call v:lua.project_files()"]]
                     nnoremap("<C-p>", ":ProjectFiles<cr>")
                     nnoremap("<A-h>", ":Telescope oldfiles<cr>")
                     nnoremap("<A-g>", ":Telescope live_grep<cr>")
