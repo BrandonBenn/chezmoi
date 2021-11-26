@@ -1,3 +1,7 @@
+set $left  h
+set $down  j
+set $up    k
+set $right l
 bindsym $mod+Return exec $term
 bindsym $mod+q kill
 bindsym $mod+Shift+c reload
@@ -36,14 +40,13 @@ bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
 
-bindsym $mod+b splith
-bindsym $mod+v splitv
+bindsym $mod+s splitt
 bindsym $mod+r layout stacking
 bindsym $mod+t layout tabbed
 bindsym $mod+e layout toggle split
-bindsym $mod+f fullscreen
-bindsym $mod+Shift+s floating toggle
-bindsym $mod+s focus mode_toggle
+bindsym F11 fullscreen
+bindsym $mod+f floating toggle
+bindsym $mod+Shift+f focus mode_toggle
 bindsym $mod+a focus parent
 
 bindsym $mod+Alt+$left  resize shrink width 10px

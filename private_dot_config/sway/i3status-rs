@@ -1,5 +1,5 @@
 theme = "native"
-icons = "awesome"
+icons = "awesome5"
 
 [[block]]
 block = "focused_window"
@@ -15,11 +15,13 @@ interval = 5
 block = "sound"
 step_width = 3
 
+
 [[block]]
 block = "battery"
 interval = 10
 format = "{percentage} {time}"
 allow_missing = true
+hide_missing = true
 
 [[block]]
 block = "time"
