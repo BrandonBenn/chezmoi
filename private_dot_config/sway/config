@@ -1,3 +1,4 @@
+# vim:filetype=config:tw=80:et
 set $FONT "FreeSans"
 set $mod Mod4
 set $term kitty -e fish
@@ -9,7 +10,7 @@ default_border pixel 2
 smart_borders on
 
 font "$FONT 11"
-output * background #000000 solid_color
+output * background #282828 solid_color
 output eDP-1 scale 1.4
 input type:keyboard xkb_options caps:escape
 input type:touchpad {
@@ -31,5 +32,7 @@ exec dbus-update-activation-environment 2>/dev/null && dbus-update-activation-en
 exec swayidle -w timeout 300 "$lock" timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep "$lock"
 exec fcitx5
 exec gammastep -l 23.6:120.9 6000:3000
+exec kitty --class=scratch -e btop
+exec $menu
 
 include ~/.config/sway/config.d/*
