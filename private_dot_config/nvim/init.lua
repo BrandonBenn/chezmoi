@@ -26,6 +26,7 @@ set.laststatus = 0
 set.udir = "/tmp/nvim/undo"
 set.swapfile = false
 set.exrc = true
+set.title = true
 set.wrap = false
 set.scrolloff = 999
 set.completeopt = "menuone,noselect,noinsert"
@@ -56,10 +57,6 @@ autocmd("TermOpen * setlocal nonumber norelativenumber")
 if vim.env.NVIM_LISTEN_ADDRESS then
     vim.env.EDITOR = "nvr --remote"
     vim.env.GIT_EDITOR = "nvr -cc split --remote-wait"
-end
-
-if vim.fn.exists("g:gnvim") == 1 then
-    vim.cmd [[set guifont=JetBrains\ Mono:h12]]
 end
 
 -- Plugins
@@ -95,7 +92,7 @@ local function load_plugins()
             use {
                 "numToStr/Comment.nvim",
                 config = function()
-                    require('Comment').setup()
+                    require("Comment").setup()
                 end
             }
 
@@ -107,39 +104,46 @@ local function load_plugins()
             }
 
             use {
-                "kyazdani42/nvim-tree.lua",
+                "TimUntersberger/neogit",
+                requires = "nvim-lua/plenary.nvim",
                 config = function()
-                    require "nvim-tree".setup {
-                        view = {
-                            side = "right",
-                            auto_resize = false
+                    nnoremap("<leader>gg", ":Neogit<cr>")
+                end
+            }
+
+            use {
+                "mcchrish/nnn.vim",
+                config = function()
+                    require("nnn").setup(
+                        {
+                            command = "nnn -o -C",
+                            set_default_mappings = 0,
+                            replace_netrw = 1,
+                            explorer_layout = {right = "~20%"},
+                            layout = {
+                                window = {
+                                    width = 0.2,
+                                    height = 0.6,
+                                    xoffset = 0.8
+                                }
+                            },
+                            action = {
+                                ["<c-t>"] = "tab split",
+                                ["<c-s>"] = "split",
+                                ["<c-v>"] = "vsplit"
+                            }
                         }
-                    }
-                nnoremap("<leader>f", ":NvimTreeToggle<cr>")
+                    )
+                    nnoremap([[<leader>ff]], [[:NnnPicker %:p:h<CR>]])
+                    nnoremap([[<leader>fe]], [[:NnnExplorer %:p:h<CR>]])
                 end
             }
 
             use {
                 "numToStr/FTerm.nvim",
                 config = function()
-                    local fterm = require("FTerm")
-                    local gitui =
-                        fterm:new(
-                        {
-                            ft = "fterm_gitui", -- You can also override the default filetype, if you want
-                            cmd = "gitui",
-                            dimensions = {
-                                height = 0.9,
-                                width = 0.9
-                            }
-                        }
-                    )
-
-                    function _G.gitui()
-                        gitui:toggle()
-                    end
-
-                    nnoremap("<leader>gg", ":call v:lua.gitui()<cr>")
+                    require "FTerm".setup({cmd = "fish"})
+                    nnoremap("<leader>tt", [[:lua require("FTerm").toggle()<CR>]])
                 end
             }
 
@@ -163,6 +167,8 @@ local function load_plugins()
                 config = function()
                     local telescope = require "telescope.builtin"
                     local action_layout = require("telescope.actions.layout")
+                    local default_picker = {theme = "ivy", previewer = false}
+
                     require("telescope").setup {
                         defaults = {
                             mappings = {
@@ -175,26 +181,13 @@ local function load_plugins()
                             }
                         },
                         pickers = {
-                            find_files = {
-                                theme = "ivy",
-                                previewer = false
-                            },
-                            git_files = {
-                                theme = "ivy",
-                                previewer = false
-                            },
-                            oldfiles = {
-                                theme = "ivy",
-                                previewer = false
-                            },
+                            live_grep = default_picker,
+                            find_files = default_picker,
+                            git_files = default_picker,
+                            oldfiles = default_picker,
                             buffers = {
                                 theme = "dropdown",
                                 previewer = false
-                            },
-                            live_grep = {
-                                theme = "dropdown",
-                                height = 0.8,
-                                width = 0.8
                             }
                         }
                     }
@@ -307,7 +300,7 @@ local function load_plugins()
                     local on_attach = function()
                         nnoremap("<F2>", [[:lua vim.lsp.buf.rename()<CR>]])
                         nnoremap("gd", [[:lua vim.lsp.buf.declaration()<CR>]])
-                        nnoremap("<c-]>", [[:lua vim.lsp.buf.definition()<CR>]])
+                        nnoremap("<C-]>", [[:lua vim.lsp.buf.definition()<CR>]])
                         nnoremap("K", [[:lua vim.lsp.buf.hover()<CR>]])
                         nnoremap("gD", [[:lua vim.lsp.buf.implementation()<CR>]])
                         nnoremap("<c-k>", [[:lua vim.lsp.buf.signature_help()<CR>]])

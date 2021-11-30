@@ -1,5 +1,5 @@
 # vim:filetype=config:tw=80:et
-set $FONT "FreeSans"
+set $FONT "Roboto"
 set $mod Mod4
 set $term kitty -e fish
 set $menu j4-dmenu-desktop --dmenu='bemenu -i -p "" --fn "FreeSans 11" --hb "#f7f6f4"' --term=kitty
