@@ -110,14 +110,6 @@ local function load_plugins()
 		})
 
 		use({
-			"TimUntersberger/neogit",
-			requires = "nvim-lua/plenary.nvim",
-			config = function()
-				nnoremap("<leader>gg", ":Neogit<cr>")
-			end,
-		})
-
-		use({
 			"mcchrish/nnn.vim",
 			config = function()
 				require("nnn").setup({
@@ -144,10 +136,9 @@ local function load_plugins()
 		})
 
 		use({
-			"numToStr/FTerm.nvim",
+			"kdheepak/lazygit.nvim",
 			config = function()
-				require("FTerm").setup({ cmd = "fish" })
-				nnoremap("<leader>tt", [[:lua require("FTerm").toggle()<CR>]])
+				nnoremap([[<silent><leader>gg]], [[:LazyGit<CR>]])
 			end,
 		})
 
@@ -346,4 +337,4 @@ else
 	load_plugins()
 	require("packer").sync()
 end
--- vim:ts=2:sw=2:ai:foldmethod=marker:foldlevel=0:
+-- vim:ts=2:sw=2:ai:foldmethod=indent:foldlevel=2:
