@@ -42,10 +42,9 @@ nnoremap("<localleader>q", ":quitall<cr>")
 nnoremap("<localleader>w", ":update<cr>")
 nnoremap("<localleader>d", ":bd<cr>")
 nnoremap("<localleader>nh", ":noh<cr>")
-nnoremap("<leader>p", '"+p')
-nnoremap("<leader>y", '"+y')
-nnoremap("<leader>y", '"+y')
-nnoremap("<leader>Y", 'gg"+yG')
+nnoremap("<leader>p", [["+p]])
+nnoremap("<leader>y", [["+y]])
+nnoremap("<leader>Y", [[gg"+yG]])
 vnoremap("<", "<gv")
 vnoremap(">", ">gv")
 tnoremap("<Esc>", "<C-\\><C-n>")
@@ -68,7 +67,6 @@ local function load_plugins()
 		use("nvim-lua/plenary.nvim")
 		use("nvim-lua/popup.nvim")
 
-		use("jiangmiao/auto-pairs")
 		use("pbrisbin/vim-mkdir")
 		use("tpope/vim-endwise")
 		use("tpope/vim-eunuch")
@@ -78,11 +76,21 @@ local function load_plugins()
 
 		use({ "APZelos/blamer.nvim", cmd = "BlamerToggle" })
 
+		use({
+			"windwp/nvim-autopairs",
+			event = "InsertEnter",
+			config = function()
+				require("nvim-autopairs").setup({})
+			end,
+		})
+
 		use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 
 		use({
 			"https://gitlab.com/th3lusive/typography.vim",
 			config = function()
+				-- I don't usually use a gui, but when I do, set the
+				-- background.
 				set.background = "light"
 				cmd([[colorscheme typograph]])
 			end,
@@ -90,6 +98,7 @@ local function load_plugins()
 
 		use({
 			"numToStr/Comment.nvim",
+			event = "InsertEnter",
 			config = function()
 				require("Comment").setup()
 			end,
@@ -97,13 +106,32 @@ local function load_plugins()
 
 		use({
 			"blackCauldron7/surround.nvim",
+			-- Easily switch different types of enclosed braces.
+			event = "BufReadPre",
 			config = function()
 				require("surround").setup({ mappings_style = "sandwich" })
 			end,
 		})
 
 		use({
+			"ygm2/rooter.nvim",
+			-- When inside a project, set the project to be the root directory
+			-- so the linters, formatters, file finder is project specific.
+			event = "BufReadPre",
+			config = function()
+				vim.g.rooter_pattern = {
+					".git",
+					"Makefile",
+					"selene.toml",
+					"CMakeLists.txt",
+				}
+				vim.g.outermost_root = true
+			end,
+		})
+
+		use({
 			"sbdchd/neoformat",
+			cmd = "Neoformat",
 			config = function()
 				nnoremap("<localleader>f", ":Neoformat<cr>")
 			end,
@@ -111,6 +139,7 @@ local function load_plugins()
 
 		use({
 			"mcchrish/nnn.vim",
+			cmd = { "NnnPicker", "NnnExplorer" },
 			config = function()
 				require("nnn").setup({
 					command = "nnn -o -C",
@@ -137,13 +166,16 @@ local function load_plugins()
 
 		use({
 			"kdheepak/lazygit.nvim",
+			cmd = "LazyGit",
 			config = function()
 				nnoremap([[<silent><leader>gg]], [[:LazyGit<CR>]])
 			end,
+			event = "VimEnter",
 		})
 
 		use({
 			"folke/zen-mode.nvim",
+			event = "BufReadPre",
 			config = function()
 				require("zen-mode").setup({
 					window = {
@@ -213,6 +245,7 @@ local function load_plugins()
 
 		use({
 			"junegunn/vim-easy-align",
+			event = "BufReadPre",
 			config = function()
 				xnoremap("ga", ":EasyAlign<cr>")
 			end,
@@ -220,12 +253,13 @@ local function load_plugins()
 
 		use({
 			"hrsh7th/nvim-cmp",
+			event = "InsertEnter",
 			requires = {
-				{ "hrsh7th/cmp-buffer" },
-				{ "hrsh7th/cmp-cmdline" },
-				{ "hrsh7th/cmp-nvim-lua" },
-				{ "hrsh7th/cmp-path" },
-				{ "saadparwaiz1/cmp_luasnip", requires = "L3MON4D3/LuaSnip" },
+				{ "hrsh7th/cmp-buffer", after = "nvim-cmp" },
+				{ "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
+				{ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
+				{ "hrsh7th/cmp-path", after = "nvim-cmp" },
+				{ "saadparwaiz1/cmp_luasnip", requires = "L3MON4D3/LuaSnip", after = "nvim-cmp" },
 			},
 			config = function()
 				local cmp = require("cmp")
@@ -268,7 +302,7 @@ local function load_plugins()
 			config = function()
 				require("lint").linters_by_ft = {
 					sh = { "shellcheck" },
-					lua = { "luacheck" },
+					lua = { "selene" },
 				}
 				autocmd([[BufWritePost <buffer> lua require'lint'.try_lint()]])
 			end,
