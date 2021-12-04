@@ -98,7 +98,6 @@ local function load_plugins()
 
 		use({
 			"numToStr/Comment.nvim",
-			event = "InsertEnter",
 			config = function()
 				require("Comment").setup()
 			end,
@@ -107,7 +106,6 @@ local function load_plugins()
 		use({
 			"blackCauldron7/surround.nvim",
 			-- Easily switch different types of enclosed braces.
-			event = "BufReadPre",
 			config = function()
 				require("surround").setup({ mappings_style = "sandwich" })
 			end,
@@ -117,7 +115,6 @@ local function load_plugins()
 			"ygm2/rooter.nvim",
 			-- When inside a project, set the project to be the root directory
 			-- so the linters, formatters, file finder is project specific.
-			event = "BufReadPre",
 			config = function()
 				vim.g.rooter_pattern = {
 					".git",
@@ -131,7 +128,6 @@ local function load_plugins()
 
 		use({
 			"sbdchd/neoformat",
-			cmd = "Neoformat",
 			config = function()
 				nnoremap("<localleader>f", ":Neoformat<cr>")
 			end,
@@ -139,7 +135,6 @@ local function load_plugins()
 
 		use({
 			"mcchrish/nnn.vim",
-			cmd = { "NnnPicker", "NnnExplorer" },
 			config = function()
 				require("nnn").setup({
 					command = "nnn -o -C",
@@ -245,7 +240,6 @@ local function load_plugins()
 
 		use({
 			"junegunn/vim-easy-align",
-			event = "BufReadPre",
 			config = function()
 				xnoremap("ga", ":EasyAlign<cr>")
 			end,
@@ -259,14 +253,12 @@ local function load_plugins()
 				{ "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
 				{ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
 				{ "hrsh7th/cmp-path", after = "nvim-cmp" },
-				{ "saadparwaiz1/cmp_luasnip", requires = "L3MON4D3/LuaSnip", after = "nvim-cmp" },
+				{ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp", requires = "L3MON4D3/LuaSnip" },
 			},
 			config = function()
 				local cmp = require("cmp")
 				cmp.setup({
-					completion = {
-						completeopt = "menu,menuone,noinsert",
-					},
+					completion = { completeopt = "menu,menuone,noinsert" },
 					mapping = {
 						["<C-b>"] = cmp.mapping.scroll_docs(-4),
 						["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -289,9 +281,7 @@ local function load_plugins()
 							require("luasnip").lsp_expand(args.body)
 						end,
 					},
-					experimental = {
-						native_menu = true,
-					},
+					experimental = { native_menu = true },
 				})
 			end,
 		})
@@ -311,7 +301,7 @@ local function load_plugins()
 		use({
 			"neovim/nvim-lspconfig",
 			requires = { "hrsh7th/cmp-nvim-lsp" },
-			ft = { "go", "c", "cpp", "zig", "ruby", "python" },
+			ft = { "go", "c", "cpp", "zig", "ruby", "python", "lua" },
 			config = function()
 				local servers = { "gopls", "zls", "pyright", "clangd", "solargraph" }
 				local lsp = require("lspconfig")
@@ -349,6 +339,38 @@ local function load_plugins()
 						settings = { documentFormatting = true },
 					})
 				end
+
+				-- lua specific
+				local sumneko_binary_path = vim.fn.exepath("lua-language-server")
+				local sumneko_root_path = vim.fn.fnamemodify(sumneko_binary_path, ":h:h:h")
+				local runtime_path = vim.split(package.path, ";")
+				table.insert(runtime_path, "lua/?.lua")
+				table.insert(runtime_path, "lua/?/init.lua")
+
+				lsp.sumneko_lua.setup({
+					on_attach = on_attach,
+					capabilities = capabilities,
+					settings = { documentFormatting = true },
+					cmd = { sumneko_binary_path, "-E", sumneko_root_path .. "/main.lua" },
+					settings = {
+						Lua = {
+							-- Tell the language server which version of
+							-- Lua you're using (most likely LuaJIT in the
+							-- case of Neovim)
+							runtime = { version = "LuaJIT", path = runtime_path },
+							diagnostics = { globals = { "vim" } },
+							-- Get the language server to recognize the
+							-- `vim` global
+
+							-- Make the server aware of Neovim runtime
+							-- files
+							workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+							-- Do not send telemetry data containing a
+							-- randomized but unique identifier
+							telemetry = { enable = false },
+						},
+					},
+				})
 			end,
 		})
 	end)
@@ -360,11 +382,11 @@ local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.n
 if vim.fn.isdirectory(install_path) == 1 then
 	load_plugins()
 	cmd([[
-        augroup packer_user_config
-        autocmd!
-        autocmd BufWritePost ~/.config/nvim/init.lua source % | PackerCompile
-        augroup end
-    ]])
+	       augroup packer_user_config
+	       autocmd!
+	       autocmd BufWritePost ~/.config/nvim/init.lua source % | PackerCompile
+	       augroup end
+	   ]])
 else
 	vim.fn.system({ "git", "clone", "https://github.com/wbthomason/packer.nvim", install_path })
 	cmd([[packloadall]])
