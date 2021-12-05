@@ -61,11 +61,11 @@ end
 -- Plugins
 local function load_plugins()
 	require("packer").startup(function(use)
-		use("wbthomason/packer.nvim") -- Packer can manage itself
-
-		-- Dependency of many plugins
-		use("nvim-lua/plenary.nvim")
-		use("nvim-lua/popup.nvim")
+		use({
+			"wbthomason/packer.nvim", -- Packer can manage itself
+			-- Dependency of many plugins
+			requires = { "nvim-lua/plenary.nvim", "nvim-lua/popup.nvim" },
+		})
 
 		use("pbrisbin/vim-mkdir")
 		use("tpope/vim-endwise")
@@ -78,7 +78,6 @@ local function load_plugins()
 
 		use({
 			"windwp/nvim-autopairs",
-			event = "InsertEnter",
 			config = function()
 				require("nvim-autopairs").setup({})
 			end,
@@ -104,15 +103,14 @@ local function load_plugins()
 		})
 
 		use({
-			"blackCauldron7/surround.nvim",
-			-- Easily switch different types of enclosed braces.
+			"blackCauldron7/surround.nvim", -- Easily switch different types of enclosed braces.
 			config = function()
 				require("surround").setup({ mappings_style = "sandwich" })
 			end,
 		})
 
 		use({
-			"ygm2/rooter.nvim",
+			"ygm2/rooter.nvim", -- Change root directory to project file root
 			-- When inside a project, set the project to be the root directory
 			-- so the linters, formatters, file finder is project specific.
 			config = function()
@@ -170,7 +168,6 @@ local function load_plugins()
 
 		use({
 			"folke/zen-mode.nvim",
-			event = "BufReadPre",
 			config = function()
 				require("zen-mode").setup({
 					window = {
