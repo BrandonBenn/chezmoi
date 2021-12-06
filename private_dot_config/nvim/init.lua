@@ -30,7 +30,6 @@ set.title = true
 set.wrap = false
 set.scrolloff = 999
 set.completeopt = "menuone,noselect,noinsert"
-set.inccommand = "nosplit"
 
 nnoremap("H", "^")
 nnoremap("L", "$")
@@ -41,9 +40,9 @@ nnoremap("b[", ":bprev<cr>")
 nnoremap("<localleader>q", ":quitall<cr>")
 nnoremap("<localleader>w", ":update<cr>")
 nnoremap("<localleader>d", ":bd<cr>")
-nnoremap("<localleader>nh", ":noh<cr>")
 nnoremap("<leader>p", [["+p]])
 nnoremap("<leader>y", [["+y]])
+vnoremap("<leader>y", [["+y]])
 nnoremap("<leader>Y", [[gg"+yG]])
 vnoremap("<", "<gv")
 vnoremap(">", ">gv")
