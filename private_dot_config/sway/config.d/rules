@@ -1,0 +1,9 @@
+for_window [app_id="gnome-(calendar|calculator|power-statistics|control-center)"] floating enable
+for_window [app_id="org.gnome.Nautilus"] floating enable
+for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 20 ppt 60 ppt
+for_window [app_id="^.*"  title="^Open File$"] floating enable
+for_window [app_id="mpv"] floating enable, resize set 960 540, border pixel 0
+for_window [app_id="firefox" title="Firefox — Sharing Indicator"] floating enable
+for_window [app_id="firefox" title="Picture-in-Picture"] floating enable
+for_window [app_id="firefox" title="About Mozilla Firefox"] floating enable
+for_window [app_id="scratch"] move to scratchpad, floating enable
