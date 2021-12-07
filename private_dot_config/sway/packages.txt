@@ -1,0 +1,9 @@
+gammastep
+grim
+mako
+network-manager-applet
+slurp
+swayidle
+swaylock
+waybar
+xorg-xwayland
