@@ -11,6 +11,7 @@ set $menu $terminal --class=popup -e sway-launcher-desktop
 default_border pixel 2
 client.focused #dddad6 #dddad6 #111111 #d3869b #dddad6
 output * background #282828 solid_color
+output "eDP-1" scale 1.4
 input * xkb_options "caps:escape"
 input type:touchpad {
     tap enabled
