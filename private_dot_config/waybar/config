@@ -1,0 +1,56 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 17,
+    "modules-left": [ "sway/workspaces" ],
+    "modules-center": [ "sway/window" ],
+    "modules-right": [ "network", "battery", "pulseaudio", "clock#date", "clock#time", "tray" ],
+    "battery": {
+        "interval": 10,
+        "states": { "warning": 30, "critical": 15 },
+        "format": " {capacity}%",
+        "format-discharging": "Bat {capacity}%",
+        "tooltip": true
+    },
+
+    "clock#time": {
+        "interval": 1,
+        "format": "{:%R:%S}",
+        "tooltip": false,
+    },
+
+    "clock#date": {
+      "interval": 10,
+      "format": "{:%e %b %Y}",
+        "tooltip-format": "{:%e %B %Y}"
+    },
+
+    "network": {
+        "format": "{ipaddr}/{cidr}  ↑{bandwidthUpBits} ↓{bandwidthDownBits}",
+        "format-disconnected": "",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+        "tooltip-format-ethernet": "{ifname} ",
+        "tooltip-format-disconnected": "Disconnected",
+        "max-length": 50
+    },
+
+
+    "sway/window": {
+        "format": "{}",
+        "max-length": 160
+    },
+
+
+    "pulseaudio": {
+        "format": "Vol {volume}%",
+        "format-muted": "Vol MUTE",
+        "format-bluetooth": "{icon}  {volume}%",
+        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+    },
+
+    "tray": {
+        "icon-size": 21,
+        "spacing": 10
+    }
+}
