@@ -6,7 +6,7 @@ set $up k
 set $right l
 set $terminal kitty
 set $locker swaylock -f -c 282828
-set $menu $terminal --class=launcher -e sway-launcher-desktop
+set $menu $terminal --class=popup -e sway-launcher-desktop
 
 default_border pixel 2
 client.focused #dddad6 #dddad6 #111111 #d3869b #dddad6
