@@ -4,3 +4,4 @@ exec waybar
 exec fcitx5
 exec nm-applet --indicator
 exec $terminal
+exec wl-clipboard-history -d
