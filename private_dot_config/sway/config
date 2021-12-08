@@ -58,8 +58,9 @@ bindsym $mod+Mod1+$down resize grow height 10px
 bindsym $mod+Mod1+$up resize shrink height 10px
 bindsym $mod+Mod1+$right resize grow width 10px
 bindsym $mod+s splitt
+bindsym $mod+r layout stacking
 bindsym $mod+t layout tabbed
-bindsym $mod+r layout toggle split
+bindsym $mod+e layout toggle split
 bindsym $mod+f fullscreen
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
