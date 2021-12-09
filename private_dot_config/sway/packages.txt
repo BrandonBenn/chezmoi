@@ -2,6 +2,7 @@ gammastep
 grim
 mako
 network-manager-applet
+polkit-gnome
 slurp
 swayidle
 swaylock

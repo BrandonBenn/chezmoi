@@ -9,6 +9,7 @@ set $locker swaylock -f -c 282828
 set $menu $terminal --class=popup -e sway-launcher-desktop
 
 default_border pixel 2
+smart_borders on
 client.focused #dddad6 #dddad6 #111111 #d3869b #dddad6
 output * background #282828 solid_color
 output "eDP-1" scale 1.4
