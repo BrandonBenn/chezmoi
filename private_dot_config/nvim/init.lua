@@ -95,6 +95,15 @@ local function load_plugins()
 		})
 
 		use({
+			"norcalli/nvim-colorizer.lua",
+			cmd = { "ColorizerToggle" },
+			ft = { "css", "config" },
+			config = function()
+				require("colorizer").setup()
+			end,
+		})
+
+		use({
 			"numToStr/Comment.nvim",
 			config = function()
 				require("Comment").setup()
@@ -231,6 +240,14 @@ local function load_plugins()
 						nnoremap("<localleader>cd", ":Telescope zoxide list theme=dropdown<CR>")
 					end,
 				},
+				use({
+					"nvim-telescope/telescope-frecency.nvim",
+					requires = { "tami5/sqlite.lua" },
+					config = function()
+						require("telescope").load_extension("frecency")
+						nnoremap("<A-h>", ":Telescope frecency theme=ivy<cr>")
+					end,
+				}),
 			},
 		})
 
