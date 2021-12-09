@@ -1,5 +1,8 @@
+bemenu
+bemenu-wayland
 gammastep
 grim
+j4-dmenu-desktop
 mako
 network-manager-applet
 polkit-gnome
