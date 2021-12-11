@@ -4,29 +4,26 @@
     "height": 17,
     "modules-left": [ "sway/workspaces" ],
     "modules-center": [ "sway/window" ],
-    "modules-right": [ "network", "battery", "pulseaudio", "clock#date", "clock#time", "tray" ],
+    "modules-right": [ "idle_inhibitor", "network", "battery", "pulseaudio", "clock", "tray" ],
+    "clock": {
+        "interval": 60,
+        "format": "{:%m/%d, %R}",
+        "max-length": 25,
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>",
+    },
+
     "battery": {
         "interval": 10,
         "states": { "warning": 30, "critical": 15 },
-        "format": " {capacity}%",
-        "format-discharging": "Bat {capacity}%",
+        "format": " {capacity}",
+        "format-discharging": "Bat {capacity}",
         "tooltip": true
     },
 
-    "clock#time": {
-        "interval": 1,
-        "format": "{:%R:%S}",
-        "tooltip": false,
-    },
-
-    "clock#date": {
-      "interval": 10,
-      "format": "{:%e %b %Y}",
-        "tooltip-format": "{:%e %B %Y}"
-    },
-
     "network": {
-        "format": "{ipaddr}/{cidr}  ↑{bandwidthUpBits} ↓{bandwidthDownBits}",
+        "format": "{ifname}",
+        "format-wifi": "WiFi {signalStrength}",
+        "format-ethernet": "{ipaddr}/{cidr} ",
         "format-disconnected": "",
         "tooltip-format": "{ifname} via {gwaddr} ",
         "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
@@ -35,18 +32,25 @@
         "max-length": 50
     },
 
-
     "sway/window": {
         "format": "{}",
         "max-length": 160
     },
-
+    
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
 
     "pulseaudio": {
-        "format": "Vol {volume}%",
+        "format": "Vol {volume}",
+        "format-bluetooth": "Vol {volume}",
         "format-muted": "MUTE",
-        "format-bluetooth": "{icon}  {volume}%",
-        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+        "scroll-step": 1,
+        "on-click": "pavucontrol"
     },
 
     "tray": {

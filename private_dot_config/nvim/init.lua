@@ -1,35 +1,33 @@
-local Utils = require("utils")
+local utils = require("utils")
 
-exprnnoremap = Utils.exprnnoremap
-nnoremap = Utils.nnoremap
-vnoremap = Utils.vnoremap
-xnoremap = Utils.xnoremap
-inoremap = Utils.inoremap
-tnoremap = Utils.tnoremap
-autocmd = Utils.autocmd
-set, let, cmd = vim.o, vim.g, vim.cmd
+exprnnoremap = utils.exprnnoremap
+nnoremap = utils.nnoremap
+vnoremap = utils.vnoremap
+xnoremap = utils.xnoremap
+inoremap = utils.inoremap
+tnoremap = utils.tnoremap
+autocmd = utils.autocmd
 
-let.mapleader = " "
-let.maplocalleader = ";"
-set.showmode = false
-set.termguicolors = true
-set.relativenumber = true
-set.hidden = true
-set.undofile = true
-set.number = true
-set.expandtab = true
-set.smartindent = true
-set.tabstop = 4
-set.shiftwidth = 4
-set.softtabstop = 4
-set.laststatus = 0
-set.udir = "/tmp/nvim/undo"
-set.swapfile = false
-set.exrc = true
-set.title = true
-set.wrap = false
-set.scrolloff = 999
-set.completeopt = "menuone,noselect,noinsert"
+vim.g.mapleader = " "
+vim.o.showmode = false
+vim.o.termguicolors = true
+vim.o.relativenumber = true
+vim.o.hidden = true
+vim.o.undofile = true
+vim.o.number = true
+vim.o.expandtab = true
+vim.o.smartindent = true
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.softtabstop = 4
+vim.o.laststatus = 0
+vim.o.udir = "/tmp/nvim/undo"
+vim.o.swapfile = false
+vim.o.exrc = true
+vim.o.title = true
+vim.o.wrap = false
+vim.o.scrolloff = 999
+vim.o.completeopt = "menuone,noselect,noinsert"
 
 nnoremap("H", "^")
 nnoremap("L", "$")
@@ -37,9 +35,9 @@ nnoremap("<C-j>", ":cnext<cr>")
 nnoremap("<C-k>", ":cprev<cr>")
 nnoremap("b]", ":bnext<cr>")
 nnoremap("b[", ":bprev<cr>")
-nnoremap("<localleader>q", ":quitall<cr>")
 nnoremap("<localleader>w", ":update<cr>")
-nnoremap("<localleader>d", ":bd<cr>")
+nnoremap(";", ":")
+vnoremap(";", ":")
 nnoremap("<leader>p", [["+p]])
 nnoremap("<leader>y", [["+y]])
 vnoremap("<leader>y", [["+y]])
@@ -49,6 +47,7 @@ vnoremap(">", ">gv")
 tnoremap("<Esc>", "<C-\\><C-n>")
 tnoremap("<Esc>", "<C-\\><C-n>")
 autocmd("TermOpen * setlocal nonumber norelativenumber")
+vim.cmd([[cabbrev w update]])
 
 -- Setup for github.com/mhinz/neovim-remote For opening files from within
 -- :terminal without starting a nested nvim process.
@@ -56,6 +55,26 @@ if vim.env.NVIM_LISTEN_ADDRESS then
 	vim.env.EDITOR = "nvr --remote"
 	vim.env.GIT_EDITOR = "nvr -cc split --remote-wait"
 end
+
+function _G.font_resize(family, size)
+	vim.g.guifont = family .. ":h" .. size
+end
+
+function _G.font_increase()
+    vim.g.font_size = vim.g.font_size + 2
+    font_resize(vim.g.font_family, vim.g.font_size)
+end
+
+function _G.font_decrease()
+    vim.g.font_size = vim.g.font_size - 2
+    font_resize(vim.g.font_family, vim.g.font_size)
+end
+
+vim.g.font_family = "Cascadia Code"
+vim.g.font_size = 14
+
+nnoremap("<C-=>", ":lua font_increase()<cr>")
+nnoremap("<C-->", ":lua font_decrease()<cr>")
 
 -- Plugins
 local function load_plugins()
@@ -89,8 +108,21 @@ local function load_plugins()
 			config = function()
 				-- I don't usually use a gui, but when I do, set the
 				-- background.
-				set.background = "light"
-				cmd([[colorscheme typograph]])
+				if vim.g.neovide then
+					return
+				end
+				vim.o.background = "light"
+				vim.cmd([[colorscheme typograph]])
+			end,
+		})
+
+		use({
+			"mcchrish/zenbones.nvim",
+			requires = "rktjmp/lush.nvim",
+			config = function()
+				vim.o.termguicolors = true
+				vim.o.background = "light"
+				vim.cmd([[colorscheme zenbones]])
 			end,
 		})
 
@@ -135,7 +167,7 @@ local function load_plugins()
 		use({
 			"sbdchd/neoformat",
 			config = function()
-				nnoremap("<localleader>f", ":Neoformat<cr>")
+				nnoremap("<leader>=", ":Neoformat<cr>")
 			end,
 		})
 
@@ -166,15 +198,6 @@ local function load_plugins()
 		})
 
 		use({
-			"kdheepak/lazygit.nvim",
-			cmd = "LazyGit",
-			config = function()
-				nnoremap([[<silent><leader>gg]], [[:LazyGit<CR>]])
-			end,
-			event = "VimEnter",
-		})
-
-		use({
 			"folke/zen-mode.nvim",
 			config = function()
 				require("zen-mode").setup({
@@ -185,7 +208,7 @@ local function load_plugins()
 						},
 					},
 				})
-				nnoremap("<localleader>z", ":ZenMode<cr>")
+				nnoremap("<leader>z", ":ZenMode<cr>")
 			end,
 		})
 
@@ -226,7 +249,7 @@ local function load_plugins()
 					end
 				end
 
-				cmd([[command! ProjectFiles execute "call v:lua.project_files()"]])
+				vim.cmd([[command! ProjectFiles execute "call v:lua.project_files()"]])
 				nnoremap("<C-p>", ":ProjectFiles<cr>")
 				nnoremap("<A-h>", ":Telescope oldfiles<cr>")
 				nnoremap("<A-g>", ":Telescope live_grep<cr>")
@@ -237,7 +260,7 @@ local function load_plugins()
 					"jvgrootveld/telescope-zoxide",
 					config = function()
 						require("telescope").load_extension("zoxide")
-						nnoremap("<localleader>cd", ":Telescope zoxide list theme=dropdown<CR>")
+						nnoremap("<leader>cd", ":Telescope zoxide list theme=dropdown<CR>")
 					end,
 				},
 				use({
@@ -341,7 +364,7 @@ local function load_plugins()
 					nnoremap("gr", [[:lua vim.lsp.buf.references()<CR>]])
 					nnoremap("g0", [[:lua vim.lsp.buf.document_symbol()<CR>]])
 					nnoremap("gW", [[:lua vim.lsp.buf.workspace_symbol()<CR>]])
-					cmd([[command! Format execute "lua vim.lsp.buf.formatting()"]])
+					vim.cmd([[command! Format execute "lua vim.lsp.buf.formatting()"]])
 					nnoremap(";f", ":Format<cr>")
 				end
 
@@ -363,7 +386,6 @@ local function load_plugins()
 				lsp.sumneko_lua.setup({
 					on_attach = on_attach,
 					capabilities = capabilities,
-					settings = { documentFormatting = true },
 					cmd = { sumneko_binary_path, "-E", sumneko_root_path .. "/main.lua" },
 					settings = {
 						Lua = {
@@ -394,7 +416,7 @@ end
 local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if vim.fn.isdirectory(install_path) == 1 then
 	load_plugins()
-	cmd([[
+	vim.cmd([[
 	       augroup packer_user_config
 	       autocmd!
 	       autocmd BufWritePost ~/.config/nvim/init.lua source % | PackerCompile
@@ -402,7 +424,7 @@ if vim.fn.isdirectory(install_path) == 1 then
 	   ]])
 else
 	vim.fn.system({ "git", "clone", "https://github.com/wbthomason/packer.nvim", install_path })
-	cmd([[packloadall]])
+	vim.cmd([[packloadall]])
 	load_plugins()
 	require("packer").sync()
 end

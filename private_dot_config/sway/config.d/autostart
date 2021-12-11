@@ -4,6 +4,7 @@ exec_always {
     gsettings set org.gnome.desktop.interface icon-theme 'Adwaita'
     gsettings set org.gnome.desktop.interface cursor-theme 'Adwaita'
     gsettings set org.gnome.desktop.wm.preferences button-layout ''
+    gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs"
 }
 
 exec /usr/libexec/polkit-gnome-authentication-agent-1
