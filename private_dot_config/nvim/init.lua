@@ -61,13 +61,13 @@ function _G.font_resize(family, size)
 end
 
 function _G.font_increase()
-    vim.g.font_size = vim.g.font_size + 2
-    font_resize(vim.g.font_family, vim.g.font_size)
+	vim.g.font_size = vim.g.font_size + 2
+	font_resize(vim.g.font_family, vim.g.font_size)
 end
 
 function _G.font_decrease()
-    vim.g.font_size = vim.g.font_size - 2
-    font_resize(vim.g.font_family, vim.g.font_size)
+	vim.g.font_size = vim.g.font_size - 2
+	font_resize(vim.g.font_family, vim.g.font_size)
 end
 
 vim.g.font_family = "Cascadia Code"
@@ -120,9 +120,11 @@ local function load_plugins()
 			"mcchrish/zenbones.nvim",
 			requires = "rktjmp/lush.nvim",
 			config = function()
-				vim.o.termguicolors = true
-				vim.o.background = "light"
-				vim.cmd([[colorscheme zenbones]])
+				if vim.g.neovide then
+					vim.o.termguicolors = true
+					vim.o.background = "light"
+					vim.cmd([[colorscheme zenbones]])
+				end
 			end,
 		})
 
