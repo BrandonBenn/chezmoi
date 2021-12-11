@@ -61,20 +61,20 @@ function _G.font_resize(family, size)
 end
 
 function _G.font_increase()
-	vim.g.font_size = vim.g.font_size + 2
+	font_size = vim.g.font_size + 2
 	font_resize(vim.g.font_family, vim.g.font_size)
 end
 
 function _G.font_decrease()
-	vim.g.font_size = vim.g.font_size - 2
+	font_size = font_size - 2
 	font_resize(vim.g.font_family, vim.g.font_size)
 end
 
 vim.g.font_family = "Cascadia Code"
 vim.g.font_size = 14
 
-nnoremap("<C-=>", ":lua font_increase()<cr>")
-nnoremap("<C-->", ":lua font_decrease()<cr>")
+nnoremap("+", ":lua font_increase()<cr>")
+nnoremap("-", ":lua font_decrease()<cr>")
 
 -- Plugins
 local function load_plugins()
