@@ -1,4 +1,7 @@
-font="Roboto 11"
+font=Roboto 14 
 padding=14
 border-radius=2
+border-color=#222222
 text-alignment=center
+background-color=#dddad6ef
+text-color=#1c1c1c
