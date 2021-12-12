@@ -29,8 +29,8 @@ vim.o.wrap = false
 vim.o.scrolloff = 999
 vim.o.completeopt = "menuone,noselect,noinsert"
 
-nnoremap("H", "^")
-nnoremap("L", "$")
+nnoremap("gh", "^")
+nnoremap("gl", "$")
 nnoremap("<C-j>", ":cnext<cr>")
 nnoremap("<C-k>", ":cprev<cr>")
 nnoremap("b]", ":bnext<cr>")
@@ -56,25 +56,11 @@ if vim.env.NVIM_LISTEN_ADDRESS then
 	vim.env.GIT_EDITOR = "nvr -cc split --remote-wait"
 end
 
-function _G.font_resize(family, size)
-	vim.g.guifont = family .. ":h" .. size
+if vim.g.fvim_loaded == 1 then
+	vim.o.guifont = "Cascadia Code:h11"
+	nnoremap("<C-=>", ":set guifont=+<cr>")
+	nnoremap("<C-->", ":set guifont=-<cr>")
 end
-
-function _G.font_increase()
-	font_size = vim.g.font_size + 2
-	font_resize(vim.g.font_family, vim.g.font_size)
-end
-
-function _G.font_decrease()
-	font_size = font_size - 2
-	font_resize(vim.g.font_family, vim.g.font_size)
-end
-
-vim.g.font_family = "Cascadia Code"
-vim.g.font_size = 14
-
-nnoremap("+", ":lua font_increase()<cr>")
-nnoremap("-", ":lua font_decrease()<cr>")
 
 -- Plugins
 local function load_plugins()
@@ -117,23 +103,20 @@ local function load_plugins()
 		})
 
 		use({
-			"mcchrish/zenbones.nvim",
-			requires = "rktjmp/lush.nvim",
-			config = function()
-				if vim.g.neovide then
-					vim.o.termguicolors = true
-					vim.o.background = "light"
-					vim.cmd([[colorscheme zenbones]])
-				end
-			end,
-		})
-
-		use({
 			"norcalli/nvim-colorizer.lua",
 			cmd = { "ColorizerToggle" },
 			ft = { "css", "config" },
 			config = function()
 				require("colorizer").setup()
+			end,
+		})
+
+		use({
+			"akinsho/bufferline.nvim",
+			config = function()
+				require("bufferline").setup({})
+				nnoremap([[<TAB>]], ":BufferLineCycleNext<CR>")
+				nnoremap([[<S-TAB>]], ":BufferLineCyclePrev<CR>")
 			end,
 		})
 
@@ -430,4 +413,4 @@ else
 	load_plugins()
 	require("packer").sync()
 end
--- vim:ts=2:sw=2:ai:foldmethod=indent:foldlevel=2:
+-- vim:foldmethod=indent:foldlevel=2:
