@@ -4,10 +4,10 @@
     "height": 16,
     "modules-left": [ "sway/workspaces" ],
     "modules-center": [ "sway/window" ],
-    "modules-right": [ "idle_inhibitor", "network", "battery", "pulseaudio", "clock", "tray" ],
+    "modules-right": [ "idle_inhibitor", "cpu", "network", "battery", "pulseaudio", "clock", "tray" ],
     "clock": {
         "interval": 60,
-        "format": "{:%m/%d, %R}",
+        "format": "{:%m/%d | %R}",
         "max-length": 25,
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>",
     },
@@ -22,7 +22,7 @@
 
     "network": {
         "format": "{ifname}",
-        "format-wifi": "WiFi {signalStrength}",
+        "format-wifi": "  {signalStrength}",
         "format-ethernet": "{ipaddr}/{cidr} ",
         "format-disconnected": "",
         "tooltip-format": "{ifname} via {gwaddr} ",
@@ -34,21 +34,36 @@
 
     "sway/window": {
         "format": "{}",
-        "max-length": 160
+        "max-length": 200
     },
     
     "idle_inhibitor": {
-        "format": "{icon}",
+        "format": "{icon} ",
         "format-icons": {
             "activated": "",
             "deactivated": ""
         }
     },
 
+    "cpu": {
+        "interval": 10,
+        "max-length": 10,
+        "format": " {}%"
+    },
+
     "pulseaudio": {
-        "format": "Vol {volume}",
-        "format-bluetooth": "Vol {volume}",
-        "format-muted": "MUTE",
+        "format": "{icon} {volume}",
+        "format-bluetooth": "{icon} {volume}",
+        "format-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", ""]
+        },
         "scroll-step": 1,
         "on-click": "pavucontrol"
     },

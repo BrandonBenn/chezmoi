@@ -85,5 +85,6 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
+
 include /etc/sway/config.d/*
 include ~/.config/sway/config.d/*
