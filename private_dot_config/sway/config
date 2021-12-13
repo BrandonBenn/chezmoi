@@ -8,9 +8,9 @@ set $terminal kitty -e fish
 set $locker swaylock -f -c 282828
 set $menu j4-dmenu-desktop --dmenu='bemenu -i -p "" --hb "#dddad6" --hf "#111111" --fn "Roboto 11"'
 
-default_border pixel 4
+default_border pixel 2 
 smart_borders on
-client.focused #dddad6 #dddad6 #111111 #d3869b #dddad6
+client.focused #dddad6 #dddad6 #111111 #d3869b #d79921
 client.unfocused #282828  #282828 #ffffff #d3869b #282828
 output * background #282828 solid_color
 output "eDP-1" scale 1.3

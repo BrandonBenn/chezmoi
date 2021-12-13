@@ -35,7 +35,6 @@
 
 #waybar {
     background: #dddad6;
-    border-bottom: 1px solid @unfocused_borders;
     color: @theme_text_color;
 }
 
@@ -85,12 +84,6 @@
     font-weight: bold;
 }
 
-#mode {
-    background: #64727D;
-    border-top: 2px solid white;
-    /* To compensate for the top border and still have vertical centering */
-    padding-bottom: 2px;
-}
 
 #network {
     /* No styles */
@@ -112,16 +105,12 @@
     font-weight: bold;
 }
 
-#workspaces button {
-    border-bottom: 2px solid transparent;
-    color: #888888;
-}
-
 #workspaces button.focused {
-    color: @theme_text_color;;
+    color: @theme_text_color;
+    border-radius: 0px;
     border-color: #080808;
     font-weight: bold;
-    background-color: rgba(245, 245, 245, 0.4);
+    background-color: #d79921;
 }
 
 #workspaces button.urgent {
