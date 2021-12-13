@@ -4,20 +4,28 @@
     "height": 12,
     "modules-left": [ "sway/workspaces" ],
     "modules-center": [ "sway/window" ],
-    "modules-right": [ "idle_inhibitor", "cpu", "network", "battery", "pulseaudio", "clock", "tray" ],
+    "modules-right": [ "idle_inhibitor", "cpu", "network", "backlight", "battery", "pulseaudio", "clock", "tray" ],
     "clock": {
         "interval": 60,
-        "format": "{:%m/%d | %R}",
+        "format": "{:%R}",
         "max-length": 25,
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>"
+    },
+
+    "backlight": {
+        "format": "{icon} {percent}",
+        "format-icons": ["", ""]
     },
 
     "battery": {
-        "interval": 10,
         "states": { "warning": 30, "critical": 15 },
-        "format": " {capacity}",
-        "format-discharging": "Bat {capacity}",
-        "tooltip": true
+        "format": "{icon} {capacity}",
+        "format-charging": " {capacity}",
+        "format-plugged": " {capacity}",
+        "format-alt": "{time} {icon}",
+        "format-good": "",
+        "format-full": "",
+        "format-icons": ["", "", "", "", ""]
     },
 
     "network": {
@@ -48,13 +56,13 @@
     "cpu": {
         "interval": 10,
         "max-length": 10,
-        "format": " {}%"
+        "format": " {}"
     },
 
     "pulseaudio": {
         "format": "{icon} {volume}",
         "format-bluetooth": "{icon} {volume}",
-        "format-muted": "",
+        "format-muted": "",
         "format-icons": {
             "headphone": "",
             "hands-free": "",
@@ -65,7 +73,7 @@
             "default": ["", ""]
         },
         "scroll-step": 1,
-        "on-click": "pavucontrol"
+        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
     },
 
     "tray": {

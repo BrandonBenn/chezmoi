@@ -25,10 +25,9 @@
  * Base styles
  * -------------------------------------------------------------------------- */
 * {
-    font-family: Roboto, sans-serif;
-    font-size: 12px;
     border: none;
-    border-radius: 0;
+    font-family: Roboto, sans-serif;
+    font-size: 13px;
     min-height: 0;
     margin: 0;
     padding: 0;
