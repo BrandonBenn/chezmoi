@@ -10,9 +10,11 @@ mako
 network-manager-applet
 otf-font-awesome
 polkit-gnome
+seahorse
 slurp
 swayidle
 swaylock
+ttf-nerd-fonts-symbols
 waybar
 xdg-desktop-portal-wlr
 xorg-xwayland

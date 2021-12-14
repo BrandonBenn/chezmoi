@@ -24,9 +24,6 @@ nnoremap("gh", "^")
 nnoremap("gl", "$")
 nnoremap("<C-j>", ":cnext<cr>")
 nnoremap("<C-k>", ":cprev<cr>")
-nnoremap("b]", ":bnext<cr>")
-nnoremap("b[", ":bprev<cr>")
-nnoremap("<localleader>w", ":update<cr>")
 nnoremap(";", ":")
 vnoremap(";", ":")
 nnoremap("<leader>p", [["+p]])
@@ -47,8 +44,14 @@ if vim.env.NVIM_LISTEN_ADDRESS then
 	vim.env.GIT_EDITOR = "nvr -cc split --remote-wait"
 end
 
-if vim.g.fvim_loaded == 1 then
-	vim.o.guifont = "Cascadia Code:h11"
-	nnoremap("<C-=>", ":set guifont=+<cr>")
-	nnoremap("<C-->", ":set guifont=-<cr>")
+vim.g.font_name = "Cascadia Code"
+vim.g.font_size = 11
+vim.o.guifont = vim.g.font_name .. ":h".. vim.g.font_size
+
+function _G.resize_font(offset)
+    vim.g.font_size = vim.g.font_size + offset
+    vim.o.guifont = vim.g.font_name .. ":h".. vim.g.font_size
 end
+
+nnoremap("<C-=>", ":lua resize_font(2)<cr>")
+nnoremap("<C-->", ":lua resize_font(-2)<cr>")
