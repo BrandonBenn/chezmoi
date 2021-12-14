@@ -4,34 +4,35 @@
     "height": 12,
     "modules-left": [ "sway/workspaces" ],
     "modules-center": [ "sway/window" ],
-    "modules-right": [ "idle_inhibitor", "cpu", "network", "backlight", "battery", "pulseaudio", "clock", "tray" ],
+    "modules-right": [ "idle_inhibitor", "network", "backlight", "battery", "pulseaudio", "clock", "tray" ],
     "clock": {
         "interval": 60,
-        "format": "{:%R}",
+        "format": "{:%a %b %d %R}",
         "max-length": 25,
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>"
     },
 
     "backlight": {
-        "format": "{icon} {percent}",
-        "format-icons": ["", ""]
+        "format": "{icon}",
+        "format-icons": ["", ""],
+        "tooltip-format": "{percent}% {icon}"
     },
 
     "battery": {
         "states": { "warning": 30, "critical": 15 },
-        "format": "{icon} {capacity}",
-        "format-charging": " {capacity}",
-        "format-plugged": " {capacity}",
+        "format": "{icon}",
+        "format-charging": "",
+        "format-plugged": " ",
         "format-alt": "{time} {icon}",
-        "format-good": "",
         "format-full": "",
+        "tooltip-format": "{icon} {capacity} {timeTo}",
         "format-icons": ["", "", "", "", ""]
     },
 
     "network": {
         "format": "{ifname}",
-        "format-wifi": "  {signalStrength}",
-        "format-ethernet": "{ipaddr}/{cidr} ",
+        "format-wifi": " ",
+        "format-ethernet": "",
         "format-disconnected": "",
         "tooltip-format": "{ifname} via {gwaddr} ",
         "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
@@ -53,15 +54,10 @@
         }
     },
 
-    "cpu": {
-        "interval": 10,
-        "max-length": 10,
-        "format": " {}"
-    },
-
     "pulseaudio": {
-        "format": "{icon} {volume}",
+        "format": "{icon}",
         "format-bluetooth": "{icon} {volume}",
+        "tooltip-format": "{volume}% {desc}",
         "format-muted": "",
         "format-icons": {
             "headphone": "",
