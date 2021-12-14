@@ -4,7 +4,7 @@
     "height": 12,
     "modules-left": [ "sway/workspaces" ],
     "modules-center": [ "sway/window" ],
-    "modules-right": [ "idle_inhibitor", "network", "backlight", "battery", "pulseaudio", "clock", "tray" ],
+    "modules-right": [ "network", "battery", "pulseaudio", "clock", "tray" ],
     "clock": {
         "interval": 60,
         "format": "{:%a %b %d %R}",
@@ -12,21 +12,12 @@
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>"
     },
 
-    "backlight": {
-        "format": "{icon}",
-        "format-icons": ["", ""],
-        "tooltip-format": "{percent}% {icon}"
-    },
-
     "battery": {
-        "states": { "warning": 30, "critical": 15 },
         "format": "{icon}",
         "format-charging": "",
         "format-plugged": " ",
-        "format-alt": "{time} {icon}",
-        "format-full": "",
-        "tooltip-format": "{icon} {capacity} {timeTo}",
-        "format-icons": ["", "", "", "", ""]
+        "format-icons": ["", "", "", "", ""],
+        "tooltip-format": "{timeTo}, {capacity}% remaining"
     },
 
     "network": {
@@ -35,7 +26,7 @@
         "format-ethernet": "",
         "format-disconnected": "",
         "tooltip-format": "{ifname} via {gwaddr} ",
-        "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+        "tooltip-format-wifi": "{ipaddr}, {essid} ({signalStrength}%) ",
         "tooltip-format-ethernet": "{ifname} ",
         "tooltip-format-disconnected": "Disconnected",
         "max-length": 50
@@ -46,14 +37,6 @@
         "max-length": 200
     },
     
-    "idle_inhibitor": {
-        "format": "{icon} ",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
-    },
-
     "pulseaudio": {
         "format": "{icon}",
         "format-bluetooth": "{icon} {volume}",
