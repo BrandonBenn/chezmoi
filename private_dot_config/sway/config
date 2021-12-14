@@ -6,7 +6,7 @@ set $up k
 set $right l
 set $terminal kitty -e fish
 set $locker swaylock -f -c 282828
-set $menu j4-dmenu-desktop --dmenu='bemenu -i -p "" --hb "#dddad6" --hf "#111111" --fn "Roboto 11"'
+set $menu j4-dmenu-desktop --dmenu='bemenu -i -p "" --nb "#dddad6" --nf "#111111" --hb "#d79921" --hf "#111111" --fb "#dddad6" --ff "#111111" --fn "Roboto 9"'
 
 default_border pixel 2 
 smart_borders on
