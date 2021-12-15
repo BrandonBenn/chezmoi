@@ -10,6 +10,7 @@ mako
 network-manager-applet
 otf-font-awesome
 polkit-gnome
+qt5-wayland
 seahorse
 slurp
 swayidle

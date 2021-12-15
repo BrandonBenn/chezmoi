@@ -49,6 +49,7 @@ vim.g.font_size = 11
 vim.o.guifont = vim.g.font_name .. ":h".. vim.g.font_size
 
 function _G.resize_font(offset)
+    offset = offset or 0
     vim.g.font_size = vim.g.font_size + offset
     vim.o.guifont = vim.g.font_name .. ":h".. vim.g.font_size
 end

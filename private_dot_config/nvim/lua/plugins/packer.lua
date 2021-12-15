@@ -25,6 +25,8 @@ function M.plugins()
 			end,
 		})
 
+        use({"jamestthompson3/nvim-remote-containers"})
+
 		use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 
 		use({

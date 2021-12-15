@@ -26,7 +26,7 @@
         "format-ethernet": "",
         "format-disconnected": "",
         "tooltip-format": "{ifname} via {gwaddr} ",
-        "tooltip-format-wifi": "{ipaddr}, {essid} ({signalStrength}%) ",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%) {ipaddr}",
         "tooltip-format-ethernet": "{ifname} ",
         "tooltip-format-disconnected": "Disconnected",
         "max-length": 50
@@ -41,7 +41,7 @@
         "format": "{icon}",
         "format-bluetooth": "{icon} {volume}",
         "tooltip-format": "{volume}% {desc}",
-        "format-muted": "",
+        "format-muted": "",
         "format-icons": {
             "headphone": "",
             "hands-free": "",
