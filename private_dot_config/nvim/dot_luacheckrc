@@ -1,5 +1,0 @@
-globals = {
-    "vim", "cmd", "set", "let",
-    "exprnnoremap", "nnoremap", "vnoremap", "xnoremap",
-    "inoremap", "tnoremap", "autocmd", "bootstrap"
-}
