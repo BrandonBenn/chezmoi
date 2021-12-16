@@ -1,8 +1,4 @@
-# Rename this file to match the name of the function
-# e.g. ~/.config/fish/functions/n.fish
-# or, add the lines to the 'config.fish' file.
-
-function n --wraps nnn --description 'support nnn quit and change directory'
+function n --wraps=nnn --description 'support nnn quit and change directory'
     # Block nesting of nnn in subshells
     if test -n "$NNNLVL"
         if [ (expr $NNNLVL + 0) -ge 1 ]
@@ -28,7 +24,7 @@ function n --wraps nnn --description 'support nnn quit and change directory'
     # stty lwrap undef
     # stty lnext undef
 
-    nnn -C $argv
+    nnn $argv
 
     if test -e $NNN_TMPFILE
         source $NNN_TMPFILE
