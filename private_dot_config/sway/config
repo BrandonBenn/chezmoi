@@ -73,8 +73,8 @@ bindsym $mod+s splitt
 bindsym $mod+r layout stacking
 bindsym $mod+t layout tabbed
 bindsym $mod+e layout toggle split
-bindsym $mod+f fullscreen
-bindsym $mod+Shift+space floating toggle
+bindsym F11 fullscreen
+bindsym $mod+f floating toggle
 bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 bindsym $mod+Shift+minus move scratchpad
