@@ -16,6 +16,7 @@
      :jose-elias-alvarez/null-ls.nvim
      :nvim-telescope/telescope.nvim
      :ygm2/rooter.nvim
+     :ziglang/zig.vim
 
      ;; plugins used by others
      :nvim-lua/plenary.nvim
