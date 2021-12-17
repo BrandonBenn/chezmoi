@@ -4,6 +4,7 @@
 
 (let [nvim-lsp (require :lspconfig)]
   (fn on-attach [client buffer]
+    (vim.cmd "command! Format lua.lsp.buf.formatting_sync()")
     (buf-set! buffer :omnifunc "v:lua.vim.lsp.omnifunc")	
 
     (buf-map! buffer :n :gD ":lua vim.lsp.buf.declaration()<CR>")
@@ -22,7 +23,7 @@
     (buf-map! buffer :n "[d" ":lua vim.diagnostic.goto_prev()<CR>")
     (buf-map! buffer :n "]d" ":lua vim.diagnostic.goto_next()<CR>")
     (buf-map! buffer :n :<leader>q ":lua vim.diagnostic.setloclist()<CR>")
-    (buf-map! buffer :n :<leader>f ":lua vim.lsp.buf.formatting()<CR>"))
+    (buf-map! buffer :n :<leader>= ":lua vim.lsp.buf.formatting()<CR>"))
 
   (local servers [:solargraph :zls])
 

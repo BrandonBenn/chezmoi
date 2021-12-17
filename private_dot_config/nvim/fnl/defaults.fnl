@@ -41,3 +41,5 @@
 (map! :n :<leader>y "\"+y")
 (map! :v :<leader>y "\"+y")
 (map! :t :<esc> :<C-\><C-n>)
+(vim.cmd "command! Format execute \"lua vim.lsp.buf.formatting()\"")
+(map! :n :g= ":Format<cr>")

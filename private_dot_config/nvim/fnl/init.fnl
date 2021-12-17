@@ -13,6 +13,7 @@
      :neovim/nvim-lspconfig
      :akinsho/bufferline.nvim
      :numToStr/Comment.nvim
+     :jose-elias-alvarez/null-ls.nvim
 
      ;; plugins used by others
      :nvim-lua/plenary.nvim
@@ -27,3 +28,4 @@
 (require :plugins/lspconfig)
 (require :plugins/bufferline)
 (require :plugins/comment)
+(require :plugins/null-ls)
