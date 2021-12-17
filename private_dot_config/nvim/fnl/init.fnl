@@ -14,6 +14,8 @@
      :akinsho/bufferline.nvim
      :numToStr/Comment.nvim
      :jose-elias-alvarez/null-ls.nvim
+     :nvim-telescope/telescope.nvim
+     :ygm2/rooter.nvim
 
      ;; plugins used by others
      :nvim-lua/plenary.nvim
@@ -29,3 +31,5 @@
 (require :plugins/bufferline)
 (require :plugins/comment)
 (require :plugins/null-ls)
+(require :plugins/telescope)
+(require :plugins/rooter)
