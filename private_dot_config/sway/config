@@ -26,6 +26,7 @@ floating_modifier $mod normal
 bindsym $mod+Return exec $terminal
 bindsym $mod+Escape exec $locker
 bindsym $mod+q kill
+bindsym $mod+b exec toggl waybar
 bindsym $mod+d exec $menu
 bindsym $mod+n exec makoctl dismiss
 bindsym $mod+Shift+n exec makoctl dismiss --all
