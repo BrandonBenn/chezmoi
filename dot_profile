@@ -18,6 +18,10 @@ PATH=$PATH:~/.asdf/installs/nodejs/14.18.0/.npm/lib/node_modules
 export PATH
 
 # If running from tty1 start sway
-if [ "$(tty)" = "/dev/tty1" ]; then
-    XDG_CURRENT_DESKTOP=sway QT_QPA_PLATFORM=wayland MOZ_ENABLE_WAYLAND=1 exec sway 2>/dev/null
-fi
+[ "$(tty)" = "/dev/tty1" ] && {
+	export XDG_CURRENT_DESKTOP=sway
+	export XDG_SESSION_TYPE=wayland
+	export QT_QPA_PLATFORM=wayland
+	export MOZ_ENABLE_WAYLAND=1
+	exec sway 2>/tmp/sway.log
+}
