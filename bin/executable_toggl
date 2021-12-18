@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+#
+# If program is already running, kill it. Start a program with arguments, if
+# not already running
+#
+
+pgrep -f "$1" >/dev/null && pkill "$1" >/dev/null && exit 0
+setsid -f "$@" >/tmp/toggl-"$1".log 2>&1
