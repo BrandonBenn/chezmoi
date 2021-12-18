@@ -1,10 +1,11 @@
-(local {: set-options 
-        : map! 
-        } (require :utils))
+(local 
+    {: set-options 
+     : set-mappings
+     : command
+     : cnoreabbrev } (require :utils))
 
 (set-options 
-  {
-   :expandtab true
+  {:expandtab true
    :exrc true
    :hidden true
    :laststatus 0
@@ -25,21 +26,23 @@
    :udir "/tmp/nvim/undo"
    :undofile true
    :wrap false
-   :completeopt "menuone,noselect,noinsert"
-   })
+   :completeopt "menuone,noselect,noinsert"})
 
-(map! :n ";" ":")
-(map! :v ";" ":")
-(map! :v :< :<gv)
-(map! :v :> :>gv)
-(map! :n :gh :^)
-(map! :n :gl :$)
-(map! :n :<C-j> ":cnext<cr>")
-(map! :n :<C-k> ":cprev<cr>")
-(map! :n :<localleader>w ":update<cr>")
-(map! :n :<leader>p "\"+p")
-(map! :n :<leader>y "\"+y")
-(map! :v :<leader>y "\"+y")
-(map! :t :<esc> :<C-\><C-n>)
-(vim.cmd "command! Format execute \"lua vim.lsp.buf.formatting()\"")
-(map! :n :g= ":Format<cr>")
+(set-mappings 
+  [:n ";" ":" {:silent false}]
+  [:v ";" ":" {:silent false}]
+  [:v :< :<gv]
+  [:v :> :>gv]
+  [:n :gh :^]
+  [:n :gl :$]
+  [:n :<C-j> ":cnext<cr>"]
+  [:n :<C-k> ":cprev<cr>"]
+  [:n :<localleader>w ":update<cr>"]
+  [:n :<leader>p "\"+p"]
+  [:n :<leader>y "\"+y"]
+  [:v :<leader>y "\"+y"]
+  [:t :<esc> :<C-\><C-n>]
+  [:n :g= ":Format<cr>"])
+
+(command :Format :execute "'lua vim.lsp.buf.formatting()'")
+(cnoreabbrev :w :update)

@@ -1,6 +1,7 @@
 (require :defaults)
 (local {: colorscheme! } (require :utils))
 
+;; Plugsins managed by paq-nvim
 (let [paq (require :paq)]
   (paq
     [
