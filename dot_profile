@@ -1,5 +1,10 @@
 #!/usr/bin/env sh
 
+export INPUT_METHOD=fcitx
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+
 export GOPATH=~/.asdf/installs/golang/1.17.1/packages
 export XDG_DATA_HOME=~/.local/share
 export EDITOR=nvim

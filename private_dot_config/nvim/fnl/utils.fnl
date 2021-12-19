@@ -13,6 +13,11 @@
     (tset options :noremap true)
         (vim.api.nvim_set_keymap mode lhs rhs options)))
 
+(λ M.require-all [...]
+  "set a table of editor options at once."
+  (each [_ value (pairs [...])]
+    (require value)))
+
 (λ M.set-options [options]
   "set a table of editor options at once."
   (each [key value (pairs options)]
