@@ -26,7 +26,8 @@
         :savq/paq-nvim]))
 
 (colorscheme! :typograph)
-(set! :gitblame_enabled 0)	
+(require :mkdir)
+(set! :gitblame_enabled 0)
 
 (require-all :plugins/bufferline
              :plugins/comment
@@ -34,5 +35,4 @@
              :plugins/lspconfig
              :plugins/null-ls
              :plugins/telescope
-             :plugins/mkdir
              :plugins/nvim-autopairs)
