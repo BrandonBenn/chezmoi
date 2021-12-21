@@ -1,5 +1,5 @@
 (require :defaults)
-(local {: colorscheme! : require-all } (require :utils))
+(local {: colorscheme! : require-all : set! } (require :utils))
 
 ;; Plugsins managed by paq-nvim
 (let [paq (require :paq)]
@@ -14,6 +14,9 @@
         :numToStr/Comment.nvim
         :jose-elias-alvarez/null-ls.nvim
         :nvim-telescope/telescope.nvim
+        :f-person/git-blame.nvim
+        :github/copilot.vim
+        :jghauser/mkdir.nvim
         :ziglang/zig.vim
 
         ;; plugins used by others
@@ -23,6 +26,7 @@
         :savq/paq-nvim]))
 
 (colorscheme! :typograph)
+(set! :gitblame_enabled 0)	
 
 (require-all :plugins/bufferline
              :plugins/comment
@@ -30,4 +34,5 @@
              :plugins/lspconfig
              :plugins/null-ls
              :plugins/telescope
+             :plugins/mkdir
              :plugins/nvim-autopairs)
