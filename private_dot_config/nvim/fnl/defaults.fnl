@@ -35,7 +35,7 @@
               [:n :gl :$]
               [:n :<C-j> ":cnext<cr>"]
               [:n :<C-k> ":cprev<cr>"]
-              [:n :<localleader>w ":update<cr>"]
+              [:n :<leader>w ":update<cr>"]
               [:n :<leader>p "\"+p"]
               [:n :<leader>y "\"+y"]
               [:v :<leader>y "\"+y"]
