@@ -10,14 +10,16 @@
               :laststatus 0
               :mapleader " "
               :number true
-              :number true
-              :relativenumber true
               :relativenumber true
               :scrolloff 999
               :shiftwidth 4
               :showmode false
+              :smartcase true
               :smartindent true
               :softtabstop 4
+              :spell true
+              :spelllang :en
+              :spelloptions :camel
               :swapfile false
               :tabstop 4
               :termguicolors true
@@ -31,8 +33,10 @@
               [:v ";" ":" {:silent false}]
               [:v :< :<gv]
               [:v :> :>gv]
-              [:n :gh :^]
-              [:n :gl :$]
+              [:n :Q :gq]
+              [:v :Q :gq]
+              [:n :H :^]
+              [:n :L :$]
               [:n :<C-j> ":cnext<cr>"]
               [:n :<C-k> ":cprev<cr>"]
               [:n :<leader>w ":update<cr>"]
