@@ -1,2 +1,3 @@
 (let [Comment (require :Comment)]
-  ((. Comment :setup) {}))
+  (Comment.setup))
+

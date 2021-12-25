@@ -1,2 +1,3 @@
 (let [coq (require :coq)]
-  (coq.Now "--shut-up"))
+  (coq.Now :--shut-up))
+

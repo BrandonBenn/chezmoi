@@ -1,8 +1,4 @@
-(local {: set-options 
-        : set-mappings
-        : command
-        : cnoreabbrev 
-        } (require :utils))
+(local {: set-options : set-mappings : command : cnoreabbrev} (require :utils))
 
 (set-options {:expandtab true
               :exrc true
@@ -24,27 +20,28 @@
               :tabstop 4
               :termguicolors true
               :title true
-              :udir "/tmp/nvim/undo"
+              :udir :/tmp/nvim/undo
               :undofile true
               :wrap false
               :completeopt "menuone,noselect,noinsert"})
 
-(set-mappings [:n ";" ":" {:silent false}]
-              [:v ";" ":" {:silent false}]
-              [:v :< :<gv]
-              [:v :> :>gv]
-              [:n :Q :gq]
-              [:v :Q :gq]
-              [:n :H :^]
-              [:n :L :$]
-              [:n :<C-j> ":cnext<cr>"]
-              [:n :<C-k> ":cprev<cr>"]
-              [:n :<leader>w ":update<cr>"]
-              [:n :<leader>p "\"+p"]
-              [:n :<leader>y "\"+y"]
-              [:v :<leader>y "\"+y"]
-              [:t :<esc> :<C-\><C-n>]
-              [:n :g= ":Format<cr>"])
+(set-mappings [[:n ";" ":" {:silent false}]
+               [:v ";" ":" {:silent false}]
+               [:v "<" :<gv]
+               [:v ">" :>gv]
+               [:n :Q :gq]
+               [:v :Q :gq]
+               [:n :H "^"]
+               [:n :L "$"]
+               [:n :<C-j> ":cnext<cr>"]
+               [:n :<C-k> ":cprev<cr>"]
+               [:n :<leader>w ":update<cr>"]
+               [:n :<leader>p "\"+p"]
+               [:n :<leader>y "\"+y"]
+               [:v :<leader>y "\"+y"]
+               [:t :<esc> "<C-\\><C-n>"]
+               [:n :g= ":Format<cr>"]])
 
 (command :Format :execute "'lua vim.lsp.buf.formatting()'")
 (cnoreabbrev :w :update)
+

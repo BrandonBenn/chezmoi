@@ -2,7 +2,7 @@
 
 (λ M.set! [key value]
   "set editor options/globals"
-    (if (pcall #(. vim.o key))
+  (if (pcall #(. vim.o key))
       (tset vim.o key value)
       (tset vim.g key value)))
 
@@ -11,11 +11,11 @@
   applies. The result, including {rhs}, is then further scanned for mappings."
   (let [options (or ?options {:silent true})]
     (tset options :noremap true)
-        (vim.api.nvim_set_keymap mode lhs rhs options)))
+    (vim.api.nvim_set_keymap mode lhs rhs options)))
 
-(λ M.require-all [...]
+(λ M.require-all [args]
   "set a table of editor options at once."
-  (each [_ value (pairs [...])]
+  (each [_ value (pairs args)]
     (require value)))
 
 (λ M.set-options [options]
@@ -23,9 +23,9 @@
   (each [key value (pairs options)]
     (M.set! key value)))
 
-(λ M.set-mappings [...]
+(λ M.set-mappings [mappings]
   "set a table of editor mappings at once."
-  (each [_ mapping (pairs [...])]
+  (each [_ mapping (pairs mappings)]
     (M.map! (unpack mapping))))
 
 (λ wrapper [...]
@@ -45,4 +45,5 @@
   "replace one command name with another."
   (wrapper :cnoreabbrev lhs rhs))
 
-M ; export
+M
+

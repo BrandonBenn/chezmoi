@@ -1,5 +1,5 @@
 (let [null-ls (require :null-ls)]
-  (null-ls.setup 
-    { :sources 
-     {1 null-ls.builtins.formatting.shfmt
-      2 null-ls.builtins.diagnostics.shellcheck}}))
+  (null-ls.setup {:sources [null-ls.builtins.formatting.shfmt
+                            null-ls.builtins.formatting.fnlfmt
+                            null-ls.builtins.diagnostics.shellcheck]}))
+
