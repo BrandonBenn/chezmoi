@@ -13,37 +13,22 @@
     (tset options :noremap true)
     (vim.api.nvim_set_keymap mode lhs rhs options)))
 
-(λ M.require-all [args]
-  "set a table of editor options at once."
-  (each [_ value (pairs args)]
-    (require value)))
-
-(λ M.set-options [options]
-  "set a table of editor options at once."
-  (each [key value (pairs options)]
-    (M.set! key value)))
-
-(λ M.set-mappings [mappings]
-  "set a table of editor mappings at once."
-  (each [_ mapping (pairs mappings)]
-    (M.map! (unpack mapping))))
-
-(λ wrapper [...]
+(λ M.wrapper [...]
   "wraps vim commands"
   (let [command (.. (table.concat [...] " "))]
     (vim.cmd command)))
 
 (λ M.command [...]
   "Define a user command."
-  (wrapper :command! ...))
+  (M.wrapper :command! ...))
 
 (λ M.colorscheme! [name]
   "Load color scheme {name}."
-  (wrapper :colorscheme name))
+  (M.wrapper :colorscheme name))
 
 (λ M.cnoreabbrev [lhs rhs]
   "replace one command name with another."
-  (wrapper :cnoreabbrev lhs rhs))
+  (M.wrapper :cnoreabbrev lhs rhs))
 
 M
 

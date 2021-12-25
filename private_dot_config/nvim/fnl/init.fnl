@@ -1,5 +1,5 @@
 (require :defaults)
-(local {: colorscheme! : require-all : set!} (require :utils))
+(local {: colorscheme! : set!} (require :utils))
 
 ;; Plugsins managed by paq-nvim
 (let [paq (require :paq)]
@@ -19,6 +19,7 @@
         :tpope/vim-eunuch
         :hkupty/iron.nvim
         :windwp/nvim-autopairs
+        :janet-lang/janet.vim
         :ziglang/zig.vim
         ;; plugins used by others
         :nvim-lua/popup.nvim
@@ -26,15 +27,17 @@
         ; let paq manage itself
         :savq/paq-nvim]))
 
-(require-all [:mkdir
-              :plugins/bufferline
-              :plugins/comment
-              :plugins/coq_nvim
-              :plugins/lspconfig
-              :plugins/null-ls
-              :plugins/telescope
-              :plugins/iron
-              :plugins/nvim-autopairs])
+(let [mod [:mkdir
+           :plugins/bufferline
+           :plugins/comment
+           :plugins/coq_nvim
+           :plugins/lspconfig
+           :plugins/null-ls
+           :plugins/telescope
+           :plugins/iron
+           :plugins/nvim-autopairs]]
+  (each [_ value (pairs mod)]
+    (require value)))
 
 (colorscheme! :typograph)
 (set! :gitblame_enabled 0)
