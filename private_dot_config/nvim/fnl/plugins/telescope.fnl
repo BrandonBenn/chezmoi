@@ -1,4 +1,4 @@
-(local {: map!} (require :utils))
+(local {: map! : command} (require :utils))
 
 (local telescope (require :telescope))
 (local action-layout (require :telescope.actions.layout))
@@ -18,7 +18,7 @@
     (when (not ok)
       (builtin.find_files))))
 
-(vim.cmd "command! ProjectFiles execute \"call v:lua.project_files()\"")
+(command :ProjectFiles :execute "'lua project_files()'")
 (map! :n :<C-p> ":ProjectFiles<cr>")
 (map! :n :<A-h> ":Telescope oldfiles<cr>")
 (map! :n :<A-g> ":Telescope live_grep<cr>")
