@@ -5,9 +5,9 @@ pkgver=1
 pkgrel=1
 pkgdesc='Set of packages required for sway config'
 depends=(
-	'base' 'base-devel' 'xorg-xwayland' 'bemenu' 'bemenu-wayland'
-	'brightnessctl' 'fcitx5' 'fcitx5-chewing' 'gammastep' 'grim'
-	'j4-dmenu-desktop' 'mako' 'network-manager-applet' 'otf-font-awesome'
-	'polkit-gnome' 'qt5-wayland' 'seahorse' 'slurp' 'swayidle' 'swaylock'
-	'ttf-nerd-fonts-symbols' 'waybar' 'xdg-desktop-portal-wlr' 'xorg-xwayland'
+    'xorg-xwayland' 'bemenu' 'bemenu-wayland' 'brightnessctl' 'fcitx5'
+    'fcitx5-chewing' 'gammastep' 'grim' 'j4-dmenu-desktop' 'mako'
+    'network-manager-applet' 'otf-font-awesome' 'polkit-gnome' 'qt5-wayland'
+    'seahorse' 'slurp' 'swayidle' 'swaylock' 'ttf-nerd-fonts-symbols' 'waybar'
+    'xdg-desktop-portal-wlr' 'xorg-xwayland'
 )

@@ -1,13 +1,15 @@
 (require :defaults)
 (local {: colorscheme! : set!} (require :utils))
+(local f vim.fn)
 
 ;; Plugsins managed by paq-nvim
 (let [paq (require :paq)]
   (paq [{:url "https://gitlab.com/th3lusive/typography.vim.git"}
-        ; Manually run :COQdeps
+        ;; Manually run :COQdeps
         {1 :ms-jpq/coq.artifacts :branch :artifacts}
         {1 :ms-jpq/coq.thirdparty :branch :3p}
         {1 :ms-jpq/coq_nvim :branch :coq}
+        :gelguy/wilder.nvim
         :akinsho/bufferline.nvim
         :f-person/git-blame.nvim
         :github/copilot.vim
@@ -24,7 +26,7 @@
         ;; plugins used by others
         :nvim-lua/popup.nvim
         :nvim-lua/plenary.nvim
-        ; let paq manage itself
+        ;; let paq manage itself
         :savq/paq-nvim]))
 
 (let [mod [:mkdir
@@ -41,4 +43,7 @@
 
 (colorscheme! :typograph)
 (set! :gitblame_enabled 0)
-
+(f.wilder#setup {:modes [":" "/" "?"]})
+(let [coq_3p (require :coq_3p)]
+  (coq_3p [{:src :repl :sh :bash :max_lines 99 :deadline 900}
+           {:src :copilot :short_name :COP :tmp_accept_key :<c-r>}]))
