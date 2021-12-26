@@ -1,5 +1,5 @@
 (require :defaults)
-(local {: colorscheme! : set!} (require :utils))
+(local {: set! : for-each : colorscheme!} (require :utils))
 (local f vim.fn)
 
 ;; Plugsins managed by paq-nvim
@@ -29,17 +29,16 @@
         ;; let paq manage itself
         :savq/paq-nvim]))
 
-(let [mod [:mkdir
-           :plugins/bufferline
-           :plugins/comment
-           :plugins/coq_nvim
-           :plugins/lspconfig
-           :plugins/null-ls
-           :plugins/telescope
-           :plugins/iron
-           :plugins/nvim-autopairs]]
-  (each [_ value (pairs mod)]
-    (require value)))
+(for-each require [:mkdir
+                   :plugins/bufferline
+                   :plugins/comment
+                   :plugins/coq_nvim
+                   :plugins/lspconfig
+                   :plugins/null-ls
+                   :plugins/telescope
+                   :plugins/iron
+                   :plugins/nvim-autopairs])
+
 
 (colorscheme! :typograph)
 (set! :gitblame_enabled 0)
@@ -47,3 +46,4 @@
 (let [coq_3p (require :coq_3p)]
   (coq_3p [{:src :repl :sh :bash :max_lines 99 :deadline 900}
            {:src :copilot :short_name :COP :tmp_accept_key :<c-r>}]))
+

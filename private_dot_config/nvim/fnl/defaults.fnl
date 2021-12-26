@@ -1,4 +1,4 @@
-(local {: set! : map! : command : cnoreabbrev} (require :utils))
+(local {: set! : map! : command : cnoreabbrev } (require :utils))
 
 (let [options {:expandtab true
                :exrc true

@@ -30,5 +30,11 @@
   "replace one command name with another."
   (M.wrapper :cnoreabbrev lhs rhs))
 
+(fn M.for-each [func list]
+  "Apply {func} to each element of {list}."
+  (when (> (length list) 0)
+    (each [_ item (pairs list)]
+      (func item))))
+
 M
 
