@@ -21,6 +21,7 @@
         :tpope/vim-eunuch
         :hkupty/iron.nvim
         :windwp/nvim-autopairs
+        :ethanholz/nvim-lastplace
         :janet-lang/janet.vim
         :ziglang/zig.vim
         ;; plugins used by others
@@ -36,14 +37,14 @@
                    :plugins/lspconfig
                    :plugins/null-ls
                    :plugins/telescope
+                   :plugins/coq
                    :plugins/iron
                    :plugins/nvim-autopairs])
 
-
 (colorscheme! :typograph)
 (set! :gitblame_enabled 0)
+(let [lastplace (require :nvim-lastplace)]
+  (lastplace.setup))
+
 (f.wilder#setup {:modes [":" "/" "?"]})
-(let [coq_3p (require :coq_3p)]
-  (coq_3p [{:src :repl :sh :bash :max_lines 99 :deadline 900}
-           {:src :copilot :short_name :COP :tmp_accept_key :<c-r>}]))
 
