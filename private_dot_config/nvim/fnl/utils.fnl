@@ -30,11 +30,16 @@
   "replace one command name with another."
   (M.wrapper :cnoreabbrev lhs rhs))
 
-(fn M.for-each [func list]
-  "Apply {func} to each element of {list}."
+(λ M.for-each [proc list]
+  "Apply {proc} to each element of {list}."
   (when (> (length list) 0)
     (each [_ item (pairs list)]
-      (func item))))
+      (proc item))))
+
+(λ M.for-each-pair [proc tbl]
+  "Apply {proc} to each pair of {tbl}."
+    (each [key value (pairs tbl)]
+      (proc key value)))
 
 M
 
