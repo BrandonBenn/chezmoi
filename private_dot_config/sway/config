@@ -6,8 +6,7 @@ set $up k
 set $right l
 set $terminal kitty
 set $locker swaylock -f -c 080808
-set $launcher bemenu -i -p '' --nb '#080808' --hb '#f5f5f5' --hf '#080808' --fb '#080808' --fn '$font Bold 16'
-set $menu j4-dmenu-desktop --dmenu="$launcher"
+set $menu wofi
 
 font $font 11
 default_border pixel 3 
