@@ -1,4 +1,5 @@
 for_window [app_id="org.telegram.desktop"] floating enable
+for_window [app_id="org.keepassxc.KeePassXC"] floating enable
 
 for_window [app_id="gnome-.*"] floating enable, border none
 for_window [app_id="org.gnome.*"] floating enable, border none

@@ -8,4 +8,4 @@ insensitive=true
 location=top
 orientation=horizontal
 halign=start
-layer=top
+layer=overlay
