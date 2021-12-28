@@ -27,8 +27,8 @@
 * {
     border: none;
     font-family: FreeSans, sans-serif;
-    font-size: 14px;
-    padding: 0px;
+    font-size: 13px;
+    padding: 1px;
 }
 
 #waybar {

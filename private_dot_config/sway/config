@@ -9,7 +9,7 @@ set $locker swaylock -f -c 080808
 set $menu wofi
 
 font $font 11
-default_border pixel 3 
+default_border pixel 4
 smart_borders on
 output * background #080808 solid_color
 output "eDP-1" scale 1.2
