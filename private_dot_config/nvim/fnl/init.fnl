@@ -1,5 +1,4 @@
 (require :defaults)
-(require :gui)
 (local {: set! : for-each : colorscheme!} (require :utils))
 (local f vim.fn)
 

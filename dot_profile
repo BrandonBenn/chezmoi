@@ -14,6 +14,7 @@ export HISTFILE=~/.cache/history
 export HISTSIZE=10000
 export SAVEHIST=10000
 export XKB_DEFAULT_OPTIONS=caps:escape
+export JANET_PATH=~/.cache/janet
 PATH=$PATH:~/.local/bin
 PATH=$PATH:~/bin
 PATH=$PATH:"$GOPATH"/bin
