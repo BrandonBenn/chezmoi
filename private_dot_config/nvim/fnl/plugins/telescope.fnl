@@ -1,4 +1,4 @@
-(local {: map! : command} (require :utils))
+(local {: map! : command} (require :core/utils))
 
 (local telescope (require :telescope))
 (local action-layout (require :telescope.actions.layout))

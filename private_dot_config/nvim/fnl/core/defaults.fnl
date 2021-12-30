@@ -1,4 +1,4 @@
-(local {: set! : map! : command : cnoreabbrev : for-each-pair} (require :utils))
+(local {: set! : map! : command : cnoreabbrev : for-each-pair} (require :core/utils))
 
 (for-each-pair set!
                {:expandtab true

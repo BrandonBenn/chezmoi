@@ -1,4 +1,4 @@
-(local {: map! : set!} (require :utils))
+(local {: map! : set!} (require :core/utils))
 (let [bufferline (require :bufferline)]
   ((. bufferline :setup) {}))
 
