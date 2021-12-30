@@ -1,6 +1,6 @@
-(require :defaults)
-(require :gui)
-(local {: set! : for-each : colorscheme!} (require :utils))
+(local {: set! : for-each : colorscheme!} (require :core/utils))
+(require :core/defaults)
+
 (local f vim.fn)
 
 ;; Plugsins managed by paq-nvim
@@ -48,4 +48,6 @@
   (lastplace.setup))
 
 (f.wilder#setup {:modes [":" "/" "?"]})
+
+(pcall #(require :local))
 

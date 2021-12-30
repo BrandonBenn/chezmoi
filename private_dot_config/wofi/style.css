@@ -1,12 +1,11 @@
-@define-color primary rgba(8, 8, 8, 0.75);
-@define-color secondary #f5f5f5;
+@define-color primary rgba(8, 8, 8, 0.5);
+@define-color secondary #eeeeee;
 
 * {
     background-color: @primary;
     color: @secondary;
-    font-family: "FreeSans", sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 16px;
-    font-weight: 600;
 }
 
 window {
@@ -15,6 +14,8 @@ window {
 }
 
 #text:selected {
-    background-color: @secondary;
-    color: @primary;
+    color: @secondary;
+    background-color: @primary;
+    font-size: 20px;
+    font-weight:  700;
 }

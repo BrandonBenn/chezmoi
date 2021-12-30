@@ -10,8 +10,8 @@ exec_always {
 exec /usr/libexec/polkit-gnome-authentication-agent-1
 exec swayidle -w timeout 300 '$locker' timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep '$locker'
 exec gammastep -l 23.6:120.9 6000:3000
-exec waybar
-exec fcitx5
-exec nm-applet --indicator
 exec $terminal
-exec wl-clipboard-history -d
+exec nm-applet --indicator
+exec fcitx5
+exec keepassxc
+exec waybar
