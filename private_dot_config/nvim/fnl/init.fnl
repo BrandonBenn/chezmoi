@@ -1,12 +1,11 @@
-(local {: set! : for-each : colorscheme!} (require :core/utils))
 (require :core/defaults)
 
+(local {: set! : for-each : colorscheme!} (require :core/utils))
 (local f vim.fn)
 
-;; Plugsins managed by paq-nvim
+;; Plugins managed by paq-nvim
 (let [paq (require :paq)]
-  (paq [{:url "https://gitlab.com/th3lusive/typography.vim.git"}
-        ;; Manually run :COQdeps
+  (paq [;; Manually run :COQdeps
         {1 :ms-jpq/coq.artifacts :branch :artifacts}
         {1 :ms-jpq/coq.thirdparty :branch :3p}
         {1 :ms-jpq/coq_nvim :branch :coq}
@@ -42,12 +41,12 @@
                    :plugins/iron
                    :plugins/nvim-autopairs])
 
-(colorscheme! :typograph)
 (set! :gitblame_enabled 0)
 (let [lastplace (require :nvim-lastplace)]
   (lastplace.setup))
 
 (f.wilder#setup {:modes [":" "/" "?"]})
 
+;; Configurations that are not managed by version control
 (pcall #(require :local))
 

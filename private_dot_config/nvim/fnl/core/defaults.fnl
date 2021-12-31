@@ -1,5 +1,7 @@
-(local {: set! : map! : command : cnoreabbrev : for-each-pair} (require :core/utils))
+(local {: set! : map! : colorscheme! : command : cnoreabbrev : for-each-pair}
+       (require :core/utils))
 
+(colorscheme! :typograph)
 (for-each-pair set!
                {:expandtab true
                 :exrc true
