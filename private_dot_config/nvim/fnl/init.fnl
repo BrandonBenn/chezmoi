@@ -37,7 +37,6 @@
                    :plugins/lspconfig
                    :plugins/null-ls
                    :plugins/telescope
-                   :plugins/coq
                    :plugins/iron
                    :plugins/nvim-autopairs])
 
@@ -46,6 +45,7 @@
   (lastplace.setup))
 
 (f.wilder#setup {:modes [":" "/" "?"]})
+(set vim.g.copilot_filetypes {"*" true})	
 
 ;; Configurations that are not managed by version control
 (pcall #(require :local))

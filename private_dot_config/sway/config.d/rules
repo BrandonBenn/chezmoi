@@ -8,7 +8,7 @@ for_window [app_id="(flameshot|eog|mpv|Celluloid|imv|Bitwarden)"] floating enabl
 for_window [app_id="firefox" title="Firefox — Sharing Indicator"] floating enable
 for_window [app_id="firefox" title="Picture-in-Picture"] floating enable
 for_window [app_id="firefox" title="About Mozilla Firefox"] floating enable
-for_window [app_id="scratch"] move to scratchpad, floating enable
 for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable
+for_window [class="scratch"] move container to scratchpad
 
 for_window [shell="xwayland"] title_format "[X] %title"
