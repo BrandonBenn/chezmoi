@@ -17,6 +17,7 @@
         :jose-elias-alvarez/null-ls.nvim
         :neovim/nvim-lspconfig
         :numToStr/Comment.nvim
+        :lukas-reineke/indent-blankline.nvim
         :nvim-telescope/telescope.nvim
         :tpope/vim-eunuch
         :hkupty/iron.nvim
@@ -45,7 +46,7 @@
   (lastplace.setup))
 
 (f.wilder#setup {:modes [":" "/" "?"]})
-(set vim.g.copilot_filetypes {"*" true})	
+(set vim.g.copilot_filetypes {:* true})
 
 ;; Configurations that are not managed by version control
 (pcall #(require :local))
