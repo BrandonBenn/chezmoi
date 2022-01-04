@@ -51,3 +51,8 @@
 (command :Format :execute "'lua vim.lsp.buf.formatting()'")
 (cnoreabbrev :w :update)
 
+(let [gui (require :core/gui)]
+  (gui.setup {:fontsize 11})
+  (map! :n :<C-=> ":IncreaseFont<cr>")
+  (map! :n :<C--> ":DecreaseFont<cr>"))
+

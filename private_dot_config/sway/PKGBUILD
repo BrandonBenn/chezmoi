@@ -5,7 +5,7 @@ pkgver=1
 pkgrel=1
 pkgdesc='Set of packages required for sway config'
 depends=(
-    'gammastep' 'grim' 'mako' 'network-manager-applet' 'otf-font-awesome'
+    'wlsunset' 'grim' 'mako' 'network-manager-applet' 'otf-font-awesome'
     'polkit-gnome' 'qt5-wayland' 'seahorse' 'slurp' 'swayidle' 'swaylock'
     'swappy' 'ttf-nerd-fonts-symbols' 'waybar' 'xdg-desktop-portal-wlr'
     'xorg-xwayland' 'xorg-xwayland' 'wofi' 'brightnessctl' 'fcitx5'
