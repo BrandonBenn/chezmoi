@@ -1,42 +1,16 @@
-@keyframes blink-warning {
-    70% {
-        color: white;
-    }
-
-    to {
-        color: white;
-        background-color: orange;
-    }
-}
-
-@keyframes blink-critical {
-    70% {
-      color: white;
-    }
-
-    to {
-        color: white;
-        background-color: red;
-    }
-}
-
-
-/* -----------------------------------------------------------------------------
- * Base styles
- * -------------------------------------------------------------------------- */
 * {
     border: none;
-    font-family: Roboto, sans-serif;
-    font-size: 14px;
-    padding: 0px;
+    border-radius: 0;
+    font-family: Roboto, FreeSans, sans-serif;
+    font-size: 13px;
+    min-height: 0;
 }
 
 #waybar {
-    background: #080808;
-    color: #eeeeee;
+    background: #222222;
+    color: white;
 }
 
-/* Each module */
 #battery,
 #clock,
 #cpu,
@@ -49,11 +23,6 @@
     padding-right: 10px;
 }
 
-
-/* -----------------------------------------------------------------------------
- * Module styles
- * -------------------------------------------------------------------------- */
-
 #battery {
     animation-timing-function: linear;
     animation-iteration-count: infinite;
@@ -61,11 +30,11 @@
 }
 
 #battery.warning {
-    color: orange;
+    background-color: orange;
 }
 
 #battery.critical {
-    color: red;
+    background-color: #900000;
 }
 
 #battery.warning.discharging {
@@ -82,21 +51,12 @@
     font-weight: bold;
 }
 
-
-#network {
-    /* No styles */
-}
-
 #network.disconnected {
     color: orange;
 }
 
-#pulseaudio {
-    /* No styles */
-}
-
 #pulseaudio.muted {
-    /* No styles */
+    background-color: #900000;
 }
 
 #window {
@@ -104,18 +64,23 @@
 }
 
 #workspaces button {
-    color: #eeeeee;
-    background-color: #080808;
+    padding: 0px;
+    border-radius: 0px;
+    font-weight: bold;
+    color: white;
 }
 
 #workspaces button.focused {
-    color: @theme_text_color;
-    border-radius: 0px;
-    font-weight: bold;
-    background-color: #eeeeee;
+    background-color: #295577;
 }
 
 #workspaces button.urgent {
     border-color: #c9545d;
     color: #c9545d;
 }
+
+#workspaces button:hover {
+    background-color: #484e50;
+    color: white;
+}
+

@@ -4,14 +4,14 @@ set $left h
 set $down j
 set $up k
 set $right l
-set $terminal kitty
-set $locker swaylock -f -c 080808
+set $terminal footclient -e fish
+set $locker swaylock -f -c 222222
 set $menu wofi
 
 font $font 10
 default_border pixel 4
 smart_borders on
-output * background #080808 solid_color
+output * background #222222 solid_color
 output "eDP-1" scale 1.2
 title_align center
 input * xkb_options "caps:escape"

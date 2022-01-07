@@ -15,3 +15,4 @@ exec nm-applet --indicator
 exec fcitx5
 exec keepassxc
 exec waybar
+exec foot --server
