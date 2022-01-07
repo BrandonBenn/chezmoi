@@ -1,3 +1,11 @@
+#input {
+    font-size: 24px;
+    font-weight: normal;
+}
+
 #window {
     border-radius: 8;
+    background-color: rgba(34, 34, 34, 0.98);
+    font-weight: bold;
+    color: white;
 }
