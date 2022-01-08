@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+
+FILENAME="$(date +'screencast-%F-%H%M%S').mkv"
+LOCK_FILE=/tmp/wl-screencast.lock
+
+# trap 'rm -f $PID_FILE' EXIT
+[ -f "$LOCK_FILE" ] && {
+	pkill -P "$(cat $LOCK_FILE)"
+	rm -f "$LOCK_FILE"
+	notify-send "Saved screencast to $FILENAME"
+	exit 0
+}
+
+echo $$ >$LOCK_FILE
+
+case "$1" in
+-r | --region)
+	wf-recorder -g "$(slurp)" -f ~/Desktop/"$FILENAME"
+	;;
+*)
+	wf-recorder -f ~/Desktop/"$FILENAME"
+	;;
+esac
