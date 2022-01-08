@@ -52,7 +52,7 @@
 (cnoreabbrev :w :update)
 
 (let [gui (require :core/gui)]
-  (gui.setup {:fontsize 11})
+  (gui.setup {:fontsize 12})
   (map! :n :<C-=> ":IncreaseFont<cr>")
   (map! :n :<C--> ":DecreaseFont<cr>"))
 

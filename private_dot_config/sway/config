@@ -74,6 +74,7 @@ bindsym $mod+m fullscreen
 bindsym F11 fullscreen
 bindsym Print exec grim -g "$(slurp)" - | swappy -f -
 bindsym Shift+Print exec grim - | swappy -f -
+bindsym $mod+Print exec wl-screencast -r
 bindsym $mod+f floating toggle
 bindsym $mod+space focus mode_toggle
 bindsym $mod+minus scratchpad show

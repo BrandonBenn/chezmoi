@@ -24,6 +24,7 @@
         :tpope/vim-eunuch
         :hkupty/iron.nvim
         :windwp/nvim-autopairs
+        :projekt0n/github-nvim-theme
         :ethanholz/nvim-lastplace
         :janet-lang/janet.vim
         :ziglang/zig.vim
