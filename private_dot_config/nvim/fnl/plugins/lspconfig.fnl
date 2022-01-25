@@ -29,8 +29,8 @@
       (buf-map! :n :<leader>q ":lua vim.diagnostic.setloclist()<CR>" o)
       (buf-map! :n :<leader>f ":lua vim.lsp.buf.formatting()<CR>" o)))
 
-  (local servers [:solargraph :zls])
-  (each [_ lsp (ipairs servers)]
-    ((. (. nvim-lsp lsp) :setup) {:on_attach on-attach
-                                  :flags {:debounce_text_changes 150}})))
+  (let [servers [:solargraph :zls :vls :clangd :zk]]
+    (each [_ lsp (ipairs servers)]
+      ((. (. nvim-lsp lsp) :setup) {:on_attach on-attach
+                                    :flags {:debounce_text_changes 150}}))))
 

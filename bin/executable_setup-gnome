@@ -1,30 +1,62 @@
 #!/usr/bin/env bash
 
-VARIABLE_FONT='Roboto 11'
+VARIABLE_FONT='FreeSans 12'
 MONOSPACE_FONT='JetBrains Mono 11'
 TERMINAL=kitty
-
 GNOME_EXTENSIONS=(
-    just-perfection-desktopjust-perfection.v16.shell-extension.zip
-    clipboard-indicatortudmotu.com.v39.shell-extension.zip
+	just-perfection-desktopjust-perfection.v16.shell-extension.zip
+	clipboard-indicatortudmotu.com.v39.shell-extension.zip
 )
 
-for extension in "${GNOME_EXTENSIONS[@]}"; do
-    url="https://extensions.gnome.org/extension-data/$extension"
-    printf "Installing extension: %s\n" "$extension"
-    gnome-extensions install "$url" 2>/dev/null
-done
+install_extensions() {
+	for extension in "${GNOME_EXTENSIONS[@]}"; do
+		url="https://extensions.gnome.org/extension-data/$extension"
+		printf "Installing extension: %s\n" "$extension"
+		gnome-extensions install "$url" 2>/dev/null
+	done
+}
 
-gsettings set org.gnome.shell enabled-extensions "['just-perfection-desktop@just-perfection', 'clipboard-indicator@tudmotu.com']"
-gsettings set org.gnome.desktop.wm.keybindings close "['<Super>q']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-center "['<Super>c']"
-gsettings set org.gnome.desktop.wm.keybindings maximize-vertically "['<Super>minus']"
-gsettings set org.gnome.desktop.wm.keybindings toggle-maximized "['<Super>Up']"
-gsettings set org.gnome.desktop.background primary-color ""
-gsettings set org.gnome.desktop.wm.keybindings cycle-windows "['<Super>Tab']"
-gsettings set org.gnome.desktop.input-sources xkb-options "['terminate:ctrl_alt_bksp', 'caps:escape']"
-gsettings set org.gnome.mutter center-new-windows true
-gsettings set org.gnome.desktop.interface font-name "$VARIABLE_FONT"
-gsettings set org.gnome.desktop.interface monospace-font-name "$MONOSPACE_FONT"
-gsettings set org.gnome.desktop.default-applications.terminal exec "$TERMINAL"
-gsettings set org.gnome.desktop.default-applications.terminal exec-arg '-e'
+set_defaults() {
+	gsettings set org.gnome.shell enabled-extensions "['just-perfection-desktop@just-perfection', 'clipboard-indicator@tudmotu.com']"
+	gsettings set org.gnome.desktop.wm.keybindings close "['<Super>q']"
+	gsettings set org.gnome.desktop.wm.keybindings move-to-center "['<Super>c']"
+	gsettings set org.gnome.desktop.wm.keybindings maximize-vertically "['<Super>minus']"
+	gsettings set org.gnome.desktop.wm.keybindings toggle-maximized "['<Super>Up']"
+	gsettings set org.gnome.desktop.background primary-color ""
+	gsettings set org.gnome.desktop.wm.keybindings cycle-windows "['<Super>j']"
+	gsettings set org.gnome.desktop.input-sources xkb-options "['terminate:ctrl_alt_bksp', 'caps:escape']"
+	gsettings set org.gnome.desktop.input-sources xkb-options "[]"
+	gsettings set org.gnome.mutter center-new-windows true
+	gsettings set org.gnome.desktop.interface font-name "$VARIABLE_FONT"
+	gsettings set org.gnome.desktop.interface monospace-font-name "$MONOSPACE_FONT"
+	gsettings set org.gnome.desktop.default-applications.terminal exec "$TERMINAL"
+	gsettings set org.gnome.desktop.default-applications.terminal exec-arg '-e'
+}
+
+help_message() {
+	printf "Usage: %s [OPTION]...\n" "$0"
+	printf "Install GNOME extensions and set some defaults.\n\n"
+	printf "  -h, --help\t\tShow this help message and exit\n"
+	printf "  -e, --extensions\t\tInstall GNOME extensions\n"
+	printf "  -d, --defaults\tSet some defaults\n"
+}
+
+case "$1" in
+--extensions | -e)
+	install_extensions
+	;;
+--defaults | -d)
+	set_defaults
+	;;
+--all | -a)
+	install_extensions
+	set_defaults
+	;;
+--help | -h)
+	help_message
+	exit 1
+	;;
+*)
+	set_defaults
+	;;
+esac

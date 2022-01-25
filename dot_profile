@@ -5,6 +5,7 @@ export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 
+export NNN_TMPFILE=~/.config/nnn/.lastd
 export GOPATH=~/.asdf/installs/golang/1.17.1/packages
 export XDG_DATA_HOME=~/.local/share
 export EDITOR=nvim
@@ -23,10 +24,5 @@ PATH=$PATH:~/.asdf/installs/nodejs/14.18.0/.npm/lib/node_modules
 export PATH
 
 # If running from tty1 start sway
-[ "$(tty)" = "/dev/tty1" ] && {
-	export XDG_SESSION_TYPE=wayland
-	export QT_QPA_PLATFORM=wayland
-	export MOZ_ENABLE_WAYLAND=1
-	export XDG_CURRENT_DESKTOP=sway
-	exec sway 2>/tmp/sway.log
-}
+[ "$(tty)" = "/dev/tty1" ] &&
+	exec ~/.config/wayfire/start

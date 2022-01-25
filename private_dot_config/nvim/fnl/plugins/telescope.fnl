@@ -6,7 +6,8 @@
 (local builtin (require :telescope.builtin))
 
 (telescope.setup {:defaults {:mappings {:n {:<M-p> action-layout.toggle_preview}
-                                        :i {:<M-p> action-layout.toggle_preview}}}
+                                        :i {:<M-p> action-layout.toggle_preview}}
+                             :file_ignore_patterns [:node_modules]}
                   :pickers {:live_grep default-picker
                             :find_files default-picker
                             :git_files default-picker

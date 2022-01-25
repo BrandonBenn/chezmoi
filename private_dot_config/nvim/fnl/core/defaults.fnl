@@ -49,8 +49,6 @@
     (map! (unpack mapping))))
 
 (command :Format :execute "'lua vim.lsp.buf.formatting()'")
-(cnoreabbrev :w :update)
-
 (let [gui (require :core/gui)]
   (gui.setup {:fontsize 12})
   (map! :n :<C-=> ":IncreaseFont<cr>")

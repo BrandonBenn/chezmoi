@@ -9,8 +9,8 @@
         {1 :ms-jpq/coq.artifacts :branch :artifacts}
         {1 :ms-jpq/coq.thirdparty :branch :3p}
         {1 :ms-jpq/coq_nvim :branch :coq}
-        {1 :ms-jpq/chadtree :branch :chad}
-        :gelguy/wilder.nvim
+        {1 :nvim-treesitter/nvim-treesitter :run (λ [] (vim.cmd :TSUpdate))}
+        :mcchrish/nnn.vim
         :akinsho/bufferline.nvim
         :f-person/git-blame.nvim
         :github/copilot.vim
@@ -22,9 +22,8 @@
         :lukas-reineke/indent-blankline.nvim
         :nvim-telescope/telescope.nvim
         :tpope/vim-eunuch
-        :hkupty/iron.nvim
         :windwp/nvim-autopairs
-        :projekt0n/github-nvim-theme
+        :folke/zen-mode.nvim
         :ethanholz/nvim-lastplace
         :janet-lang/janet.vim
         :ziglang/zig.vim
@@ -41,18 +40,13 @@
                    :plugins/lspconfig
                    :plugins/null-ls
                    :plugins/telescope
-                   :plugins/iron
                    :plugins/nvim-autopairs])
 
 (set! :gitblame_enabled 0)
 (let [lastplace (require :nvim-lastplace)]
   (lastplace.setup))
 
-(f.wilder#setup {:modes [":" "/" "?"]})
-(set vim.g.copilot_filetypes {:* true})
-
-(map! :n :<leader>n ":CHADopen<cr>")
-
+(set vim.g.nnn#layout {:window {:width 0.3 :height 0.5}})
 ;; Configurations that are not managed by version control
 (pcall #(require :local))
 
