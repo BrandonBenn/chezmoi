@@ -15,14 +15,16 @@ export HISTFILE=~/.cache/history
 export HISTSIZE=10000
 export SAVEHIST=10000
 export XKB_DEFAULT_OPTIONS=caps:escape
-PATH=$PATH:~/.local/bin
-PATH=$PATH:~/bin
-PATH=$PATH:"$GOPATH"/bin
-PATH=$PATH:~/.asdf/shims
-PATH=$PATH:~/.asdf/installs/python/3.9.6/bin
-PATH=$PATH:~/.asdf/installs/nodejs/14.18.0/.npm/lib/node_modules
+PATH="$PATH":~/.local/bin
+PATH="$PATH":~/bin
+PATH="$PATH":"$GOPATH"/bin
+PATH="$PATH":~/.asdf/shims
+PATH="$PATH":~/.asdf/installs/python/3.9.6/bin
+PATH="$PATH":~/.asdf/installs/nodejs/14.18.0/.npm/lib/node_modules
 export PATH
 
-# If running from tty1 start sway
-[ "$(tty)" = "/dev/tty1" ] &&
-	exec ~/.config/wayfire/start
+[ "$(uname)" = "Darwin" ] && {
+  source /usr/local/opt/asdf/libexec/asdf.sh 
+  export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
+}
+

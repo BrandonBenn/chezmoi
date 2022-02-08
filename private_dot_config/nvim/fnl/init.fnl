@@ -11,7 +11,6 @@
         {1 :ms-jpq/coq_nvim :branch :coq}
         {1 :nvim-treesitter/nvim-treesitter :run (λ [] (vim.cmd :TSUpdate))}
         :mcchrish/nnn.vim
-        :akinsho/bufferline.nvim
         :f-person/git-blame.nvim
         :github/copilot.vim
         :jghauser/mkdir.nvim
@@ -34,7 +33,6 @@
         :savq/paq-nvim]))
 
 (for-each require [:mkdir
-                   :plugins/bufferline
                    :plugins/comment
                    :plugins/coq_nvim
                    :plugins/lspconfig
