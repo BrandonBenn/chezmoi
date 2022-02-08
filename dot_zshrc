@@ -1,0 +1,3 @@
+bindkey -e
+(( $+commands[starship] )) && eval "$(starship init zsh)"
+source ~/.zshrc.local || touch ~/.zshrc.local
