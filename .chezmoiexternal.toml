@@ -1,6 +1,3 @@
-["~/.local/share/zsh/zsh-autosuggestions"]
-    type = "archive"
-    url = "https://github.com/zsh-users/zsh-autosuggestions/archive/refs/heads/master.tar.gz"
-    exact = true
-    stripComponents = 1
-    refreshPeriod = "168h"
+["~/.local/share/zsh/zsh-autosuggestions.zsh"]
+    type = "file"
+    url = "https://raw.githubusercontent.com/zsh-users/zsh-autosuggestions/master/zsh-autosuggestions.zsh"
