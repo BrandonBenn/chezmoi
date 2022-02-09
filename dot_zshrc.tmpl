@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+bindkey -e
+(( $+commands[starship] )) && eval "$(starship init zsh)"
+source ~/.zshrc.local || touch ~/.zshrc.local
+source ~/.local/share/zsh/zsh-autosuggestions.zsh
+
+{{ if eq .chezmoi.os "darwin" -}}
+source ~/.zshrc_macos
+{{end}}
