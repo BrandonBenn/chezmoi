@@ -1,0 +1,6 @@
+["~/.local/share/zsh/zsh-autosuggestions"]
+    type = "archive"
+    url = "https://github.com/zsh-users/zsh-autosuggestions/archive/refs/heads/master.tar.gz"
+    exact = true
+    stripComponents = 1
+    refreshPeriod = "168h"
