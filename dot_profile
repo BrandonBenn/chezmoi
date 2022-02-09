@@ -22,9 +22,3 @@ PATH="$PATH":~/.asdf/shims
 PATH="$PATH":~/.asdf/installs/python/3.9.6/bin
 PATH="$PATH":~/.asdf/installs/nodejs/14.18.0/.npm/lib/node_modules
 export PATH
-
-[ "$(uname)" = "Darwin" ] && {
-  source /usr/local/opt/asdf/libexec/asdf.sh 
-  export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
-}
-
