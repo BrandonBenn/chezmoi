@@ -4,4 +4,4 @@
 
 [".local/share/zsh/zsh-tab-title.zsh"]
     type = "file"
-    url = "https://github.com/trystan2k/zsh-tab-title/blob/master/zsh-tab-title.plugin.zsh"
+    url = "https://raw.githubusercontent.com/trystan2k/zsh-tab-title/master/zsh-tab-title.plugin.zsh"

@@ -4,6 +4,9 @@ bindkey -e
 (( $+commands[starship] )) && eval "$(starship init zsh)"
 source ~/.zshrc.local || touch ~/.zshrc.local
 source ~/.local/share/zsh/zsh-autosuggestions.zsh
+
+ZSH_TAB_TITLE_DEFAULT_DISABLE_PREFIX=true
+ZSH_TAB_TITLE_CONCAT_FOLDER_PROCESS=true
 source ~/.local/share/zsh/zsh-tab-title.zsh
 {{ if eq .chezmoi.os "darwin" }}
 export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
