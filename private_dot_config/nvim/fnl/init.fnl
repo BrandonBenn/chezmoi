@@ -21,6 +21,8 @@
         :lukas-reineke/indent-blankline.nvim
         :nvim-telescope/telescope.nvim
         :tpope/vim-eunuch
+        :tpope/vim-dispatch
+        :TimUntersberger/neogit
         :windwp/nvim-autopairs
         :folke/zen-mode.nvim
         :ethanholz/nvim-lastplace
