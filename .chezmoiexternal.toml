@@ -1,3 +1,7 @@
 [".local/share/zsh/zsh-autosuggestions.zsh"]
     type = "file"
     url = "https://raw.githubusercontent.com/zsh-users/zsh-autosuggestions/master/zsh-autosuggestions.zsh"
+
+[".local/share/zsh/zsh-tab-title.zsh"]
+    type = "file"
+    url = "https://github.com/trystan2k/zsh-tab-title/blob/master/zsh-tab-title.plugin.zsh"
