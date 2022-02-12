@@ -9,7 +9,9 @@
         {1 :ms-jpq/coq.artifacts :branch :artifacts}
         {1 :ms-jpq/coq.thirdparty :branch :3p}
         {1 :ms-jpq/coq_nvim :branch :coq}
-        {1 :nvim-treesitter/nvim-treesitter :run (λ [] (vim.cmd :TSUpdate))}
+        {1 :nvim-treesitter/nvim-treesitter
+         :run (λ []
+                (vim.cmd :TSUpdate))}
         :mcchrish/nnn.vim
         :f-person/git-blame.nvim
         :github/copilot.vim
@@ -20,6 +22,7 @@
         :numToStr/Comment.nvim
         :lukas-reineke/indent-blankline.nvim
         :nvim-telescope/telescope.nvim
+        {1 :nvim-telescope/telescope-fzf-native.nvim :run :make}
         :tpope/vim-eunuch
         :tpope/vim-dispatch
         :TimUntersberger/neogit
@@ -46,7 +49,8 @@
 (let [lastplace (require :nvim-lastplace)]
   (lastplace.setup))
 
+(set vim.g.copilot_filetypes {:TelescopePrompt false})
+
 (set vim.g.nnn#layout {:window {:width 0.3 :height 0.5}})
 ;; Configurations that are not managed by version control
 (pcall #(require :local))
-
