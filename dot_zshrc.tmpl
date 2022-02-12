@@ -7,6 +7,7 @@ zstyle ':completion:*' menu select
 zstyle ':completion::complete:*' gain-privileges 1
 
 (( $+commands[starship] )) && eval "$(starship init zsh)"
+source $HOME/.asdf/asdf.sh
 source ~/.zshrc.local || touch ~/.zshrc.local
 source ~/.local/share/zsh/zsh-autosuggestions.zsh
 
