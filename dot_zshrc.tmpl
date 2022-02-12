@@ -3,6 +3,8 @@
 bindkey -e
 
 autoload -Uz compinit && compinit
+zstyle ':completion:*' menu select
+zstyle ':completion::complete:*' gain-privileges 1
 
 (( $+commands[starship] )) && eval "$(starship init zsh)"
 source ~/.zshrc.local || touch ~/.zshrc.local
