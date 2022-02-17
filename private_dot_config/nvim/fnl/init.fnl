@@ -20,11 +20,12 @@
         :norcalli/nvim-colorizer.lua
         :neovim/nvim-lspconfig
         :numToStr/Comment.nvim
+        :kchmck/vim-coffee-script
         :lukas-reineke/indent-blankline.nvim
         :nvim-telescope/telescope.nvim
         {1 :nvim-telescope/telescope-fzf-native.nvim :run :make}
         :tpope/vim-eunuch
-        :tpope/vim-dispatch
+        :skywind3000/asyncrun.vim
         :TimUntersberger/neogit
         :windwp/nvim-autopairs
         :folke/zen-mode.nvim

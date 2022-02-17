@@ -1,4 +1,4 @@
-(local {: set! : map! : colorscheme! : command : cnoreabbrev : for-each-pair}
+(local {: set! : map! : colorscheme! : command : autocmd : cnoreabbrev : for-each-pair}
        (require :core/utils))
 
 (colorscheme! :typograph)
@@ -47,6 +47,8 @@
                 [:n :g= ":Format<cr>"]]]
   (each [_ mapping (pairs mappings)]
     (map! (unpack mapping))))
+
+(autocmd :TermOpen "* setlocal nonumber norelativenumber")
 
 (command :Format :execute "'lua vim.lsp.buf.formatting()'")
 (let [gui (require :core/gui)]

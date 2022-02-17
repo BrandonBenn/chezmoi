@@ -18,6 +18,10 @@
   (let [command (.. (table.concat [...] " "))]
     (vim.cmd command)))
 
+(λ M.autocmd [...]
+  "Define a user command."
+  (M.wrapper :autocmd ...))
+
 (λ M.command [...]
   "Define a user command."
   (M.wrapper :command! ...))
@@ -40,6 +44,16 @@
   "Apply {proc} to each pair of {tbl}."
   (each [key value (pairs tbl)]
     (proc key value)))
+
+(fn M.augroup [definitions]
+  (each [group-name definition (pairs definitions)]
+    (vim.api.nvim_command (.. "augroup " group-name))
+    (vim.api.nvim_command :autocmd!)
+    (each [_ def (ipairs definition)]
+      (local command
+        (table.concat (vim.tbl_flatten {1 :autocmd 2 def}) " "))
+      (vim.api.nvim_command command))
+    (vim.api.nvim_command "augroup END")))
 
 M
 
