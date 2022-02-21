@@ -5,6 +5,7 @@ bindkey -e
 autoload -Uz compinit && compinit
 zstyle ':completion:*' menu select
 zstyle ':completion::complete:*' gain-privileges 1
+setopt interactivecomments
 
 if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
