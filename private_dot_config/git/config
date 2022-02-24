@@ -3,3 +3,5 @@
 	name  = Brandon Duval Benn
 [commit]
 	template = ~/.config/git/template
+[status]
+	short = true
