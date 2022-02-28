@@ -12,26 +12,27 @@
         {1 :nvim-treesitter/nvim-treesitter
          :run (λ []
                 (vim.cmd :TSUpdate))}
-        :mcchrish/nnn.vim
-        :f-person/git-blame.nvim
         :github/copilot.vim
         :jghauser/mkdir.nvim
         :jose-elias-alvarez/null-ls.nvim
         :norcalli/nvim-colorizer.lua
         :neovim/nvim-lspconfig
         :numToStr/Comment.nvim
-        :kchmck/vim-coffee-script
         :lukas-reineke/indent-blankline.nvim
         :nvim-telescope/telescope.nvim
         {1 :nvim-telescope/telescope-fzf-native.nvim :run :make}
+        :kyazdani42/nvim-web-devicons
+        :projekt0n/circles.nvim
         :tpope/vim-eunuch
+        :tpope/vim-vinegar
         :skywind3000/asyncrun.vim
         :TimUntersberger/neogit
         :windwp/nvim-autopairs
-        :folke/zen-mode.nvim
         :ethanholz/nvim-lastplace
         :janet-lang/janet.vim
+        :lewis6991/impatient.nvim
         :ziglang/zig.vim
+        :kchmck/vim-coffee-script
         ;; plugins used by others
         :nvim-lua/popup.nvim
         :nvim-lua/plenary.nvim
@@ -50,7 +51,11 @@
 (let [lastplace (require :nvim-lastplace)]
   (lastplace.setup))
 
+(require :impatient)
 (set vim.g.copilot_filetypes {:TelescopePrompt false})
+
+(let [circles (require :circles)]
+  (circles.setup {:lsp true}))
 
 (set vim.g.nnn#layout {:window {:width 0.3 :height 0.5}})
 ;; Configurations that are not managed by version control
