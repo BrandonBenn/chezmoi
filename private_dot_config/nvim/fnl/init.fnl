@@ -23,6 +23,7 @@
         {1 :nvim-telescope/telescope-fzf-native.nvim :run :make}
         :kyazdani42/nvim-web-devicons
         :projekt0n/circles.nvim
+        :projekt0n/github-nvim-theme
         :tpope/vim-eunuch
         :tpope/vim-vinegar
         :skywind3000/asyncrun.vim
