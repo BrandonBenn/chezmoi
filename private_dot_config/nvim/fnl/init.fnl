@@ -22,6 +22,7 @@
         :nvim-telescope/telescope.nvim
         {1 :nvim-telescope/telescope-fzf-native.nvim :run :make}
         :kyazdani42/nvim-web-devicons
+        :folke/zen-mode.nvim
         :projekt0n/circles.nvim
         :projekt0n/github-nvim-theme
         :tpope/vim-eunuch
@@ -53,7 +54,7 @@
   (lastplace.setup))
 
 (require :impatient)
-(set vim.g.copilot_filetypes {:TelescopePrompt false})
+(set vim.g.copilot_filetypes {:TelescopePrompt false :markdown true})
 
 (let [circles (require :circles)]
   (circles.setup {:lsp true}))
