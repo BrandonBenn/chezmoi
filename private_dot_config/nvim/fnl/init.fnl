@@ -14,6 +14,7 @@
                 (vim.cmd :TSUpdate))}
         :github/copilot.vim
         :jghauser/mkdir.nvim
+        :famiu/bufdelete.nvim
         :jose-elias-alvarez/null-ls.nvim
         :norcalli/nvim-colorizer.lua
         :neovim/nvim-lspconfig

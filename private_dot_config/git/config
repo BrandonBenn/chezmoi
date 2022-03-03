@@ -5,3 +5,6 @@
 	template = ~/.config/git/template
 [status]
 	short = true
+[log]
+	abbrevCommit = true
+	oneline = true

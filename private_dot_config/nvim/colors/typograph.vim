@@ -70,7 +70,6 @@ if ($TERM =~ '256' || &t_Co >= 256) || has("gui_running")
     hi ToolbarButton ctermbg=NONE ctermfg=NONE cterm=NONE guibg=NONE guifg=NONE gui=NONE
     hi debugPC ctermbg=NONE ctermfg=NONE cterm=NONE guibg=NONE guifg=NONE gui=NONE
     hi debugBreakpoint ctermbg=NONE ctermfg=NONE cterm=NONE guibg=NONE guifg=NONE gui=NONE
-
 elseif &t_Co == 8 || $TERM !~# '^linux' || &t_Co == 16
     set t_Co=16
 
@@ -145,6 +144,12 @@ hi link Number Constant
 hi link ErrorMsg Error
 hi link CursorIM Cursor
 hi link Terminal Normal
+
+hi def NeogitDiffAddHighlight guibg=NONE guifg=#859900
+hi def NeogitDiffDeleteHighlight guibg=NONE guifg=#dc322f
+hi def NeogitDiffContextHighlight guibg=NONE guifg=#b2b2b2
+hi def NeogitHunkHeader guifg=#cccccc guibg=#404040
+hi def NeogitHunkHeaderHighlight guifg=#cccccc guibg=#4d4d4d
 
 let g:terminal_ansi_colors = [
         \ '#000000',
