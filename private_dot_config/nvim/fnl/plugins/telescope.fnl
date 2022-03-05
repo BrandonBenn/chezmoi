@@ -28,3 +28,4 @@
 (map! :n :<A-h> ":Telescope oldfiles<cr>")
 (map! :n :<A-g> ":Telescope live_grep<cr>")
 (map! :n :<A-b> ":Telescope buffers<cr>")
+(map! :n :<A-r> ":Telescope resume<cr>")

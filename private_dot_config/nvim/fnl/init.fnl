@@ -22,9 +22,7 @@
         :lukas-reineke/indent-blankline.nvim
         :nvim-telescope/telescope.nvim
         {1 :nvim-telescope/telescope-fzf-native.nvim :run :make}
-        :kyazdani42/nvim-web-devicons
         :folke/zen-mode.nvim
-        :projekt0n/circles.nvim
         :projekt0n/github-nvim-theme
         :tpope/vim-eunuch
         :tpope/vim-vinegar
@@ -57,9 +55,5 @@
 (require :impatient)
 (set vim.g.copilot_filetypes {:TelescopePrompt false :markdown true})
 
-(let [circles (require :circles)]
-  (circles.setup {:lsp true}))
-
-(set vim.g.nnn#layout {:window {:width 0.3 :height 0.5}})
 ;; Configurations that are not managed by version control
 (pcall #(require :local))
