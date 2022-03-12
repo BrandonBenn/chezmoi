@@ -8,3 +8,5 @@
 [log]
 	abbrevCommit = true
 	oneline = true
+[format]
+	pretty = oneline

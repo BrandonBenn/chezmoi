@@ -18,19 +18,16 @@
         :jose-elias-alvarez/null-ls.nvim
         :norcalli/nvim-colorizer.lua
         :neovim/nvim-lspconfig
+        :akinsho/toggleterm.nvim
         :numToStr/Comment.nvim
         :lukas-reineke/indent-blankline.nvim
         :nvim-telescope/telescope.nvim
         {1 :nvim-telescope/telescope-fzf-native.nvim :run :make}
         :folke/zen-mode.nvim
-        :projekt0n/github-nvim-theme
         :tpope/vim-eunuch
         :tpope/vim-vinegar
-        :skywind3000/asyncrun.vim
-        :TimUntersberger/neogit
         :windwp/nvim-autopairs
         :ethanholz/nvim-lastplace
-        :janet-lang/janet.vim
         :lewis6991/impatient.nvim
         :ziglang/zig.vim
         :kchmck/vim-coffee-script
@@ -48,12 +45,14 @@
                    :plugins/telescope
                    :plugins/nvim-autopairs])
 
-(set! :gitblame_enabled 0)
 (let [lastplace (require :nvim-lastplace)]
   (lastplace.setup))
 
 (require :impatient)
 (set vim.g.copilot_filetypes {:TelescopePrompt false :markdown true})
+
+(let [toggleterm (require :toggleterm)]
+  (toggleterm.setup {:open_mapping "<c-\\>"}))
 
 ;; Configurations that are not managed by version control
 (pcall #(require :local))
