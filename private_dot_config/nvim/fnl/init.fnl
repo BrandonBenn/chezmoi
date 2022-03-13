@@ -18,7 +18,6 @@
         :jose-elias-alvarez/null-ls.nvim
         :norcalli/nvim-colorizer.lua
         :neovim/nvim-lspconfig
-        :akinsho/toggleterm.nvim
         :numToStr/Comment.nvim
         :lukas-reineke/indent-blankline.nvim
         :nvim-telescope/telescope.nvim
@@ -28,6 +27,7 @@
         :tpope/vim-vinegar
         :windwp/nvim-autopairs
         :ethanholz/nvim-lastplace
+        :alexghergh/nvim-tmux-navigation
         :lewis6991/impatient.nvim
         :ziglang/zig.vim
         :kchmck/vim-coffee-script
@@ -51,8 +51,14 @@
 (require :impatient)
 (set vim.g.copilot_filetypes {:TelescopePrompt false :markdown true})
 
-(let [toggleterm (require :toggleterm)]
-  (toggleterm.setup {:open_mapping "<c-\\>"}))
+(let [nvim-tmux-navigation (require :nvim-tmux-navigation)]
+  (nvim-tmux-navigation.setup {:disable_when_zoomed true
+                               :keybindings {:left :<C-h>
+                                             :down :<C-j>
+                                             :up :<C-k>
+                                             :right :<C-l>
+                                             :last_active "<C-\\>"
+                                             :next :<A-Space>}}))
 
 ;; Configurations that are not managed by version control
 (pcall #(require :local))
