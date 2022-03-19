@@ -70,6 +70,7 @@ if ($TERM =~ '256' || &t_Co >= 256) || has("gui_running")
     hi ToolbarButton ctermbg=NONE ctermfg=NONE cterm=NONE guibg=NONE guifg=NONE gui=NONE
     hi debugPC ctermbg=NONE ctermfg=NONE cterm=NONE guibg=NONE guifg=NONE gui=NONE
     hi debugBreakpoint ctermbg=NONE ctermfg=NONE cterm=NONE guibg=NONE guifg=NONE gui=NONE
+    hi WinSeparator guibg=NONE
 elseif &t_Co == 8 || $TERM !~# '^linux' || &t_Co == 16
     set t_Co=16
 
@@ -136,6 +137,7 @@ elseif &t_Co == 8 || $TERM !~# '^linux' || &t_Co == 16
     hi ToolbarButton ctermbg=NONE ctermfg=NONE cterm=NONE
     hi debugPC ctermbg=NONE ctermfg=NONE cterm=NONE
     hi debugBreakpoint ctermbg=NONE ctermfg=NONE cterm=NONE
+    hi WinSeparator ctermbg=NONE
 endif
 
 hi link EndOfBuffer NonText
