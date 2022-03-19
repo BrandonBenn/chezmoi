@@ -31,16 +31,18 @@
         ;; let paq manage itself
         :savq/paq-nvim]))
 
-(for-each require [:mkdir
-                   :impatient
-                   :core/defaults
-                   :plugins/comment
-                   :plugins/coq_nvim
-                   :plugins/lspconfig
-                   :plugins/toggleterm-nvim
-                   :plugins/null-ls
-                   :plugins/telescope
-                   :plugins/nvim-autopairs])
+(let [modules [:mkdir
+               :impatient
+               :core/defaults
+               :plugins/comment
+               :plugins/coq_nvim
+               :plugins/lspconfig
+               :plugins/toggleterm-nvim
+               :plugins/null-ls
+               :plugins/telescope
+               :plugins/nvim-autopairs]]
+  (each [_ module (pairs modules)]
+    (require module)))
 
 (let [lastplace (require :nvim-lastplace)]
   (lastplace.setup))

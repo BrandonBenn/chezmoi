@@ -6,4 +6,4 @@
 
 (let [terminal (. (require :toggleterm.terminal) :Terminal)
       gitui (terminal:new {:cmd :gitui :hidden true :direction :float})]
-  (vim.keymap.set :n :<leader>g #(gitui:toggle)))
+  (vim.keymap.set :n :<leader>gg #(gitui:toggle)))
