@@ -49,5 +49,4 @@
 
 (set vim.g.copilot_filetypes {:TelescopePrompt false :markdown true})
 
-;; Configurations that are not managed by version control
 (pcall #(require :local))

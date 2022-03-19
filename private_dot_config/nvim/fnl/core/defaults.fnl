@@ -34,7 +34,7 @@
                 :guifont "JetBrains Mono"
                 :completeopt "menuone,noselect,noinsert"})
 
-(let [options {:silent true}
+(let [options {:silent true :noremap true}
       mappings [[:v "<" :<gv]
                 [:v ">" :>gv]
                 [[:n :v] :Q :gq]
