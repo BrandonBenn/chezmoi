@@ -1,0 +1,23 @@
+#!/usr/bin/env zsh
+
+autoload -Uz compinit && compinit
+autoload -z edit-command-line
+
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
+bindkey -e
+
+zstyle ':completion:*' menu select
+zstyle ':completion::complete:*' gain-privileges 1
+setopt interactivecomments
+
+alias ls='ls -F --color=auto'
+alias ll='ls -lah'
+alias rm=trash
+
+ZSH_TAB_TITLE_DEFAULT_DISABLE_PREFIX=true
+ZSH_TAB_TITLE_CONCAT_FOLDER_PROCESS=true
+source $HOME/.asdf/asdf.sh
+source ~/.zshrc.local
+source ~/.local/share/zsh/zsh-autosuggestions.zsh
+source ~/.local/share/zsh/zsh-tab-title.zsh
