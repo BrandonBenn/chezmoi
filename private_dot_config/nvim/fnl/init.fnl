@@ -1,4 +1,3 @@
-(local {: set! : map! : for-each : colorscheme!} (require :core/utils))
 ;; Plugins managed by paq-nvim
 (let [paq (require :paq)]
   (paq [;; Manually run :COQdeps

@@ -1,62 +1,55 @@
-(local {: set!
-        : map!
-        : colorscheme!
-        : command
-        : autocmd
-        : cnoreabbrev
-        : for-each-pair} (require :core/utils))
-
-(colorscheme! :typograph)
-(for-each-pair set!
-               {:expandtab true
-                :exrc true
-                :hidden true
-                :laststatus 0
-                :mapleader " "
-                :number true
-                :relativenumber true
-                :scrolloff 999
-                :shiftwidth 4
-                :showmode false
-                :smartcase true
-                :smartindent true
-                :softtabstop 4
-                :spell true
-                :spelllang :en
-                :spelloptions :camel
-                :swapfile false
-                :tabstop 4
-                :termguicolors true
-                :title true
-                :udir :/tmp/nvim/undo
-                :undofile true
-                :wrap false
-                :guifont "JetBrains Mono"
-                :completeopt "menuone,noselect,noinsert"})
-
-(let [options {:silent true :noremap true}
-      mappings [[:v "<" :<gv]
-                [:v ">" :>gv]
-                [[:n :v] :Q :gq]
-                [:n :<leader>w ":update<cr>"]
-                [:n :<leader>p "\"+p"]
-                [:n :<leader>y "\"+y"]
-                [:v :<leader>y "\"+y"]
-                [:t :<esc> "<C-\\><C-n>"]
-                [:n :g= ":Format<cr>"]]]
-  (each [_ mapping (pairs mappings)]
-    (let [(mode lhs rhs) (unpack mapping)]
-      (vim.keymap.set mode lhs rhs options))))
-
-(autocmd :TermOpen "* setlocal nonumber norelativenumber")
-(command :Format :execute "'lua vim.lsp.buf.formatting()'")
-
-(let [gui (require :core/gui)]
-  (gui.setup {:fontsize 14})
-  (map! :n :<C-=> ":IncreaseFont<cr>")
-  (map! :n :<C--> ":DecreaseFont<cr>"))
-
-(when (= (vim.fn.executable :nvr) 1)
-  (let [editor-command "nvr -cc split --remote-wait"]
-    (vim.fn.setenv :EDITOR editor-command)
-    (vim.fn.setenv :GIT_EDITOR editor-command)))
+(let [colorscheme #(vim.cmd (.. :colorscheme " " $1))
+      cnoreabbrev #(vim.cmd (.. :cnoreabbrev " " $1 $2))
+      keymap vim.keymap.set]
+  (colorscheme :typograph)
+  (set vim.g.mapleader " ")
+  (set vim.o.expandtab true)
+  (set vim.o.exrc true)
+  (set vim.o.hidden true)
+  (set vim.o.laststatus 0)
+  (set vim.o.number true)
+  (set vim.o.relativenumber true)
+  (set vim.o.scrolloff 999)
+  (set vim.o.shiftwidth 4)
+  (set vim.o.showmode false)
+  (set vim.o.smartcase true)
+  (set vim.o.smartindent true)
+  (set vim.o.softtabstop 4)
+  (set vim.o.spell true)
+  (set vim.o.spelloptions :camel)
+  (set vim.o.swapfile false)
+  (set vim.o.tabstop 4)
+  (set vim.o.termguicolors true)
+  (set vim.o.title true)
+  (set vim.o.udir :/tmp/nvim/undo)
+  (set vim.o.undofile true)
+  (set vim.o.wildmode "longest,list")
+  (set vim.o.wildoptions :pum)
+  (set vim.o.wrap false)
+  (set vim.o.guifont "JetBrains Mono")
+  (set vim.o.completeopt "menuone,noselect,noinsert")
+  (let [options {:silent true :noremap true}
+        mappings [[:v "<" :<gv]
+                  [:v ">" :>gv]
+                  [[:n :v] :Q :gq]
+                  [[:n :v] ";" ":"]
+                  [[:n :v] :<leader>y "\"+y"]
+                  [:n :<leader>p "\"+p"]
+                  [:t :<esc> "<C-\\><C-n>"]
+                  [:n :g= #(vim.lsp.buf.formatting)]]]
+    (each [_ mapping (pairs mappings)]
+      (let [(mode lhs rhs) (unpack mapping)]
+        (keymap mode lhs rhs options))))
+  (vim.api.nvim_create_autocmd :TermOpen
+                               {:pattern "*"
+                                :callback #(do
+                                             (set vim.bo.relativenumber false)
+                                             (set vim.bo.number false))})
+  (let [gui (require :core/gui)]
+    (gui.setup {:fontsize 12})
+    (keymap :n :<C-=> #(gui.resize-font 2))
+    (keymap :n :<C--> #(gui.resize-font -2))
+    (when (= (vim.fn.executable :nvr) 1)
+      (let [editor-command "nvr -cc split --remote-wait"]
+        (vim.fn.setenv :EDITOR editor-command)
+        (vim.fn.setenv :GIT_EDITOR editor-command)))))
