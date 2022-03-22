@@ -1,4 +1,5 @@
-(let [keymap vim.keymap.set]
+(let [keymap vim.keymap.set
+      autocmd vim.api.nvim_create_autocmd]
   (local telescope (require :telescope))
   (local action-layout (require :telescope.actions.layout))
   (local default-picker {:theme :ivy :previewer false})
@@ -19,4 +20,16 @@
   (keymap :n :<A-h> #(builtin.oldfiles))
   (keymap :n :<A-g> #(builtin.live_grep))
   (keymap :n :<A-b> #(builtin.buffers))
-  (keymap :n :<A-r> #(builtin.resume)))
+  (keymap :n :<A-r> #(builtin.resume))
+  (autocmd :FileType
+           {:pattern :TelescopePrompt
+            :callback #(do
+                         (set vim.o.laststatus 0)
+                         (set vim.o.showmode false)
+                         (set vim.o.ruler false))})
+  (autocmd :BufLeave
+           {:pattern (vim.fn.expand :<buffer>)
+            :callback #(do
+                         (set vim.o.laststatus 3)
+                         (set vim.o.showmode true)
+                         (set vim.o.ruler true))}))
