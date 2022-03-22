@@ -23,11 +23,11 @@
   (set vim.o.title true)
   (set vim.o.udir :/tmp/nvim/undo)
   (set vim.o.undofile true)
-  (set vim.o.wildmode "longest,list")
   (set vim.o.wildoptions :pum)
   (set vim.o.wrap false)
   (set vim.o.guifont "JetBrains Mono")
-  (set vim.o.completeopt "menuone,noselect,noinsert")
+  (set vim.opt.completeopt {1 :menuone 2 :noselect 3 :noinsert})
+  (set vim.o.wildmode "longest,list")
   (let [options {:silent true :noremap true}
         mappings [[:v "<" :<gv]
                   [:v ">" :>gv]
@@ -40,6 +40,10 @@
     (each [_ mapping (pairs mappings)]
       (let [(mode lhs rhs) (unpack mapping)]
         (keymap mode lhs rhs options))))
+  (vim.api.nvim_create_autocmd :TermOpen
+                               {:callback #(do
+                                             (set vim.wo.relativenumber false)
+                                             (set vim.wo.number false))})
   (let [gui (require :core/gui)]
     (gui.setup {:fontsize 12})
     (keymap :n :<C-=> #(gui.resize-font 2))
