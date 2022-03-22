@@ -40,11 +40,6 @@
     (each [_ mapping (pairs mappings)]
       (let [(mode lhs rhs) (unpack mapping)]
         (keymap mode lhs rhs options))))
-  (vim.api.nvim_create_autocmd :TermOpen
-                               {:pattern "*"
-                                :callback #(do
-                                             (set vim.bo.relativenumber false)
-                                             (set vim.bo.number false))})
   (let [gui (require :core/gui)]
     (gui.setup {:fontsize 12})
     (keymap :n :<C-=> #(gui.resize-font 2))
