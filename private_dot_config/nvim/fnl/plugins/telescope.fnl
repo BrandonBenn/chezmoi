@@ -2,7 +2,7 @@
       autocmd vim.api.nvim_create_autocmd]
   (local telescope (require :telescope))
   (local action-layout (require :telescope.actions.layout))
-  (local default-picker {:theme :ivy :previewer false})
+  (local default-picker {:theme :dropdown :previewer false})
   (local builtin (require :telescope.builtin))
   (telescope.setup {:defaults {:mappings {:n {:<M-p> action-layout.toggle_preview}
                                           :i {:<M-p> action-layout.toggle_preview}}
@@ -13,23 +13,11 @@
                               :find_files default-picker
                               :git_files default-picker
                               :oldfiles default-picker
-                              :buffers {:theme :dropdown :previewer false}}})
+                              :buffers default-picker}})
   (telescope.load_extension :fzf)
   (keymap :n :<C-p> #(when (not (pcall builtin.git_files))
                        (builtin.find_files)))
   (keymap :n :<A-h> #(builtin.oldfiles))
   (keymap :n :<A-g> #(builtin.live_grep))
   (keymap :n :<A-b> #(builtin.buffers))
-  (keymap :n :<A-r> #(builtin.resume))
-  (autocmd :FileType
-           {:pattern :TelescopePrompt
-            :callback #(do
-                         (set vim.o.laststatus 0)
-                         (set vim.o.showmode false)
-                         (set vim.o.ruler false))})
-  (autocmd :BufLeave
-           {:pattern (vim.fn.expand :<buffer>)
-            :callback #(do
-                         (set vim.o.laststatus 3)
-                         (set vim.o.showmode true)
-                         (set vim.o.ruler true))}))
+  (keymap :n :<A-r> #(builtin.resume)))
