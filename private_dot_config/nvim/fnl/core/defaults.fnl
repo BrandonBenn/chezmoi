@@ -54,10 +54,9 @@
         (vim.fn.setenv :GIT_EDITOR editor-command)))))
 
 (let [stl ["%#PrimaryBlock#"
+           "%f %m"
            "%#SecondaryBlock#"
            "%#Blanks#"
-           "%f"
-           "%m"
            "%="
            "%#SecondaryBlock#"
            "%l:%c "
