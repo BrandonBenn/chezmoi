@@ -25,11 +25,9 @@
   (set o.title true)
   (set o.udir :/tmp/nvim/undo)
   (set o.undofile true)
-  (set o.wildoptions :pum)
   (set o.wrap false)
   (set o.guifont "JetBrains Mono")
   (set o.completeopt [:menuone :noselect :noinsert])
-  (set o.wildmode [:longest :list])
   (let [options {:silent true :noremap true}
         mappings [[:v "<" :<gv]
                   [:v ">" :>gv]

@@ -2,6 +2,7 @@
       nvim-lsp (require :lspconfig)
       flags {:debounce_text_changes 150}
       keymap #(vim.keymap.set $2 $3 $4 {:noremap true :silent true :buffer $1})
+      capabilities ((. (require :cmp_nvim_lsp) :update_capabilities) (vim.lsp.protocol.make_client_capabilities))
       on-attach (fn [client buf]
                   "Set the keymap and attach the client."
                   (set vim.bo.omnifunc "v:lua.vim.lsp.omnifunc")
@@ -26,4 +27,4 @@
                   (keymap buf :n :<leader>q #(vim.diagnostic.setloclist))
                   (keymap buf :n :<leader>f #(vim.lsp.buf.formatting)))]
   (each [_ lsp (ipairs servers)]
-    ((. (. nvim-lsp lsp) :setup) {:on_attach on-attach : flags})))
+    ((. (. nvim-lsp lsp) :setup) {:on_attach on-attach : flags : capabilities})))

@@ -1,10 +1,14 @@
 ;; Plugins managed by paq-nvim
 (let [paq (require :paq)]
   (paq [;; Manually run :COQdeps
-        {1 :ms-jpq/coq.artifacts :branch :artifacts}
-        {1 :ms-jpq/coq.thirdparty :branch :3p}
-        {1 :ms-jpq/coq_nvim :branch :coq}
         {1 :nvim-treesitter/nvim-treesitter :run #(vim.cmd :TSUpdate)}
+        :hrsh7th/cmp-nvim-lsp
+        :hrsh7th/cmp-cmdline
+        :hrsh7th/cmp-buffer
+        :hrsh7th/cmp-vsnip
+        :hrsh7th/vim-vsnip
+        :hrsh7th/nvim-cmp
+        :hrsh7th/cmp-path
         :github/copilot.vim
         :jghauser/mkdir.nvim
         :famiu/bufdelete.nvim
@@ -34,8 +38,8 @@
                :impatient
                :core/defaults
                :plugins/comment
-               :plugins/coq_nvim
                :plugins/lspconfig
+               :plugins/nvim-cmp
                :plugins/toggleterm-nvim
                :plugins/null-ls
                :plugins/telescope
