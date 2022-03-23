@@ -52,3 +52,16 @@
       (let [editor-command "nvr -cc split --remote-wait"]
         (vim.fn.setenv :EDITOR editor-command)
         (vim.fn.setenv :GIT_EDITOR editor-command)))))
+
+(let [stl ["%#PrimaryBlock#"
+           "%#SecondaryBlock#"
+           "%#Blanks#"
+           "%f"
+           "%m"
+           "%="
+           "%#SecondaryBlock#"
+           "%l:%c "
+           "%p%% "
+           "%#PrimaryBlock#"
+           "[%{&filetype}]"]]
+  (set vim.o.statusline (table.concat stl)))
