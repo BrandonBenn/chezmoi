@@ -53,14 +53,4 @@
         (vim.fn.setenv :EDITOR editor-command)
         (vim.fn.setenv :GIT_EDITOR editor-command)))))
 
-(let [stl ["%#PrimaryBlock#"
-           "%f %m"
-           "%#SecondaryBlock#"
-           "%#Blanks#"
-           "%="
-           "%#SecondaryBlock#"
-           "%l:%c "
-           "%p%% "
-           "%#PrimaryBlock#"
-           "[%{&filetype}]"]]
-  (set vim.o.statusline (table.concat stl)))
+(require :core/statusline)
