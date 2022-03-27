@@ -32,6 +32,5 @@
                                      "%#Normal#"
                                      "%="
                                      "%l:%c"
-                                     "%#Constant#"
-                                     " %{&filetype}"
-                                     " %#NonText#"]))
+                                     " %#NonText#"
+                                     " %{&filetype} "]))
