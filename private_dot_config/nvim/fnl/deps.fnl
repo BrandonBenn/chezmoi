@@ -1,7 +1,6 @@
 ;; Plugins managed by paq-nvim
 (let [paq (require :paq)]
-  (paq [;; Manually run :COQdeps
-        {1 :nvim-treesitter/nvim-treesitter :run #(vim.cmd :TSUpdate)}
+  (paq [{1 :nvim-treesitter/nvim-treesitter :run #(vim.cmd :TSUpdate)}
         :hrsh7th/cmp-nvim-lsp
         :hrsh7th/cmp-cmdline
         :hrsh7th/cmp-buffer
@@ -22,7 +21,8 @@
         :folke/zen-mode.nvim
         :akinsho/toggleterm.nvim
         :tpope/vim-eunuch
-        :tpope/vim-vinegar
+        :justinmk/vim-dirvish
+        :roginfarrer/vim-dirvish-dovish
         :windwp/nvim-autopairs
         :ethanholz/nvim-lastplace
         :lewis6991/impatient.nvim
@@ -33,4 +33,3 @@
         :nvim-lua/plenary.nvim
         ;; let paq manage itself
         :savq/paq-nvim]))
-

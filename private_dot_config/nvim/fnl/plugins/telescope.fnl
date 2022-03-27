@@ -20,4 +20,5 @@
   (keymap :n :<C-p> #(when (not (pcall builtin.git_files))
                        (builtin.find_files)))
   (keymap :n :<A-h> #(builtin.oldfiles))
-  (keymap :n :<A-r> #(builtin.resume)))
+  (keymap :n :<A-r> #(builtin.resume))
+  (keymap :n :<A-b> #(builtin.buffers)))
