@@ -5,7 +5,8 @@
       builtin (require :telescope.builtin)
       layout (require :telescope.actions.layout)
       default-picker {:theme :dropdown :previewer false}]
-  (telescope.setup {:defaults {:mappings {:n {:<M-p> layoutoggle_preview}
+  (telescope.setup {:defaults {:path_display [:truncate]
+                               :mappings {:n {:<M-p> layoutoggle_preview}
                                           :i {:<M-p> layoutoggle_preview
                                               :<c-d> actions.delete_buffer}}
                                :file_ignore_patterns [:node_modules]}

@@ -38,7 +38,7 @@ if ($TERM =~ '256' || &t_Co >= 256) || has("gui_running")
     hi VisualNOS ctermbg=NONE ctermfg=NONE cterm=NONE guibg=NONE guifg=NONE gui=NONE
     hi Pmenu ctermbg=NONE ctermfg=NONE cterm=NONE guibg=NONE guifg=NONE gui=NONE
     hi PmenuSbar ctermbg=NONE ctermfg=NONE cterm=NONE guibg=#666666 guifg=NONE gui=NONE
-    hi PmenuSel ctermbg=NONE ctermfg=NONE cterm=bold guibg=NONE guifg=NONE gui=bold
+    hi PmenuSel ctermbg=NONE ctermfg=NONE cterm=reverse,bold guibg=NONE guifg=darkcyan gui=reverse,bold
     hi PmenuThumb ctermbg=NONE ctermfg=NONE cterm=NONE guibg=NONE guifg=NONE gui=NONE
     hi FoldColumn ctermbg=NONE ctermfg=NONE cterm=NONE guibg=NONE guifg=NONE gui=NONE
     hi Folded ctermbg=NONE ctermfg=NONE cterm=NONE guibg=NONE guifg=NONE gui=NONE
@@ -105,7 +105,7 @@ elseif &t_Co == 8 || $TERM !~# '^linux' || &t_Co == 16
     hi VisualNOS ctermbg=NONE ctermfg=NONE cterm=NONE
     hi Pmenu ctermbg=NONE ctermfg=NONE cterm=NONE
     hi PmenuSbar ctermbg=NONE ctermfg=NONE cterm=NONE
-    hi PmenuSel ctermbg=NONE ctermfg=NONE cterm=bold
+    hi PmenuSel ctermbg=NONE ctermfg=darkcyan cterm=reverse,bold
     hi PmenuThumb ctermbg=NONE ctermfg=NONE cterm=NONE
     hi FoldColumn ctermbg=NONE ctermfg=NONE cterm=NONE
     hi Folded ctermbg=NONE ctermfg=NONE cterm=NONE
