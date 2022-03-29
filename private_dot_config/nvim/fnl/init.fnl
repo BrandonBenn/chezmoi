@@ -7,6 +7,7 @@
                :plugins/nvim-cmp
                :plugins/toggleterm-nvim
                :plugins/null-ls
+               :plugins/gitsigns
                :plugins/telescope
                :plugins/nvim-autopairs]]
   (each [_ module (pairs modules)]

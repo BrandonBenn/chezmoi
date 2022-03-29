@@ -9,6 +9,7 @@
         :hrsh7th/nvim-cmp
         :hrsh7th/cmp-path
         :github/copilot.vim
+        :lewis6991/gitsigns.nvim
         :jghauser/mkdir.nvim
         :famiu/bufdelete.nvim
         :jose-elias-alvarez/null-ls.nvim
