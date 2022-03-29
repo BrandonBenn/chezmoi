@@ -6,8 +6,8 @@
       layout (require :telescope.actions.layout)
       default-picker {:theme :dropdown :previewer false}]
   (telescope.setup {:defaults {:path_display [:truncate]
-                               :mappings {:n {:<M-p> layoutoggle_preview}
-                                          :i {:<M-p> layoutoggle_preview
+                               :mappings {:n {:<M-p> layout.toggle_preview}
+                                          :i {:<M-p> layout.toggle_preview
                                               :<c-d> actions.delete_buffer}}
                                :file_ignore_patterns [:node_modules]}
                     :extensions {:fzf {:fuzzy true}
@@ -22,4 +22,5 @@
                        (builtin.find_files)))
   (keymap :n :<A-h> #(builtin.oldfiles))
   (keymap :n :<A-r> #(builtin.resume))
+  (keymap :n :<A-g> #(builtin.live_grep))
   (keymap :n :<A-b> #(builtin.buffers)))
