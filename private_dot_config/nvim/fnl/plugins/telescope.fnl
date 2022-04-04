@@ -9,7 +9,8 @@
   (telescope.setup {:defaults (merge (themes.get_dropdown)
                                      {:preview {:hide_on_startup true}
                                       :path_display [:smart]
-                                      :mappings {:n {:<M-p> layout.toggle_preview}
+                                      :mappings {:n {:<M-p> layout.toggle_preview
+                                                     :d actions.delete_buffer}
                                                  :i {:<M-p> layout.toggle_preview
                                                      :<c-d> actions.delete_buffer}}
                                       :file_ignore_patterns [:node_modules]})
@@ -22,4 +23,5 @@
   (keymap :n :<A-r> #(builtin.resume))
   (keymap :n :<A-b> #(builtin.buffers))
   (keymap :n :<A-g>g #(builtin.live_grep))
+  (keymap :n "<A-g>:<A-g" #(builtin.live_grep))
   (keymap :n :<A-g>w #(builtin.grep_string)))

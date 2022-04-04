@@ -16,6 +16,10 @@
 (let [lastplace (require :nvim-lastplace)]
   (lastplace.setup))
 
+(vim.cmd "cnoreabbrev bd Bdelete")
+
+(vim.keymap.set :n :<LocalLeader>bdb ":Bdelete<cr>")
+
 (set vim.g.copilot_filetypes {:TelescopePrompt false :markdown true})
 
 (pcall #(require :local))

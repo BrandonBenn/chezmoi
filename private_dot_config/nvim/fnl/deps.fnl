@@ -1,4 +1,4 @@
-;; Plugins managed by paq-nvim
+;; ;; Plugins managed by paq-nvim
 (let [paq (require :paq)]
   (paq [{1 :nvim-treesitter/nvim-treesitter :run #(vim.cmd :TSUpdate)}
         :hrsh7th/cmp-nvim-lsp
@@ -33,4 +33,5 @@
         :nvim-lua/popup.nvim
         :nvim-lua/plenary.nvim
         ;; let paq manage itself
-        :savq/paq-nvim]))
+        :savq/paq-nvim
+        :rktjmp/hotpot.nvim]))
