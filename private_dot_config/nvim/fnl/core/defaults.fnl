@@ -52,5 +52,3 @@
       (let [editor-command "nvr -cc split --remote-wait"]
         (vim.fn.setenv :EDITOR editor-command)
         (vim.fn.setenv :GIT_EDITOR editor-command)))))
-
-(require :core/statusline)
