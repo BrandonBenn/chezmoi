@@ -8,7 +8,7 @@
   (set o.expandtab true)
   (set o.exrc true)
   (set o.hidden true)
-  (set o.laststatus 3)
+  (set o.laststatus 0)
   (set o.number true)
   (set o.relativenumber true)
   (set o.scrolloff 999)
