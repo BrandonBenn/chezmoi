@@ -10,6 +10,8 @@
         :hrsh7th/cmp-path
         :github/copilot.vim
         :lewis6991/gitsigns.nvim
+        :TimUntersberger/neogit
+        :sindrets/diffview.nvim
         :jghauser/mkdir.nvim
         :famiu/bufdelete.nvim
         :jose-elias-alvarez/null-ls.nvim
