@@ -23,5 +23,5 @@ source ~/.local/share/zsh/zsh-autosuggestions.zsh
 source ~/.local/share/zsh/zsh-tab-title.zsh
 
 if [ -n "${NVIM_LISTEN_ADDRESS+x}" ]; then
-  alias edit='nvr -o'
+  alias nvim='nvr -o'
 fi
