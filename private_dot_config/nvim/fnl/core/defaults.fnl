@@ -47,8 +47,4 @@
   (let [gui (require :core/gui)]
     (gui.setup {:fontsize 12})
     (keymap :n :<C-=> #(gui.resize-font 2))
-    (keymap :n :<C--> #(gui.resize-font -2))
-    (when (= (vim.fn.executable :nvr) 1)
-      (let [editor-command "nvr -cc split --remote-wait"]
-        (vim.fn.setenv :EDITOR editor-command)
-        (vim.fn.setenv :GIT_EDITOR editor-command)))))
+    (keymap :n :<C--> #(gui.resize-font -2))))
