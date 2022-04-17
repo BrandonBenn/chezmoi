@@ -22,3 +22,8 @@ PATH="$PATH":~/.asdf/shims
 PATH="$PATH":~/.asdf/installs/python/3.9.6/bin
 PATH="$PATH":~/.asdf/installs/nodejs/14.18.0/.npm/lib/node_modules
 export PATH
+
+if [ -n "${NVIM_LISTEN_ADDRESS+x}" ]; then
+    export EDITOR="nvr -o"
+    export VISUAL=$EDITOR
+fi
