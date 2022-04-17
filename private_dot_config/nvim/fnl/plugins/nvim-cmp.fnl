@@ -10,8 +10,4 @@
                         :<CR> (cmp.mapping.confirm {:select true})}
               :sources (cmp.config.sources [{:name :nvim_lsp} {:name :vsnip}]
                                            [{:name :buffer
-                                             :option {:get_bufnrs #(vim.api.nvim_list_bufs)}}])})
-  (cmp.setup.cmdline "/" {:sources [{:name :buffer}]})
-  (cmp.setup.cmdline ":"
-                     {:sources (cmp.config.sources [{:name :path}]
-                                                   [{:name :cmdline}])}))
+                                             :option {:get_bufnrs #(vim.api.nvim_list_bufs)}}])}))
