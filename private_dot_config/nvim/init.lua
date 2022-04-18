@@ -19,8 +19,8 @@ local function ensure(repo, path)
 	vim.cmd(fmt("packadd %s", plugin))
 end
 
-ensure("rktjmp/hotpot.nvim", "hotpot")
-ensure("bakpakin/fennel.vim", "fennel")
+ensure("rktjmp/hotpot.nvim")
+ensure("bakpakin/fennel.vim")
 ensure("savq/paq-nvim.git")
 
 require "hotpot"
