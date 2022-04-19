@@ -6,8 +6,8 @@
       themes (require :telescope.themes)
       layout (require :telescope.actions.layout)
       merge #(vim.tbl_deep_extend :force $1 $2)]
-  (telescope.setup {:defaults (merge (themes.get_dropdown)
-                                     {:preview {:hide_on_startup true}
+  (telescope.setup {:defaults (merge (themes.get_ivy)
+                                     {:preview {:hide_on_startup false}
                                       :path_display [:smart]
                                       :mappings {:n {:<M-p> layout.toggle_preview
                                                      :d actions.delete_buffer}
