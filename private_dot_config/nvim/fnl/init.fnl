@@ -8,6 +8,7 @@
                :plugins/toggleterm-nvim
                :plugins/null-ls
                :plugins/git
+               :plugins/nvim-treesitter
                :plugins/telescope
                :plugins/nvim-autopairs]]
   (each [_ module (pairs modules)]

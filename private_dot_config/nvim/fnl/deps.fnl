@@ -1,6 +1,6 @@
 ;; ;; Plugins managed by paq-nvim
 (let [paq (require :paq)]
-  (paq [{1 :nvim-treesitter/nvim-treesitter :run #(vim.cmd :TSUpdate)}
+  (paq [:nvim-treesitter/nvim-treesitter
         :hrsh7th/cmp-nvim-lsp
         :hrsh7th/cmp-buffer
         :hrsh7th/cmp-vsnip
