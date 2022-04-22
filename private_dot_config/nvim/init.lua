@@ -1,27 +1,19 @@
 local function ensure(repo, path)
 	assert(repo)
 	local path = path or "paqs"
-	local fn = vim.fn
-	local author  = fn.split(repo, "/")[1]
-	local plugin = fn.split(repo, "/")[2]
-	local fmt = string.format
-	local install_path = fn.stdpath('data') .. fmt('/site/pack/%s/start/%s', path, plugin)
-	if fn.empty(fn.glob(install_path)) > 0 then
-		fn.system({
-		'git', 
-		'clone',
-		'--depth',
-		'1',
-		fmt('https://github.com/%s/%s', author, plugin),
+	local author, plugin = vim.fn.split(repo, "/")[1], vim.fn.split(repo, "/")[2]
+	local install_path = vim.fn.stdpath('data') .. string.format('/site/pack/%s/start/%s', path, plugin)
+	if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+		vim.fn.system({ 'git', 'clone', '--depth', '1',
+		string.format('https://github.com/%s/%s', author, plugin),
 		install_path
 	})
 	end
-	vim.cmd(fmt("packadd %s", plugin))
+	vim.cmd(string.format("packadd %s", plugin))
 end
 
-ensure("rktjmp/hotpot.nvim")
-ensure("bakpakin/fennel.vim")
 ensure("savq/paq-nvim.git")
-
-require "hotpot"
-require "init"
+dofile(vim.fn.expand("~/.config/nvim/deps.lua"))
+for _, module in pairs(vim.split(vim.fn.glob('~/.config/nvim/modules/*.lua'), '\n')) do
+  pcall(dofile, module)
+end
