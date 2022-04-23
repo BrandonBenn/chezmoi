@@ -29,7 +29,7 @@ vim.keymap.set("v", ">", ">gv", { remap = true })
 vim.keymap.set({ "v", "n" }, ";", ":", { remap = true })
 vim.keymap.set({ "v", "n" }, ":<leader>y", '"+y')
 vim.keymap.set({ "v", "n" }, ":<leader>p", '"+p')
-vim.keymap.set("t", "<esc>", [[C-\\><C-n>]], {silent = true, remap = true})
+vim.keymap.set("t", "<esc>", [[C-\\><C-n>]], { silent = true, remap = true })
 vim.keymap.set("n", "g=", vim.lsp.buf.formatting, { silent = true })
 
 require("Comment").setup()
