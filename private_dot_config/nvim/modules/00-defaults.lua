@@ -1,4 +1,4 @@
-vim.cmd('colorscheme typograph')
+vim.cmd("colorscheme typograph")
 vim.g.mapleader = " "
 vim.opt.expandtab = true
 vim.opt.exrc = true
@@ -22,15 +22,15 @@ vim.opt.udir = "/tmp/nvim/undo"
 vim.opt.undofile = true
 vim.opt.wrap = false
 vim.opt.guifont = "JetBrains Mono"
-vim.opt.completeopt = {"menuone", "noselect", "noinsert"}
+vim.opt.completeopt = { "menuone", "noselect", "noinsert" }
 
-vim.keymap.set('v', '<', '<gv', {noremap = true})
-vim.keymap.set('v', '>', '>gv', {noremap = true})
-vim.keymap.set({'v', 'n' }, ';', ':', {noremap = true})
-vim.keymap.set({'v', 'n' }, ':<leader>y', '"+y')
-vim.keymap.set({'v', 'n' }, ':<leader>p', '\"+p')
-vim.keymap.set('t', '<esc>', 'C-\\><C-n>')
-vim.keymap.set('n', 'g=', vim.lsp.buf.formatting, {silent = true})
+vim.keymap.set("v", "<", "<gv", { remap = true })
+vim.keymap.set("v", ">", ">gv", { remap = true })
+vim.keymap.set({ "v", "n" }, ";", ":", { remap = true })
+vim.keymap.set({ "v", "n" }, ":<leader>y", '"+y')
+vim.keymap.set({ "v", "n" }, ":<leader>p", '"+p')
+vim.keymap.set("t", "<esc>", [[C-\\><C-n>]], {silent = true, remap = true})
+vim.keymap.set("n", "g=", vim.lsp.buf.formatting, { silent = true })
 
-require('Comment').setup()
-require('impatient').setup()
+require("Comment").setup()
+require("impatient").enable_profile()
