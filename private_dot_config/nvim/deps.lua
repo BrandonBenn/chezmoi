@@ -19,8 +19,6 @@ require("paq")({
 	"nvim-telescope/telescope.nvim",
 	{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
 	"tpope/vim-eunuch",
-	"tpope/vim-dadbod",
-	"kristijanhusak/vim-dadbod-ui", -- set vim.g.dbs in local config
 	"justinmk/vim-dirvish",
 	"roginfarrer/vim-dirvish-dovish",
 	"windwp/nvim-autopairs",
