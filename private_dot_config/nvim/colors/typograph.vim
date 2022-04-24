@@ -140,6 +140,29 @@ elseif &t_Co == 8 || $TERM !~# '^linux' || &t_Co == 16
     hi WinSeparator ctermbg=NONE
 endif
 
+highlight CopilotSuggestion guifg=#555555 ctermfg=8
+
+highlight NotifyERRORBorder guifg=#8A1F1F
+highlight NotifyWARNBorder guifg=#79491D
+highlight NotifyINFOBorder guifg=#4F6752
+highlight NotifyDEBUGBorder guifg=#8B8B8B
+highlight NotifyTRACEBorder guifg=#4F3552
+highlight NotifyERRORIcon guifg=#dc322f
+highlight NotifyWARNIcon guifg=#F79000
+highlight NotifyINFOIcon guifg=#A9FF68
+highlight NotifyDEBUGIcon guifg=#8B8B8B
+highlight NotifyTRACEIcon guifg=#D484FF
+highlight NotifyERRORTitle guifg=8
+highlight NotifyWARNTitle guifg=8
+highlight NotifyINFOTitle guifg=8
+highlight NotifyDEBUGTitle guifg=8
+highlight NotifyTRACETitle guifg=8
+highlight link NotifyERRORBody Normal
+highlight link NotifyWARNBody Normal
+highlight link NotifyINFOBody Normal
+highlight link NotifyDEBUGBody Normal
+highlight link NotifyTRACEBody Normal
+
 hi link EndOfBuffer NonText
 hi link String Normal
 hi link Number Constant
@@ -152,7 +175,6 @@ hi def NeogitDiffDeleteHighlight guibg=NONE guifg=#dc322f
 hi def NeogitDiffContextHighlight guibg=NONE guifg=#b2b2b2
 hi def NeogitHunkHeader guifg=#cccccc guibg=#404040
 hi def NeogitHunkHeaderHighlight guifg=#cccccc guibg=#4d4d4d
-highlight CopilotSuggestion guifg=#555555 ctermfg=8
 
 let g:terminal_ansi_colors = [
         \ '#000000',

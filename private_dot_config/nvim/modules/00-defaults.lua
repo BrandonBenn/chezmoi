@@ -21,7 +21,6 @@ vim.opt.title = true
 vim.opt.udir = "/tmp/nvim/undo"
 vim.opt.undofile = true
 vim.opt.wrap = false
-vim.opt.guifont = "JetBrains Mono"
 vim.opt.completeopt = { "menuone", "noselect", "noinsert" }
 
 vim.keymap.set("v", "<", "<gv", { remap = true })
@@ -32,6 +31,17 @@ vim.keymap.set({ "v", "n" }, ":<leader>p", '"+p')
 vim.keymap.set("t", "<esc>", "C-\\><C-n>", { silent = true, remap = true })
 vim.keymap.set("n", "g=", vim.lsp.buf.formatting, { silent = true })
 
+-- restore cursor's last position upon reopening the file
+-- reload config file on change
+vim.api.nvim_create_autocmd("BufWritePost", {
+	pattern = { vim.fn.expand("~/.config/nvim/") .. "**/*.lua" },
+	command = "silent source %",
+})
+
+vim.api.nvim_create_autocmd('FocusLost', { pattern = '*', command = 'silent! wa' })
+
+vim.notify = require("notify")
+vim.notify.setup({stages = "static"})
 require("Comment").setup()
 require("impatient").enable_profile()
 require("notes").setup()

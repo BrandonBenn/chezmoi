@@ -1,4 +1,4 @@
-local ensure = function(repo, path)
+local bootstrap = function(repo, path)
 	assert(repo)
 	local path = path or "paqs"
 	local author, plugin = vim.fn.split(repo, "/")[1], vim.fn.split(repo, "/")[2]
@@ -16,7 +16,7 @@ local ensure = function(repo, path)
 	vim.cmd(string.format("packadd %s", plugin))
 end
 
-ensure("savq/paq-nvim.git")
+bootstrap("savq/paq-nvim.git")
 dofile(vim.fn.expand("~/.config/nvim/deps.lua"))
 for _, module in pairs(vim.split(vim.fn.glob("~/.config/nvim/modules/*.lua"), "\n")) do
 	dofile(module)
