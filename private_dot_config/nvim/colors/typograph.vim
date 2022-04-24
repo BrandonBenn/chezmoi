@@ -152,6 +152,7 @@ hi def NeogitDiffDeleteHighlight guibg=NONE guifg=#dc322f
 hi def NeogitDiffContextHighlight guibg=NONE guifg=#b2b2b2
 hi def NeogitHunkHeader guifg=#cccccc guibg=#404040
 hi def NeogitHunkHeaderHighlight guifg=#cccccc guibg=#4d4d4d
+highlight CopilotSuggestion guifg=#555555 ctermfg=8
 
 let g:terminal_ansi_colors = [
         \ '#000000',

@@ -15,10 +15,12 @@ require("paq")({
 	"lukas-reineke/indent-blankline.nvim",
 	"ms-jpq/coq.artifacts",
 	"ms-jpq/coq.thirdparty",
-	{ "ms-jpq/coq_nvim", run = function() require("coq").deps() end },
+    { "ms-jpq/coq_nvim", run = function() require("coq").deps() end, },
 	"nvim-telescope/telescope.nvim",
 	{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
 	"tpope/vim-eunuch",
+	"tpope/vim-dadbod",
+	"kristijanhusak/vim-dadbod-ui", -- set vim.g.dbs in local config
 	"justinmk/vim-dirvish",
 	"roginfarrer/vim-dirvish-dovish",
 	"windwp/nvim-autopairs",
