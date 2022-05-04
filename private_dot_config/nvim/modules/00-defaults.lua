@@ -26,10 +26,12 @@ vim.opt.completeopt = { "menuone", "noselect", "noinsert" }
 vim.keymap.set("v", "<", "<gv", { remap = true })
 vim.keymap.set("v", ">", ">gv", { remap = true })
 vim.keymap.set({ "v", "n" }, ";", ":", { remap = true })
-vim.keymap.set({ "v", "n" }, ":<leader>y", '"+y')
-vim.keymap.set({ "v", "n" }, ":<leader>p", '"+p')
+vim.keymap.set({ "v" }, ":<leader>y", [["+y]])
+vim.keymap.set({ "v" }, ":<leader>p", [["+p]])
 vim.keymap.set("t", "<esc>", "C-\\><C-n>", { silent = true, remap = true })
-vim.keymap.set("n", "g=", vim.lsp.buf.formatting, { silent = true })
+vim.keymap.set("n", "g=", function()
+	vim.lsp.buf.format({ async = true })
+end, { silent = true })
 
 -- restore cursor's last position upon reopening the file
 -- reload config file on change
@@ -38,10 +40,8 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 	command = "silent source %",
 })
 
-vim.api.nvim_create_autocmd('FocusLost', { pattern = '*', command = 'silent! wa' })
+vim.api.nvim_create_autocmd("FocusLost", { pattern = "*", command = "silent! wa" })
 
-vim.notify = require("notify")
-vim.notify.setup({stages = "static"})
 require("Comment").setup()
 require("impatient").enable_profile()
-require("notes").setup({notes_dir = vim.fn.expand(vim.env.NOTES_DIR)})
+require("notes").setup({ notes_dir = vim.fn.expand(vim.env.NOTES_DIR) })

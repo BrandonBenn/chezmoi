@@ -28,7 +28,6 @@ require("paq")({
 	"roginfarrer/vim-dirvish-dovish",
 	"windwp/nvim-autopairs",
 	"lewis6991/impatient.nvim",
-	"rcarriga/nvim-notify",
 	"kchmck/vim-coffee-script",
 	"nvim-lua/popup.nvim",
 	"nvim-lua/plenary.nvim",
