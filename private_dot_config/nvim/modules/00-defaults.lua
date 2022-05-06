@@ -26,9 +26,7 @@ vim.opt.completeopt = { "menuone", "noselect", "noinsert" }
 vim.keymap.set("v", "<", "<gv", { remap = true })
 vim.keymap.set("v", ">", ">gv", { remap = true })
 vim.keymap.set({ "v", "n" }, ";", ":", { remap = true })
-vim.keymap.set({ "v" }, ":<leader>y", [["+y]])
-vim.keymap.set({ "v" }, ":<leader>p", [["+p]])
-vim.keymap.set("t", "<esc>", "C-\\><C-n>", { silent = true, remap = true })
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { silent = true, remap = true })
 vim.keymap.set("n", "g=", function()
 	vim.lsp.buf.format({ async = true })
 end, { silent = true })
@@ -40,8 +38,19 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 	command = "silent source %",
 })
 
+-- on terminal open, disable line numbers
+vim.api.nvim_create_autocmd("TermOpen", {
+    pattern = "*",
+    command = "set nonumber norelativenumber",
+})
+
 vim.api.nvim_create_autocmd("FocusLost", { pattern = "*", command = "silent! wa" })
 
 require("Comment").setup()
 require("impatient").enable_profile()
 require("notes").setup({ notes_dir = vim.fn.expand(vim.env.NOTES_DIR) })
+
+vim.g.copilot_filetypes = {
+    ["*"] = true,
+    ["TelescopePrompt"] = false,
+}
