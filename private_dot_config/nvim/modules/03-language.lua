@@ -43,7 +43,7 @@ null_ls.setup({
 })
 
 treesitter.setup({
-	ensure_installed = { "ruby", "lua", "vue", "zig" },
+	ensure_installed = { "ruby", "lua", "vue", "zig", "javascript", "elixir" },
 	sync_install = true,
 	highlight = {
 		enable = true,

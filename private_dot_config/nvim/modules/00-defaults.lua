@@ -41,7 +41,10 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 -- on terminal open, disable line numbers
 vim.api.nvim_create_autocmd("TermOpen", {
     pattern = "*",
-    command = "set nonumber norelativenumber",
+    callback = function()
+        vim.wo.number = false
+        vim.wo.relativenumber = false
+    end
 })
 
 vim.api.nvim_create_autocmd("FocusLost", { pattern = "*", command = "silent! wa" })

@@ -1,8 +1,6 @@
 require("paq")({
 	"famiu/bufdelete.nvim",
 	"lewis6991/gitsigns.nvim",
-	"TimUntersberger/neogit",
-	"sindrets/diffview.nvim",
 	"jghauser/mkdir.nvim",
 	"famiu/bufdelete.nvim",
 	"akinsho/toggleterm.nvim",
