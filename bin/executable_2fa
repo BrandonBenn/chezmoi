@@ -1,0 +1,135 @@
+#!/usr/bin/env ruby
+
+require 'bundler/inline'
+gemfile do
+  source 'https://rubygems.org'
+  gem 'base32'
+  gem 'terminal-table'
+end
+
+require 'fileutils'
+require 'yaml'
+require 'openssl'
+
+class TwoFAError < StandardError; end
+
+class Integer
+  def to_bytes(int = self, padding = 8)
+    raise ArgumentError, '#to_bytes requires a positive number' unless int.positive?
+
+    result = []
+    until int.zero?
+      result << (int & 0xFF).chr
+      int >>= 8
+    end
+
+    result.reverse.join.rjust(padding, 0.chr)
+  end
+end
+
+def counter(time, t_zero, t_x)
+  c_t = (time - t_zero) / t_x
+  c_t.floor
+end
+
+def hmac(secret, time, digest: 'sha1')
+  OpenSSL::HMAC.digest(digest, secret, time.to_bytes)
+end
+
+def hotp(key, time, digits: 6)
+  hmac = hmac(Base32.decode(key.upcase), time)
+  offset = hmac[-1].ord & 0xf
+  code =
+    (hmac[offset].ord & 0x7f) << 24 |
+    (hmac[offset + 1].ord & 0xff) << 16 |
+    (hmac[offset + 2].ord & 0xff) << 8 |
+    (hmac[offset + 3].ord & 0xff)
+
+  (code % 10.pow(digits)).to_s.rjust(digits, '0')
+end
+
+def totp(key, time: Time.now, t_zero: 0, t_x: 30)
+  hotp(key, counter(time.to_i, t_zero, t_x))
+end
+
+def keychain_dir
+  "#{ENV['XDG_CACHE_HOME'] || File.expand_path('~/.cache')}/2fa/"
+end
+
+def keychain_file
+  "#{keychain_dir}/keychain.yml"
+end
+
+def keychain
+  @keychain ||= YAML.load_file(keychain_file) || []
+end
+
+def list_tokens
+  raise TwoFAError, 'No entries in keychain' unless keychain&.any?
+
+  puts Terminal::Table.new(
+    title: 'Verification Codes',
+    headings: keychain.first.keys,
+    rows: keychain.map { |k| [totp(k['code']), k['name'], k['description']] }
+  )
+end
+
+def add_token_prompt
+  print 'name: '
+  name = $stdin.gets.chomp
+  raise TwoFAError, 'Name cannot be empty' if name.strip.empty?
+  raise TwoFAError, 'Token already exists' if keychain.any? { |entry| entry['name'] == name }
+
+  print '2FA key: '
+  key = $stdin.gets.chomp
+  raise TwoFAError, 'Key cannot be empty' if key.strip.empty?
+  raise TwoFAError, 'Token already exists' if keychain.any? { |entry| entry['code'] == key }
+
+  print 'description: '
+  description = $stdin.gets.chomp
+
+  [name, key, description]
+end
+
+def persist_data!(data)
+  File.truncate keychain_file, 0
+  File.write keychain_file, data.to_yaml
+end
+
+def add_token
+  name, key, description = add_token_prompt
+  keychain << { 'code' => key, 'name' => name, 'description' => description }
+  persist_data! keychain
+end
+
+def remove_token(name)
+  raise TwoFAError, "Token doesn't exist" unless keychain.any? { |entry| entry['name'] == name }
+
+  persist_data!(keychain.reject { |entry| entry['name'] == name })
+end
+
+begin
+  FileUtils.mkdir_p keychain_dir
+  FileUtils.touch keychain_file
+
+  case ARGV[0]
+  when 'l' || 'list'
+    list_tokens
+  when 'a' || 'add'
+    puts '2FA token setup'
+    add_token
+  when 'd' || 'delete'
+    raise TwoFAError, 'Missing name argument' unless ARGV[1]
+
+    remove_token ARGV[1]
+  end
+rescue TwoFAError => e
+  puts e.message
+  exit
+rescue StandardError
+  exit 1
+end
+
+# seed = "GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ"
+# result = totp(seed, time: Time.at(1_111_111_111))
+# puts result, result == "050471"
