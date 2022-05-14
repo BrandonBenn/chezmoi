@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'bundler/inline'
+
 gemfile do
   source 'https://rubygems.org'
   gem 'base32'
@@ -12,6 +13,9 @@ require 'yaml'
 require 'openssl'
 
 class TwoFAError < StandardError; end
+
+KEYCHAIN_DIR = "#{ENV['XDG_CACHE_HOME'] || File.expand_path('~/.cache')}/2fa/".freeze
+KEYCHAIN_FILE = "#{KEYCHAIN_DIR}/keychain.yml".freeze
 
 class Integer
   def to_bytes(int = self, padding = 8)
@@ -53,11 +57,11 @@ def totp(key, time: Time.now, t_zero: 0, t_x: 30)
 end
 
 def keychain_dir
-  "#{ENV['XDG_CACHE_HOME'] || File.expand_path('~/.cache')}/2fa/"
+  KEYCHAIN_DIR
 end
 
 def keychain_file
-  "#{keychain_dir}/keychain.yml"
+  KEYCHAIN_FILE
 end
 
 def keychain
@@ -113,12 +117,12 @@ begin
   FileUtils.touch keychain_file
 
   case ARGV[0]
-  when 'l' || 'list'
+  when /^l/
     list_tokens
-  when 'a' || 'add'
+  when /^a/
     puts '2FA token setup'
     add_token
-  when 'd' || 'delete'
+  when /^d/
     raise TwoFAError, 'Missing name argument' unless ARGV[1]
 
     remove_token ARGV[1]
