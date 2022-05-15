@@ -35,6 +35,7 @@ null_ls.setup({
 	end,
 	sources = {
 		null_ls.builtins.completion.spell,
+		null_ls.builtins.diagnostics.credo,
 		null_ls.builtins.diagnostics.eslint_d,
 		null_ls.builtins.diagnostics.proselint,
 		null_ls.builtins.diagnostics.rubocop,
@@ -46,6 +47,7 @@ null_ls.setup({
 		null_ls.builtins.formatting.shfmt,
 		null_ls.builtins.formatting.stylua,
 		null_ls.builtins.formatting.trim_whitespace,
+        null_ls.builtins.formatting.mix,
 	},
 })
 

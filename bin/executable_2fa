@@ -1,13 +1,12 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
-require 'bundler/inline'
+raise 'Ruby version ~> 3.0 required ' unless RUBY_VERSION >= '3.0'
 
-gemfile do
-  source 'https://rubygems.org'
-  gem 'base32'
-  gem 'terminal-table'
-end
-
+require 'rubygems'
+require 'bundler/setup'
+require 'terminal-table'
+require 'base32'
 require 'fileutils'
 require 'yaml'
 require 'openssl'
@@ -17,6 +16,9 @@ class TwoFAError < StandardError; end
 KEYCHAIN_DIR = "#{ENV['XDG_CACHE_HOME'] || File.expand_path('~/.cache')}/2fa/".freeze
 KEYCHAIN_FILE = "#{KEYCHAIN_DIR}/keychain.yml".freeze
 
+Account = Struct.new(:name, :issuer, :key)
+
+# Converts integet into bytes
 class Integer
   def to_bytes(int = self, padding = 8)
     raise ArgumentError, '#to_bytes requires a positive number' unless int.positive?
@@ -40,15 +42,19 @@ def hmac(secret, time, digest: 'sha1')
   OpenSSL::HMAC.digest(digest, secret, time.to_bytes)
 end
 
-def hotp(key, time, digits: 6)
-  hmac = hmac(Base32.decode(key.upcase), time)
-  offset = hmac[-1].ord & 0xf
-  code =
-    (hmac[offset].ord & 0x7f) << 24 |
-    (hmac[offset + 1].ord & 0xff) << 16 |
-    (hmac[offset + 2].ord & 0xff) << 8 |
-    (hmac[offset + 3].ord & 0xff)
+# rubocop:disable Metrics/AbcSize
+def hotp_value(mac, offset)
+  (mac[offset].ord & 0x7f)       << 24 |
+    (mac[offset + 1].ord & 0xff) << 16 |
+    (mac[offset + 2].ord & 0xff) << 8  |
+    (mac[offset + 3].ord & 0xff)
+end
+# rubocop:enable Metrics/AbcSize
 
+def hotp(key, time, digits: 6)
+  mac = hmac(Base32.decode(key.upcase), time)
+  offset = mac[-1].ord & 0xf
+  code = hotp_value mac, offset
   (code % 10.pow(digits)).to_s.rjust(digits, '0')
 end
 
@@ -56,43 +62,32 @@ def totp(key, time: Time.now, t_zero: 0, t_x: 30)
   hotp(key, counter(time.to_i, t_zero, t_x))
 end
 
-def keychain_dir
-  KEYCHAIN_DIR
-end
+def keychain_dir = KEYCHAIN_DIR
 
-def keychain_file
-  KEYCHAIN_FILE
-end
+def keychain_file = KEYCHAIN_FILE
 
 def keychain
-  @keychain ||= YAML.load_file(keychain_file) || []
+  @keychain ||= YAML.load_file(keychain_file, permitted_classes: [Account, Symbol]) || []
 end
 
 def list_tokens
   raise TwoFAError, 'No entries in keychain' unless keychain&.any?
 
-  puts Terminal::Table.new(
-    title: 'Verification Codes',
-    headings: keychain.first.keys,
-    rows: keychain.map { |k| [totp(k['code']), k['name'], k['description']] }
+  $stdout.puts Terminal::Table.new(
+    title: 'OTP tokens',
+    headings: %w[# code name issuer],
+    rows: keychain.map.with_index { |k, i| [i + 1, totp(k.key), k.name, k.issuer] }
   )
 end
 
 def add_token_prompt
-  print 'name: '
-  name = $stdin.gets.chomp
-  raise TwoFAError, 'Name cannot be empty' if name.strip.empty?
-  raise TwoFAError, 'Token already exists' if keychain.any? { |entry| entry['name'] == name }
+  account = Account.new
+  %w[name issuer key].each do |entry|
+    print "#{entry}: "
+    account.send("#{entry}=", $stdin.gets.chomp)
+  end
 
-  print '2FA key: '
-  key = $stdin.gets.chomp
-  raise TwoFAError, 'Key cannot be empty' if key.strip.empty?
-  raise TwoFAError, 'Token already exists' if keychain.any? { |entry| entry['code'] == key }
-
-  print 'description: '
-  description = $stdin.gets.chomp
-
-  [name, key, description]
+  account
 end
 
 def persist_data!(data)
@@ -101,38 +96,37 @@ def persist_data!(data)
 end
 
 def add_token
-  name, key, description = add_token_prompt
-  keychain << { 'code' => key, 'name' => name, 'description' => description }
+  account = add_token_prompt
+  if keychain.any? { |entry| entry.name == account.name || entry.key == account.key }
+    raise TwoFAError, 'Account already exists'
+  end
+
+  keychain << account
   persist_data! keychain
 end
 
-def remove_token(name)
-  raise TwoFAError, "Token doesn't exist" unless keychain.any? { |entry| entry['name'] == name }
-
-  persist_data!(keychain.reject { |entry| entry['name'] == name })
+def remove_token(idx)
+  persist_data!(keychain.reject.with_index { |_key, i| i + 1 == idx.to_i })
 end
 
-begin
+def ensure_file!
   FileUtils.mkdir_p keychain_dir
   FileUtils.touch keychain_file
+end
 
-  case ARGV[0]
-  when /^l/
-    list_tokens
-  when /^a/
-    puts '2FA token setup'
-    add_token
-  when /^d/
-    raise TwoFAError, 'Missing name argument' unless ARGV[1]
-
-    remove_token ARGV[1]
+def main
+  ensure_file!
+  case ARGV.first
+  when /^l/ then list_tokens
+  when /^a/ then add_token
+  when /^d/ then remove_token ARGV[1]
   end
-rescue TwoFAError => e
-  puts e.message
-  exit
-rescue StandardError
+rescue StandardError => e
+  warn e.message
   exit 1
 end
+
+main
 
 # seed = "GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ"
 # result = totp(seed, time: Time.at(1_111_111_111))
