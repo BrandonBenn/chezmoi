@@ -43,6 +43,7 @@ def hmac(secret, time, digest: 'sha1')
 end
 
 # rubocop:disable Metrics/AbcSize
+# https://datatracker.ietf.org/doc/html/rfc4226#section-5.4
 def hotp_value(mac, offset)
   (mac[offset].ord & 0x7f)       << 24 |
     (mac[offset + 1].ord & 0xff) << 16 |
@@ -115,7 +116,7 @@ def ensure_file!
 end
 
 def main
-  ensure_file!
+  ensure_file! unless File.exist? keychain_file
   case ARGV.first
   when /^l/ then list_tokens
   when /^a/ then add_token
