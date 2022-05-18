@@ -1,20 +1,23 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-raise 'Ruby version ~> 3.0 required ' unless RUBY_VERSION >= '3.0'
+raise 'Ruby version ~> 2.6 required ' unless RUBY_VERSION >= '2.6'
 
-require 'rubygems'
-require 'bundler/setup'
-require 'terminal-table'
-require 'base32'
+require 'bundler/inline'
+gemfile do
+  source 'https://rubygems.org'
+  gem 'terminal-table'
+  gem 'base32'
+end
+
 require 'fileutils'
 require 'yaml'
 require 'openssl'
 
-class TwoFAError < StandardError; end
-
 KEYCHAIN_DIR = "#{ENV['XDG_CACHE_HOME'] || File.expand_path('~/.cache')}/2fa/".freeze
 KEYCHAIN_FILE = "#{KEYCHAIN_DIR}/keychain.yml".freeze
+
+class TwoFAError < StandardError; end
 
 Account = Struct.new(:name, :issuer, :key)
 
@@ -63,12 +66,20 @@ def totp(key, time: Time.now, t_zero: 0, t_x: 30)
   hotp(key, counter(time.to_i, t_zero, t_x))
 end
 
-def keychain_dir = KEYCHAIN_DIR
+def keychain_dir 
+  KEYCHAIN_DIR
+end
 
-def keychain_file = KEYCHAIN_FILE
+def keychain_file
+  KEYCHAIN_FILE
+end
 
 def keychain
-  @keychain ||= YAML.load_file(keychain_file, permitted_classes: [Account, Symbol]) || []
+  if RUBY_VERSION >= '3.1'
+    @keychain ||= YAML.load_file(keychain_file, permitted_classes: [Account, Symbol]) || []
+  else
+    @keychain ||= YAML.load_file(keychain_file) || []
+  end
 end
 
 def list_tokens
