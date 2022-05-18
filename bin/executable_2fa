@@ -132,6 +132,7 @@ def main
   when /^l/ then list_tokens
   when /^a/ then add_token
   when /^d/ then remove_token ARGV[1]
+  else list_tokens
   end
 rescue StandardError => e
   warn e.message
