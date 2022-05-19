@@ -122,16 +122,20 @@ def remove_token(idx)
 end
 
 def ensure_file!
+  return unless File.exist? keychain_file
+
   FileUtils.mkdir_p keychain_dir
   FileUtils.touch keychain_file
+  true
 end
 
 def main
-  ensure_file! unless File.exist? keychain_file
+  ensure_file!
   case ARGV.first
   when /^l/ then list_tokens
   when /^a/ then add_token
   when /^d/ then remove_token ARGV[1]
+  when /^g/ then puts totp ARGV[1]
   else list_tokens
   end
 rescue StandardError => e
