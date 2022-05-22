@@ -1,10 +1,8 @@
 README.md
-# Excluded from Macos
 {{- if (eq .chezmoi.os "darwin") }}
 .config/fcitx5/*
 {{- end }}
 
-# Excluded from Linux
 {{- if (eq .chezmoi.os "linux") }}
 .hammerspoon/*/**
 {{- end }}
