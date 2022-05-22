@@ -1,4 +1,5 @@
 README.md
+Brewfile.lock.json
 {{- if (eq .chezmoi.os "darwin") }}
 .config/fcitx5/*
 {{- end }}
