@@ -7,7 +7,13 @@ local actions = require("telescope.actions")
 local builtin = require("telescope.builtin")
 
 require("telescope").setup({
-	defaults = { preview = false },
+	defaults = {
+		preview = { hide_on_startup = true },
+		mappings = {
+			i = { ["<M-p>"] = layout.toggle_preview },
+			n = { ["<M-p>"] = layout.toggle_preview },
+		},
+	},
 	pickers = {
 		find_files = {
 			theme = "dropdown",
@@ -24,10 +30,6 @@ require("telescope").setup({
 			override_generic_sorter = true,
 			case_mode = "smart_case",
 		},
-	},
-	mappings = {
-		i = { ["<M-p>"] = layout.toggle_preview },
-		n = { ["p"] = layout.toggle_preview },
 	},
 })
 
