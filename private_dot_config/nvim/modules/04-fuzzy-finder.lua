@@ -4,31 +4,27 @@ local merge = vim.tbl_deep_extend
 local layout = require("telescope.actions.layout")
 local themes = require("telescope.themes")
 local actions = require("telescope.actions")
+local builtin = require("telescope.builtin")
+
 require("telescope").setup({
 	defaults = merge("force", themes.get_dropdown(), {
 		preview = { hide_on_startup = true },
-		layout_config = {
-			height = function(_, _, rows)
-				return math.min(rows, 15)
-			end,
-			width = function(_, cols, _)
-				return math.min(cols, 60)
-			end,
-		},
-		path_display = { "smart" },
 		extensions = {
-			fzf = { fuzzy = true },
-			override_file_sorter = true,
-			override_generic_sorter = true,
+			fzf = {
+				fuzzy = true,
+				override_file_sorter = true,
+				override_generic_sorter = true,
+				case_mode = "smart_case",
+			},
 		},
 		mappings = {
 			n = {
 				["<M-p>"] = layout.toggle_preview,
-				["d"] = pcall(actions.delete_buffer),
+				["d"] = actions.delete_buffer,
 			},
 			i = {
 				["<M-p>"] = layout.toggle_preview,
-				["<C-d>"] = pcall(actions.delete_buffer),
+				["<C-d>"] = actions.delete_buffer,
 			},
 		},
 	}),
@@ -36,16 +32,8 @@ require("telescope").setup({
 
 require("telescope").load_extension("fzf")
 
-local builtin = require("telescope.builtin")
-
-local finder = function()
-	if not pcall(builtin.git_files) then
-		builtin.find_files()
-	end
-end
-
-keymap("n", "<C-p>", finder, { silent = true })
-keymap("n", "<leader>ff", finder, { silent = true })
+keymap("n", "<C-p>", builtin.fd, { silent = true })
+keymap("n", "<leader>ff", builtin.fd, { silent = true })
 keymap("n", "<leader>fo", builtin.oldfiles, { silent = true })
 keymap("n", "<leader>fr", builtin.resume, { silent = true })
 keymap("n", "<leader>fb", builtin.buffers, { silent = true })

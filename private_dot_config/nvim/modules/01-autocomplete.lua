@@ -43,8 +43,8 @@ cmp.setup.cmdline("/", {
 cmp.setup.cmdline(":", {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
-		{ name = "path", option = { keyword_length = 4 } },
+		{ name = "path" },
 	}, {
-		{ name = "cmdline" },
+		{ name = "cmdline", option = { keyword_length = 4 } },
 	}),
 })

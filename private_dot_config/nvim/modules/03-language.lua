@@ -4,6 +4,7 @@ local lspconfig = require("lspconfig")
 local null_ls = require("null-ls")
 local treesitter = require("nvim-treesitter.configs")
 
+local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local map = vim.keymap.set
 local flags = { debounce_text_changes = 150 }
 local on_attach = function(client, buffer)
@@ -26,7 +27,7 @@ local on_attach = function(client, buffer)
 end
 
 for _, server in pairs(servers) do
-	lspconfig[server].setup({ on_attach = on_attach, flags = flags })
+	lspconfig[server].setup({ on_attach = on_attach, flags = flags, capabilities = capabilities })
 end
 
 null_ls.setup({
@@ -47,7 +48,7 @@ null_ls.setup({
 		null_ls.builtins.formatting.shfmt,
 		null_ls.builtins.formatting.stylua,
 		null_ls.builtins.formatting.trim_whitespace,
-        null_ls.builtins.formatting.mix,
+		null_ls.builtins.formatting.mix,
 	},
 })
 
