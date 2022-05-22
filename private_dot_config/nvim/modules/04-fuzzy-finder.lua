@@ -7,39 +7,35 @@ local actions = require("telescope.actions")
 local builtin = require("telescope.builtin")
 
 require("telescope").setup({
-	defaults = merge("force", themes.get_dropdown(), {
-		preview = { hide_on_startup = true },
-		extensions = {
-			fzf = {
-				fuzzy = true,
-				override_file_sorter = true,
-				override_generic_sorter = true,
-				case_mode = "smart_case",
-			},
+	defaults = { preview = false },
+	pickers = {
+		find_files = {
+			theme = "dropdown",
+			find_command = { "fd", "--type", "f", "--strip-cwd-prefix" },
 		},
-		mappings = {
-			n = {
-				["<M-p>"] = layout.toggle_preview,
-				["d"] = actions.delete_buffer,
-			},
-			i = {
-				["<M-p>"] = layout.toggle_preview,
-				["<C-d>"] = actions.delete_buffer,
-			},
+		oldfiles = { theme = "dropdown", only_cwd = true },
+		live_grep = { theme = "ivy" },
+		grep_string = { theme = "ivy" },
+	},
+	extensions = {
+		fzf = {
+			fuzzy = true,
+			override_file_sorter = true,
+			override_generic_sorter = true,
+			case_mode = "smart_case",
 		},
-	}),
+	},
+	mappings = {
+		i = { ["<M-p>"] = layout.toggle_preview },
+		n = { ["p"] = layout.toggle_preview },
+	},
 })
 
 require("telescope").load_extension("fzf")
 
-keymap("n", "<C-p>", builtin.fd, { silent = true })
-keymap("n", "<leader>ff", builtin.fd, { silent = true })
-keymap("n", "<leader>fo", builtin.oldfiles, { silent = true })
-keymap("n", "<leader>fr", builtin.resume, { silent = true })
-keymap("n", "<leader>fb", builtin.buffers, { silent = true })
-keymap("n", "<leader>fg", function()
-	builtin.live_grep(themes.get_ivy({}))
-end, { silent = true })
-keymap("n", "<leader>fw", function()
-	builtin.grep_string(themes.get_ivy({}))
-end, { silent = true })
+keymap("n", "<C-p>p", builtin.find_files, { silent = true })
+keymap("n", "<C-p><C-p>", builtin.find_files, { silent = true })
+keymap("n", "<C-p>o", builtin.oldfiles, { silent = true })
+keymap("n", "<C-p>r", builtin.resume, { silent = true })
+keymap("n", "<C-p>g", builtin.live_grep, { silent = true })
+keymap("n", "<C-p>w", builtin.grep_string, { silent = true })

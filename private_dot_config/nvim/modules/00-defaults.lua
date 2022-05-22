@@ -41,11 +41,11 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 
 -- on terminal open, disable line numbers
 vim.api.nvim_create_autocmd("TermOpen", {
-    pattern = "*",
-    callback = function()
-        vim.wo.number = false
-        vim.wo.relativenumber = false
-    end
+	pattern = "*",
+	callback = function()
+		vim.wo.number = false
+		vim.wo.relativenumber = false
+	end,
 })
 
 vim.api.nvim_create_autocmd("FocusLost", { pattern = "*", command = "silent! wa" })
@@ -55,6 +55,6 @@ require("impatient").enable_profile()
 require("notes").setup({ notes_dir = vim.fn.expand(vim.env.NOTES_DIR) })
 
 vim.g.copilot_filetypes = {
-    ["*"] = true,
-    ["TelescopePrompt"] = false,
+	["*"] = true,
+	["TelescopePrompt"] = false,
 }
