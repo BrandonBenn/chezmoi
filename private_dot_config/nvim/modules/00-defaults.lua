@@ -1,5 +1,6 @@
 vim.cmd("colorscheme typograph")
 vim.g.mapleader = " "
+vim.g.netrw_banner = 0
 vim.opt.expandtab = true
 vim.opt.exrc = true
 vim.opt.hidden = true
