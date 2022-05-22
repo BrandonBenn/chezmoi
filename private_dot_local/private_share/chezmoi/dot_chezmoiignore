@@ -1,7 +1,10 @@
 README.md
-{{- if (eq .chezmoi.os "darwin") }}
 # Excluded from Macos
-~/.config/fcitx5/*
-{{- else if (eq .chezmoi.os "linux") }}
+{{- if (eq .chezmoi.os "darwin") }}
+.config/fcitx5/*
+{{- end }}
+
 # Excluded from Linux
+{{- if (eq .chezmoi.os "linux") }}
+.hammerspoon/*/**
 {{- end }}
