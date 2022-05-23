@@ -1,10 +1,10 @@
 README.md
 Brewfile.lock.json
 {{- if (eq .chezmoi.os "darwin") }}
-.config/fcitx5/*
+.config/fcitx5
 {{- end }}
 
 {{- if (eq .chezmoi.os "linux") }}
 Brewfile
-.hammerspoon/*/**
+.hammerspoon
 {{- end }}
