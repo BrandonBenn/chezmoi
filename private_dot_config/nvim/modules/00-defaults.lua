@@ -50,8 +50,19 @@ vim.api.nvim_create_autocmd("TermOpen", {
 
 vim.api.nvim_create_autocmd("FocusLost", { pattern = "*", command = "silent! wa" })
 
+local readline = require("readline")
+vim.keymap.set("!", "<M-f>", readline.forward_word)
+vim.keymap.set("!", "<M-b>", readline.backward_word)
+vim.keymap.set("!", "<C-a>", readline.beginning_of_line)
+vim.keymap.set("!", "<C-e>", readline.end_of_line)
+vim.keymap.set("!", "<M-d>", readline.kill_word)
+vim.keymap.set("!", "<C-w>", readline.backward_kill_word)
+vim.keymap.set("!", "<C-k>", readline.kill_line)
+vim.keymap.set("!", "<C-u>", readline.backward_kill_line)
+
 require("Comment").setup()
 require("impatient").enable_profile()
+require("nvim-autopairs").setup({})
 require("notes").setup({ notes_dir = vim.fn.expand(vim.env.NOTES_DIR) })
 
 vim.g.copilot_filetypes = {

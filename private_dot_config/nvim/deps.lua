@@ -22,6 +22,7 @@ require("paq")({
 	{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
 	"tpope/vim-eunuch",
     "tpope/vim-vinegar",
+    "linty-org/readline.nvim",
 	"windwp/nvim-autopairs",
 	"lewis6991/impatient.nvim",
 	"kchmck/vim-coffee-script",
