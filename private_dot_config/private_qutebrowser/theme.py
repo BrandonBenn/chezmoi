@@ -45,8 +45,8 @@ def load(c):
     c.colors.downloads.stop.fg = base00
     c.colors.downloads.stop.bg = base0C
     c.colors.downloads.error.fg = base08
-    c.colors.hints.fg = base00
-    c.colors.hints.bg = base0A
+    c.colors.hints.fg = base07
+    c.colors.hints.bg = base00
     c.colors.hints.match.fg = base05
     c.colors.keyhint.fg = base05
     c.colors.keyhint.suffix.fg = base05
