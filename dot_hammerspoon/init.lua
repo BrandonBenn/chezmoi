@@ -36,6 +36,7 @@ hs.hotkey.bind("alt-shift", "tab", function()
 	switcher:previous()
 end)
 
+require("bluetooth_sleep").init()
 require("commandq").init()
 require("clipboard").init({ enable_hotkey = true })
 require("caffeine").init()
