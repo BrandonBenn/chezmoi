@@ -26,5 +26,5 @@ export PATH
 
 if [ -n "${NVIM_LISTEN_ADDRESS+x}" ]; then
     export EDITOR="nvr -o"
-    export VISUAL="$EDITOR"
+    export VISUAL=$EDITOR
 fi

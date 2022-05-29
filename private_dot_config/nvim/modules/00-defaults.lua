@@ -22,6 +22,9 @@ vim.opt.title = true
 vim.opt.udir = "/tmp/nvim/undo"
 vim.opt.undofile = true
 vim.opt.wrap = false
+vim.opt.wildmenu = true
+vim.opt.wildmode = { "longest", "full" }
+vim.opt.wildchar = ("\t"):byte()
 vim.opt.completeopt = { "menuone", "noselect", "noinsert" }
 
 vim.keymap.set("v", "<", "<gv", { remap = true })

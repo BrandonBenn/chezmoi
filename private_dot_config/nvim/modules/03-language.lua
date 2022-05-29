@@ -1,4 +1,4 @@
-local servers = { "solargraph", "zls", "clangd" }
+local servers = { "solargraph", "zls", "clangd", "gopls" }
 
 local lspconfig = require("lspconfig")
 local null_ls = require("null-ls")
@@ -53,7 +53,7 @@ null_ls.setup({
 })
 
 treesitter.setup({
-	ensure_installed = { "ruby", "lua", "vue", "zig", "javascript", "elixir" },
+	ensure_installed = { "ruby", "lua", "vue", "zig", "javascript", "elixir", "go" },
 	sync_install = true,
 	highlight = {
 		enable = true,
