@@ -1,5 +1,6 @@
 import theme
 
+theme.load(c)
 c.hints.uppercase = True
 c.content.autoplay = False
 c.fonts.default_family = ["FreeSans", "SF Pro"]
@@ -9,13 +10,13 @@ c.content.blocking.adblock.lists = [ "https://hblock.molinero.dev/hosts_domains.
 c.statusbar.show = "in-mode"
 
 c.url.searchengines = {
-    "DEFAULT": "https://searx.be/?q={}",
-    "g": "https://www.google.com/search?q={}",
+    "DEFAULT": "https://www.google.com/search?q={}",
 }
 
+config.bind('j', 'run-with-count 6 scroll down')
+config.bind('k', 'run-with-count 6 scroll up')
 config.bind('K', 'tab-next')
 config.bind('J', 'tab-prev')
 config.bind('m', 'spawn mpv {url}')
 config.bind('M', 'hint links spawn --detach mpv {hint-url}')
 config.load_autoconfig(True)
-theme.load(c)

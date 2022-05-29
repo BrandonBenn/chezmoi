@@ -66,7 +66,7 @@ def totp(key, time: Time.now, t_zero: 0, t_x: 30)
   hotp(key, counter(time.to_i, t_zero, t_x))
 end
 
-def keychain_dir 
+def keychain_dir
   KEYCHAIN_DIR
 end
 
@@ -75,11 +75,12 @@ def keychain_file
 end
 
 def keychain
-  if RUBY_VERSION >= '3.1'
-    @keychain ||= YAML.load_file(keychain_file, permitted_classes: [Account, Symbol]) || []
-  else
-    @keychain ||= YAML.load_file(keychain_file) || []
-  end
+  @keychain ||=
+    if RUBY_VERSION >= '3.1'
+      YAML.load_file(keychain_file, permitted_classes: [Account, Symbol]) || []
+    else
+      YAML.load_file(keychain_file) || []
+    end
 end
 
 def list_tokens
@@ -95,8 +96,12 @@ end
 def add_token_prompt
   account = Account.new
   %w[name issuer key].each do |entry|
-    print "#{entry}: "
-    account.send("#{entry}=", $stdin.gets.chomp)
+    if ENV[entry] || ENV[entry.upcase]
+      account.send("#{entry.downcase}=", ENV[entry] || ENV[entry.upcase])
+    else
+      print "#{entry}: "
+      account.send("#{entry}=", $stdin.gets.chomp)
+    end
   end
 
   account
