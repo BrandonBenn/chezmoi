@@ -15,6 +15,7 @@ require("paq")({
 	"hrsh7th/cmp-path",
 	"hrsh7th/nvim-cmp",
 	"lukas-reineke/cmp-rg",
+    "s1n7ax/nvim-terminal",
 	"nvim-telescope/telescope.nvim",
 	"nvim-telescope/telescope-ui-select.nvim",
 	{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
