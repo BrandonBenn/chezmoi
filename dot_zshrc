@@ -11,6 +11,7 @@ zstyle ':completion:*' menu select
 zstyle ':completion::complete:*' gain-privileges 1
 setopt interactivecomments
 
+PS1='➜ '
 alias ls='ls -F --color=auto'
 alias ll='ls -lah'
 alias rm=trash
@@ -56,5 +57,4 @@ n() {
     fi
 }
 
-# if nnn binary exists in path, alias ls to nnn
 [ -x "$(command -v nnn)" ] && alias ls='n'
