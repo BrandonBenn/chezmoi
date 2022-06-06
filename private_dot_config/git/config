@@ -14,7 +14,10 @@
     prompt = true
 [diff]
     tool = nvimdiff
+	colorMoved = zebra
 [difftool "nvimdiff"]
     cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [pull]
-	rebase = true
+	rebase = false
+[fetch]
+	prune = true
