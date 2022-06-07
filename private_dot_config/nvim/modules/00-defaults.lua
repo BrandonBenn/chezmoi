@@ -42,16 +42,15 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 	command = "silent source %",
 })
 
--- on terminal open, disable line numbers
-vim.api.nvim_create_autocmd("TermOpen", {
-	pattern = "*",
+vim.api.nvim_create_autocmd("FocusLost", { pattern = "*", command = "silent! wa" })
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = { "*.txt", "*.md", "*.tex" },
 	callback = function()
-		vim.wo.number = false
-		vim.wo.relativenumber = false
+		require("zen-mode").setup()
+		require("zen-mode").toggle()
 	end,
 })
-
-vim.api.nvim_create_autocmd("FocusLost", { pattern = "*", command = "silent! wa" })
 
 local readline = require("readline")
 vim.keymap.set("!", "<M-f>", readline.forward_word)
