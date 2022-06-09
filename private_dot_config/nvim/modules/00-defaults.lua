@@ -36,21 +36,14 @@ vim.keymap.set("n", "g=", function()
 end, { silent = true })
 
 -- restore cursor's last position upon reopening the file
+vim.api.nvim_create_autocmd("FocusLost", { pattern = "*", command = "silent! wa" })
+
 -- reload config file on change
 vim.api.nvim_create_autocmd("BufWritePost", {
 	pattern = { vim.fn.expand("~/.config/nvim/") .. "**/*.lua" },
 	command = "silent source %",
 })
 
-vim.api.nvim_create_autocmd("FocusLost", { pattern = "*", command = "silent! wa" })
-
-vim.api.nvim_create_autocmd("BufEnter", {
-	pattern = { "*.txt", "*.md", "*.tex" },
-	callback = function()
-		require("zen-mode").setup()
-		require("zen-mode").toggle()
-	end,
-})
 
 local readline = require("readline")
 vim.keymap.set("!", "<M-f>", readline.forward_word)

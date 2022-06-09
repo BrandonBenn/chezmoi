@@ -31,9 +31,6 @@ for _, server in pairs(servers) do
 end
 
 null_ls.setup({
-	should_attach = function(buffer)
-		return not vim.api.nvim_buf_get_name(buffer):match("^git://")
-	end,
 	sources = {
 		null_ls.builtins.completion.spell,
 		null_ls.builtins.diagnostics.credo,
@@ -41,7 +38,6 @@ null_ls.setup({
 		null_ls.builtins.diagnostics.proselint,
 		null_ls.builtins.diagnostics.rubocop,
 		null_ls.builtins.diagnostics.shellcheck,
-		null_ls.builtins.formatting.erb_lint,
 		null_ls.builtins.formatting.eslint_d,
 		null_ls.builtins.formatting.prettier.with({ "html", "json", "markdown" }),
 		null_ls.builtins.formatting.rubocop,
@@ -59,7 +55,5 @@ treesitter.setup({
 		enable = true,
 		additional_vim_regex_highlighting = false,
 	},
-	indent = {
-		enable = true,
-	},
+	indent = { enable = true },
 })
