@@ -56,5 +56,3 @@ n() {
             rm -f "$NNN_TMPFILE" > /dev/null
     fi
 }
-
-[ -x "$(command -v nnn)" ] && alias ls='n'
