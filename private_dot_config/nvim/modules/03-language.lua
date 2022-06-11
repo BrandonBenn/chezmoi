@@ -36,20 +36,31 @@ null_ls.setup({
 		null_ls.builtins.diagnostics.credo,
 		null_ls.builtins.diagnostics.eslint_d,
 		null_ls.builtins.diagnostics.proselint,
-		null_ls.builtins.diagnostics.rubocop,
 		null_ls.builtins.diagnostics.shellcheck,
-		null_ls.builtins.formatting.eslint_d,
-		null_ls.builtins.formatting.prettier.with({ "html", "json", "markdown" }),
-		null_ls.builtins.formatting.rubocop,
 		null_ls.builtins.formatting.shfmt,
 		null_ls.builtins.formatting.stylua,
+		null_ls.builtins.formatting.erb_lint,
 		null_ls.builtins.formatting.trim_whitespace,
 		null_ls.builtins.formatting.mix,
+		null_ls.builtins.formatting.prettier.with({
+			"json",
+			"markdown",
+			"css",
+			"html",
+		}),
 	},
 })
 
 treesitter.setup({
-	ensure_installed = { "ruby", "lua", "vue", "zig", "javascript", "elixir", "go" },
+	ensure_installed = {
+		"elixir",
+		"go",
+		"javascript",
+		"lua",
+		"ruby",
+		"vue",
+		"zig",
+	},
 	sync_install = true,
 	highlight = {
 		enable = true,

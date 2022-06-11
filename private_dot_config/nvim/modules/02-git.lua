@@ -2,10 +2,15 @@ local gitsigns = require("gitsigns")
 
 gitsigns.setup()
 
-vim.keymap.set("n", "<leader>gb", gitsigns.toggle_current_line_blame, { silent = true })
+vim.keymap.set("n", "<leader>gg", gitsigns.blame_line, { silent = true })
 
-if vim.env.WEZTERM_PANE == "0" then
-	vim.keymap.set("n", "<leader>gg", function()
-		vim.fn.system("wezterm cli spawn --cwd " .. vim.fn.getcwd() .. " -- gitui")
-	end, { silent = true })
-end
+vim.api.nvim_create_user_command("Gitui", function()
+	local terminal = require("toggleterm.terminal").Terminal
+	terminal
+		:new({
+			cmd = "gitui",
+			hidden = true,
+			direction = "float",
+		})
+		:toggle()
+end, { desc = "Toggle gitui" })
