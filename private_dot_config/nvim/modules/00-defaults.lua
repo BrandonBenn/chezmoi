@@ -1,3 +1,4 @@
+-- Set Default Options
 vim.cmd("colorscheme typograph")
 vim.g.mapleader = " "
 vim.g.netrw_banner = 0
@@ -26,41 +27,50 @@ vim.opt.wildmenu = true
 vim.opt.wildmode = { "longest", "full" }
 vim.opt.wildchar = ("\t"):byte()
 vim.opt.completeopt = { "menuone", "noselect", "noinsert" }
+local keymap = vim.keymap.set
+local autocmd = vim.api.nvim_create_autocmd
 
-vim.keymap.set("v", "<", "<gv", { remap = true })
-vim.keymap.set("v", ">", ">gv", { remap = true })
-vim.keymap.set({ "v", "n" }, ";", ":", { remap = true })
-vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { silent = true, remap = true })
-vim.keymap.set("n", "g=", function()
+-- Set Default Keymaps
+keymap("v", "<", "<gv", { remap = true })
+keymap("v", ">", ">gv", { remap = true })
+keymap({ "v", "n" }, ";", ":", { remap = true })
+keymap("t", "<Esc>", "<C-\\><C-n>", { silent = true, remap = true })
+keymap("n", "g=", function()
 	vim.lsp.buf.format({ async = true })
 end, { silent = true })
 
 -- restore cursor's last position upon reopening the file
-vim.api.nvim_create_autocmd("FocusLost", { pattern = "*", command = "silent! wa" })
+autocmd("FocusLost", { pattern = "*", command = "silent! wa" })
 
 -- reload config file on change
-vim.api.nvim_create_autocmd("BufWritePost", {
+autocmd("BufWritePost", {
 	pattern = { vim.fn.expand("~/.config/nvim/") .. "**/*.lua" },
 	command = "silent source %",
 })
 
-
-local readline = require("readline")
-vim.keymap.set("!", "<M-f>", readline.forward_word)
-vim.keymap.set("!", "<M-b>", readline.backward_word)
-vim.keymap.set("!", "<C-a>", readline.beginning_of_line)
-vim.keymap.set("!", "<C-e>", readline.end_of_line)
-vim.keymap.set("!", "<M-d>", readline.kill_word)
-vim.keymap.set("!", "<C-w>", readline.backward_kill_word)
-vim.keymap.set("!", "<C-k>", readline.kill_line)
-vim.keymap.set("!", "<C-u>", readline.backward_kill_line)
-
+-- Set up the plugin defaults
 require("Comment").setup()
 require("impatient").enable_profile()
 require("nvim-autopairs").setup({})
 require("notes").setup({ notes_dir = vim.fn.expand(vim.env.NOTES_DIR) })
-
 vim.g.copilot_filetypes = {
 	["*"] = true,
 	["TelescopePrompt"] = false,
 }
+
+-- Readline actions in command-line mode
+local readline = require("readline")
+keymap("!", "<M-f>", readline.forward_word)
+keymap("!", "<M-b>", readline.backward_word)
+keymap("!", "<C-a>", readline.beginning_of_line)
+keymap("!", "<C-e>", readline.end_of_line)
+keymap("!", "<M-d>", readline.kill_word)
+keymap("!", "<C-w>", readline.backward_kill_word)
+keymap("!", "<C-k>", readline.kill_line)
+keymap("!", "<C-u>", readline.backward_kill_line)
+
+-- Tab actions
+keymap("n", "<C-t>t", ":tabnew<CR>", { silent = true, remap = true })
+keymap("n", "<C-t>n", ":tabnext<CR>", { silent = true, remap = true })
+keymap("n", "<C-t>p", ":tabprevious<CR>", { silent = true, remap = true })
+keymap("n", "<C-t>q", ":tabclose<CR>", { silent = true, remap = true })
