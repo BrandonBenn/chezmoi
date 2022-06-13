@@ -1,4 +1,4 @@
-local servers = { "solargraph", "zls", "clangd", "gopls" }
+local servers = { "solargraph", "zls", "clangd", "gopls", "texlab" }
 
 local lspconfig = require("lspconfig")
 local null_ls = require("null-ls")

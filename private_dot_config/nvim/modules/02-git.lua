@@ -1,10 +1,12 @@
 local gitsigns = require("gitsigns")
+local command = vim.api.nvim_create_user_command
+local keymap = vim.keymap.set
 
 gitsigns.setup()
 
-vim.keymap.set("n", "<leader>gg", gitsigns.blame_line, { silent = true })
+keymap("n", "<leader>gg", gitsigns.blame_line, { silent = true })
 
-vim.api.nvim_create_user_command("Gitui", function()
+command("Gitui", function()
 	local terminal = require("toggleterm.terminal").Terminal
 	terminal
 		:new({
