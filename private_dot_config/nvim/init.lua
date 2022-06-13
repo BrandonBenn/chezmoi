@@ -16,7 +16,7 @@ local bootstrap = function(repo, path)
 	vim.cmd(string.format("packadd %s", plugin))
 end
 
-bootstrap("savq/paq-nvim.git")
+bootstrap("savq/paq-nvim")
 dofile(vim.fn.expand("~/.config/nvim/deps.lua"))
 for _, module in pairs(vim.split(vim.fn.glob("~/.config/nvim/modules/*.lua"), "\n")) do
 	dofile(module)
