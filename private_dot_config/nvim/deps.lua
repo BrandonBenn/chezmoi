@@ -19,7 +19,7 @@ require("paq")({
 	"nvim-telescope/telescope.nvim",
 	"nvim-telescope/telescope-ui-select.nvim",
 	{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-        "samjwill/nvim-unception",
+	"samjwill/nvim-unception",
 	"tpope/vim-eunuch",
 	"tpope/vim-vinegar",
 	"vim-test/vim-test",
