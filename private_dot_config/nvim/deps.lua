@@ -1,4 +1,4 @@
-require("paq")({
+return {
 	"famiu/bufdelete.nvim",
 	"lewis6991/gitsigns.nvim",
 	"jghauser/mkdir.nvim",
@@ -30,4 +30,4 @@ require("paq")({
 	"kchmck/vim-coffee-script",
 	"nvim-lua/popup.nvim",
 	"nvim-lua/plenary.nvim",
-})
+}
