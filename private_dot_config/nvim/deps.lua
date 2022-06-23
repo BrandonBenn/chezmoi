@@ -8,7 +8,6 @@ return {
 	"neovim/nvim-lspconfig",
 	"nvim-treesitter/nvim-treesitter",
 	"numToStr/Comment.nvim",
-	"github/copilot.vim",
 	"akinsho/toggleterm.nvim",
 	"lukas-reineke/indent-blankline.nvim",
 	"hrsh7th/cmp-nvim-lsp",

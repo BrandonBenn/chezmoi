@@ -1,4 +1,11 @@
-local servers = { "solargraph", "zls", "clangd", "gopls", "texlab" }
+local servers = {
+	"solargraph",
+	"zls",
+	"clangd",
+	"gopls",
+	"texlab",
+	"vls",
+}
 
 local lspconfig = require("lspconfig")
 local null_ls = require("null-ls")
@@ -37,7 +44,7 @@ null_ls.setup({
 		null_ls.builtins.diagnostics.eslint_d,
 		null_ls.builtins.diagnostics.proselint,
 		null_ls.builtins.diagnostics.shellcheck,
-        null_ls.builtins.formatting.eslint,
+		null_ls.builtins.formatting.eslint,
 		null_ls.builtins.formatting.shfmt,
 		null_ls.builtins.formatting.stylua,
 		null_ls.builtins.formatting.erb_lint,
