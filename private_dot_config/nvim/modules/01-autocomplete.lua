@@ -22,6 +22,7 @@ cmp.setup({
 	}),
 	sources = cmp.config.sources({
 		{ name = "rg" },
+		{ name = "path" },
 		{ name = "nvim_lsp" },
 	}, { { name = "buffer" } }),
 })

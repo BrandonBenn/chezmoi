@@ -40,12 +40,29 @@ keymap("n", "g=", function()
 end, { silent = true })
 
 -- restore cursor's last position upon reopening the file
-autocmd("FocusLost", { pattern = "*", command = "silent! wa" })
+autocmd({ "BufReadPost" }, {
+	callback = function()
+		vim.cmd(
+			[[ if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif ]]
+		)
+	end,
+})
+
+-- Automatically save file when focus is lost
+autocmd("FocusLost", {
+	pattern = "*",
+	callback = function()
+		vim.cmd("silent! wa")
+		vim.notify("Autosaved")
+	end,
+})
 
 -- reload config file on change
 autocmd("BufWritePost", {
 	pattern = { vim.fn.expand("~/.config/nvim/") .. "**/*.lua" },
-	command = "silent source %",
+	callback = function()
+		vim.cmd("silent! source %")
+	end,
 })
 
 -- Set up the plugin defaults
