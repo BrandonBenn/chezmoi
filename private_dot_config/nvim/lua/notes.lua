@@ -19,16 +19,29 @@ function export.setup(cfg)
 
 	cfg.notes_daily_dir = cfg.notes_daily_dir or vim.fn.expand(cfg.notes_dir .. "/daily")
 	cfg.notes_ext = cfg.notes_ext or ".md"
-	cfg.notes_daily_file = os.date("%Y-%m-%d") .. cfg.notes_ext
+	cfg.notes_daily_file = os.date("%Y%m%dT%H%M%S") .. cfg.notes_ext
 
 	command("Notes", function(opts)
-		if #opts.fargs > 0 then
-			local filename = sanitize(opts.args)
-			filename = cfg.notes_dir .. "/" .. filename .. cfg.notes_ext
-			vim.cmd(":edit " .. filename)
-		else
-			telescope.find_files({ cwd = cfg.notes_dir })
-		end
+		vim.ui.input({ prompt = "New Note? [y/N] " }, function(answer)
+			local answer = answer or "N"
+			if answer == "y" or answer == "Y" then
+				vim.ui.input({ prompt = "Title: " }, function(input)
+					local input = input or ""
+					if #input > 0 then
+						local filename = sanitize(input)
+						filename = cfg.notes_dir .. "/" .. filename .. cfg.notes_ext
+						local identifier = os.date("%Y%m%dT%H%M%S")
+						vim.cmd(":edit " .. filename)
+						vim.api.nvim_buf_set_lines(0, 0, 0, false, { "---" })
+						vim.api.nvim_buf_set_lines(0, 1, 1, false, { "title: " .. input })
+						vim.api.nvim_buf_set_lines(0, 2, 2, false, { "identifier: " .. identifier })
+						vim.api.nvim_buf_set_lines(0, 3, 3, false, { "---" })
+					end
+				end)
+			else
+				telescope.find_files({ cwd = cfg.notes_dir })
+			end
+		end)
 	end, { desc = "Find/Create notes" })
 
 	command("NotesDaily", function(opts)
