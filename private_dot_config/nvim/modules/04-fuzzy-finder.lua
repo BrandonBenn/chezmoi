@@ -34,7 +34,6 @@ require("telescope").setup({
 })
 
 require("telescope").load_extension("fzf")
-require("telescope").load_extension("ui-select")
 
 keymap("n", "<C-p>p", builtin.find_files, { silent = true })
 keymap("n", "<C-p><C-p>", builtin.find_files, { silent = true })

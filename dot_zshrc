@@ -23,10 +23,6 @@ source ~/.zshrc.local
 source ~/.local/share/zsh/zsh-autosuggestions.zsh
 source ~/.local/share/zsh/zsh-tab-title.zsh
 
-if [ -n "${NVIM_LISTEN_ADDRESS+x}" ]; then
-  alias nvim='nvr -o'
-fi
-
 eval "$(atuin init zsh)" 2>/dev/null ||:
 
 n() {
