@@ -21,7 +21,7 @@ class TwoFAError < StandardError; end
 
 Account = Struct.new(:name, :issuer, :key)
 
-# Converts integet into bytes
+# Converts integer into bytes
 class Integer
   def to_bytes(int = self, padding = 8)
     raise ArgumentError, '#to_bytes requires a positive number' unless int.positive?
