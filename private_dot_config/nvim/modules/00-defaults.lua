@@ -91,3 +91,10 @@ keymap("n", "<C-t>t", ":tabnew<CR>", { silent = true, remap = true })
 keymap("n", "<C-t>q", ":tabclose<CR>", { silent = true, remap = true })
 keymap("n", "<Tab>", ":tabnext<CR>", { silent = true, remap = true })
 keymap("n", "<S-Tab>", ":tabprevious<CR>", { silent = true, remap = true })
+
+-- Vim Test
+vim.g["test#strategy"] = {
+	nearest = "kitty",
+	file = "kitty",
+	suite = "kitty",
+}
