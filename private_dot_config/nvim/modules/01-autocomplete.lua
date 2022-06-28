@@ -17,4 +17,8 @@ cmp.setup({
 		{ name = "rg" },
 		{ name = "path" },
 	}, { { name = "buffer" } }),
+	experimental = {
+		native_menu = false,
+		ghost_text = true,
+	},
 })

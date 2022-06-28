@@ -70,31 +70,3 @@ require("Comment").setup()
 require("impatient").enable_profile()
 require("nvim-autopairs").setup({})
 require("notes").setup({ notes_dir = vim.fn.expand(vim.env.NOTES_DIR) })
-vim.g.copilot_filetypes = {
-	["*"] = true,
-	["TelescopePrompt"] = false,
-}
-
--- Readline actions in command-line mode
-local readline = require("readline")
-keymap("!", "<M-f>", readline.forward_word)
-keymap("!", "<M-b>", readline.backward_word)
-keymap("!", "<C-a>", readline.beginning_of_line)
-keymap("!", "<C-e>", readline.end_of_line)
-keymap("!", "<M-d>", readline.kill_word)
-keymap("!", "<C-w>", readline.backward_kill_word)
-keymap("!", "<C-k>", readline.kill_line)
-keymap("!", "<C-u>", readline.backward_kill_line)
-
--- Tab actions
-keymap("n", "<C-t>t", ":tabnew<CR>", { silent = true, remap = true })
-keymap("n", "<C-t>q", ":tabclose<CR>", { silent = true, remap = true })
-keymap("n", "<Tab>", ":tabnext<CR>", { silent = true, remap = true })
-keymap("n", "<S-Tab>", ":tabprevious<CR>", { silent = true, remap = true })
-
--- Vim Test
-vim.g["test#strategy"] = {
-	nearest = "kitty",
-	file = "kitty",
-	suite = "kitty",
-}
