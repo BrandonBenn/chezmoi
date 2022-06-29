@@ -14,6 +14,7 @@ return {
 	"norcalli/nvim-colorizer.lua",
 	"numToStr/Comment.nvim",
     "lewis6991/gitsigns.nvim",
+    "github/copilot.vim",
 
 	"hrsh7th/cmp-buffer",
 	"hrsh7th/cmp-nvim-lsp",
