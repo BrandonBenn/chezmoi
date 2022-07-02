@@ -23,7 +23,6 @@ source ~/.zshrc.local
 source ~/.local/share/zsh/zsh-autosuggestions.zsh
 source ~/.local/share/zsh/zsh-tab-title.zsh
 
-eval "$(atuin init zsh)" 2>/dev/null ||:
 eval "$(starship init zsh)" 2>/dev/null ||:
 
 n() {
