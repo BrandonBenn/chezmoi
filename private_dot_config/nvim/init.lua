@@ -30,9 +30,7 @@ local bootstrap = function(repo, opts)
 	return fresh_install
 end
 
--- local fresh_install = bootstrap("savq/paq-nvim", { commit = "2db3fbe" })
 local fresh_install = bootstrap("savq/paq-nvim")
-
 local packages = dofile(vim.fn.expand("~/.config/nvim/deps.lua"))
 local paq = require("paq")(packages)
 
