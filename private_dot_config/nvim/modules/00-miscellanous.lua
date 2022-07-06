@@ -11,11 +11,11 @@ keymap("!", "<C-k>", readline.kill_line)
 keymap("!", "<C-u>", readline.backward_kill_line)
 
 -- Vim Test
-vim.g["test#strategy"] = {
-	nearest = "kitty",
-	file = "kitty",
-	suite = "kitty",
-}
+-- vim.g["test#strategy"] = {
+-- 	nearest = "kitty",
+-- 	file = "kitty",
+-- 	suite = "kitty",
+-- }
 
 vim.g.copilot_filetypes = {
 	["*"] = true,

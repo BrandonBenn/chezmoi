@@ -35,6 +35,8 @@ keymap("v", "<", "<gv", { remap = true })
 keymap("v", ">", ">gv", { remap = true })
 keymap({ "v", "n" }, ";", ":", { remap = true })
 keymap("t", "<Esc>", "<C-\\><C-n>", { silent = true, remap = true })
+keymap("n", "<Tab>", ":tabnext<CR>", { silent = true, remap = true })
+keymap("n", "<S-Tab>", ":tabprev<CR>", { silent = true, remap = true })
 keymap("n", "g=", function()
 	vim.lsp.buf.format({ async = true })
 end, { silent = true })
@@ -54,6 +56,14 @@ autocmd("FocusLost", {
 	callback = function()
 		vim.cmd("silent! wa")
 		vim.notify("Autosaved")
+	end,
+})
+
+autocmd("TermOpen", {
+	pattern = "term://*",
+	callback = function()
+		vim.opt_local["number"] = false
+		vim.opt_local["relativenumber"] = false
 	end,
 })
 
