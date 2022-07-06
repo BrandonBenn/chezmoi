@@ -13,8 +13,10 @@ return {
 	"linty-org/readline.nvim",
 	"norcalli/nvim-colorizer.lua",
 	"numToStr/Comment.nvim",
-    "lewis6991/gitsigns.nvim",
-    "github/copilot.vim",
+	"lewis6991/gitsigns.nvim",
+	"github/copilot.vim",
+	"tpope/vim-dadbod",
+	"kristijanhusak/vim-dadbod-ui",
 
 	"hrsh7th/cmp-buffer",
 	"hrsh7th/cmp-nvim-lsp",
