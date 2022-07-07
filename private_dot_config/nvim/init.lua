@@ -32,7 +32,7 @@ end
 
 local fresh_install = bootstrap("savq/paq-nvim")
 local packages = dofile(vim.fn.expand("~/.config/nvim/deps.lua"))
-local paq = require("paq")(packages)
+local paq = require("paq"):setup({ verbose = false })(packages)
 
 if fresh_install then
 	vim.cmd("autocmd User PaqDoneInstall quit")
