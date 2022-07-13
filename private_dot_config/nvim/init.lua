@@ -34,11 +34,17 @@ local fresh_install = bootstrap("savq/paq-nvim")
 local packages = dofile(vim.fn.expand("~/.config/nvim/deps.lua"))
 local paq = require("paq"):setup({ verbose = false })(packages)
 
-if fresh_install then
-	vim.cmd("autocmd User PaqDoneInstall quit")
-	paq.install()
-else
+function load_config()
 	for _, module in pairs(vim.split(vim.fn.glob("~/.config/nvim/modules/*.lua"), "\n")) do
 		dofile(module)
 	end
 end
+
+if fresh_install then
+	vim.cmd("autocmd User PaqDoneInstall quit")
+	paq.install()
+else
+	load_config()
+end
+
+vim.api.nvim_create_user_command("ReloadConfig", load_config, { desc = "Reload Neovim Configuration" })

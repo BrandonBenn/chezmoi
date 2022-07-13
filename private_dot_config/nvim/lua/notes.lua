@@ -19,7 +19,9 @@ function export.setup(cfg)
 
 	cfg.notes_daily_dir = cfg.notes_daily_dir or vim.fn.expand(cfg.notes_dir .. "/daily")
 	cfg.notes_ext = cfg.notes_ext or ".md"
-	cfg.notes_daily_file = os.date("%Y%m%dT%H%M%S") .. cfg.notes_ext
+  cfg.daily_filename_format = cfg.daily_filename_format or "%Y-%m-%d"
+  cfg.identifier_format = cfg.identifier_format or %Y%m%dT%H%M%S
+	cfg.notes_daily_file = os.date(cfg.daily_filename_format) .. cfg.notes_ext
 
 	command("Notes", function(opts)
 		vim.ui.input({ prompt = "New Note? [y/N] " }, function(answer)
@@ -30,7 +32,7 @@ function export.setup(cfg)
 					if #input > 0 then
 						local filename = sanitize(input)
 						filename = cfg.notes_dir .. "/" .. filename .. cfg.notes_ext
-						local identifier = os.date("%Y%m%dT%H%M%S")
+						local identifier = os.date(cfg.identifier_format)
 						vim.cmd(":edit " .. filename)
 						vim.api.nvim_buf_set_lines(0, 0, 0, false, { "---" })
 						vim.api.nvim_buf_set_lines(0, 1, 1, false, { "title: " .. input })
@@ -47,7 +49,7 @@ function export.setup(cfg)
 	command("NotesDaily", function(opts)
 		if #opts.fargs > 0 then
 			local filename = sanitize(opts.args)
-			filename = cfg.notes_daily_dir .. "/" .. os.date("%Y-%m-%d") .. "-" .. filename .. cfg.notes_ext
+			filename = cfg.notes_daily_dir .. "/" .. os.date(cfg.daily_filename_format) .. "-" .. filename .. cfg.notes_ext
 			vim.cmd(":edit " .. filename)
 		else
 			local filename = cfg.notes_daily_dir .. "/" .. cfg.notes_daily_file

@@ -8,7 +8,6 @@ return {
 	"lukas-reineke/indent-blankline.nvim",
 	"tpope/vim-eunuch",
 	"vim-test/vim-test",
-	"kchmck/vim-coffee-script",
 	"lewis6991/impatient.nvim",
 	"linty-org/readline.nvim",
 	"norcalli/nvim-colorizer.lua",
@@ -28,10 +27,12 @@ return {
 	"roginfarrer/vim-dirvish-dovish",
 
 	"nvim-telescope/telescope.nvim",
+	"nvim-telescope/telescope-smart-history.nvim",
 	{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
 
 	"nvim-lua/plenary.nvim",
 	"nvim-lua/popup.nvim",
+	"kkharji/sqlite.lua",
 	"neovim/nvim-lspconfig",
 	"nvim-treesitter/nvim-treesitter",
 }

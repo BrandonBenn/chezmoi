@@ -17,12 +17,12 @@ vim.g.copilot_filetypes = {
 	["TelescopePrompt"] = false,
 }
 
--- Defer loading of copilot until it's after the first buffer is loaded
 autocmd("VimEnter", {
 	pattern = "*",
 	callback = function()
 		vim.defer_fn(function()
 			vim.cmd("packadd copilot.vim")
+			require("gitsigns").setup()
 		end, 150)
 	end,
 })
