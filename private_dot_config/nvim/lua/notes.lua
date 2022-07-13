@@ -20,7 +20,7 @@ function export.setup(cfg)
 	cfg.notes_daily_dir = cfg.notes_daily_dir or vim.fn.expand(cfg.notes_dir .. "/daily")
 	cfg.notes_ext = cfg.notes_ext or ".md"
   cfg.daily_filename_format = cfg.daily_filename_format or "%Y-%m-%d"
-  cfg.identifier_format = cfg.identifier_format or %Y%m%dT%H%M%S
+  cfg.identifier_format = cfg.identifier_format or "%Y%m%dT%H%M%S"
 	cfg.notes_daily_file = os.date(cfg.daily_filename_format) .. cfg.notes_ext
 
 	command("Notes", function(opts)
