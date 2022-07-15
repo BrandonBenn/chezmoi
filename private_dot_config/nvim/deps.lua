@@ -32,7 +32,6 @@ return {
 
 	"nvim-lua/plenary.nvim",
 	"nvim-lua/popup.nvim",
-	"kkharji/sqlite.lua",
 	"neovim/nvim-lspconfig",
 	"nvim-treesitter/nvim-treesitter",
 }

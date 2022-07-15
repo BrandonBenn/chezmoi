@@ -8,10 +8,6 @@ local builtin = require("telescope.builtin")
 
 require("telescope").setup({
 	defaults = {
-		history = {
-			path = "~/.local/share/nvim/databases/telescope_history.sqlite3",
-			limit = 100,
-		},
 		preview = { hide_on_startup = true },
 		mappings = {
 			i = { ["<M-p>"] = layout.toggle_preview },
@@ -38,7 +34,6 @@ require("telescope").setup({
 })
 
 require("telescope").load_extension("fzf")
-require("telescope").load_extension("smart_history")
 
 keymap("n", "<C-p>p", builtin.find_files, { silent = true })
 keymap("n", "<C-p><C-p>", builtin.find_files, { silent = true })
