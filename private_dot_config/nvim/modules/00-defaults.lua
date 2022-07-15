@@ -24,7 +24,7 @@ vim.opt.udir = "/tmp/nvim/undo"
 vim.opt.undofile = true
 vim.opt.wrap = false
 vim.opt.wildmenu = true
-vim.opt.wildmode = { "longest", "full" }
+vim.opt.wildmode = { "longest", "list", "full" }
 vim.opt.wildchar = ("\t"):byte()
 vim.opt.completeopt = { "menuone", "noselect", "noinsert" }
 local keymap = vim.keymap.set
@@ -59,8 +59,8 @@ autocmd("FocusLost", {
 	end,
 })
 
-autocmd("TermOpen", {
-	pattern = "term://*",
+autocmd({ "TermOpen", "BufEnter" }, {
+	pattern = { "term://*", "*.txt", "*.tex", "*.md" },
 	callback = function()
 		vim.opt_local["number"] = false
 		vim.opt_local["relativenumber"] = false
