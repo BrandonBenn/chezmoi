@@ -23,6 +23,6 @@ autocmd("VimEnter", {
 		vim.defer_fn(function()
 			vim.cmd("packadd copilot.vim")
 			require("gitsigns").setup()
-		end, 150)
+		end, 1500)
 	end,
 })

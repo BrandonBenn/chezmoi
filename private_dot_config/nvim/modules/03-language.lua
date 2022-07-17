@@ -5,6 +5,7 @@ local servers = {
 	"gopls",
 	"texlab",
 	"vls",
+	"pyright",
 }
 
 local lspconfig = require("lspconfig")

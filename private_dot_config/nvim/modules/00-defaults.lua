@@ -24,7 +24,7 @@ vim.opt.udir = "/tmp/nvim/undo"
 vim.opt.undofile = true
 vim.opt.wrap = false
 vim.opt.wildmenu = true
-vim.opt.wildmode = { "longest", "list", "full" }
+vim.opt.wildmode = { "longest", "full" }
 vim.opt.wildchar = ("\t"):byte()
 vim.opt.completeopt = { "menuone", "noselect", "noinsert" }
 local keymap = vim.keymap.set
@@ -76,7 +76,9 @@ autocmd("BufWritePost", {
 })
 
 -- Set up the plugin defaults
-require("Comment").setup()
-require("impatient").enable_profile()
-require("nvim-autopairs").setup({})
-require("notes").setup({ notes_dir = vim.fn.expand(vim.env.NOTES_DIR) })
+vim.defer_fn(function()
+	require("Comment").setup()
+	require("impatient").enable_profile()
+	require("nvim-autopairs").setup({})
+	require("notes").setup({ notes_dir = vim.fn.expand(vim.env.NOTES_DIR) })
+end, 1000)
