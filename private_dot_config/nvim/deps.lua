@@ -23,8 +23,7 @@ return {
 	"hrsh7th/nvim-cmp",
 	"lukas-reineke/cmp-rg",
 
-	"justinmk/vim-dirvish",
-	"roginfarrer/vim-dirvish-dovish",
+	"elihunter173/dirbuf.nvim",
 
 	"nvim-telescope/telescope.nvim",
 	"nvim-telescope/telescope-smart-history.nvim",
