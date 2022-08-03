@@ -16,7 +16,7 @@ hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "i", function()
 end)
 
 -- function to center current window
-hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "g", function()
+hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "k", function()
 	hs.window.focusedWindow():centerOnScreen()
 end)
 
@@ -28,13 +28,19 @@ switcher.ui.showTitles = true
 switcher.ui.showSelectedTitle = false
 switcher.ui.showSelectedThumbnail = false
 
-hs.hotkey.bind("alt", "tab", function()
-	switcher:next()
-end)
-
-hs.hotkey.bind("alt-shift", "tab", function()
-	switcher:previous()
-end)
+function mapCmdTab(event)
+	local flags = event:getFlags()
+	local chars = event:getCharacters()
+	if chars == "\t" and flags:containExactly({ "cmd" }) then
+		switcher:next()
+		return true
+	elseif chars == string.char(25) and flags:containExactly({ "cmd", "shift" }) then
+		switcher:previous()
+		return true
+	end
+end
+tapCmdTab = hs.eventtap.new({ hs.eventtap.event.types.keyDown }, mapCmdTab)
+tapCmdTab:start()
 
 require("bluetooth_sleep").init()
 require("commandq").init()
