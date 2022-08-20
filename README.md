@@ -1,1 +1,1 @@
-chezmoi init git@gitlab.com:th3lusive/dotfiles.git
+chezmoi init git@github.com:BrandonBenn/chezmoi.git
