@@ -23,4 +23,4 @@ vim.defer_fn(function()
 			ghost_text = true,
 		},
 	})
-end, 1000)
+end, 1500)

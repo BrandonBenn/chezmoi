@@ -15,7 +15,6 @@ return {
 	"lewis6991/gitsigns.nvim",
 	"tpope/vim-dadbod",
 	"kristijanhusak/vim-dadbod-ui",
-	{ "github/copilot.vim", opt = true },
 
 	"hrsh7th/cmp-buffer",
 	"hrsh7th/cmp-nvim-lsp",
