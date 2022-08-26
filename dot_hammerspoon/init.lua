@@ -21,12 +21,11 @@ hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "k", function()
 end)
 
 switcher = hs.window.switcher.new(hs.window.filter.new():setCurrentSpace(true):setDefaultFilter({}))
-switcher.ui.textSize = 16
-switcher.ui.fontName = "Arial"
-switcher.ui.titleBackgroundColor = { 0.3, 0.3, 0.3, 1 }
-switcher.ui.showTitles = true
-switcher.ui.showSelectedTitle = false
+switcher.ui.showTitles = false
+switcher.ui.thumbnailSize = 200
 switcher.ui.showSelectedThumbnail = false
+switcher.ui.backgroundColor = { 0, 0, 0, 0.8 }
+switcher.ui.highlightColor = { 0.3, 0.3, 0.3, 0.8 }
 
 function mapCmdTab(event)
 	local flags = event:getFlags()
