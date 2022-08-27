@@ -15,6 +15,7 @@ return {
 	"lewis6991/gitsigns.nvim",
 	"tpope/vim-dadbod",
 	"kristijanhusak/vim-dadbod-ui",
+	"junegunn/vim-easy-align",
 	{ "github/copilot.vim", opt = true },
 
 	"hrsh7th/cmp-buffer",
