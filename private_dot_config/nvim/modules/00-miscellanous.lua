@@ -17,6 +17,8 @@ vim.g.copilot_filetypes = {
 	["TelescopePrompt"] = false,
 }
 
+keymap("x", "ga", "<Plug>(EasyAlign)")
+
 autocmd("VimEnter", {
 	pattern = "*",
 	callback = function()
