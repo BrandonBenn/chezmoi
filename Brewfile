@@ -28,7 +28,3 @@ cask "dbeaver-community"
 cask "keepassxc", greedy: true
 cask "hammerspoon", greedy: true
 cask "kitty", greedy: true
-
-tap "homebrew/cask-fonts"
-cask "font-jetbrains-mono"
-cask "font-iosevka"
