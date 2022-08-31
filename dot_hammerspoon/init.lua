@@ -42,6 +42,6 @@ tapCmdTab = hs.eventtap.new({ hs.eventtap.event.types.keyDown }, mapCmdTab)
 tapCmdTab:start()
 
 require("bluetooth_sleep").init()
+require("caffeine").init()
 require("commandq").init()
 require("clipboard").init({ enable_hotkey = true })
-require("caffeine").init()
