@@ -15,6 +15,7 @@ brew "rbenv"
 brew "ncurses"
 brew "fd"
 brew "neovim"
+brew "nnn"
 brew "redis"
 brew "fzf"
 brew "ripgrep"
@@ -28,3 +29,7 @@ cask "dbeaver-community"
 cask "keepassxc", greedy: true
 cask "hammerspoon", greedy: true
 cask "kitty", greedy: true
+
+tap "homebrew/cask-fonts"
+cask "font-jetbrains-mono"
+cask "font-iosevka"
