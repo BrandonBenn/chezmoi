@@ -5,3 +5,7 @@
 [".local/share/zsh/zsh-tab-title.zsh"]
     type = "file"
     url = "https://raw.githubusercontent.com/trystan2k/zsh-tab-title/master/zsh-tab-title.plugin.zsh"
+
+[".asdf"]
+    type = "git-repo"
+    url = "https://github.com/asdf-vm/asdf.git"

@@ -19,9 +19,12 @@ brew "redis"
 brew "fzf"
 brew "ripgrep"
 brew "elasticsearch-full"
-brew "syncthing", enable_service: true
-brew "mysql@5.7", restart_service: true, link: true, conflicts_with: ["mysql"]
+brew "syncthing", enable_service: :changed
+brew "mysql@5.7", restart_service: :changed, link: true, conflicts_with: ["mysql"]
+
+cask "firefox"
 cask "qutebrowser"
-cask "sequel-ace"
+cask "dbeaver-community"
 cask "keepassxc", greedy: true
 cask "hammerspoon", greedy: true
+cask "kitty", greedy: true
