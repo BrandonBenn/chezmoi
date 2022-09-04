@@ -1,11 +1,19 @@
 [".local/share/zsh/zsh-autosuggestions.zsh"]
-    type = "file"
     url = "https://raw.githubusercontent.com/zsh-users/zsh-autosuggestions/master/zsh-autosuggestions.zsh"
+    type = "file"
 
 [".local/share/zsh/zsh-tab-title.zsh"]
-    type = "file"
     url = "https://raw.githubusercontent.com/trystan2k/zsh-tab-title/master/zsh-tab-title.plugin.zsh"
+    type = "file"
 
 [".asdf"]
-    type = "git-repo"
     url = "https://github.com/asdf-vm/asdf.git"
+    type = "git-repo"
+
+{{ if eq .chezmoi.os "darwin" -}}
+[".hammerspoon/Spoons/SpoonInstall.spoon"]
+    url     = "https://github.com/Hammerspoon/Spoons/raw/master/Spoons/SpoonInstall.spoon.zip"
+    type    = "archive"
+    exclude = ["docs.json"]
+{{ end -}}
+
