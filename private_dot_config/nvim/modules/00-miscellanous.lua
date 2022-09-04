@@ -24,7 +24,6 @@ autocmd("VimEnter", {
 	callback = function()
 		vim.defer_fn(function()
 			require("gitsigns").setup()
-			require("pqf").setup()
 			vim.cmd("packadd copilot.vim")
 		end, 1500)
 	end,
