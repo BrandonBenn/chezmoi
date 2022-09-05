@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+# Link this script to the git hooks directory's pre-commit file
+# ln -s ~/bin/git-task .git/hooks/prepare-commit-msg
+
+jira_id=$(git branch --show-current | sed -nr 's,[a-z]+/([A-Z]+-[0-9]+)-.+,\1,p')
+[ -n "$jira_id" ] && {
+	sed -i "1s/^/$jira_id /" "$1"
+}

@@ -1,0 +1,16 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/sh
+sudo dnf install -y \
+ kitty \
+ fzf \
+ zsh \
+ nnn \
+ aria2 \
+ rclone \
+ restic \
+ ripgrep \
+ fd-find \
+ starship \
+ syncthing \
+ ShellCheck
+{{ end -}}
