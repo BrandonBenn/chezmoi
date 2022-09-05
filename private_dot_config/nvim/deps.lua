@@ -17,6 +17,7 @@ return {
 	"kristijanhusak/vim-dadbod-ui",
 	"junegunn/vim-easy-align",
 	{ "github/copilot.vim", opt = true },
+	{ url = "https://gitlab.com/yorickpeterse/nvim-pqf.git" },
 
 	"hrsh7th/cmp-buffer",
 	"hrsh7th/cmp-nvim-lsp",

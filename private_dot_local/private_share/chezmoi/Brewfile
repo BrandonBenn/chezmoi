@@ -8,7 +8,7 @@ brew "chezmoi"
 brew "coreutils"
 brew "lua"
 brew "mysql-client"
-brew "python@3.9"
+brew "python@3.9", link: true
 brew "tree-sitter"
 brew "htop"
 brew "luajit"
