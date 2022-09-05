@@ -11,7 +11,7 @@
     type = "git-repo"
 
 {{ if eq .chezmoi.os "darwin" -}}
-[".hammerspoon/Spoons/SpoonInstall.spoon"]
+[".hammerspoon/Spoons/"]
     url     = "https://github.com/Hammerspoon/Spoons/raw/master/Spoons/SpoonInstall.spoon.zip"
     type    = "archive"
     exclude = ["docs.json"]
