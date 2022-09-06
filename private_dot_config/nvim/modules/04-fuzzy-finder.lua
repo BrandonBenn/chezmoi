@@ -16,25 +16,12 @@ vim.defer_fn(function()
 			},
 		},
 		pickers = {
-			find_files = {
-				theme = "dropdown",
-				find_command = { "fd", "--type", "f", "--strip-cwd-prefix" },
-			},
+			find_files = { theme = "dropdown" },
 			oldfiles = { theme = "dropdown", only_cwd = true },
 			live_grep = { theme = "ivy" },
 			grep_string = { theme = "ivy" },
 		},
-		extensions = {
-			fzf = {
-				fuzzy = true,
-				override_file_sorter = true,
-				override_generic_sorter = true,
-				case_mode = "smart_case",
-			},
-		},
 	})
-
-	require("telescope").load_extension("fzf")
 
 	keymap("n", "<C-p>p", builtin.find_files, { silent = true })
 	keymap("n", "<C-p><C-p>", builtin.find_files, { silent = true })
