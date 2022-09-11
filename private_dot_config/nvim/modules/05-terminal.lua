@@ -13,9 +13,10 @@ vim.defer_fn(function()
 	end
 	autocmd("TermOpen", { pattern = { "term://*" }, callback = set_terminal_keymaps })
 
-	for i = 1, 5 do
-		keymap("n", "m" .. i, function()
-			require("harpoon.term").gotoTerminal(i)
+	local keys = { "z", "x", "c", "v" }
+	for k, v in pairs(keys) do
+		keymap("n", "m" .. v, function()
+			require("harpoon.term").gotoTerminal(k)
 		end)
 	end
 end, 1000)
