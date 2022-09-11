@@ -7,6 +7,9 @@ vim.defer_fn(function()
 	local actions = require("telescope.actions")
 	local builtin = require("telescope.builtin")
 
+	keymap("n", "mm", require("harpoon.ui").toggle_quick_menu, { silent = false })
+	keymap("n", "m;", require("harpoon.mark").add_file, { silent = true })
+
 	require("telescope").setup({
 		defaults = {
 			preview = { hide_on_startup = true },
@@ -29,4 +32,11 @@ vim.defer_fn(function()
 	keymap("n", "<C-p>r", builtin.resume, { silent = true })
 	keymap("n", "<C-p>g", builtin.live_grep, { silent = true })
 	keymap("n", "<C-p>w", builtin.grep_string, { silent = true })
+
+	local keys = { "a", "s", "d", "f", "g" }
+	for k, v in pairs(keys) do
+		keymap("n", "m" .. v, function()
+			require("harpoon.ui").nav_file(k)
+		end, { silent = true })
+	end
 end, 1500)

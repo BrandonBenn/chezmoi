@@ -1,7 +1,5 @@
 return {
-	"akinsho/toggleterm.nvim",
 	"famiu/bufdelete.nvim",
-	"folke/zen-mode.nvim",
 	"jghauser/mkdir.nvim",
 	"jose-elias-alvarez/null-ls.nvim",
 	"windwp/nvim-autopairs",
@@ -10,14 +8,14 @@ return {
 	"vim-test/vim-test",
 	"lewis6991/impatient.nvim",
 	"linty-org/readline.nvim",
-	"norcalli/nvim-colorizer.lua",
 	"numToStr/Comment.nvim",
+	"elihunter173/dirbuf.nvim",
 	"lewis6991/gitsigns.nvim",
 	"tpope/vim-dadbod",
 	"kristijanhusak/vim-dadbod-ui",
 	"junegunn/vim-easy-align",
+	"ThePrimeagen/harpoon",
 	{ "github/copilot.vim", opt = true },
-	{ url = "https://gitlab.com/yorickpeterse/nvim-pqf.git" },
 
 	"hrsh7th/cmp-buffer",
 	"hrsh7th/cmp-nvim-lsp",
@@ -25,12 +23,8 @@ return {
 	"hrsh7th/nvim-cmp",
 	"lukas-reineke/cmp-rg",
 
-	"elihunter173/dirbuf.nvim",
-
 	"nvim-telescope/telescope.nvim",
 	"nvim-telescope/telescope-smart-history.nvim",
-	{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-
 	"nvim-lua/plenary.nvim",
 	"nvim-lua/popup.nvim",
 	"neovim/nvim-lspconfig",
