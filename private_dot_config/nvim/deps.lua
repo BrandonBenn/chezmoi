@@ -22,6 +22,8 @@ return {
 	"hrsh7th/cmp-path",
 	"hrsh7th/nvim-cmp",
 	"lukas-reineke/cmp-rg",
+	"sindrets/diffview.nvim",
+	"TimUntersberger/neogit",
 
 	"nvim-telescope/telescope.nvim",
 	"nvim-telescope/telescope-smart-history.nvim",

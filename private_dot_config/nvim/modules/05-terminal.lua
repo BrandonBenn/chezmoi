@@ -15,7 +15,7 @@ vim.defer_fn(function()
 
 	local keys = { "z", "x", "c", "v" }
 	for k, v in pairs(keys) do
-		keymap("n", "m" .. v, function()
+		keymap({ "n" }, "m" .. v, function()
 			require("harpoon.term").gotoTerminal(k)
 		end)
 	end

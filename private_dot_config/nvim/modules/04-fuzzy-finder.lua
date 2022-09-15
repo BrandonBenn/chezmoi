@@ -27,10 +27,12 @@ vim.defer_fn(function()
 	})
 
 	keymap("n", "<C-p>p", builtin.find_files, { silent = true })
-	keymap("n", "<C-p><C-p>", builtin.find_files, { silent = true })
+	keymap("n", "<D-p>", builtin.find_files, { silent = true })
 	keymap("n", "<C-p>o", builtin.oldfiles, { silent = true })
 	keymap("n", "<C-p>r", builtin.resume, { silent = true })
+	keymap("n", "<D-r>", builtin.resume, { silent = true })
 	keymap("n", "<C-p>g", builtin.live_grep, { silent = true })
+	keymap("n", "<D-f>", builtin.live_grep, { silent = true })
 	keymap("n", "<C-p>w", builtin.grep_string, { silent = true })
 
 	local keys = { "a", "s", "d", "f", "g" }
