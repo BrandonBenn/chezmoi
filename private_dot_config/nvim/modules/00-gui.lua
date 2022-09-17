@@ -1,3 +1,4 @@
+
 if not (vim.fn.exists("g:neovide") == 1 or vim.fn.exists("GuiFont") == 1) then
 	return
 end

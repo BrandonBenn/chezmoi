@@ -9,7 +9,6 @@ return {
 	"lewis6991/impatient.nvim",
 	"linty-org/readline.nvim",
 	"numToStr/Comment.nvim",
-	"elihunter173/dirbuf.nvim",
 	"lewis6991/gitsigns.nvim",
 	"tpope/vim-dadbod",
 	"kristijanhusak/vim-dadbod-ui",
@@ -24,6 +23,7 @@ return {
 	"lukas-reineke/cmp-rg",
 	"sindrets/diffview.nvim",
 	"TimUntersberger/neogit",
+  "tpope/vim-vinegar",
 
 	"nvim-telescope/telescope.nvim",
 	"nvim-telescope/telescope-smart-history.nvim",

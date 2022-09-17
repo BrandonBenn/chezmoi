@@ -26,7 +26,7 @@ vim.defer_fn(function()
 		},
 	})
 
-	keymap("n", "<C-p>p", builtin.find_files, { silent = true })
+	keymap("n", "<C-p><C-p>", builtin.find_files, { silent = true })
 	keymap("n", "<D-p>", builtin.find_files, { silent = true })
 	keymap("n", "<C-p>o", builtin.oldfiles, { silent = true })
 	keymap("n", "<C-p>r", builtin.resume, { silent = true })
