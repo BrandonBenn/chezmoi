@@ -23,7 +23,7 @@ return {
 	"lukas-reineke/cmp-rg",
 	"sindrets/diffview.nvim",
 	"TimUntersberger/neogit",
-  "tpope/vim-vinegar",
+	"tpope/vim-vinegar",
 
 	"nvim-telescope/telescope.nvim",
 	"nvim-telescope/telescope-smart-history.nvim",
