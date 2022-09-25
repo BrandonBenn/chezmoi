@@ -38,6 +38,10 @@ for _, server in pairs(servers) do
 	lspconfig[server].setup({ on_attach = on_attach, flags = flags, capabilities = capabilities })
 end
 
+
+require("mason").setup()
+require("mason-lspconfig").setup()
+
 null_ls.setup({
 	sources = {
 		null_ls.builtins.completion.spell,

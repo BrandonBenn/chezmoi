@@ -12,8 +12,11 @@ return {
 	"lewis6991/gitsigns.nvim",
 	"tpope/vim-dadbod",
 	"kristijanhusak/vim-dadbod-ui",
-	"junegunn/vim-easy-align",
-	"ThePrimeagen/harpoon",
+  "junegunn/vim-easy-align",
+  "ThePrimeagen/harpoon",
+  "williamboman/mason.nvim",
+  "williamboman/mason-lspconfig.nvim",
+  "neovim/nvim-lspconfig",
 	{ "github/copilot.vim", opt = true },
 
 	"hrsh7th/cmp-buffer",

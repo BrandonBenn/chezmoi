@@ -82,3 +82,6 @@ vim.defer_fn(function()
 	require("nvim-autopairs").setup({})
 	require("notes").setup({ notes_dir = vim.fn.expand(vim.env.NOTES_DIR) })
 end, 1000)
+
+require("mason").setup()
+require("mason-lspconfig").setup()
