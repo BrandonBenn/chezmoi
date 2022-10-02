@@ -23,6 +23,7 @@ vim.opt.title = true
 vim.opt.udir = "/tmp/nvim/undo"
 vim.opt.undofile = true
 vim.opt.wrap = false
+vim.opt.cmdheight = 0
 vim.opt.wildmenu = true
 vim.opt.wildmode = { "longest", "full" }
 vim.opt.wildchar = ("\t"):byte()
