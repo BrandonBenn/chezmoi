@@ -3,7 +3,6 @@ vim.cmd("colorscheme typograph")
 vim.g.mapleader = " "
 vim.g.netrw_banner = 0
 vim.opt.shortmess = "IfilnxtToOF"
-vim.opt.winbar = "%f"
 vim.opt.expandtab = true
 vim.opt.exrc = true
 vim.opt.hidden = true
@@ -41,7 +40,7 @@ keymap("t", "<Esc>", "<C-\\><C-n>", { silent = true, remap = true })
 keymap("n", "<Tab>", ":tabnext<CR>", { silent = true, remap = true })
 keymap("n", "<S-Tab>", ":tabprev<CR>", { silent = true, remap = true })
 keymap("n", "g=", function()
-	vim.lsp.buf.format({ async = true })
+	vim.lsp.buf.format({ async = true, timeout_ms = 2000 })
 end, { silent = true })
 
 -- restore cursor's last position upon reopening the file
@@ -77,14 +76,3 @@ autocmd("BufWritePost", {
 		vim.cmd("silent! source %")
 	end,
 })
-
--- Set up the plugin defaults
-vim.defer_fn(function()
-	require("Comment").setup()
-	require("impatient").enable_profile()
-	require("nvim-autopairs").setup({})
-	require("notes").setup({ notes_dir = vim.fn.expand(vim.env.NOTES_DIR) })
-end, 1000)
-
-require("mason").setup()
-require("mason-lspconfig").setup()
