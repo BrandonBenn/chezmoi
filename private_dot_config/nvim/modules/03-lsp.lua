@@ -33,11 +33,11 @@ local servers = {
 	"solargraph",
 }
 
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local map = vim.keymap.set
 local flags = { debounce_text_changes = 150 }
 local on_attach = function(client, buffer)
 	vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 	map("n", "gd", vim.lsp.buf.definition, { buffer = buffer, silent = true })
 	map("n", "gD", vim.lsp.buf.declaration, { buffer = buffer, silent = true })
 	map("n", "K", vim.lsp.buf.hover, { buffer = buffer, silent = true })
@@ -56,5 +56,5 @@ local on_attach = function(client, buffer)
 end
 
 for _, server in pairs(servers) do
-	lspconfig[server].setup({ on_attach = on_attach, flags = flags, capabilities = capabilities })
+	lspconfig[server].setup({ on_attach = on_attach, flags = flags })
 end
