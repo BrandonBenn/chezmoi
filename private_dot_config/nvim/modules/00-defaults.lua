@@ -39,9 +39,7 @@ keymap({ "v", "n" }, ";", ":", { remap = true })
 keymap("t", "<Esc>", "<C-\\><C-n>", { silent = true, remap = true })
 keymap("n", "<Tab>", ":tabnext<CR>", { silent = true, remap = true })
 keymap("n", "<S-Tab>", ":tabprev<CR>", { silent = true, remap = true })
-keymap({ "n", "v" }, "g=", function()
-	vim.lsp.buf.format({ async = true, timeout_ms = 2000 })
-end, { silent = true })
+keymap({ "n", "v" }, "g=", vim.lsp.buf.format, { silent = true })
 
 -- restore cursor's last position upon reopening the file
 autocmd({ "BufReadPost" }, {

@@ -64,11 +64,18 @@ require("packer").startup(function(use)
 			require("mason-lspconfig").setup()
 		end,
 	})
+
+	use({ "github/copilot.vim", opt = true })
+
 	use({
-		"github/copilot.vim",
-		event = "VimEnter",
+		"zbirenbaum/copilot.lua",
+		event = "InsertEnter",
 		config = function()
-			vim.g.copilot_filetypes = { ["*"] = true, ["TelescopePrompt"] = false }
+			vim.schedule(function()
+				require("copilot").setup({
+					copilot_node_command = vim.fn.expand("~/.asdf/installs/nodejs/16.17.0/bin/node"),
+				})
+			end)
 		end,
 	})
 end)
