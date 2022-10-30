@@ -4,6 +4,7 @@ require("packer").startup(function(use)
 		"nvim-lua/popup.nvim",
 	} })
 
+	use("elixir-editors/vim-elixir")
 	use("neovim/nvim-lspconfig")
 	use("jose-elias-alvarez/null-ls.nvim")
 	use("nvim-treesitter/nvim-treesitter")
