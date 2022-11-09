@@ -12,6 +12,7 @@ require("mason-tool-installer").setup({
 		"shellcheck",
 		"proselint",
 		"solargraph",
+		"typescript-language-server",
 	},
 })
 
@@ -31,13 +32,13 @@ null_ls.setup({
 
 local servers = {
 	"solargraph",
+	"typescript-language-server",
 }
 
 local map = vim.keymap.set
 local flags = { debounce_text_changes = 150 }
 local on_attach = function(client, buffer)
 	vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 	map("n", "gd", vim.lsp.buf.definition, { buffer = buffer, silent = true })
 	map("n", "gD", vim.lsp.buf.declaration, { buffer = buffer, silent = true })
 	map("n", "K", vim.lsp.buf.hover, { buffer = buffer, silent = true })

@@ -10,14 +10,19 @@ require("packer").startup(function(use)
 	use("nvim-treesitter/nvim-treesitter")
 	use("junegunn/vim-easy-align")
 	use("ThePrimeagen/harpoon")
+	use("tpope/vim-eunuch")
+	use("famiu/bufdelete.nvim")
+	use("jghauser/mkdir.nvim")
 
 	use({
-		"tpope/vim-vinegar",
+		"nvim-tree/nvim-tree.lua",
 		requires = {
-			"tpope/vim-eunuch",
-			"famiu/bufdelete.nvim",
-			"jghauser/mkdir.nvim",
+			"nvim-tree/nvim-web-devicons",
 		},
+		config = function()
+			require("nvim-tree").setup()
+			vim.o.guifont = "Iosevka NFM:h18"
+		end,
 	})
 
 	use({
@@ -40,6 +45,20 @@ require("packer").startup(function(use)
 		requires = "nvim-lua/plenary.nvim",
 		config = function()
 			require("gitsigns").setup()
+		end,
+	})
+
+	use({
+		"mcchrish/zenbones.nvim",
+		-- Optionally install Lush. Allows for more configuration or extending the colorscheme
+		-- If you don't want to install lush, make sure to set g:zenbones_compat = 1
+		-- In Vim, compat mode is turned on as Lush only works in Neovim.
+		requires = "rktjmp/lush.nvim",
+		config = function()
+			if vim.fn.has("gui_vimr") == 1 then
+				vim.cmd("colorscheme zenwritten")
+				vim.o.background = "light"
+			end
 		end,
 	})
 
@@ -74,7 +93,7 @@ require("packer").startup(function(use)
 		config = function()
 			vim.schedule(function()
 				require("copilot").setup({
-					copilot_node_command = vim.fn.expand("~/.asdf/installs/nodejs/16.17.0/bin/node"),
+					copilot_node_command = vim.fn.expand("~/.asdf/installs/nodejs/lts/bin/node"),
 				})
 			end)
 		end,

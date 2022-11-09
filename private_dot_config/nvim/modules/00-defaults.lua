@@ -2,13 +2,13 @@
 vim.cmd("colorscheme typograph")
 vim.g.mapleader = " "
 vim.g.netrw_banner = 0
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 vim.opt.shortmess = "IfilnxtToOF"
 vim.opt.expandtab = true
 vim.opt.exrc = true
 vim.opt.hidden = true
 vim.opt.laststatus = 0
-vim.opt.number = true
-vim.opt.relativenumber = true
 vim.opt.scrolloff = 999
 vim.opt.shiftwidth = 2
 vim.opt.showmode = true
@@ -47,15 +47,6 @@ autocmd({ "BufReadPost" }, {
 		vim.cmd(
 			[[ if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif ]]
 		)
-	end,
-})
-
--- Automatically save file when focus is lost
-autocmd("FocusLost", {
-	pattern = "*",
-	callback = function()
-		vim.cmd("silent! wa")
-		vim.notify("Autosaved")
 	end,
 })
 
