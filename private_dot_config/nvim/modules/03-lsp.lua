@@ -7,12 +7,10 @@ require("mason-tool-installer").setup({
 		"stylua",
 		"jq",
 		"eslint_d",
-		"erb-lint",
 		"shfmt",
 		"shellcheck",
 		"proselint",
 		"solargraph",
-		"typescript-language-server",
 	},
 })
 
@@ -21,7 +19,6 @@ null_ls.setup({
 		null_ls.builtins.diagnostics.eslint_d,
 		null_ls.builtins.diagnostics.proselint,
 		null_ls.builtins.diagnostics.shellcheck,
-		null_ls.builtins.formatting.erb_lint,
 		null_ls.builtins.formatting.eslint_d,
 		null_ls.builtins.formatting.jq,
 		null_ls.builtins.formatting.shfmt,
@@ -32,7 +29,6 @@ null_ls.setup({
 
 local servers = {
 	"solargraph",
-	"typescript-language-server",
 }
 
 local map = vim.keymap.set
