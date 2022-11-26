@@ -10,7 +10,8 @@ require("mason-tool-installer").setup({
 		"shfmt",
 		"shellcheck",
 		"proselint",
-		"solargraph",
+		"sqlls",
+		"sql-formatter",
 	},
 })
 
@@ -19,16 +20,19 @@ null_ls.setup({
 		null_ls.builtins.diagnostics.eslint_d,
 		null_ls.builtins.diagnostics.proselint,
 		null_ls.builtins.diagnostics.shellcheck,
+		null_ls.builtins.diagnostics.rubocop,
 		null_ls.builtins.formatting.eslint_d,
 		null_ls.builtins.formatting.jq,
 		null_ls.builtins.formatting.shfmt,
 		null_ls.builtins.formatting.stylua,
+		null_ls.builtins.formatting.rubocop,
+		null_ls.builtins.formatting.sql_formatter,
 		null_ls.builtins.formatting.trim_whitespace,
 	},
 })
 
 local servers = {
-	"solargraph",
+	"sqlls",
 }
 
 local map = vim.keymap.set

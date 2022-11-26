@@ -20,8 +20,13 @@ require("packer").startup(function(use)
 			"nvim-tree/nvim-web-devicons",
 		},
 		config = function()
-			require("nvim-tree").setup()
-			vim.o.guifont = "Iosevka NFM:h18"
+			if vim.fn.has("gui_vimr") == 0 then
+				require("nvim-tree").setup({
+					disable_netrw = true,
+					hijack_unnamed_buffer_when_opening = true,
+					actions = { open_file = { quit_on_open = true } },
+				})
+			end
 		end,
 	})
 
@@ -96,6 +101,14 @@ require("packer").startup(function(use)
 					copilot_node_command = vim.fn.expand("~/.asdf/installs/nodejs/lts/bin/node"),
 				})
 			end)
+		end,
+	})
+
+	use({
+		"zbirenbaum/copilot-cmp",
+		after = { "copilot.lua" },
+		config = function()
+			require("copilot_cmp").setup()
 		end,
 	})
 end)
