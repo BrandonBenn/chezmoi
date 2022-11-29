@@ -24,6 +24,15 @@ require("packer").startup(function(use)
 				require("nvim-tree").setup({
 					disable_netrw = true,
 					hijack_unnamed_buffer_when_opening = true,
+					renderer = {
+						icons = {
+							webdev_colors = false,
+							show = {
+								file = false,
+								folder = false,
+							},
+						},
+					},
 					actions = { open_file = { quit_on_open = true } },
 				})
 			end
