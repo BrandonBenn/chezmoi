@@ -34,9 +34,9 @@ keymap("n", "<C-p>g", builtin.live_grep, { silent = true })
 keymap("n", "<D-f>", builtin.live_grep, { silent = true })
 keymap("n", "<C-p>w", builtin.grep_string, { silent = true })
 
-local keys = { "a", "s", "d", "f", "g" }
+local keys = { "q", "w", "e", "r", "t" }
 for k, v in pairs(keys) do
 	keymap("n", "m" .. v, function()
 		require("harpoon.ui").nav_file(k)
-	end, { silent = true })
+	end, { silent = true, remap = true })
 end

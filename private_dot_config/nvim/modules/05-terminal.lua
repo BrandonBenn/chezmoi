@@ -12,9 +12,12 @@ local set_terminal_keymaps = function()
 end
 autocmd("TermOpen", { pattern = { "term://*" }, callback = set_terminal_keymaps })
 
-local keys = { "z", "x", "c", "v" }
-for k, v in pairs(keys) do
-	keymap({ "n" }, "m" .. v, function()
-		require("harpoon.term").gotoTerminal(k)
-	end)
+for i = 1, 5 do
+	keymap({ "n" }, "m" .. i, function()
+		require("harpoon.term").gotoTerminal(i)
+	end, { silent = true, remap = true })
+
+	keymap({ "i", "n" }, "<A-" .. i .. ">", function()
+		require("harpoon.term").gotoTerminal(i)
+	end, { silent = true, remap = true })
 end
