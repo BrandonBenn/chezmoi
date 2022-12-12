@@ -21,6 +21,10 @@ require("packer").startup(function(use)
 			local rails_cmds = { "foreman start", "rails server", "rails console" }
 
 			require("harpoon").setup({
+				global_settings = {
+					enter_on_sendcmd = true,
+					mark_branch = true,
+				},
 				projects = {
 					["$HOME/Git/keybridge"] = { term = { cmds = rails_cmds } },
 				},
