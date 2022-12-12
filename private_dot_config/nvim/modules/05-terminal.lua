@@ -4,7 +4,6 @@ local keymap = vim.keymap.set
 
 local set_terminal_keymaps = function()
 	local opts = { noremap = true, buffer = 0 }
-	keymap("t", "<esc>", [[<C-\><C-n>]], opts)
 	keymap("t", "<C-W>h", [[<C-\><C-n><C-W>h]], opts)
 	keymap("t", "<C-W>j", [[<C-\><C-n><C-W>j]], opts)
 	keymap("t", "<C-W>k", [[<C-\><C-n><C-W>k]], opts)
