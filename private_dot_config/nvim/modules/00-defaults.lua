@@ -38,7 +38,6 @@ local command = vim.api.nvim_create_user_command
 keymap("v", "<", "<gv", { remap = true })
 keymap("v", ">", ">gv", { remap = true })
 keymap({ "v", "n" }, ";", ":", { remap = true })
-keymap("t", "<Esc>", "<C-\\><C-n>", { silent = true, remap = true })
 keymap("n", "<Tab>", ":tabnext<CR>", { silent = true, remap = true })
 keymap("n", "<S-Tab>", ":tabprev<CR>", { silent = true, remap = true })
 keymap({ "n", "v" }, "g=", vim.lsp.buf.format, { silent = true })
