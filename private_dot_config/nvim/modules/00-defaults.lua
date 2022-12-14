@@ -21,7 +21,6 @@ vim.opt.spelloptions = "camel"
 vim.opt.swapfile = false
 vim.opt.tabstop = 2
 vim.opt.termguicolors = true
-vim.opt.guifont = "JetBrains Mono:h13"
 vim.opt.title = true
 vim.opt.udir = "/tmp/nvim/undo"
 vim.opt.undofile = true

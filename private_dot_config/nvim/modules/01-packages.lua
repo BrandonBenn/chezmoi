@@ -14,7 +14,7 @@ require("packer").startup(function(use)
 	use("famiu/bufdelete.nvim")
 	use("jghauser/mkdir.nvim")
 	use("samjwill/nvim-unception")
-
+	use("Olical/conjure")
 	use({
 		"ThePrimeagen/harpoon",
 		config = function()
