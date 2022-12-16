@@ -1,3 +1,7 @@
+local keymap = vim.keymap.set
+local autocmd = vim.api.nvim_create_autocmd
+local command = vim.api.nvim_create_user_command
+
 -- Set Default Options
 vim.cmd("colorscheme typograph")
 vim.g.mapleader = " "
@@ -29,9 +33,6 @@ vim.opt.wildmenu = true
 vim.opt.wildmode = { "longest", "full" }
 vim.opt.wildchar = ("\t"):byte()
 vim.opt.completeopt = { "menuone", "noselect", "noinsert" }
-local keymap = vim.keymap.set
-local autocmd = vim.api.nvim_create_autocmd
-local command = vim.api.nvim_create_user_command
 
 -- Set Default Keymaps
 keymap("v", "<", "<gv", { remap = true })
