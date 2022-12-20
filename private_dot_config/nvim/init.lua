@@ -56,3 +56,5 @@ vim.api.nvim_create_autocmd({ "InsertLeave" }, {
 		vim.opt_local["relativenumber"] = true
 	end,
 })
+
+require("plugins")
