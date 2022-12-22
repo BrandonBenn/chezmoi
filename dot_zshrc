@@ -11,7 +11,7 @@ zstyle ':completion:*' menu select
 zstyle ':completion::complete:*' gain-privileges 1
 setopt interactivecomments
 
-PS1='➜  '
+PS1=' $ '
 alias ls='ls -F --color=auto --hyperlink=auto'
 alias ll='ls -lah'
 alias rm=trash
