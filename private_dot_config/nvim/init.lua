@@ -57,4 +57,8 @@ vim.api.nvim_create_autocmd({ "InsertLeave" }, {
 	end,
 })
 
+if vim.g.vscode then
+	return
+end
+
 require("plugins")
