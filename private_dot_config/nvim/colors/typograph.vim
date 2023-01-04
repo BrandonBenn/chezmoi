@@ -25,8 +25,8 @@ if ($TERM =~ '256' || &t_Co >= 256) || has("gui_running")
     hi StatusLineTerm ctermbg=NONE ctermfg=NONE cterm=reverse guibg=NONE guifg=NONE gui=reverse
     hi StatusLineTermNC ctermbg=NONE ctermfg=NONE cterm=underline guibg=NONE guifg=NONE gui=underline
     hi VertSplit ctermbg=NONE ctermfg=NONE cterm=NONE guibg=NONE guifg=NONE gui=NONE
-    hi TabLine ctermbg=NONE ctermfg=NONE cterm=underline guibg=NONE guifg=NONE gui=underline
-    hi TabLineFill ctermbg=NONE ctermfg=NONE cterm=underline guibg=NONE guifg=NONE gui=underline
+    hi TabLine ctermbg=NONE ctermfg=NONE cterm=NONE guibg=NONE guifg=NONE gui=NONE
+    hi TabLineFill ctermbg=NONE ctermfg=NONE cterm=underline guibg=NONE guifg=NONE gui=NONE
     hi TabLineSel ctermbg=NONE ctermfg=NONE cterm=reverse guibg=NONE guifg=NONE gui=reverse
     hi Title ctermbg=NONE ctermfg=NONE cterm=NONE guibg=NONE guifg=NONE gui=NONE
     hi CursorLine ctermbg=NONE ctermfg=NONE cterm=NONE guibg=NONE guifg=NONE gui=NONE
@@ -92,8 +92,8 @@ elseif &t_Co == 8 || $TERM !~# '^linux' || &t_Co == 16
     hi StatusLineTerm ctermbg=NONE ctermfg=NONE cterm=reverse
     hi StatusLineTermNC ctermbg=NONE ctermfg=NONE cterm=underline
     hi VertSplit ctermbg=NONE ctermfg=NONE cterm=NONE
-    hi TabLine ctermbg=NONE ctermfg=NONE cterm=underline
-    hi TabLineFill ctermbg=NONE ctermfg=NONE cterm=underline
+    hi TabLine ctermbg=NONE ctermfg=NONE cterm=NONE
+    hi TabLineFill ctermbg=NONE ctermfg=NONE cterm=NONE
     hi TabLineSel ctermbg=NONE ctermfg=NONE cterm=reverse
     hi Title ctermbg=NONE ctermfg=NONE cterm=NONE
     hi CursorLine ctermbg=NONE ctermfg=NONE cterm=NONE

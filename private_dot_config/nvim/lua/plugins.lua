@@ -16,17 +16,50 @@ require('packer').startup(function(use)
 	}
 
 	use {
-		'camspiers/snap',
+		'nvim-telescope/telescope.nvim',
+		requires = { { 'nvim-lua/plenary.nvim' } },
 		config = function()
-			local snap = require("snap")
+			local layout = require("telescope.actions.layout")
+			local builtin = require("telescope.builtin")
 
-			local finder = snap.config.file:with {
-				prompt = " ", reverse = true, layout = snap.get('layout').bottom
+			require('telescope').setup {
+				defaults = {
+					preview = { hide_on_startup = true },
+					mappings = {
+						i = { ["<M-p>"] = layout.toggle_preview },
+						n = { ["<M-p>"] = layout.toggle_preview },
+					},
+				},
+				pickers = {
+					find_files = { theme = "dropdown" },
+					git_files = { theme = "dropdown" },
+					oldfiles = { theme = "dropdown", only_cwd = true },
+					live_grep = { theme = "ivy" },
+					grep_string = { theme = "ivy" },
+				},
 			}
 
-			snap.maps({
-				{ "<C-p><C-p>", finder { try = { "git.file", "ripgrep.file" } } },
-				{ "<C-p>o", finder { producer = "vim.oldfile" } },
+			vim.keymap.set("n", "<C-p><C-p>", function()
+				vim.fn.system("git rev-parse --is-inside-work-tree")
+				if vim.v.shell_error == 0 then
+					builtin.git_files()
+				else
+					builtin.find_files()
+				end
+			end, { silent = true })
+
+			vim.keymap.set('n', '<C-p>o', builtin.oldfiles, { silent = true })
+			vim.keymap.set('n', '<C-p>w', builtin.grep_string, { silent = true })
+			vim.keymap.set("n", "<C-p>r", builtin.resume, { silent = true })
+			vim.keymap.set('n', '<C-p>f', builtin.live_grep, { silent = true })
+		end
+	}
+
+	use {
+		'nvim-treesitter/nvim-treesitter',
+		config = function()
+			require('nvim-treesitter.configs').setup({
+				ensure_installed = { "ruby", "lua", "javascript", "vue" },
 			})
 		end
 	}
@@ -56,7 +89,6 @@ require('packer').startup(function(use)
 			local lsp = require('lsp-zero')
 			lsp.preset('recommended')
 			lsp.ensure_installed({
-				'ruby_ls',
 				'eslint',
 				'sumneko_lua',
 			})
@@ -67,17 +99,13 @@ require('packer').startup(function(use)
 	-- AI Helper
 	use {
 		'zbirenbaum/copilot.lua',
-		requires = {
-			{ 'github/copilot.vim', opt = true },
-		},
-		event = 'InsertEnter',
+		event = 'VimEnter',
 		config = function()
-			vim.schedule(function()
+			vim.defer_fn(function()
 				require('copilot').setup({
 					copilot_node_command = vim.fn.expand('~/.asdf/installs/nodejs/lts/bin/node'),
 				})
-			end)
+			end, 100)
 		end,
 	}
-
 end)
