@@ -78,6 +78,22 @@ require('packer').startup(function(use)
   }
 
   use {
+    'lewis6991/gitsigns.nvim',
+    config = function() require('gitsigns').setup() end
+  }
+
+  use {
+    "akinsho/toggleterm.nvim", tag = '*',
+    config = function()
+      require("toggleterm").setup()
+      local Terminal = require('toggleterm.terminal').Terminal
+      local lazygit  = Terminal:new({ cmd = "NO_COLOR=1 lazygit", direction = "float", hidden = true })
+
+      vim.keymap.set('n', '<leader>gg', function() lazygit:toggle() end, { noremap = true, silent = true })
+    end
+  }
+
+  use {
     'nvim-treesitter/nvim-treesitter',
     config = function()
       require('nvim-treesitter.configs').setup({
