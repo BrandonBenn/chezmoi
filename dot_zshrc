@@ -52,3 +52,11 @@ n() {
             rm -f "$NNN_TMPFILE" > /dev/null
     fi
 }
+
+# Toggle "sudo" at the start.
+  toggle-sudo() {
+      [[ "${BUFFER:0:4}" = "sudo" ]] &&
+          {CURSOR+=-5; BUFFER="${BUFFER:5}";} ||
+          {BUFFER="sudo $BUFFER"; CURSOR+=5;}
+  }
+  zle -N toggle-sudo toggle-sudo && bindkey '^s' toggle-sudo
