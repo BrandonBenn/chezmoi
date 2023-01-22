@@ -20,9 +20,12 @@ vim.o.wrap = false
 vim.o.mouse = ""
 
 -- Set Keymaps
-vim.keymap.set("v", "<", "<gv", { remap = true, silent = true })
-vim.keymap.set("v", ">", ">gv", { remap = true, silent = true })
-vim.keymap.set({ "v", "n" }, ";", ":", { remap = true })
-vim.keymap.set({ "n", "v" }, "g=", vim.lsp.buf.format, { remap = true, silent = true })
+local options = { remap = true, silent = true }
+vim.keymap.set("v", "<", "<gv", options)
+vim.keymap.set("v", ">", ">gv", options)
+vim.keymap.set({ "v", "n" }, ";", ":", { silent = false })
+vim.keymap.set({ "n", "v" }, "g=", vim.lsp.buf.format, options)
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setqflist, options)
+vim.keymap.set('n', '<LocalLeader>ca', vim.lsp.buf.code_action, options)
 
 require("plugins")
