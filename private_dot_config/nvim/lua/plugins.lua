@@ -56,25 +56,8 @@ require('packer').startup(function(use)
   }
 
   use {
-    'nvim-tree/nvim-tree.lua',
-    config = function()
-      require("nvim-tree").setup({
-        hijack_unnamed_buffer_when_opening = true,
-        hijack_netrw = true,
-        view = {
-          mappings = {
-            list = {
-              { key = "<CR>", action = "edit_in_place" }
-            }
-          }
-        },
-      })
-
-      vim.keymap.set('n', [[-]], function()
-        require('nvim-tree').open_replacing_current_buffer()
-      end, { silent = true, remap = true })
-
-    end
+    'SidOfc/carbon.nvim',
+    config = function() require('carbon').setup({}) end
   }
 
   use {
