@@ -1,25 +1,22 @@
-vim.cmd.packadd('packer.nvim')
+vim.cmd.packadd('lazy.nvim')
 
-require('packer').startup(function(use)
-  -- Editing Support
-  use {
+require('lazy').startup(
+-- Editing Support
+  {
     'wbthomason/packer.nvim',
-    requires = {
+    dependencies = {
       'junegunn/vim-easy-align',
-      'numToStr/Comment.nvim',
-      'm4xshen/autoclose.nvim',
-      'lukas-reineke/indent-blankline.nvim',
+      { 'numToStr/Comment.nvim', config = true },
+      { 'm4xshen/autoclose.nvim', config = true },
+      { 'lukas-reineke/indent-blankline.nvim', name = 'indent_blankline', config = true },
     },
-    config = function()
-      require('Comment').setup()
-      require('autoclose').setup({})
-      require("indent_blankline").setup()
-    end
-  }
+  },
 
-  use {
+  { 'Olical/conjure' },
+
+  {
     'nvim-telescope/telescope.nvim',
-    requires = { { 'nvim-lua/plenary.nvim' } },
+    dependencies = { { 'nvim-lua/plenary.nvim' } },
     config = function()
       local layout = require("telescope.actions.layout")
       local builtin = require("telescope.builtin")
@@ -53,30 +50,23 @@ require('packer').startup(function(use)
       vim.keymap.set('n', '<C-p>r', builtin.resume, { silent = true })
       vim.keymap.set('n', '<C-p>f', builtin.live_grep, { silent = true })
     end
-  }
+  },
 
-  use {
-    'SidOfc/carbon.nvim',
-    config = function() require('carbon').setup({}) end
-  }
+  { 'SidOfc/carbon.nvim', config = true },
 
-  use {
-    'lewis6991/gitsigns.nvim',
-    config = function() require('gitsigns').setup() end
-  }
+  { 'lewis6991/gitsigns.nvim', config = true },
 
-  use {
+  {
     "akinsho/toggleterm.nvim", tag = '*',
     config = function()
       require("toggleterm").setup()
       local Terminal = require('toggleterm.terminal').Terminal
       local lazygit  = Terminal:new({ cmd = "NO_COLOR=1 lazygit", direction = "float", hidden = true })
-
       vim.keymap.set('n', '<leader>gg', function() lazygit:toggle() end, { noremap = true, silent = true })
     end
-  }
+  },
 
-  use {
+  {
     'nvim-treesitter/nvim-treesitter',
     config = function()
       require('nvim-treesitter.configs').setup({
@@ -95,17 +85,16 @@ require('packer').startup(function(use)
         },
       })
     end
-  }
+  },
 
   -- IDE functionality
-  use {
+  {
     'VonHeikemen/lsp-zero.nvim',
-    requires = {
+    dependencies = {
       -- LSP Support
       { 'neovim/nvim-lspconfig' },
       { 'williamboman/mason.nvim' },
       { 'williamboman/mason-lspconfig.nvim' },
-
       -- Autocompletion
       { 'hrsh7th/nvim-cmp' },
       { 'hrsh7th/cmp-buffer' },
@@ -113,7 +102,6 @@ require('packer').startup(function(use)
       { 'saadparwaiz1/cmp_luasnip' },
       { 'hrsh7th/cmp-nvim-lsp' },
       { 'hrsh7th/cmp-nvim-lua' },
-
       -- Snippets
       { 'L3MON4D3/LuaSnip' },
       { 'rafamadriz/friendly-snippets' },
@@ -131,11 +119,9 @@ require('packer').startup(function(use)
 
       lsp.setup()
     end
-  }
+  },
 
-  use { 'Olical/conjure' }
-
-  use {
+  {
     'jose-elias-alvarez/null-ls.nvim',
     config = function()
       local null_ls = require("null-ls")
@@ -148,12 +134,11 @@ require('packer').startup(function(use)
         },
       })
     end
-  }
-
-  -- AI Helper
-  use {
+  },
+  {
+    -- AI Helper
     'zbirenbaum/copilot.lua',
-    event = 'VimEnter',
+    event = 'InsertEnter',
     config = function()
       vim.defer_fn(function()
         require('copilot').setup({
@@ -162,4 +147,4 @@ require('packer').startup(function(use)
       end, 100)
     end,
   }
-end)
+)
