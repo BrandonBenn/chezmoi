@@ -58,7 +58,7 @@ require('lazy').setup({
 
   {
     -- Terminal
-    'akinsho/toggleterm.nvim', tag = '*',
+    'akinsho/toggleterm.nvim',
     config = function()
       require('toggleterm').setup()
       local Terminal = require('toggleterm.terminal').Terminal
@@ -92,10 +92,28 @@ require('lazy').setup({
       lsp.preset('recommended')
       lsp.ensure_installed({
         'sumneko_lua',
+        'ruff_lsp',
       })
 
       lsp.configure('solargraph', { settings = { cmd = vim.fn.expand('~/.asdf/shims/solargraph') } })
       lsp.setup()
+    end
+  },
+
+  {
+    -- Linter
+    'jose-elias-alvarez/null-ls.nvim',
+    config = function()
+      local null_ls = require('null-ls')
+      null_ls.setup({
+        sources = {
+          null_ls.builtins.completion.spell,
+          null_ls.builtins.diagnostics.eslint_d,
+          null_ls.builtins.formatting.black,
+          null_ls.builtins.formatting.eslint_d,
+          null_ls.builtins.formatting.trim_whitespace,
+        },
+      })
     end
   },
 
@@ -115,22 +133,6 @@ require('lazy').setup({
             scope_incremental = '<S-CR>',
             node_decremental = '<BS>',
           },
-        },
-      })
-    end
-  },
-
-  {
-    -- Linter
-    'jose-elias-alvarez/null-ls.nvim',
-    config = function()
-      local null_ls = require('null-ls')
-      null_ls.setup({
-        sources = {
-          null_ls.builtins.completion.spell,
-          null_ls.builtins.diagnostics.eslint_d,
-          null_ls.builtins.formatting.eslint_d,
-          null_ls.builtins.formatting.trim_whitespace,
         },
       })
     end
