@@ -27,5 +27,3 @@ vim.keymap.set({ "v", "n" }, ";", ":", { silent = false })
 vim.keymap.set({ "n", "v" }, "g=", vim.lsp.buf.format, options)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setqflist, options)
 vim.keymap.set('n', '<LocalLeader>ca', vim.lsp.buf.code_action, options)
-
-require("plugins")

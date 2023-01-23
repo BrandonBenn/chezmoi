@@ -10,7 +10,7 @@
     url = "https://github.com/asdf-vm/asdf.git"
     type = "git-repo"
 
-[".local/share/nvim/site/pack/lazy/start/lazy.nvim"]
+[".local/share/nvim/lazy/lazy.nvim"]
     url = "https://github.com/folke/lazy.nvim.git"
     type = "git-repo"
 
