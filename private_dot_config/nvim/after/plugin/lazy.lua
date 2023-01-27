@@ -118,6 +118,9 @@ require('lazy').setup({
           null_ls.builtins.completion.spell,
           null_ls.builtins.diagnostics.shellcheck,
           null_ls.builtins.diagnostics.eslint_d,
+          null_ls.builtins.formatting.sqlfluff.with({
+            extra_args = { "--dialect", "postgres" },
+          }),
           null_ls.builtins.formatting.black,
           null_ls.builtins.formatting.eslint_d,
           null_ls.builtins.formatting.trim_whitespace,
