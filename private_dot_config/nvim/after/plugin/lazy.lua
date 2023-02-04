@@ -7,6 +7,7 @@ require('lazy').setup({
     -- Editing Support
     'wbthomason/packer.nvim',
     dependencies = {
+      'vim-test/vim-test',
       'junegunn/vim-easy-align',
       'Olical/conjure',
       { 'numToStr/Comment.nvim', config = true },
@@ -54,7 +55,18 @@ require('lazy').setup({
     end
   },
 
-  { 'lewis6991/gitsigns.nvim', config = true }, -- Inline Git Functionality
+  {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      local gitsigns = require('gitsigns')
+      gitsigns.setup()
+
+      vim.keymap.set('n', '<leader>ghr', gitsigns.reset_hunk, { silent = true })
+      vim.keymap.set('n', '<leader>gb', gitsigns.blame_line, { silent = true })
+      vim.keymap.set('n', '<leader>ghb', gitsigns.reset_buffer, { silent = true })
+      vim.keymap.set('n', '<leader>gs', gitsigns.stage_hunk, { silent = true })
+    end
+  },
 
   {
     -- Terminal
