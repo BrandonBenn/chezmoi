@@ -9,7 +9,7 @@ require('lazy').setup({
     dependencies = {
       'vim-test/vim-test',
       'junegunn/vim-easy-align',
-      'Olical/conjure',
+      { 'https://gitlab.com/yorickpeterse/nvim-pqf.git', as = 'pqf', config = true },
       { 'numToStr/Comment.nvim', config = true },
       { 'm4xshen/autoclose.nvim', config = true },
       { 'lukas-reineke/indent-blankline.nvim', config = true },
