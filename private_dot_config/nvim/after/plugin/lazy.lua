@@ -61,10 +61,10 @@ require('lazy').setup({
       local gitsigns = require('gitsigns')
       gitsigns.setup()
 
-      vim.keymap.set('n', '<leader>ghr', gitsigns.reset_hunk, { silent = true })
+      vim.keymap.set('n', '<leader>gR', gitsigns.reset_hunk, { silent = true })
       vim.keymap.set('n', '<leader>gb', gitsigns.blame_line, { silent = true })
-      vim.keymap.set('n', '<leader>ghb', gitsigns.reset_buffer, { silent = true })
       vim.keymap.set('n', '<leader>gs', gitsigns.stage_hunk, { silent = true })
+      vim.keymap.set('n', '<leader>gS', gitsigns.stage_buffer, { silent = true })
     end
   },
 
