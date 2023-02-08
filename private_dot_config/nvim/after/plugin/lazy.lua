@@ -101,7 +101,15 @@ require('lazy').setup({
     },
     config = function()
       local lsp = require('lsp-zero')
+      local cmp = require("cmp")
+
       lsp.preset('recommended')
+      lsp.setup_nvim_cmp({
+        window = {
+          completion = cmp.config.window.bordered(),
+        },
+      })
+
       lsp.ensure_installed({
         'sumneko_lua',
         'ruff_lsp',
