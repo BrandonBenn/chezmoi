@@ -95,6 +95,7 @@ require('lazy').setup({
       'hrsh7th/cmp-nvim-lua',
       'hrsh7th/cmp-path',
       'hrsh7th/nvim-cmp',
+      'lukas-reineke/cmp-rg',
       'saadparwaiz1/cmp_luasnip',
       -- Snippets
       'L3MON4D3/LuaSnip',
@@ -114,9 +115,15 @@ require('lazy').setup({
       local cmp = require('cmp')
       cmp.setup(
         lsp.defaults.cmp_config({
-          window = {
-            completion = cmp.config.window.bordered()
-          }
+          window = { completion = cmp.config.window.bordered() },
+          sources = {
+            { name = 'nvim_lua' },
+            { name = 'nvim_lsp' },
+            { name = 'buffer'},
+            { name = 'rg' },
+            { name = 'path' },
+            { name = 'cmdline' },
+          },
         })
       )
 
