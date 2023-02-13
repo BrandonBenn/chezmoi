@@ -89,34 +89,47 @@ require('lazy').setup({
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       -- Autocompletion
-      'hrsh7th/nvim-cmp',
       'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      'saadparwaiz1/cmp_luasnip',
+      'hrsh7th/cmp-cmdline',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-nvim-lua',
+      'hrsh7th/cmp-path',
+      'hrsh7th/nvim-cmp',
+      'saadparwaiz1/cmp_luasnip',
       -- Snippets
       'L3MON4D3/LuaSnip',
       'rafamadriz/friendly-snippets',
     },
     config = function()
       local lsp = require('lsp-zero')
-      local cmp = require("cmp")
-
       lsp.preset('recommended')
-      lsp.setup_nvim_cmp({
-        window = {
-          completion = cmp.config.window.bordered(),
-        },
-      })
-
+      lsp.configure('solargraph', { settings = { cmd = vim.fn.expand('~/.asdf/shims/solargraph') } })
+      lsp.setup()
       lsp.ensure_installed({
         'sumneko_lua',
         'ruff_lsp',
       })
 
-      lsp.configure('solargraph', { settings = { cmd = vim.fn.expand('~/.asdf/shims/solargraph') } })
-      lsp.setup()
+
+      local cmp = require('cmp')
+      cmp.setup(
+        lsp.defaults.cmp_config({
+          window = {
+            completion = cmp.config.window.bordered()
+          }
+        })
+      )
+
+      cmp.setup.cmdline({ '/', '?' }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = { { name = 'buffer' } }
+      })
+
+      cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({ { name = 'path' } }, { { name = 'cmdline' } })
+      })
+
     end
   },
 
@@ -136,13 +149,11 @@ require('lazy').setup({
       null_ls.setup({
         sources = {
           null_ls.builtins.completion.spell,
-          null_ls.builtins.diagnostics.shellcheck,
           null_ls.builtins.diagnostics.eslint_d,
-          null_ls.builtins.formatting.sqlfluff.with({
-            extra_args = { "--dialect", "postgres" },
-          }),
+          null_ls.builtins.diagnostics.shellcheck,
           null_ls.builtins.formatting.black,
           null_ls.builtins.formatting.eslint_d,
+          null_ls.builtins.formatting.sqlfluff.with({ extra_args = { "--dialect", "postgres" } }),
           null_ls.builtins.formatting.trim_whitespace,
         },
       })
