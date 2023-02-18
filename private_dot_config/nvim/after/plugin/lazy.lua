@@ -2,13 +2,18 @@ local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then return end
 vim.opt.rtp:prepend(lazypath)
 
+local opts = {
+  install = { missing = true, colorscheme = { 'typograph' } }
+}
+
 require('lazy').setup({
   {
     -- Editing Support
     'wbthomason/packer.nvim',
     dependencies = {
-      'vim-test/vim-test',
       'junegunn/vim-easy-align',
+      'stevearc/dressing.nvim',
+      'vim-test/vim-test',
       { 'https://gitlab.com/yorickpeterse/nvim-pqf.git', as = 'pqf', config = true },
       { 'numToStr/Comment.nvim', config = true },
       { 'm4xshen/autoclose.nvim', config = true },
@@ -19,10 +24,11 @@ require('lazy').setup({
   {
     -- Fuzzy Finder
     'nvim-telescope/telescope.nvim',
-    dependencies = { { 'nvim-lua/plenary.nvim' } },
+    dependencies = { { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-ui-select.nvim' } },
     config = function()
       local layout = require('telescope.actions.layout')
       local builtin = require('telescope.builtin')
+      require("telescope").load_extension("ui-select")
 
       require('telescope').setup {
         defaults = {
@@ -60,7 +66,6 @@ require('lazy').setup({
     config = function()
       local gitsigns = require('gitsigns')
       gitsigns.setup()
-
       vim.keymap.set('n', '<leader>gR', gitsigns.reset_hunk, { silent = true })
       vim.keymap.set('n', '<leader>gb', gitsigns.blame_line, { silent = true })
       vim.keymap.set('n', '<leader>gs', gitsigns.stage_hunk, { silent = true })
@@ -75,7 +80,6 @@ require('lazy').setup({
       require('toggleterm').setup()
       local Terminal = require('toggleterm.terminal').Terminal
       local lazygit  = Terminal:new({ cmd = 'NO_COLOR=1 lazygit', direction = 'float', hidden = true })
-
       vim.keymap.set('n', '<leader>gg', function() lazygit:toggle() end, { noremap = true, silent = true })
     end
   },
@@ -119,7 +123,7 @@ require('lazy').setup({
           sources = {
             { name = 'nvim_lua' },
             { name = 'nvim_lsp' },
-            { name = 'buffer'},
+            { name = 'buffer' },
             { name = 'rg' },
             { name = 'path' },
             { name = 'cmdline' },
@@ -200,4 +204,4 @@ require('lazy').setup({
       end, 100)
     end,
   },
-})
+}, opts)
