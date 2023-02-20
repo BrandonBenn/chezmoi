@@ -121,6 +121,7 @@ require('lazy').setup({
         lsp.defaults.cmp_config({
           window = { completion = cmp.config.window.bordered() },
           sources = {
+            { name = 'luasnip' },
             { name = 'nvim_lua' },
             { name = 'nvim_lsp' },
             { name = 'buffer' },
