@@ -11,6 +11,7 @@ require('lazy').setup({
     -- Editing Support
     'wbthomason/packer.nvim',
     dependencies = {
+      'elixir-editors/vim-elixir',
       'junegunn/vim-easy-align',
       'stevearc/dressing.nvim',
       'vim-test/vim-test',
