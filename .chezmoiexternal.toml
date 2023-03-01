@@ -1,14 +1,11 @@
-[".local/share/zsh/zsh-autosuggestions.zsh"]
-    url = "https://raw.githubusercontent.com/zsh-users/zsh-autosuggestions/master/zsh-autosuggestions.zsh"
+["bin/rtx"]
+  {{ if eq .chezmoi.os "darwin" -}}
+    url = "https://rtx.pub/rtx-latest-macos-arm64"
+  {{ else -}}
+    url = "https://rtx.pub/rtx-latest-linux-amd64"
+  {{ end -}}
     type = "file"
-
-[".local/share/zsh/zsh-tab-title.zsh"]
-    url = "https://raw.githubusercontent.com/trystan2k/zsh-tab-title/master/zsh-tab-title.plugin.zsh"
-    type = "file"
-
-[".asdf"]
-    url = "https://github.com/asdf-vm/asdf.git"
-    type = "git-repo"
+    executable = true
 
 [".local/share/nvim/lazy/lazy.nvim"]
     url = "https://github.com/folke/lazy.nvim.git"
@@ -20,4 +17,3 @@
     type    = "archive"
     exclude = ["docs.json"]
 {{ end -}}
-
