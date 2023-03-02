@@ -21,6 +21,7 @@ export SAVEHIST=10000
 PATH="$PATH":~/.local/bin
 PATH="$PATH":~/bin
 PATH="$PATH":"$GOPATH"/bin
+PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
 export PATH
 
 [ -x "/opt/homebrew/bin/brew" ] && eval "$(/opt/homebrew/bin/brew shellenv)"

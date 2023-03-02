@@ -1,5 +1,4 @@
-brew "atuin"
-brew "gitui"
+brew "lazygit"
 brew "stylua"
 brew "blueutil"
 brew "trash"
@@ -20,12 +19,11 @@ brew "nnn"
 brew "redis"
 brew "fzf"
 brew "ripgrep"
-brew "elasticsearch-full"
+brew "opensearch", enable_service: :changed
 brew "syncthing", enable_service: :changed
-brew "mysql@5.7", restart_service: :changed, link: true, conflicts_with: ["mysql"]
+brew "mysql@8.0", restart_service: :changed, link: true, conflicts_with: ["mysql"]
 
 cask "firefox"
-cask "qutebrowser"
 cask "dbeaver-community"
 cask "keepassxc", greedy: true
 cask "hammerspoon", greedy: true
