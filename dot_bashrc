@@ -23,5 +23,6 @@ PATH="$PATH":~/bin
 PATH="$PATH":"$GOPATH"/bin
 export PATH
 
+[ -x "/opt/homebrew/bin/brew" ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 [ -x "$(command -v rtx)" ] && eval "$(rtx activate bash)"
 [ -x "$(command -v starship)" ] && eval "$(starship init bash)"
