@@ -11,9 +11,9 @@ require('lazy').setup({
     -- Editing Support
     'wbthomason/packer.nvim',
     dependencies = {
+      'elixir-editors/vim-elixir',
       'junegunn/vim-easy-align',
       'stevearc/dressing.nvim',
-      'tpope/vim-dadbod',
       'vim-test/vim-test',
       { 'https://gitlab.com/yorickpeterse/nvim-pqf.git', as = 'pqf', config = true },
       { 'numToStr/Comment.nvim', config = true },
@@ -62,7 +62,6 @@ require('lazy').setup({
     end
   },
 
-  -- Git Functionality
   {
     'lewis6991/gitsigns.nvim',
     config = function()
@@ -73,11 +72,6 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>gs', gitsigns.stage_hunk, { silent = true })
       vim.keymap.set('n', '<leader>gS', gitsigns.stage_buffer, { silent = true })
     end
-  },
-
-  {
-    'TimUntersberger/neogit',
-    config = true,
   },
 
   {
@@ -141,12 +135,15 @@ require('lazy').setup({
 
       cmp.setup.cmdline({ '/', '?' }, {
         mapping = cmp.mapping.preset.cmdline(),
-        sources = { { name = 'buffer' } }
+        sources = { { name = 'buffer', keyword_length = 3 } }
       })
 
       cmp.setup.cmdline(':', {
         mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources({ { name = 'path' } }, { { name = 'cmdline' } })
+        sources = cmp.config.sources(
+          { { name = 'path' } },
+          { { name = 'cmdline', keyword_length = 3 } }
+        )
       })
 
     end
@@ -181,10 +178,9 @@ require('lazy').setup({
 
   {
     'nvim-treesitter/nvim-treesitter',
-    'nvim-treesitter/playground',
     config = function()
       require('nvim-treesitter.configs').setup({
-        ensure_installed = { 'ruby', 'python', 'lua', 'javascript', 'vue', 'sql' },
+        ensure_installed = { 'ruby', 'python', 'lua', 'javascript', 'vue' },
       })
 
       require('nvim-treesitter.configs').setup({
@@ -207,10 +203,8 @@ require('lazy').setup({
     event = 'VimEnter',
     config = function()
       vim.defer_fn(function()
-        require('copilot').setup({
-          copilot_node_command = vim.fn.expand('~/.asdf/installs/nodejs/lts/bin/node'),
-        })
-      end, 100)
+        require('copilot').setup({})
+      end, 1000)
     end,
   },
 }, opts)
