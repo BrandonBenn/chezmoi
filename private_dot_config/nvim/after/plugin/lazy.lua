@@ -78,7 +78,9 @@ require('lazy').setup({
     -- Terminal
     'akinsho/toggleterm.nvim',
     config = function()
-      require('toggleterm').setup()
+      require('toggleterm').setup({
+        open_mapping = [[<c-\>]]
+      })
       local Terminal = require('toggleterm.terminal').Terminal
       local lazygit  = Terminal:new({ cmd = 'NO_COLOR=1 lazygit', direction = 'float', hidden = true })
       vim.keymap.set('n', '<leader>gg', function() lazygit:toggle() end, { noremap = true, silent = true })

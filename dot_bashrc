@@ -1,8 +1,13 @@
+#!/usr/bin/env bash
+[ -x "/opt/homebrew/bin/brew" ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+[ -x "$(command -v starship)" ] &&  eval "$(starship init bash)"
+
 PS1=' $ '
 alias ls='ls -F --color=auto --hyperlink=auto'
 alias ll='ls -lah'
 alias rm=trash
 
+export DATADIR=~/.local/share/mysql
 export INPUT_METHOD=fcitx5
 export GTK_IM_MODULE=fcitx5
 export QT_IM_MODULE=fcitx5
@@ -24,6 +29,6 @@ PATH="$PATH":"$GOPATH"/bin
 PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
 export PATH
 
-[ -x "/opt/homebrew/bin/brew" ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 [ -x "$(command -v rtx)" ] && eval "$(rtx activate bash)"
-[ -x "$(command -v starship)" ] && eval "$(starship init bash)"
+
+source ~/.bashrc.local
