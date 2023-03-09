@@ -182,7 +182,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     config = function()
       require('nvim-treesitter.configs').setup({
-        ensure_installed = { 'ruby', 'python', 'lua', 'javascript', 'vue' },
+        ensure_installed = { 'ruby', 'python', 'lua', 'javascript', 'vue', 'json', 'http' },
       })
 
       require('nvim-treesitter.configs').setup({
@@ -197,6 +197,13 @@ require('lazy').setup({
         },
       })
     end
+  },
+
+  {
+    "rest-nvim/rest.nvim",
+    name = "rest-nvim",
+    requires = { 'nvim-lua/plenary.nvim' },
+    config = true,
   },
 
   {
