@@ -202,11 +202,11 @@ require('lazy').setup({
   {
     -- AI Helper
     'zbirenbaum/copilot.lua',
-    event = 'VimEnter',
+    event = 'BufEnter',
     config = function()
-      vim.defer_fn(function()
-        require('copilot').setup({})
-      end, 1000)
+      require('copilot').setup({
+        copilot_node_command = vim.fn.expand('~/.local/share/rtx/installs/nodejs/18.15.0/bin/node')
+      })
     end,
   },
 }, opts)
