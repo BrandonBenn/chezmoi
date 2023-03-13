@@ -7,8 +7,8 @@ vim.o.exrc = true
 vim.o.title = true
 vim.o.hidden = true
 vim.o.laststatus = 0
-vim.o.number = true
-vim.o.relativenumber = true
+vim.o.number = false
+vim.o.relativenumber = false
 vim.o.scrolloff = 999
 vim.o.shiftwidth = 2
 vim.o.tabstop = 2
@@ -24,6 +24,8 @@ vim.o.background = 'light'
 
 -- Set Keymaps
 local options = { remap = true, silent = true }
+vim.keymap.set('n', '<Tab>', ':tabn<cr>', options)
+vim.keymap.set('n', '<S-Tab>', ':tabp<cr>', options)
 vim.keymap.set('v', '<', '<gv', options)
 vim.keymap.set('v', '>', '>gv', options)
 vim.keymap.set({ 'v', 'n' }, ';', ':', { silent = false })

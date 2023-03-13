@@ -88,6 +88,11 @@ require('lazy').setup({
   },
 
   {
+    'willothy/flatten.nvim',
+    config = true,
+  },
+
+  {
     -- IDE Functionality
     'VonHeikemen/lsp-zero.nvim',
     dependencies = {
@@ -116,6 +121,7 @@ require('lazy').setup({
       lsp.ensure_installed({
         'sumneko_lua',
         'ruff_lsp',
+        'gopls,'
       })
 
 
@@ -182,7 +188,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     config = function()
       require('nvim-treesitter.configs').setup({
-        ensure_installed = { 'ruby', 'python', 'lua', 'javascript', 'vue', 'json', 'http' },
+        ensure_installed = { 'ruby', 'python', 'lua', 'javascript', 'vue', 'json', 'http', 'go' },
       })
 
       require('nvim-treesitter.configs').setup({
@@ -201,12 +207,29 @@ require('lazy').setup({
 
   {
     "rest-nvim/rest.nvim",
-    name = "rest-nvim",
     requires = { 'nvim-lua/plenary.nvim' },
-    config = true,
+    ft = "http",
+    config = function()
+      require("rest-nvim").setup({
+        result_split_horizontal = true
+      })
+    end,
+    keys = {
+      { "<leader><leader>", "<Plug>RestNvim", desc = "Run the request under the cursor" },
+    }
   },
 
   {
+    "ray-x/go.nvim",
+    dependencies = { "ray-x/guihua.lua" },
+    config = function()
+      require("go").setup()
+    end,
+    event = {"CmdlineEnter"},
+    ft = {"go", 'gomod'},
+  },
+
+{
     -- AI Helper
     'zbirenbaum/copilot.lua',
     event = 'BufEnter',
