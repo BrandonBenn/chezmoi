@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#
 [ -x "/opt/homebrew/bin/brew" ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 [ -x "$(command -v starship)" ] &&  eval "$(starship init bash)"
 
@@ -31,4 +32,5 @@ export PATH
 
 [ -x "$(command -v rtx)" ] && eval "$(rtx activate bash)"
 
-source ~/.bashrc.local
+[ ! -f ~/.bashrc.local ] || . "$HOME"/.bashrc.local
+[ ! -f .env ] || export "$(grep -v '^#' .env | xargs)"
