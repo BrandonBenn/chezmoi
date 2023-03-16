@@ -37,6 +37,15 @@ require('notes').setup({
   notes_dir = vim.fn.expand(os.getenv('NOTES_DIR'))
 })
 
+function toggle_theme()
+  if vim.o.background == 'light' then
+    vim.o.background = 'dark'
+  else
+    vim.o.background = 'light'
+  end
+end
+vim.keymap.set({'n','v', 'v'}, '<F2>', toggle_theme, options)
+
 if vim.g.neovide then
   vim.g.neovide_input_use_logo = 1 -- enable use of the logo (cmd) key
   vim.g.neovide_input_macos_alt_is_meta = true
