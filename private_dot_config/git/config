@@ -2,7 +2,7 @@
 	email = me@brandonbenn.xyz
 	name  = Brandon Duval Benn
 [core]
-  editor = nvim --cmd 'let g:unception_block_while_host_edits=1'
+  editor = nvim --cmd
 [commit]
 	template = ~/.config/git/template
 [status]
@@ -30,3 +30,5 @@
     wip = !git add -A && git commit -m "WIP"
 [cola]
 	spellcheck = false
+[gui]
+	editor = nvim-qt --nofork

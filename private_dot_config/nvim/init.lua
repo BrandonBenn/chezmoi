@@ -55,6 +55,7 @@ if vim.g.neovide then
     vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
   end
 
+  vim.keymap.set('n', '<D-w>', ':bd<cr>', options)
   for _, key in ipairs({ 'C', 'D' }) do
     vim.keymap.set("n", "<" .. key .. "-=>", function()
       change_scale_factor(1.25)
