@@ -79,7 +79,8 @@ require('lazy').setup({
     'akinsho/toggleterm.nvim',
     config = function()
       require('toggleterm').setup({
-        open_mapping = [[<c-\>]]
+        open_mapping = [[<A-\>]],
+        direction = 'tab',
       })
       local Terminal = require('toggleterm.terminal').Terminal
       local lazygit  = Terminal:new({ cmd = 'NO_COLOR=1 lazygit', direction = 'float', hidden = true })
