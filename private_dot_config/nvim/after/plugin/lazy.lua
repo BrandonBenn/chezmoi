@@ -187,9 +187,10 @@ require('lazy').setup({
 
   {
     'nvim-treesitter/nvim-treesitter',
+    dependencies = { 'nvim-treesitter/playground' },
     config = function()
       require('nvim-treesitter.configs').setup({
-        ensure_installed = { 'ruby', 'python', 'lua', 'javascript', 'vue', 'json', 'http', 'go' },
+        ensure_installed = { 'ruby', 'python', 'lua', 'javascript', 'vue', 'json', 'http', 'go', 'sql' },
       })
 
       require('nvim-treesitter.configs').setup({
