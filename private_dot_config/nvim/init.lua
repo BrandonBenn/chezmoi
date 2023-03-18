@@ -19,8 +19,8 @@ vim.o.udir = "/tmp/nvim/undo"
 vim.o.undofile = true
 vim.o.wrap = false
 vim.o.mouse = ""
-vim.opt.guifont = { "JetBrains Mono", "h14" }
-vim.o.background = 'light'
+vim.opt.guifont = { "Iosevka Nerd Font", "h14" }
+-- vim.o.background = 'light'
 
 -- Set Keymaps
 local options = { remap = true, silent = true }
@@ -46,18 +46,18 @@ function toggle_theme()
 end
 vim.keymap.set({'n','v', 'v'}, '<F2>', toggle_theme, options)
 
+for _, key in ipairs({ 'C', 'D' }) do
+  vim.keymap.set('n', '<' .. key .. '-s>', ':w<CR>') -- Save
+  vim.keymap.set('v', '<' .. key .. '-c>', '"+y') -- Copy
+  vim.keymap.set('n', '<' .. key .. '-v>', '"+P') -- Paste normal mode
+  vim.keymap.set('v', '<' .. key .. '-v>', '"+P') -- Paste visual mode
+  vim.keymap.set('c', '<' .. key .. '-v>', '<C-R>+') -- Paste command mode
+  vim.keymap.set('i', '<' .. key .. '-v>', '<ESC>l"+Pli') -- Paste insert mode
+end
+
 if vim.g.neovide then
   vim.g.neovide_input_use_logo = 1 -- enable use of the logo (cmd) key
   vim.g.neovide_input_macos_alt_is_meta = true
-
-  for _, key in ipairs({ 'C', 'D' }) do
-    vim.keymap.set('n', '<' .. key .. '-s>', ':w<CR>') -- Save
-    vim.keymap.set('v', '<' .. key .. '-c>', '"+y') -- Copy
-    vim.keymap.set('n', '<' .. key .. '-v>', '"+P') -- Paste normal mode
-    vim.keymap.set('v', '<' .. key .. '-v>', '"+P') -- Paste visual mode
-    vim.keymap.set('c', '<' .. key .. '-v>', '<C-R>+') -- Paste command mode
-    vim.keymap.set('i', '<' .. key .. '-v>', '<ESC>l"+Pli') -- Paste insert mode
-  end
 
   vim.g.neovide_scale_factor = 1.0
   local change_scale_factor = function(delta)

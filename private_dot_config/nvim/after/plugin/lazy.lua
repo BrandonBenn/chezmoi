@@ -11,14 +11,12 @@ require('lazy').setup({
     -- Editing Support
     'wbthomason/packer.nvim',
     dependencies = {
-      'elixir-editors/vim-elixir',
       'junegunn/vim-easy-align',
       'stevearc/dressing.nvim',
       'vim-test/vim-test',
       { 'https://gitlab.com/yorickpeterse/nvim-pqf.git', as = 'pqf', config = true },
       { 'numToStr/Comment.nvim', config = true },
       { 'm4xshen/autoclose.nvim', config = true },
-      { 'lukas-reineke/indent-blankline.nvim', config = true },
     },
   },
 
@@ -117,12 +115,12 @@ require('lazy').setup({
     config = function()
       local lsp = require('lsp-zero')
       lsp.preset('recommended')
-      lsp.configure('solargraph', { settings = { cmd = vim.fn.expand('~/.asdf/shims/solargraph') } })
       lsp.setup()
       lsp.ensure_installed({
-        'sumneko_lua',
+        'gopls',
         'ruff_lsp',
-        'gopls,'
+        'solargraph',
+        'sumneko_lua',
       })
 
 
@@ -217,7 +215,7 @@ require('lazy').setup({
       })
     end,
     keys = {
-      { "<leader><leader>", "<Plug>RestNvim", desc = "Run the request under the cursor" },
+      { "<leader>R", "<Plug>RestNvim", desc = "Run the request under the cursor" },
     }
   },
 
@@ -231,7 +229,7 @@ require('lazy').setup({
     ft = {"go", 'gomod'},
   },
 
-{
+  {
     -- AI Helper
     'zbirenbaum/copilot.lua',
     event = 'BufEnter',
