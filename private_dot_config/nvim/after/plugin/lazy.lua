@@ -77,7 +77,7 @@ require('lazy').setup({
     'akinsho/toggleterm.nvim',
     config = function()
       require('toggleterm').setup({
-        open_mapping = [[<A-\>]],
+        open_mapping = [[<C-T>]],
         direction = 'tab',
       })
       local Terminal = require('toggleterm.terminal').Terminal
@@ -101,7 +101,6 @@ require('lazy').setup({
       'williamboman/mason-lspconfig.nvim',
       -- Autocompletion
       'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-cmdline',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-nvim-lua',
       'hrsh7th/cmp-path',
@@ -130,29 +129,14 @@ require('lazy').setup({
           window = { completion = cmp.config.window.bordered() },
           sources = {
             { name = 'luasnip' },
-            { name = 'nvim_lua' },
             { name = 'nvim_lsp' },
             { name = 'buffer' },
             { name = 'rg' },
             { name = 'path' },
-            { name = 'cmdline' },
+            { name = 'nvim_lua' },
           },
         })
       )
-
-      cmp.setup.cmdline({ '/', '?' }, {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = { { name = 'buffer', keyword_length = 3 } }
-      })
-
-      cmp.setup.cmdline(':', {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources(
-          { { name = 'path' } },
-          { { name = 'cmdline', keyword_length = 3 } }
-        )
-      })
-
     end
   },
 
