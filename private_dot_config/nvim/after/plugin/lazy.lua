@@ -194,10 +194,10 @@ require('lazy').setup({
     requires = { 'nvim-lua/plenary.nvim' },
     ft = "http",
     config = function()
-      require("rest-nvim").setup({result_split_horizontal = true})
+      require("rest-nvim").setup({ result_split_horizontal = true})
     end,
     keys = {
-      { "<C-c><C-c>", require("rest-nvim").run, desc = "Run the request under the cursor" },
+      { "<C-c><C-c>", "<Plug>RestNvim", desc = "Run the request under the cursor" },
     }
   },
 
