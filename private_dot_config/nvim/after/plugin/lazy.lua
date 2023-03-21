@@ -81,7 +81,7 @@ require('lazy').setup({
         direction = 'tab',
       })
       local Terminal = require('toggleterm.terminal').Terminal
-      local lazygit  = Terminal:new({ cmd = 'NO_COLOR=1 lazygit', direction = 'float', hidden = true })
+      local lazygit  = Terminal:new({ cmd = 'NO_COLOR=1 lazygit', direction = 'tab', hidden = true })
       vim.keymap.set('n', '<leader>gg', function() lazygit:toggle() end, { noremap = true, silent = true })
     end
   },
@@ -194,12 +194,10 @@ require('lazy').setup({
     requires = { 'nvim-lua/plenary.nvim' },
     ft = "http",
     config = function()
-      require("rest-nvim").setup({
-        result_split_horizontal = true
-      })
+      require("rest-nvim").setup({result_split_horizontal = true})
     end,
     keys = {
-      { "<leader>R", "<Plug>RestNvim", desc = "Run the request under the cursor" },
+      { "<C-c><C-c>", require("rest-nvim").run, desc = "Run the request under the cursor" },
     }
   },
 
@@ -209,8 +207,8 @@ require('lazy').setup({
     config = function()
       require("go").setup()
     end,
-    event = {"CmdlineEnter"},
-    ft = {"go", 'gomod'},
+    event = { "CmdlineEnter" },
+    ft = { "go", 'gomod' },
   },
 
   {
