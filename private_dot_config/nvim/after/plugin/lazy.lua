@@ -20,6 +20,14 @@ require('lazy').setup({
     },
   },
 
+  { 
+    'stevearc/oil.nvim',
+    config = true,
+    keys = {
+      { "-", ":Oil<CR>", desc = "File explorer" },
+    }
+  },
+
   {
     -- Fuzzy Finder
     'nvim-telescope/telescope.nvim',
