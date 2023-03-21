@@ -19,13 +19,15 @@ require('lazy').setup({
       { 'm4xshen/autoclose.nvim', config = true },
     },
   },
-
   { 
     'stevearc/oil.nvim',
+    lazy = false,
+    init = function()
+      vim.g.loaded_netrw = 1
+      vim.g.loaded_netrwPlugin = 1
+    end,
     config = true,
-    keys = {
-      { "-", ":Oil<CR>", desc = "File explorer" },
-    }
+    keys = { { "-", ":Oil<CR>", desc = "File explorer" } }
   },
 
   {
@@ -212,10 +214,7 @@ require('lazy').setup({
   {
     "ray-x/go.nvim",
     dependencies = { "ray-x/guihua.lua" },
-    config = function()
-      require("go").setup()
-    end,
-    event = { "CmdlineEnter" },
+    config = true,
     ft = { "go", 'gomod' },
   },
 

@@ -21,6 +21,7 @@ vim.o.wrap = false
 vim.o.mouse = ""
 vim.opt.guifont = { "Iosevka Nerd Font", "h14" }
 vim.o.background = 'light'
+vim.o.showmode = false
 
 -- Set Keymaps
 local options = { remap = true, silent = true }
