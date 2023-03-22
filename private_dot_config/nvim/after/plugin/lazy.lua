@@ -19,7 +19,7 @@ require('lazy').setup({
       { 'm4xshen/autoclose.nvim', config = true },
     },
   },
-  { 
+  {
     'stevearc/oil.nvim',
     lazy = false,
     init = function()
@@ -204,7 +204,7 @@ require('lazy').setup({
     requires = { 'nvim-lua/plenary.nvim' },
     ft = "http",
     config = function()
-      require("rest-nvim").setup({ result_split_horizontal = true})
+      require("rest-nvim").setup({ result_split_horizontal = true, result_split_in_place = 'below' })
     end,
     keys = {
       { "<C-c><C-c>", "<Plug>RestNvim", desc = "Run the request under the cursor" },

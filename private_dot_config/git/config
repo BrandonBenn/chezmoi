@@ -2,7 +2,7 @@
 	email = me@brandonbenn.xyz
 	name  = Brandon Duval Benn
 [core]
-  editor = nvim --cmd
+  editor = nvim
 [commit]
 	template = ~/.config/git/template
 [status]
