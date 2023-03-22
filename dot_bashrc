@@ -23,6 +23,7 @@ export TERM=xterm-256color
 export HISTFILE=~/.cache/history
 export HISTSIZE=10000
 export SAVEHIST=10000
+export NO_COLOR=1
 
 PATH="$PATH":~/.local/bin
 PATH="$PATH":~/bin

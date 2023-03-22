@@ -91,7 +91,7 @@ require('lazy').setup({
         direction = 'tab',
       })
       local Terminal = require('toggleterm.terminal').Terminal
-      local lazygit  = Terminal:new({ cmd = 'NO_COLOR=1 lazygit', direction = 'tab', hidden = true })
+      local lazygit  = Terminal:new({ cmd = 'lazygit', direction = 'tab', hidden = true })
       vim.keymap.set('n', '<leader>gg', function() lazygit:toggle() end, { noremap = true, silent = true })
     end
   },
