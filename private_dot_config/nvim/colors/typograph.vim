@@ -20,7 +20,7 @@ if ($TERM =~ '256' || &t_Co >= 256) || has("gui_running")
     hi Todo ctermbg=NONE ctermfg=NONE cterm=reverse guibg=NONE guifg=NONE gui=reverse
     hi Type ctermbg=NONE ctermfg=NONE cterm=bold,italic guibg=NONE guifg=NONE gui=bold,italic
     hi Underlined ctermbg=NONE ctermfg=NONE cterm=underline guibg=NONE guifg=NONE gui=underline
-    hi StatusLine ctermbg=NONE ctermfg=NONE cterm=reverse guibg=NONE guifg=NONE gui=reverse
+    hi StatusLine ctermbg=NONE ctermfg=NONE cterm=reverse guibg=NONE guifg=NONE gui=NONE
     hi StatusLineNC ctermbg=NONE ctermfg=NONE cterm=underline guibg=NONE guifg=NONE gui=underline
     hi StatusLineTerm ctermbg=NONE ctermfg=NONE cterm=reverse guibg=NONE guifg=NONE gui=reverse
     hi StatusLineTermNC ctermbg=NONE ctermfg=NONE cterm=underline guibg=NONE guifg=NONE gui=underline
@@ -87,7 +87,7 @@ elseif &t_Co == 8 || $TERM !~# '^linux' || &t_Co == 16
     hi Todo ctermbg=NONE ctermfg=NONE cterm=reverse
     hi Type ctermbg=NONE ctermfg=NONE cterm=bold,italic
     hi Underlined ctermbg=NONE ctermfg=NONE cterm=underline
-    hi StatusLine ctermbg=NONE ctermfg=NONE cterm=reverse
+    hi StatusLine guibg=NONE ctermbg=NONE ctermfg=NONE cterm=reverse gui=NONE
     hi StatusLineNC ctermbg=NONE ctermfg=NONE cterm=underline
     hi StatusLineTerm ctermbg=NONE ctermfg=NONE cterm=reverse
     hi StatusLineTermNC ctermbg=NONE ctermfg=NONE cterm=underline

@@ -27,7 +27,7 @@ require('lazy').setup({
       vim.g.loaded_netrwPlugin = 1
     end,
     config = true,
-    keys = { { "-", ":Oil<CR>", desc = "File explorer" } }
+    keys = { { "-", ":Oil<CR>", silent = true, desc = "File explorer" } }
   },
 
   {
@@ -79,20 +79,6 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>gb', gitsigns.blame_line, { silent = true })
       vim.keymap.set('n', '<leader>gs', gitsigns.stage_hunk, { silent = true })
       vim.keymap.set('n', '<leader>gS', gitsigns.stage_buffer, { silent = true })
-    end
-  },
-
-  {
-    -- Terminal
-    'akinsho/toggleterm.nvim',
-    config = function()
-      require('toggleterm').setup({
-        open_mapping = [[<C-T>]],
-        direction = 'tab',
-      })
-      local Terminal = require('toggleterm.terminal').Terminal
-      local lazygit  = Terminal:new({ cmd = 'lazygit', direction = 'tab', hidden = true })
-      vim.keymap.set('n', '<leader>gg', function() lazygit:toggle() end, { noremap = true, silent = true })
     end
   },
 
