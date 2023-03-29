@@ -22,7 +22,7 @@ vim.opt.guifont = { "Iosevka Nerd Font", "h14" }
 vim.o.background = 'light'
 vim.o.showmode = false
 vim.o.laststatus = 3
-vim.opt.statusline = [[%<%f %h%m%r%=%-14.(%l:%c%V%) %P]]
+vim.opt.statusline = [[┆]]
 
 -- Set Keymaps
 local options = { remap = true, silent = true }

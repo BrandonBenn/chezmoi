@@ -82,20 +82,27 @@ require('lazy').setup({
 
   {
     'lewis6991/gitsigns.nvim',
-    config = function()
-      local gitsigns = require('gitsigns')
-      gitsigns.setup()
-      vim.keymap.set('n', '<leader>gR', gitsigns.reset_hunk, { silent = true })
-      vim.keymap.set('n', '<leader>gb', gitsigns.blame_line, { silent = true })
-      vim.keymap.set('n', '<leader>gs', gitsigns.stage_hunk, { silent = true })
-      vim.keymap.set('n', '<leader>gS', gitsigns.stage_buffer, { silent = true })
-    end
+    config = true,
+    keys = {
+      { '<leader>gR', ":Gitsigns reset_hunk<cr>", silent = true },
+      { '<leader>gb', ":Gitsigns blame_line<cr>", silent = true },
+      { '<leader>gs', ":Gitsigns stage_hunk<cr>", silent = true },
+      { '<leader>gS', ":Gitsigns stage_buffer<cr>", silent = true },
+      { "<leader>gl", ":term git log<cr>", silent = true },
+    },
   },
 
   {
-    'willothy/flatten.nvim',
-    config = true,
+    'akinsho/toggleterm.nvim',
+    version = "*",
+    dependencies = {
+      { 'willothy/flatten.nvim', config = true }
+    },
+    opts = {
+      open_mapping = [[<c-;>]],
+    }
   },
+
 
   {
     -- IDE Functionality

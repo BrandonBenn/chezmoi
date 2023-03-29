@@ -34,4 +34,8 @@ export PATH
 [ -x "$(command -v rtx)" ] && eval "$(rtx activate bash)"
 
 [ ! -f ~/.bashrc.local ] || . "$HOME"/.bashrc.local
-[ ! -f .env ] || export "$(grep -v '^#' .env | xargs)"
+[ ! -f .env ] || {
+  set -o allexport
+  source .env
+  set +o allexport
+}
