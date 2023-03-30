@@ -14,9 +14,9 @@ require('lazy').setup({
       'junegunn/vim-easy-align',
       'stevearc/dressing.nvim',
       'vim-test/vim-test',
-      { 'https://gitlab.com/yorickpeterse/nvim-pqf.git', as = 'pqf', config = true },
-      { 'numToStr/Comment.nvim', config = true },
-      { 'm4xshen/autoclose.nvim', config = true },
+      { 'https://gitlab.com/yorickpeterse/nvim-pqf.git', as = 'pqf',   config = true },
+      { 'numToStr/Comment.nvim',                         config = true },
+      { 'm4xshen/autoclose.nvim',                        config = true },
     },
   },
 
@@ -82,13 +82,16 @@ require('lazy').setup({
 
   {
     'lewis6991/gitsigns.nvim',
+    init = function()
+      vim.opt.titlestring = [[%t%( %M%)%( (%{expand("%:~:.:h")})%)%( %a%) %{get(b:,'gitsigns_head','')}]]
+    end,
     config = true,
     keys = {
-      { '<leader>gR', ":Gitsigns reset_hunk<cr>", silent = true },
-      { '<leader>gb', ":Gitsigns blame_line<cr>", silent = true },
-      { '<leader>gs', ":Gitsigns stage_hunk<cr>", silent = true },
+      { '<leader>gR', ":Gitsigns reset_hunk<cr>",   silent = true },
+      { '<leader>gb', ":Gitsigns blame_line<cr>",   silent = true },
+      { '<leader>gs', ":Gitsigns stage_hunk<cr>",   silent = true },
       { '<leader>gS', ":Gitsigns stage_buffer<cr>", silent = true },
-      { "<leader>gl", ":term git log<cr>", silent = true },
+      { "<leader>gl", ":term git log<cr>",          silent = true },
     },
   },
 
@@ -127,7 +130,7 @@ require('lazy').setup({
     config = function()
       local lsp = require('lsp-zero')
       lsp.preset('recommended')
-      lsp.setup()
+
       lsp.ensure_installed({
         'gopls',
         'ruff_lsp',
@@ -135,21 +138,19 @@ require('lazy').setup({
         'sumneko_lua',
       })
 
-
       local cmp = require('cmp')
-      cmp.setup(
-        lsp.defaults.cmp_config({
-          window = { completion = cmp.config.window.bordered() },
-          sources = {
-            { name = 'luasnip' },
-            { name = 'nvim_lsp' },
-            { name = 'buffer' },
-            { name = 'rg' },
-            { name = 'path' },
-            { name = 'nvim_lua' },
-          },
-        })
-      )
+      lsp.setup_nvim_cmp({
+        window = { completion = cmp.config.window.bordered() },
+        sources = {
+          { name = 'luasnip',  keyword_length = 3 },
+          { name = 'nvim_lsp', keyword_length = 2 },
+          { name = 'buffer' },
+          { name = 'rg' },
+          { name = 'path' },
+          { name = 'nvim_lua' },
+        },
+      })
+      lsp.setup()
     end
   },
 
