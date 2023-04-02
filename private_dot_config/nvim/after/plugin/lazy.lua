@@ -102,7 +102,7 @@ require('lazy').setup({
       { 'willothy/flatten.nvim', config = true }
     },
     opts = {
-      open_mapping = [[<c-;>]],
+      open_mapping = [[<c-g>]],
     }
   },
 
@@ -134,8 +134,6 @@ require('lazy').setup({
       lsp.ensure_installed({
         'gopls',
         'ruff_lsp',
-        'solargraph',
-        'sumneko_lua',
       })
 
       local cmp = require('cmp')
