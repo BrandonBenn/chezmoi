@@ -22,6 +22,7 @@ vim.opt.guifont = { "Iosevka Nerd Font", "h14" }
 vim.o.background = 'light'
 vim.o.showmode = false
 vim.o.laststatus = 3
+vim.o.cursorline = true
 vim.opt.statusline = [[.]]
 
 -- Set Keymaps
