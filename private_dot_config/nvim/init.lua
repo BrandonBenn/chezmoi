@@ -3,6 +3,8 @@ vim.cmd.colorscheme("typograph")
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 vim.g.netrw_banner = 0
+vim.g.netrw_liststyle = 3
+vim.g.netrw_winsize = 20
 vim.o.exrc = true
 vim.o.title = true
 vim.o.hidden = true
@@ -34,10 +36,11 @@ vim.keymap.set('v', '<', '<gv', options)
 vim.keymap.set('v', '>', '>gv', options)
 vim.keymap.set({ 'v', 'n' }, ';', ':', { silent = false })
 vim.keymap.set({ 'n', 'v' }, 'g=', vim.lsp.buf.format, options)
--- vim.keymap.set('n', '-', vim.cmd.Ex, options)
--- vim.keymap.set('n', '<C-t><C-t>', ':tabnew | terminal<cr>', options)
--- vim.keymap.set('n', '<C-t>v', ':vsplit | terminal<cr>', options)
--- vim.keymap.set('n', '<C-t>s', ':split | terminal<cr>', options)
+vim.keymap.set('n', '-', vim.cmd.Ex, options)
+vim.keymap.set('n', '<leader>v', vim.cmd.Lex, options)
+vim.keymap.set('n', '<C-t><C-t>', ':tabnew | terminal<cr>', options)
+vim.keymap.set('n', '<C-t>v', ':vsplit | terminal<cr>', options)
+vim.keymap.set('n', '<C-t>s', ':split | terminal<cr>', options)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setqflist, options)
 vim.keymap.set('n', '<leader><leader>', vim.lsp.buf.code_action, options)
 vim.keymap.set('n', '<leader>gg', ':tabnew term://lazygit | startinsert<cr>', options)

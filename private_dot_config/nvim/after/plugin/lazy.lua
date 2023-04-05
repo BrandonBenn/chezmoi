@@ -21,26 +21,6 @@ require('lazy').setup({
   },
 
   {
-    'ms-jpq/chadtree',
-    branch = 'chad',
-    build = 'python3 -m chadtree deps',
-    lazy = false,
-    init = function()
-      vim.g.loaded_netrw = 1
-      vim.g.loaded_netrwPlugin = 1
-    end,
-    config = function()
-      local chadtree_settings = {
-        view = { open_direction = "right" }
-      }
-      vim.api.nvim_set_var("chadtree_settings", chadtree_settings)
-    end,
-    keys = {
-      { "<leader>v", ":CHADopen<cr>", desc = "Run File manager for Neovim.", silent = true },
-    }
-  },
-
-  {
     -- Fuzzy Finder
     'nvim-telescope/telescope.nvim',
     dependencies = { { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-ui-select.nvim' } },
