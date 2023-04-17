@@ -87,6 +87,13 @@ require('lazy').setup({
   },
 
   {
+    'tpope/vim-fugitive',
+    keys = {
+      { '<leader>gg', ':Git<cr>', silent = true }
+    }
+  },
+
+  {
     'akinsho/toggleterm.nvim',
     version = "*",
     dependencies = {
