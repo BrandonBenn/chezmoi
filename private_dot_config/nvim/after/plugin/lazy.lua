@@ -61,6 +61,17 @@ require('lazy').setup({
   },
 
   {
+    "luukvbaal/nnn.nvim",
+    opts = {
+      replace_netrw = "picker",
+      picker = { style = { border = "rounded", width = 0.35, xoffset = 0.9 } },
+    },
+    keys = {
+      { '<leader>v', ':NnnPicker<cr>', silent = true }
+    }
+  },
+
+  {
     'lewis6991/gitsigns.nvim',
     init = function()
       vim.opt.titlestring = [[%t%( %M%)%( (%{expand("%:~:.:h")})%)%( %a%) %{get(b:,'gitsigns_head','')}]]
