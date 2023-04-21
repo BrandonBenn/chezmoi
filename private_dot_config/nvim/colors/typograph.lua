@@ -10,8 +10,8 @@ vim.o.termguicolors = true
 local colors = {
   ['Normal'] = { ctermfg = 'NONE', ctermbg = 'NONE', bg = 'NONE', fg = 'NONE' },
   ['NonText'] = { bg = 'NONE', fg = '#808080' },
-  ['Comment'] = { ctermbg = 'NONE', ctermfg = 'NONE', bg = 'NONE', fg = '#808080', italic = true },
-  ['Constant'] = { ctermbg = 'NONE', ctermfg = 'NONE', bg = 'NONE', fg = 'NONE' },
+  ['Comment'] = { ctermbg = 'NONE', ctermfg = 'NONE', bg = 'NONE', fg = '#555555', italic = true },
+  ['Constant'] = { ctermfg = 'NONE', ctermbg = 'NONE', bg = 'NONE', fg = '#808080' },
   ['Error'] = { ctermbg = 15, ctermfg = 9, bg = '#ffffff', fg = '#ff0000', reverse = true },
   ['Identifier'] = { ctermbg = 'NONE', ctermfg = 'NONE', bg = 'NONE', fg = 'NONE', bold = true },
   ['Ignore'] = { ctermbg = 'NONE', ctermfg = 'NONE', bg = 'NONE', fg = 'NONE' },
@@ -72,6 +72,7 @@ local colors = {
   ['debugPC'] = { ctermbg = 'NONE', ctermfg = 'NONE', bg = 'NONE', fg = 'NONE' },
   ['debugBreakpoint'] = { ctermbg = 'NONE', ctermfg = 'NONE', bg = 'NONE', fg = 'NONE' },
   ['WinSeparator'] = { bg = 'NONE' },
+  -- LSP Treesitter
   -- ['@lsp.type.namespace'] = '@type',
   -- ['@lsp.type.type'] = '@type',
   -- ['@lsp.type.class'] = '@type',
@@ -87,8 +88,54 @@ local colors = {
   -- ['@lsp.type.macro'] = '@macro',
   ['@lsp.type.decorator'] = { bg = 'NONE', fg = 'NONE', italic = true },
   ['CopilotSuggestion'] = { fg = '#555555', ctermfg = 8 },
+  -- Notify
+  ['NotifyERRORBorder'] = { fg = '#8A1F1F' },
+  ['NotifyWARNBorder'] = { fg = '#79491D' },
+  ['NotifyINFOBorder'] = { fg = '#4F6752' },
+  ['NotifyDEBUGBorder'] = { fg = '#8B8B8B' },
+  ['NotifyTRACEBorder'] = { fg = '#4F3552' },
+  ['NotifyERRORIcon'] = { fg = '#dc322f' },
+  ['NotifyWARNIcon'] = { fg = '#F79000' },
+  ['NotifyINFOIcon'] = { fg = '#A9FF68' },
+  ['NotifyDEBUGIcon'] = { fg = '#8B8B8B' },
+  ['NotifyTRACEIcon'] = { fg = '#D484FF' },
+  ['NotifyERRORTitle'] = { fg = 8 },
+  ['NotifyWARNTitle'] = { fg = 8 },
+  ['NotifyINFOTitle'] = { fg = 8 },
+  ['NotifyDEBUGTitle'] = { fg = 8 },
+  ['NotifyTRACETitle'] = { fg = 8 },
+  ['NotifyERRORBody'] = { link = 'Normal' },
+  ['NotifyWARNBody'] = { link = 'Normal' },
+  ['NotifyINFOBody'] = { link = 'Normal' },
+  ['NotifyDEBUGBody'] = { link = 'Normal' },
+  ['NotifyTRACEBody'] = { link = 'Normal' },
+  ['EndOfBuffer'] = { link = 'NonText' },
+  ['String'] = { link = 'Comment' },
+  ['Number'] = { link = 'Constant' },
+  ['ErrorMsg'] = { link = 'Error' },
+  ['CursorIM'] = { link = 'Cursor' },
+  ['Terminal'] = { link = 'Normal' },
 }
 
 for group, opts in pairs(colors) do
   vim.api.nvim_set_hl(0, group, opts)
 end
+
+vim.g.terminal_ansi_colors = {
+  '#000000',
+  '#800000',
+  '#008000',
+  '#808000',
+  '#000080',
+  '#800080',
+  '#008080',
+  '#c0c0c0',
+  '#808080',
+  '#ff0000',
+  '#00ff00',
+  '#ffff00',
+  '#0000ff',
+  '#ff00ff',
+  '#00ffff',
+  '#ffffff',
+}
