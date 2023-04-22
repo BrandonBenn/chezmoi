@@ -61,18 +61,16 @@ require('lazy').setup({
   },
 
   {
-    "luukvbaal/nnn.nvim",
-    opts = {
-      replace_netrw = "picker",
-      picker = { style = { border = "rounded", width = 0.35, xoffset = 0.9 } },
-    },
-    keys = {
-      { '<leader>v', ':NnnPicker<cr>', silent = true }
-    }
+    'SidOfc/carbon.nvim',
+    init = function()
+      vim.g.carbon_lazy_init = 1
+    end,
+    opts = { setting = 'value' }
   },
 
   {
     'lewis6991/gitsigns.nvim',
+    event = 'BufEnter',
     init = function()
       vim.opt.titlestring = [[%t%( %M%)%( (%{expand("%:~:.:h")})%)%( %a%) %{get(b:,'gitsigns_head','')}]]
     end,
@@ -179,7 +177,6 @@ require('lazy').setup({
 
   {
     'nvim-treesitter/nvim-treesitter',
-    dependencies = { 'nvim-treesitter/playground' },
     config = function()
       require('nvim-treesitter.configs').setup({
         ensure_installed = { 'ruby', 'python', 'lua', 'javascript', 'vue', 'json', 'http', 'go', 'sql' },
