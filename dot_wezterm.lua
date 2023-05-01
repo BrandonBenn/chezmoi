@@ -1,8 +1,14 @@
 local wezterm = require 'wezterm'
 local config = {}
 
-config.color_scheme = 'Modus-Operandi'
-config.font = wezterm.font_with_fallback { 'Iosevka Term', 'JetBrains Mono' }
+local theme = {
+  light = 'Modus-Operandi',
+  dark = 'Model-Vivendi',
+}
+
+config.color_scheme = theme.light
+config.font = wezterm.font_with_fallback { 'Iosevka Nerd Font' }
+
 config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 if wezterm.target_triple == 'aarch64-apple-darwin' then
   config.integrated_title_button_style = "MacOsNative"
