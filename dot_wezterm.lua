@@ -3,12 +3,24 @@ local config = {}
 
 config.color_scheme = 'Modus-Operandi'
 config.font = wezterm.font_with_fallback { 'Iosevka Term', 'JetBrains Mono' }
+config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 if wezterm.target_triple == 'aarch64-apple-darwin' then
-  config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
   config.integrated_title_button_style = "MacOsNative"
+else
+  config.integrated_title_buttons = { 'Close' }
+  config.integrated_title_button_style = "Gnome"
 end
 
-config.window_background_opacity = 0.9
+-- local scheme = wezterm.get_builtin_color_schemes()[config.color_scheme]
+-- config.window_frame = {
+--   inactive_titlebar_bg = scheme.background,
+--   active_titlebar_bg = scheme.background,
+--   button_bg = scheme.background,
+--   button_hover_bg = scheme.background,
+-- }
+
+
+config.window_background_opacity = 0.96
 config.keys = {
   {
     key = 'LeftArrow',
