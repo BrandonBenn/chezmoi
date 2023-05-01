@@ -3,11 +3,9 @@ local config = {}
 
 config.color_scheme = 'Modus-Operandi'
 config.font = wezterm.font_with_fallback { 'Iosevka Term', 'JetBrains Mono' }
-config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 if wezterm.target_triple == 'aarch64-apple-darwin' then
+  config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
   config.integrated_title_button_style = "MacOsNative"
-else
-  config.integrated_title_button_style = "Gnome"
 end
 
 config.keys = {
