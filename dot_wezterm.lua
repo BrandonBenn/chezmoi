@@ -11,15 +11,6 @@ else
   config.integrated_title_button_style = "Gnome"
 end
 
--- local scheme = wezterm.get_builtin_color_schemes()[config.color_scheme]
--- config.window_frame = {
---   inactive_titlebar_bg = scheme.background,
---   active_titlebar_bg = scheme.background,
---   button_bg = scheme.background,
---   button_hover_bg = scheme.background,
--- }
-
-
 config.window_background_opacity = 0.96
 config.keys = {
   {
