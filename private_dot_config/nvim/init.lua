@@ -24,7 +24,7 @@ vim.o.background = 'light'
 vim.o.showmode = false
 vim.o.laststatus = 3
 vim.o.cursorline = true
-vim.opt.statusline = [[.]]
+vim.opt.statusline = [[ ]]
 
 -- Set Keymaps
 local options = { remap = true, silent = true }

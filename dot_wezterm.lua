@@ -8,6 +8,7 @@ if wezterm.target_triple == 'aarch64-apple-darwin' then
   config.integrated_title_button_style = "MacOsNative"
 end
 
+config.window_background_opacity = 0.9
 config.keys = {
   {
     key = 'LeftArrow',
