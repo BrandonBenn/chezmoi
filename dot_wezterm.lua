@@ -2,49 +2,48 @@ local wezterm = require 'wezterm'
 local config = {}
 
 config.color_scheme = 'Modus-Operandi'
-config.tab_bar_at_bottom = true
-config.hide_tab_bar_if_only_one_tab = true
-config.font = wezterm.font_with_fallback { 'Iosevka Nerd Font', 'JetBrains Mono' }
+config.font = wezterm.font_with_fallback { 'Iosevka Term', 'JetBrains Mono' }
+config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 
 config.keys = {
   {
     key = 'LeftArrow',
-    mods = 'CTRL',
+    mods = 'ALT',
     action = wezterm.action.ActivatePaneDirection 'Left',
   },
   {
     key = 'RightArrow',
-    mods = 'CTRL',
+    mods = 'ALT',
     action = wezterm.action.ActivatePaneDirection 'Right',
   },
   {
     key = 'UpArrow',
-    mods = 'CTRL',
+    mods = 'ALT',
     action = wezterm.action.ActivatePaneDirection 'Up',
   },
   {
     key = 'DownArrow',
-    mods = 'CTRL',
+    mods = 'ALT',
     action = wezterm.action.ActivatePaneDirection 'Down',
   },
   {
     key = 'LeftArrow',
-    mods = 'CTRL|SHIFT',
+    mods = 'ALT|SHIFT',
     action = wezterm.action.AdjustPaneSize { 'Left', 5 },
   },
   {
     key = 'RightArrow',
-    mods = 'CTRL|SHIFT',
+    mods = 'ALT|SHIFT',
     action = wezterm.action.AdjustPaneSize { 'Right', 5 },
   },
   {
     key = 'UpArrow',
-    mods = 'CTRL|SHIFT',
+    mods = 'ALT|SHIFT',
     action = wezterm.action.AdjustPaneSize { 'Up', 5 },
   },
   {
     key = 'DownArrow',
-    mods = 'CTRL|SHIFT',
+    mods = 'ALT|SHIFT',
     action = wezterm.action.AdjustPaneSize { 'Down', 5 },
   },
 }
