@@ -24,6 +24,7 @@ export HISTFILE=~/.cache/history
 export HISTSIZE=10000
 export SAVEHIST=10000
 export NO_COLOR=1
+export FZF_DEFAULT_OPTS="--reverse --preview-window up,1,border-horizontal,hidden --bind 'ctrl-/:change-preview-window(50%|hidden)'"
 
 PATH="$PATH":~/.local/bin
 PATH="$PATH":~/bin

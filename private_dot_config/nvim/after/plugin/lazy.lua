@@ -23,7 +23,16 @@ require('lazy').setup({
   {
     -- Fuzzy Finder
     'nvim-telescope/telescope.nvim',
-    dependencies = { { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-ui-select.nvim' } },
+    dependencies = {
+      { 'nvim-lua/plenary.nvim',
+        'nvim-telescope/telescope-ui-select.nvim',
+        {
+          'prochri/telescope-all-recent.nvim',
+          dependencies = { 'kkharji/sqlite.lua' },
+          config = true
+        },
+      }
+    },
     config = function()
       local layout = require('telescope.actions.layout')
       local builtin = require('telescope.builtin')
@@ -33,7 +42,9 @@ require('lazy').setup({
         defaults = {
           preview = { hide_on_startup = true },
           mappings = {
-            i = { ['<M-p>'] = layout.toggle_preview },
+            i = {
+              ['<M-p>'] = layout.toggle_preview,
+            },
             n = { ['<M-p>'] = layout.toggle_preview },
           },
         },
@@ -44,7 +55,7 @@ require('lazy').setup({
         },
       }
 
-      vim.keymap.set('n', '<C-p><C-p>', function()
+      vim.keymap.set('n', '<C-p>', function()
         vim.fn.system('git rev-parse --is-inside-work-tree')
         if vim.v.shell_error == 0 then
           builtin.git_files()
@@ -53,10 +64,9 @@ require('lazy').setup({
         end
       end, { silent = true })
 
-      vim.keymap.set('n', '<C-p>o', builtin.oldfiles, { silent = true })
-      vim.keymap.set('n', '<C-p>w', builtin.grep_string, { silent = true })
-      vim.keymap.set('n', '<C-p>r', builtin.resume, { silent = true })
-      vim.keymap.set('n', '<C-p>f', builtin.live_grep, { silent = true })
+      vim.keymap.set('n', '<C-.>', builtin.grep_string, { silent = true })
+      vim.keymap.set('n', '<leader>r', builtin.resume, { silent = true })
+      vim.keymap.set('n', '<C-/>', builtin.live_grep, { silent = true })
     end
   },
 
