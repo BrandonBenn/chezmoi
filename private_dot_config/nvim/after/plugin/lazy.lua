@@ -71,11 +71,17 @@ require('lazy').setup({
   },
 
   {
-    'SidOfc/carbon.nvim',
-    init = function()
-      vim.g.carbon_lazy_init = 1
-    end,
-    opts = { setting = 'value' }
+    url = 'https://github.com/luukvbaal/nnn.nvim',
+    config = true,
+    opts = {
+      explorer = {
+        side = 'botright',
+      },
+    },
+    keys = {
+      { '<leader>v', ':NnnExplorer %:p:h<cr>', silent = true },
+      { '-',         '',                       silent = true }
+    }
   },
 
   {
@@ -90,7 +96,6 @@ require('lazy').setup({
       { '<leader>gb', ":Gitsigns blame_line<cr>",   silent = true },
       { '<leader>gs', ":Gitsigns stage_hunk<cr>",   silent = true },
       { '<leader>gS', ":Gitsigns stage_buffer<cr>", silent = true },
-      { "<leader>gl", ":term git log<cr>",          silent = true },
     },
   },
 
