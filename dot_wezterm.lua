@@ -16,14 +16,14 @@ else
 end
 
 config.keys = {
-  { key = 'h', mods = 'ALT',       action = wezterm.action.ActivatePaneDirection 'Left' },
-  { key = 'h', mods = 'ALT|SHIFT', action = wezterm.action.AdjustPaneSize { 'Left', 5 } },
-  { key = 'l', mods = 'ALT',       action = wezterm.action.ActivatePaneDirection 'Right' },
-  { key = 'l', mods = 'ALT|SHIFT', action = wezterm.action.AdjustPaneSize { 'Right', 5 } },
-  { key = 'k', mods = 'ALT',       action = wezterm.action.ActivatePaneDirection 'Up' },
-  { key = 'k', mods = 'ALT|SHIFT', action = wezterm.action.AdjustPaneSize { 'Up', 5 } },
-  { key = 'j', mods = 'ALT',       action = wezterm.action.ActivatePaneDirection 'Down' },
-  { key = 'j', mods = 'ALT|SHIFT', action = wezterm.action.AdjustPaneSize { 'Down', 5 } },
+  { key = 'LeftArrow',  mods = 'ALT',       action = wezterm.action.ActivatePaneDirection 'Left' },
+  { key = 'LeftArrow',  mods = 'ALT|SHIFT', action = wezterm.action.AdjustPaneSize { 'Left', 5 } },
+  { key = 'RightArrow', mods = 'ALT',       action = wezterm.action.ActivatePaneDirection 'Right' },
+  { key = 'RightArrow', mods = 'ALT|SHIFT', action = wezterm.action.AdjustPaneSize { 'Right', 5 } },
+  { key = 'UpArrow',    mods = 'ALT',       action = wezterm.action.ActivatePaneDirection 'Up' },
+  { key = 'UpArrow',    mods = 'ALT|SHIFT', action = wezterm.action.AdjustPaneSize { 'Up', 5 } },
+  { key = 'DownArrow',  mods = 'ALT',       action = wezterm.action.ActivatePaneDirection 'Down' },
+  { key = 'DownArrow',  mods = 'ALT|SHIFT', action = wezterm.action.AdjustPaneSize { 'Down', 5 } },
 }
 
 return config

@@ -33,54 +33,38 @@ require('lazy').setup({
         },
       }
     },
-    config = function()
-      local layout = require('telescope.actions.layout')
-      local builtin = require('telescope.builtin')
-      require("telescope").load_extension("ui-select")
-
-      require('telescope').setup {
-        defaults = {
-          preview = { hide_on_startup = true },
-          mappings = {
-            i = {
-              ['<M-p>'] = layout.toggle_preview,
-            },
-            n = { ['<M-p>'] = layout.toggle_preview },
-          },
-        },
-        pickers = {
-          find_files = { theme = 'dropdown' },
-          git_files = { theme = 'dropdown' },
-          oldfiles = { theme = 'dropdown', only_cwd = true },
-        },
-      }
-
-      vim.keymap.set('n', '<C-p>', function()
-        vim.fn.system('git rev-parse --is-inside-work-tree')
-        if vim.v.shell_error == 0 then
-          builtin.git_files()
-        else
-          builtin.find_files()
-        end
-      end, { silent = true })
-
-      vim.keymap.set('n', '<C-.>', builtin.grep_string, { silent = true })
-      vim.keymap.set('n', '<leader>r', builtin.resume, { silent = true })
-      vim.keymap.set('n', '<C-/>', builtin.live_grep, { silent = true })
-    end
-  },
-
-  {
-    url = 'https://github.com/luukvbaal/nnn.nvim',
+    event = 'BufEnter',
     config = true,
+    init = function()
+      require("telescope").load_extension("ui-select")
+    end,
     opts = {
-      explorer = {
-        side = 'botright',
+      defaults = {
+        preview = { hide_on_startup = true },
+        layout_strategy = 'center',
+        layout_config = { height = 0.5 },
+        sorting_strategy = "ascending",
       },
     },
     keys = {
-      { '<leader>v', ':NnnExplorer %:p:h<cr>', silent = true },
-      { '-',         '',                       silent = true }
+      { "<C-p>", ':Telescope find_files<cr>',                 silent = true },
+      { "<C-g>", ':Telescope live_grep previewer=true<cr>',   silent = true },
+      { "<C-f>", ':Telescope grep_string previewer=true<cr>', silent = true },
+      { "<C-;>", ':Telescope oldfiles<cr>',                   silent = true },
+      { "<C-'>", ':Telescope resume<cr>',                     silent = true },
+    },
+  },
+
+  {
+    "stevearc/oil.nvim",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+      "chrisgrieser/nvim-genghis",
+      "stevearc/dressing.nvim",
+    },
+    config = true,
+    keys = {
+      { "-", ":Oil<cr>", desc = "Open parent directory", silent = true },
     }
   },
 
@@ -92,18 +76,17 @@ require('lazy').setup({
     end,
     config = true,
     keys = {
-      { '<leader>gR', ":Gitsigns reset_hunk<cr>",   silent = true },
-      { '<leader>gb', ":Gitsigns blame_line<cr>",   silent = true },
-      { '<leader>gs', ":Gitsigns stage_hunk<cr>",   silent = true },
-      { '<leader>gS', ":Gitsigns stage_buffer<cr>", silent = true },
+      { '<leader>gx', ":Gitsigns reset_hunk<cr>",      silent = true },
+      { '<leader>gb', ":Gitsigns blame_line<cr>",      silent = true },
+      { '<leader>gs', ":Gitsigns stage_hunk<cr>",      silent = true },
+      { '<leader>gu', ":Gitsigns undo_stage_hunk<cr>", silent = true },
+      { '<leader>gS', ":Gitsigns stage_buffer<cr>",    silent = true },
     },
   },
 
   {
     'tpope/vim-fugitive',
-    keys = {
-      { '<leader>gg', ':Git<cr>', silent = true }
-    }
+    keys = { { '<leader>gg', ':tab G<cr>', silent = true } }
   },
 
   {
@@ -113,7 +96,7 @@ require('lazy').setup({
       { 'willothy/flatten.nvim', config = true }
     },
     opts = {
-      open_mapping = [[<c-g>]],
+      open_mapping = [[<c-/>]],
     }
   },
 
