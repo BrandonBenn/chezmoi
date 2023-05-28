@@ -13,6 +13,7 @@ require('lazy').setup({
     dependencies = {
       'junegunn/vim-easy-align',
       'stevearc/dressing.nvim',
+      'nvim-lua/plenary.nvim',
       'vim-test/vim-test',
       { 'https://gitlab.com/yorickpeterse/nvim-pqf.git', as = 'pqf',   config = true },
       { 'numToStr/Comment.nvim',                         config = true },
@@ -42,7 +43,6 @@ require('lazy').setup({
       defaults = {
         preview = { hide_on_startup = true },
         layout_strategy = 'center',
-        layout_config = { height = 0.5 },
         sorting_strategy = "ascending",
       },
     },
@@ -55,16 +55,17 @@ require('lazy').setup({
     },
   },
 
+  { "chrisgrieser/nvim-genghis" },
   {
     "stevearc/oil.nvim",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
-      "chrisgrieser/nvim-genghis",
       "stevearc/dressing.nvim",
     },
     config = true,
     keys = {
-      { "-", ":Oil<cr>", desc = "Open parent directory", silent = true },
+      {
+        "-", function() require("oil").open() end, desc = "Open parent directory", silent = true },
     }
   },
 
