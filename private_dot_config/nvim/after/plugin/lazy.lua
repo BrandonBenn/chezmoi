@@ -22,38 +22,39 @@ require('lazy').setup({
   },
 
   {
-    -- Fuzzy Finder
-    'nvim-telescope/telescope.nvim',
-    dependencies = {
-      { 'nvim-lua/plenary.nvim',
-        'nvim-telescope/telescope-ui-select.nvim',
-        {
-          'prochri/telescope-all-recent.nvim',
-          dependencies = { 'kkharji/sqlite.lua' },
-          config = true
-        },
-      }
-    },
-    event = 'BufEnter',
+    "ibhagwan/fzf-lua",
     config = true,
-    init = function()
-      require("telescope").load_extension("ui-select")
-    end,
     opts = {
-      defaults = {
-        preview = { hide_on_startup = true },
-        layout_strategy = 'center',
-        sorting_strategy = "ascending",
+      height = 0.2,
+      width = 0.5,
+      files = {
+        cwd_prompt = false,
+        previewer = false,
       },
     },
     keys = {
-      { "<C-b>", function() require('telescope.builtin').buffers() end,                         silent = true },
-      { "<C-p>", function() require('telescope.builtin').find_files() end,                      silent = true },
-      { "<C-h>", function() require('telescope.builtin').help_tags() end,                       silent = true },
-      { "<C-;>", function() require('telescope.builtin').oldfiles() end,                        silent = true },
-      { "<C-'>", function() require('telescope.builtin').resume() end,                          silent = true },
-      { "<C-g>", function() require('telescope.builtin').live_grep({ previewer = true }) end,   silent = true },
-      { "<C-f>", function() require('telescope.builtin').grep_string({ previewer = true }) end, silent = true },
+      { "<c-p>", function() require("fzf-lua").files() end,   desc = "Fuzzy Finder", silent = true },
+      { "<c-b>", function() require("fzf-lua").buffers() end, desc = "Fuzzy Finder", silent = true },
+      {
+        "<c-g>",
+        function()
+          require("fzf-lua").grep_project(
+            { winopts = { height = 0.4, width = 0.7 } }
+          )
+        end,
+        desc = "Fuzzy Finder",
+        silent = true
+      },
+      {
+        "<c-f>",
+        function()
+          require("fzf-lua").grep(
+            { winopts = { height = 0.4, width = 0.7 } }
+          )
+        end,
+        desc = "Fuzzy Finder",
+        silent = true
+      },
     },
   },
 
