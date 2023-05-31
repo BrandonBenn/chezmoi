@@ -25,8 +25,11 @@ require('lazy').setup({
     "ibhagwan/fzf-lua",
     config = true,
     opts = {
-      height = 0.2,
+      height = 0.3,
       width = 0.5,
+      winopts = {
+        preview = { layout = 'vertical' },
+      },
       files = {
         cwd_prompt = false,
         previewer = false,
@@ -34,25 +37,25 @@ require('lazy').setup({
     },
     keys = {
       { "<c-p>", function() require("fzf-lua").files() end,   desc = "Fuzzy Finder", silent = true },
-      { "<c-b>", function() require("fzf-lua").buffers() end, desc = "Fuzzy Finder", silent = true },
+      { "<c-b>", function() require("fzf-lua").buffers() end, desc = "Open Buffers", silent = true },
       {
         "<c-g>",
         function()
           require("fzf-lua").grep_project(
-            { winopts = { height = 0.4, width = 0.7 } }
+            { prompt = '> ', winopts = { height = 0.4, width = 0.7 } }
           )
         end,
-        desc = "Fuzzy Finder",
+        desc = "search all project lines (fzf.vim's `:Rg`)",
         silent = true
       },
       {
         "<c-f>",
         function()
           require("fzf-lua").grep(
-            { winopts = { height = 0.4, width = 0.7 } }
+            { prompt = '> ', input_prompt = 'Search: ', winopts = { height = 0.4, width = 0.7 } }
           )
         end,
-        desc = "Fuzzy Finder",
+        desc = "search for a pattern with `grep` or `rg`",
         silent = true
       },
     },
