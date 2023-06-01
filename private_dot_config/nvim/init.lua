@@ -46,3 +46,6 @@ vim.keymap.set('n', '<leader>gg', ':tabnew term://lazygit | startinsert<cr>', op
 require('notes').setup({
   notes_dir = vim.fn.expand(os.getenv('NOTES_DIR'))
 })
+
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
