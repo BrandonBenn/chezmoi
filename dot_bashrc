@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#
+
 [ -x "/opt/homebrew/bin/brew" ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 [ -x "$(command -v starship)" ] &&  eval "$(starship init bash)"
 
@@ -32,8 +32,6 @@ PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
 export PATH
 
 [ -x "$(command -v rtx)" ] && eval "$(rtx activate bash)"
-
-trap nnn_cd EXIT
 
 [ ! -f ~/.bashrc.local ] || . "$HOME"/.bashrc.local
 [ ! -f .env ] || {
