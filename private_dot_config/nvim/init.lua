@@ -42,7 +42,7 @@ vim.keymap.set('n', '<C-t>v', ':vsplit | terminal<cr>', options)
 vim.keymap.set('n', '<C-t>s', ':split | terminal<cr>', options)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setqflist, options)
 vim.keymap.set('n', '<leader><leader>', vim.lsp.buf.code_action, options)
-vim.keymap.set('n', '<leader>gg', ':tabnew term://lazygit | startinsert<cr>', options)
+-- vim.keymap.set('n', '<leader>gg', ':tabnew term://lazygit | startinsert<cr>', options)
 require('notes').setup({
   notes_dir = vim.fn.expand(os.getenv('NOTES_DIR'))
 })

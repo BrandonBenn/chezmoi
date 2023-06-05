@@ -24,8 +24,9 @@ require('lazy').setup({
   {
     "ibhagwan/fzf-lua",
     config = true,
+    cmd = 'FzfLua',
     opts = {
-      height = 0.3,
+      height = 0.4,
       width = 0.5,
       winopts = {
         preview = { layout = 'vertical' },
@@ -70,8 +71,7 @@ require('lazy').setup({
     },
     config = true,
     keys = {
-      {
-        "-", function() require("oil").open() end, desc = "Open parent directory", silent = true },
+      { "-", function() require("oil").open() end, desc = "Open parent directory", silent = true },
     }
   },
 
@@ -93,7 +93,13 @@ require('lazy').setup({
 
   {
     'tpope/vim-fugitive',
-    keys = { { '<leader>gg', ':tab G<cr>', silent = true } }
+    cmd = 'Git',
+    keys = {
+      { '<leader>gg', ':tab G<cr>',                        silent = true },
+      { '<leader>gC', ':Git commit --amend --no-edit<cr>', silent = true },
+      { '<leader>gP', ':Git push --force<cr>',             silent = true },
+      { '<leader>gF', ':Git pull<cr>',                     silent = true },
+    }
   },
 
   {
