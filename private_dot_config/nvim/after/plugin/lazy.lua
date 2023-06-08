@@ -63,6 +63,7 @@ require('lazy').setup({
   },
 
   { "chrisgrieser/nvim-genghis" },
+
   {
     "stevearc/oil.nvim",
     dependencies = {
@@ -112,7 +113,6 @@ require('lazy').setup({
       open_mapping = [[<c-/>]],
     }
   },
-
 
   {
     -- IDE Functionality

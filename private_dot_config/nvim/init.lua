@@ -35,7 +35,7 @@ vim.keymap.set('v', '<', '<gv', options)
 vim.keymap.set('v', '>', '>gv', options)
 vim.keymap.set({ 'v', 'n' }, ';', ':', { silent = false })
 vim.keymap.set({ 'n', 'v' }, 'g=', vim.lsp.buf.format, options)
-vim.keymap.set('n', '-', vim.cmd.Ex, options)
+-- vim.keymap.set('n', '-', vim.cmd.Ex, options)
 vim.keymap.set('n', '<leader>v', vim.cmd.Lex, options)
 vim.keymap.set('n', '<C-t><C-t>', ':tabnew | terminal<cr>', options)
 vim.keymap.set('n', '<C-t>v', ':vsplit | terminal<cr>', options)
@@ -43,9 +43,4 @@ vim.keymap.set('n', '<C-t>s', ':split | terminal<cr>', options)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setqflist, options)
 vim.keymap.set('n', '<leader><leader>', vim.lsp.buf.code_action, options)
 -- vim.keymap.set('n', '<leader>gg', ':tabnew term://lazygit | startinsert<cr>', options)
-require('notes').setup({
-  notes_dir = vim.fn.expand(os.getenv('NOTES_DIR'))
-})
-
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+require('notes').setup({ notes_dir = vim.fn.expand(os.getenv('NOTES_DIR')) })
