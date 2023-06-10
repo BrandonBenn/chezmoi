@@ -87,7 +87,7 @@ require('lazy').setup({
       { 'willothy/flatten.nvim', config = true }
     },
     opts = {
-      open_mapping = [[<c-/>]],
+      open_mapping = [[<c-g>]],
     }
   },
 
