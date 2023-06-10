@@ -21,47 +21,6 @@ require('lazy').setup({
     },
   },
 
-  {
-    "ibhagwan/fzf-lua",
-    config = true,
-    cmd = 'FzfLua',
-    opts = {
-      height = 0.4,
-      width = 0.5,
-      winopts = {
-        preview = { layout = 'vertical' },
-      },
-      files = {
-        cwd_prompt = false,
-        previewer = false,
-      },
-    },
-    keys = {
-      { "<c-p>", function() require("fzf-lua").files() end,   desc = "Fuzzy Finder", silent = true },
-      { "<c-b>", function() require("fzf-lua").buffers() end, desc = "Open Buffers", silent = true },
-      {
-        "<c-g>",
-        function()
-          require("fzf-lua").grep_project(
-            { prompt = '> ', winopts = { height = 0.4, width = 0.7 } }
-          )
-        end,
-        desc = "search all project lines (fzf.vim's `:Rg`)",
-        silent = true
-      },
-      {
-        "<c-f>",
-        function()
-          require("fzf-lua").grep(
-            { prompt = '> ', input_prompt = 'Search: ', winopts = { height = 0.4, width = 0.7 } }
-          )
-        end,
-        desc = "search for a pattern with `grep` or `rg`",
-        silent = true
-      },
-    },
-  },
-
   { "chrisgrieser/nvim-genghis" },
 
   {
@@ -74,6 +33,24 @@ require('lazy').setup({
     keys = {
       { "-", function() require("oil").open() end, desc = "Open parent directory", silent = true },
     }
+  },
+
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = true,
+    opts = {
+      defaults = {
+        layout_strategy = 'center',
+        sorting_strategy = "ascending",
+      },
+    },
+    keys = {
+      { '<c-p><c-o>', function() require('telescope.builtin').oldfiles() end,                        silent = true },
+      { '<c-p><c-g>', function() require('telescope.builtin').grep_string() end,                     silent = true },
+      { '<c-p><c-r>', function() require('telescope.builtin').resume() end,                          silent = true },
+      { '<c-p><c-p>', function() require('telescope.builtin').find_files({ previewer = false }) end, silent = true },
+    },
   },
 
   {
