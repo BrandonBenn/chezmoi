@@ -24,15 +24,36 @@ require('lazy').setup({
   { "chrisgrieser/nvim-genghis" },
 
   {
-    "stevearc/oil.nvim",
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-      "stevearc/dressing.nvim",
-    },
+    "tamago324/lir.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
     config = true,
+    opts = {
+      mappings = {
+        ['<Enter>'] = function() require('lir.actions').edit() end,
+        ['<C-s>']   = function() require('lir.actions').split() end,
+        ['<C-v>']   = function() require('lir.actions').vsplit() end,
+        ['<C-t>']   = function() require('lir.actions').tabedit() end,
+        ['-']       = function() require('lir.actions').up() end,
+        ['q']       = function() require('lir.actions').quit() end,
+        ['A']       = function() require('lir.actions').mkdir() end,
+        ['a']       = function() require('lir.actions').newfile() end,
+        ['r']       = function() require('lir.actions').rename() end,
+        ['@']       = function() require('lir.actions').cd() end,
+        ['yy']      = function() require('lir.actions').yank_path() end,
+        ['.']       = function() require('lir.actions').toggle_show_hidden() end,
+        ['dd']      = function() require('lir.actions').delete() end,
+        ['C']       = function() require('lir.clipboard.actions').copy() end,
+        ['X']       = function() require('lir.clipboard.actions').cut() end,
+        ['P']       = function() require('lir.clipboard.actions').paste() end,
+        ['J']       = function()
+          require("lir.mark.actions").toggle_mark()
+          vim.cmd('normal! j')
+        end,
+      },
+    },
     keys = {
-      { "-", function() require("oil").open() end, desc = "Open parent directory", silent = true },
-    }
+      { "-", ':edit .<cr>', { silent = true } },
+    },
   },
 
   {
