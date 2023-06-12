@@ -52,7 +52,7 @@ require('lazy').setup({
       },
     },
     keys = {
-      { "-", ':edit .<cr>', { silent = true } },
+      { "-", ':edit .<cr>', silent = true },
     },
   },
 
