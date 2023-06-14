@@ -51,8 +51,7 @@ require('lazy').setup({
         end,
       },
     },
-    keys = {
-      { "-", ':edit .<cr>', silent = true },
+    keys = { { "-", function() vim.cmd("edit " .. vim.fn.expand("%:p:h")) end, silent = true },
     },
   },
 
