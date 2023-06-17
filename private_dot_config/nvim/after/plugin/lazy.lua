@@ -89,6 +89,8 @@ require('lazy').setup({
     },
   },
 
+  { "duane9/nvim-rg" },
+
   {
     'tpope/vim-fugitive',
     cmd = 'Git',
