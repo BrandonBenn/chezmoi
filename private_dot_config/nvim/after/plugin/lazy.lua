@@ -24,34 +24,33 @@ require('lazy').setup({
   { "chrisgrieser/nvim-genghis" },
 
   {
-    "tamago324/lir.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    config = true,
+    'tamago324/lir.nvim',
     opts = {
       mappings = {
-        ['<Enter>'] = function() require('lir.actions').edit() end,
-        ['<C-s>']   = function() require('lir.actions').split() end,
-        ['<C-v>']   = function() require('lir.actions').vsplit() end,
-        ['<C-t>']   = function() require('lir.actions').tabedit() end,
-        ['-']       = function() require('lir.actions').up() end,
-        ['q']       = function() require('lir.actions').quit() end,
-        ['A']       = function() require('lir.actions').mkdir() end,
-        ['a']       = function() require('lir.actions').newfile() end,
-        ['r']       = function() require('lir.actions').rename() end,
-        ['@']       = function() require('lir.actions').cd() end,
-        ['yy']      = function() require('lir.actions').yank_path() end,
-        ['.']       = function() require('lir.actions').toggle_show_hidden() end,
-        ['dd']      = function() require('lir.actions').delete() end,
-        ['C']       = function() require('lir.clipboard.actions').copy() end,
-        ['X']       = function() require('lir.clipboard.actions').cut() end,
-        ['P']       = function() require('lir.clipboard.actions').paste() end,
-        ['J']       = function()
-          require("lir.mark.actions").toggle_mark()
+        ['<cr>']  = function() require('lir.actions').edit() end,
+        ['<C-s>'] = function() require('lir.actions').split() end,
+        ['<C-v>'] = function() require('lir.actions').vsplit() end,
+        ['<C-t>'] = function() require('lir.actions').tabedit() end,
+        ['-']     = function() require('lir.actions').up() end,
+        ['q']     = function() require('lir.actions').quit() end,
+        ['a']     = function() require('lir.actions').newfile() end,
+        ['A']     = function() require('lir.actions').mkdir() end,
+        ['R']     = function() require('lir.actions').rename() end,
+        ['@']     = function() require('lir.actions').cd() end,
+        ['Y']     = function() require('lir.actions').yank_path() end,
+        ['.']     = function() require('lir.actions').toggle_show_hidden() end,
+        ['dd']    = function() require('lir.actions').delete() end,
+        ['C']     = function() require('lir.clipboard.actions').copy() end,
+        ['X']     = function() require('lir.clipboard.actions').cut() end,
+        ['P']     = function() require('lir.clipboard.actions').paste() end,
+        ['J']     = function()
+          require('lir.mark.actions').toggle_mark()
           vim.cmd('normal! j')
         end,
       },
     },
-    keys = { { "-", function() vim.cmd("edit " .. vim.fn.expand("%:p:h")) end, silent = true },
+    keys = {
+      { '-', ':edit .<cr>', silent = true },
     },
   },
 
@@ -67,7 +66,8 @@ require('lazy').setup({
     },
     keys = {
       { '<c-p><c-o>', function() require('telescope.builtin').oldfiles() end,                        silent = true },
-      { '<c-p><c-g>', function() require('telescope.builtin').grep_string() end,                     silent = true },
+      { '<c-p><c-w>', function() require('telescope.builtin').grep_string() end,                     silent = true },
+      { '<c-p><c-g>', function() require('telescope.builtin').live_grep() end,                       silent = true },
       { '<c-p><c-r>', function() require('telescope.builtin').resume() end,                          silent = true },
       { '<c-p><c-p>', function() require('telescope.builtin').find_files({ previewer = false }) end, silent = true },
     },
