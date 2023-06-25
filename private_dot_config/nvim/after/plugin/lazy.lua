@@ -24,33 +24,14 @@ require('lazy').setup({
   { "chrisgrieser/nvim-genghis" },
 
   {
-    'tamago324/lir.nvim',
-    opts = {
-      mappings = {
-        ['<cr>']  = function() require('lir.actions').edit() end,
-        ['<C-s>'] = function() require('lir.actions').split() end,
-        ['<C-v>'] = function() require('lir.actions').vsplit() end,
-        ['<C-t>'] = function() require('lir.actions').tabedit() end,
-        ['-']     = function() require('lir.actions').up() end,
-        ['q']     = function() require('lir.actions').quit() end,
-        ['a']     = function() require('lir.actions').newfile() end,
-        ['A']     = function() require('lir.actions').mkdir() end,
-        ['R']     = function() require('lir.actions').rename() end,
-        ['@']     = function() require('lir.actions').cd() end,
-        ['Y']     = function() require('lir.actions').yank_path() end,
-        ['.']     = function() require('lir.actions').toggle_show_hidden() end,
-        ['dd']    = function() require('lir.actions').delete() end,
-        ['C']     = function() require('lir.clipboard.actions').copy() end,
-        ['X']     = function() require('lir.clipboard.actions').cut() end,
-        ['P']     = function() require('lir.clipboard.actions').paste() end,
-        ['J']     = function()
-          require('lir.mark.actions').toggle_mark()
-          vim.cmd('normal! j')
-        end,
-      },
-    },
+    'dinhhuy258/sfm.nvim',
+    dependencies = { "dinhhuy258/sfm-fs.nvim" },
+    config = function()
+      local sfm_explorer = require("sfm").setup {}
+      sfm_explorer:load_extension "sfm-fs"
+    end,
     keys = {
-      { '-', ':edit .<cr>', silent = true },
+      { '<leader>a', ':SFMToggle<cr>', silent = true }
     },
   },
 
