@@ -15,6 +15,7 @@ require('lazy').setup({
       'stevearc/dressing.nvim',
       'nvim-lua/plenary.nvim',
       'vim-test/vim-test',
+      "duane9/nvim-rg",
       { 'yorickpeterse/nvim-pqf', config = true },
       { 'numToStr/Comment.nvim',  config = true },
       { 'm4xshen/autoclose.nvim', config = true },
@@ -55,6 +56,31 @@ require('lazy').setup({
   },
 
   {
+    'TimUntersberger/neogit',
+    dependencies = 'nvim-lua/plenary.nvim',
+    config = true,
+    keys = {
+      { '<leader>gg', function() require('neogit').open() end, silent = true },
+    },
+  },
+
+  {
+    'akinsho/git-conflict.nvim',
+    version = "*",
+    config = true,
+    opts = {
+      default_mappings = {
+        ours = 'o',
+        theirs = 't',
+        none = 'x',
+        both = 'b',
+        next = 'n',
+        prev = 'p',
+      },
+    },
+  },
+
+  {
     'lewis6991/gitsigns.nvim',
     event = 'BufEnter',
     init = function()
@@ -70,18 +96,6 @@ require('lazy').setup({
     },
   },
 
-  { "duane9/nvim-rg" },
-
-  {
-    'tpope/vim-fugitive',
-    cmd = 'Git',
-    keys = {
-      { '<leader>gg', ':tab G<cr>',                        silent = true },
-      { '<leader>gC', ':Git commit --amend --no-edit<cr>', silent = true },
-      { '<leader>gP', ':Git push --force<cr>',             silent = true },
-      { '<leader>gF', ':Git pull<cr>',                     silent = true },
-    }
-  },
 
   {
     'akinsho/toggleterm.nvim',
