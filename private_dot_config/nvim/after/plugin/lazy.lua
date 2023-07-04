@@ -25,14 +25,36 @@ require('lazy').setup({
   { "chrisgrieser/nvim-genghis" },
 
   {
-    'dinhhuy258/sfm.nvim',
-    dependencies = { "dinhhuy258/sfm-fs.nvim" },
-    config = function()
-      local sfm_explorer = require("sfm").setup {}
-      sfm_explorer:load_extension "sfm-fs"
-    end,
+    'tamago324/lir.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    lazy = false,
+    config = true,
     keys = {
-      { '<leader>a', ':SFMToggle<cr>', silent = true }
+      { '-', ':edit .<cr>', silent = true },
+    },
+    opts = {
+      mappings = {
+        ['<cr>']  = function() require('lir.actions').edit() end,
+        ['<C-s>'] = function() require('lir.actions').split() end,
+        ['<C-v>'] = function() require('lir.actions').vsplit() end,
+        ['<C-t>'] = function() require('lir.actions').tabedit() end,
+        ['-']     = function() require('lir.actions').up() end,
+        ['q']     = function() require('lir.actions').quit() end,
+        ['a']     = function() require('lir.actions').newfile() end,
+        ['A']     = function() require('lir.actions').mkdir() end,
+        ['r']     = function() require('lir.actions').rename() end,
+        ['@']     = function() require('lir.actions').cd() end,
+        ['Y']     = function() require('lir.actions').yank_path() end,
+        ['.']     = function() require('lir.actions').toggle_show_hidden() end,
+        ['D']     = function() require('lir.actions').delete() end,
+        ['C']     = function() require('lir.clipboard.actions').copy() end,
+        ['X']     = function() require('lir.clipboard.actions').cut() end,
+        ['P']     = function() require('lir.clipboard.actions').paste() end,
+        ['J']     = function()
+          require('lir.mark.actions').toggle_mark()
+          vim.cmd('normal! j')
+        end,
+      }
     },
   },
 
@@ -56,11 +78,9 @@ require('lazy').setup({
   },
 
   {
-    'TimUntersberger/neogit',
-    dependencies = 'nvim-lua/plenary.nvim',
-    config = true,
+    'tpope/vim-fugitive',
     keys = {
-      { '<leader>gg', function() require('neogit').open() end, silent = true },
+      { '<leader>gg', ':Git<cr>', silent = true },
     },
   },
 
@@ -104,7 +124,7 @@ require('lazy').setup({
       { 'willothy/flatten.nvim', config = true }
     },
     opts = {
-      open_mapping = [[<c-g>]],
+      open_mapping = [[<c-z>]],
     }
   },
 
