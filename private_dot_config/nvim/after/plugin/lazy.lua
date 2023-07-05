@@ -82,6 +82,15 @@ require('lazy').setup({
     keys = {
       { '<leader>gg', ':Git<cr>', silent = true },
     },
+    config = function()
+      vim.api.nvim_create_autocmd({ 'FileType' }, {
+        pattern = { "fugitive" },
+        callback = function()
+          vim.api.nvim_buf_set_keymap(0, "n", "<leader>gpp", ':Git push<CR>', { noremap = true, silent = true })
+          vim.api.nvim_buf_set_keymap(0, "n", "<leader>gpP",  ':Git push --force<CR>', { noremap = true, silent = true })
+        end
+      })
+    end
   },
 
   {
@@ -163,7 +172,6 @@ require('lazy').setup({
         sources = {
           { name = 'luasnip',  keyword_length = 3 },
           { name = 'nvim_lsp', keyword_length = 2 },
-          { name = 'buffer' },
           { name = 'rg' },
           { name = 'path' },
           { name = 'nvim_lua' },
