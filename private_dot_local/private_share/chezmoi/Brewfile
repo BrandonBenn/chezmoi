@@ -1,4 +1,3 @@
-brew "lazygit"
 brew "stylua"
 brew "blueutil"
 brew "trash"
@@ -17,16 +16,18 @@ brew "fd"
 brew "neovim"
 brew "nnn"
 brew "redis"
+brew "maccy"
+brew "rectangle"
+brew "bluesnooze"
+brew "iina"
 brew "fzf"
 brew "ripgrep"
-brew "opensearch", enable_service: :changed
+# brew "opensearch", enable_service: :changed
 brew "syncthing", enable_service: :changed
-brew "mysql@8.0", restart_service: :changed, link: true, conflicts_with: ["mysql"]
+# brew "mysql@8.0", restart_service: :changed, link: true, conflicts_with: ["mysql"]
 
 cask "firefox"
-cask "dbeaver-community"
 cask "keepassxc", greedy: true
-cask "hammerspoon", greedy: true
 cask "kitty", greedy: true
 
 tap "homebrew/cask-fonts"

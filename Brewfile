@@ -21,6 +21,7 @@ brew "rectangle"
 brew "bluesnooze"
 brew "iina"
 brew "fzf"
+brew "dmenu-mac"
 brew "ripgrep"
 # brew "opensearch", enable_service: :changed
 brew "syncthing", enable_service: :changed
