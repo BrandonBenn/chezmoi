@@ -80,17 +80,11 @@ require('lazy').setup({
   {
     'tpope/vim-fugitive',
     keys = {
-      { '<leader>gg', ':Git<cr>', silent = true },
+      { '<leader>gg', ':Git<cr>',              silent = true },
+      { '<leader>gp', ':Git push<cr>',         silent = true },
+      { '<leader>gP', ':Git push --force<cr>', silent = true },
+      { '<leader>gf', ':Git fetch<cr>',        silent = true },
     },
-    config = function()
-      vim.api.nvim_create_autocmd({ 'FileType' }, {
-        pattern = { "fugitive" },
-        callback = function()
-          vim.api.nvim_buf_set_keymap(0, "n", "<leader>gpp", ':Git push<CR>', { noremap = true, silent = true })
-          vim.api.nvim_buf_set_keymap(0, "n", "<leader>gpP",  ':Git push --force<CR>', { noremap = true, silent = true })
-        end
-      })
-    end
   },
 
   {
