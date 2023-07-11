@@ -15,6 +15,7 @@ require('lazy').setup({
       'stevearc/dressing.nvim',
       'nvim-lua/plenary.nvim',
       'vim-test/vim-test',
+      "elixir-editors/vim-elixir",
       "duane9/nvim-rg",
       { 'yorickpeterse/nvim-pqf', config = true },
       { 'numToStr/Comment.nvim',  config = true },
