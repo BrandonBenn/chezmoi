@@ -78,12 +78,29 @@ require('lazy').setup({
   },
 
   {
+    'lewis6991/gitsigns.nvim',
+    event = 'BufEnter',
+    init = function()
+      vim.opt.titlestring = [[%t%( %M%)%( (%{expand("%:~:.:h")})%)%( %a%) %{get(b:,'gitsigns_head','')}]]
+    end,
+    config = true,
+    keys = {
+      { '<leader>gx', ":Gitsigns reset_hunk<cr>",      silent = true },
+      { '<leader>gb', ":Gitsigns blame_line<cr>",      silent = true },
+      { '<leader>gs', ":Gitsigns stage_hunk<cr>",      silent = true },
+      { '<leader>gu', ":Gitsigns undo_stage_hunk<cr>", silent = true },
+      { '<leader>gS', ":Gitsigns stage_buffer<cr>",    silent = true },
+    },
+  },
+
+  {
     'tpope/vim-fugitive',
     keys = {
       { '<leader>gg', ':Git<cr>',              silent = true },
       { '<leader>gp', ':Git push<cr>',         silent = true },
       { '<leader>gP', ':Git push --force<cr>', silent = true },
-      { '<leader>gf', ':Git fetch<cr>',        silent = true },
+      { '<leader>gf', ':Git pull<cr>',        silent = true },
+      { '<leader>gF', ':Git fetch<cr>',        silent = true },
     },
   },
 
@@ -104,28 +121,11 @@ require('lazy').setup({
   },
 
   {
-    'lewis6991/gitsigns.nvim',
-    event = 'BufEnter',
-    init = function()
-      vim.opt.titlestring = [[%t%( %M%)%( (%{expand("%:~:.:h")})%)%( %a%) %{get(b:,'gitsigns_head','')}]]
-    end,
-    config = true,
-    keys = {
-      { '<leader>gx', ":Gitsigns reset_hunk<cr>",      silent = true },
-      { '<leader>gb', ":Gitsigns blame_line<cr>",      silent = true },
-      { '<leader>gs', ":Gitsigns stage_hunk<cr>",      silent = true },
-      { '<leader>gu', ":Gitsigns undo_stage_hunk<cr>", silent = true },
-      { '<leader>gS', ":Gitsigns stage_buffer<cr>",    silent = true },
-    },
-  },
-
-
-  {
     'akinsho/toggleterm.nvim',
     version = "*",
     dependencies = {
       { 'willothy/flatten.nvim', config = true }
-    },
+    ,
     opts = {
       open_mapping = [[<c-z>]],
     }
