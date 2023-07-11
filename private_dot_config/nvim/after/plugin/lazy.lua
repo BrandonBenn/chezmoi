@@ -93,14 +93,26 @@ require('lazy').setup({
     },
   },
 
+  -- {
+  --   'tpope/vim-fugitive',
+  --   keys = {
+  --     { '<leader>gg', ':Git<cr>',              silent = true },
+  --     { '<leader>gp', ':Git push<cr>',         silent = true },
+  --     { '<leader>gP', ':Git push --force<cr>', silent = true },
+  --     { '<leader>gf', ':Git pull<cr>',         silent = true },
+  --     { '<leader>gF', ':Git fetch<cr>',        silent = true },
+  --   },
+  -- },
+
   {
-    'tpope/vim-fugitive',
+    "NeogitOrg/neogit",
+    config = true,
     keys = {
-      { '<leader>gg', ':Git<cr>',              silent = true },
-      { '<leader>gp', ':Git push<cr>',         silent = true },
-      { '<leader>gP', ':Git push --force<cr>', silent = true },
-      { '<leader>gf', ':Git pull<cr>',        silent = true },
-      { '<leader>gF', ':Git fetch<cr>',        silent = true },
+      { '<leader>gg', function() require('neogit').open({ kind = "split_above" }) end, silent = true },
+      { '<leader>gp', ':belowright split | terminal git push<cr>',                     silent = true },
+      { '<leader>gP', ':belowright split | terminal git push --force<cr>',             silent = true },
+      { '<leader>gf', ':belowright split | terminal git pull<cr>',                     silent = true },
+      { '<leader>gF', ':belowright split | terminal git fetch<cr>',                    silent = true },
     },
   },
 
@@ -125,7 +137,7 @@ require('lazy').setup({
     version = "*",
     dependencies = {
       { 'willothy/flatten.nvim', config = true }
-    ,
+    },
     opts = {
       open_mapping = [[<c-z>]],
     }
