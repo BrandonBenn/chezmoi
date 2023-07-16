@@ -28,6 +28,7 @@ vim.opt.statusline = [[ ]]
 
 -- Set Keymaps
 local options = { remap = true, silent = true }
+vim.keymap.set('n', 'gq', ':bd<cr>', options)
 vim.keymap.set('n', '<C-w>t', ':tabnew<cr>', options)
 vim.keymap.set('n', '<Tab>', ':tabn<cr>', options)
 vim.keymap.set('n', '<S-Tab>', ':tabp<cr>', options)
@@ -42,8 +43,11 @@ vim.keymap.set('n', '<C-t>v', ':vsplit | terminal<cr>', options)
 vim.keymap.set('n', '<C-t>s', ':split | terminal<cr>', options)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setqflist, options)
 vim.keymap.set('n', '<leader><leader>', vim.lsp.buf.code_action, options)
- vim.keymap.set('i', '<Tab>', function() return vim.fn.pumvisible() == 1 and "<C-n>" or "<Tab>" end, { expr = true })
--- vim.keymap.set('n', '<leader>gg', ':tabnew term://lazygit | startinsert<cr>', options)
+vim.keymap.set('i', '<Tab>', function() return vim.fn.pumvisible() == 1 and "<C-n>" or "<Tab>" end, { expr = true })
+vim.api.nvim_create_user_command('Lazygit',
+  ':tabnew term://lazygit | startinsert<cr>',
+  { desc = [[Run instance of lazygit in the embedded terminal]], force = true }
+)
 require('notes').setup({ notes_dir = vim.fn.expand(os.getenv('NOTES_DIR')) })
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
