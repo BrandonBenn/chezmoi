@@ -31,7 +31,7 @@ require('lazy').setup({
     lazy = false,
     config = true,
     keys = {
-      { '-', ':edit .<cr>', silent = true },
+      { '-', ':edit %:p:h<cr>', silent = true }
     },
     opts = {
       mappings = {
