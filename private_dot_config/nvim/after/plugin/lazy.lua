@@ -86,36 +86,17 @@ require('lazy').setup({
     end,
     config = true,
     keys = {
-      { '<leader>gx', ":Gitsigns reset_hunk<cr>",      silent = true },
-      { '<leader>gb', ":Gitsigns blame_line<cr>",      silent = true },
-      { '<leader>gs', ":Gitsigns stage_hunk<cr>",      silent = true },
-      { '<leader>gu', ":Gitsigns undo_stage_hunk<cr>", silent = true },
-      { '<leader>gS', ":Gitsigns stage_buffer<cr>",    silent = true },
+      { '<leader>gx', ":Gitsigns reset_hunk<cr>",                          silent = true },
+      { '<leader>gb', ":Gitsigns blame_line<cr>",                          silent = true },
+      { '<leader>gs', ":Gitsigns stage_hunk<cr>",                          silent = true },
+      { '<leader>gu', ":Gitsigns undo_stage_hunk<cr>",                     silent = true },
+      { '<leader>gS', ":Gitsigns stage_buffer<cr>",                        silent = true },
+      { '<leader>gp', ':belowright split | terminal git push<cr>',         silent = true },
+      { '<leader>gP', ':belowright split | terminal git push --force<cr>', silent = true },
+      { '<leader>gf', ':belowright split | terminal git pull<cr>',         silent = true },
+      { '<leader>gF', ':belowright split | terminal git fetch<cr>',        silent = true },
     },
   },
-
-  {
-    'tpope/vim-fugitive',
-    keys = {
-      { '<leader>gg', ':Git<cr>',              silent = true },
-      { '<leader>gp', ':Git! push<cr>',         silent = true },
-      { '<leader>gP', ':Git! push --force<cr>', silent = true },
-      { '<leader>gf', ':Git! pull<cr>',         silent = true },
-      { '<leader>gF', ':Git! fetch<cr>',        silent = true },
-    },
-  },
-
-  -- {
-  --   "NeogitOrg/neogit",
-  --   config = true,
-  --   keys = {
-  --     { '<leader>gg', function() require('neogit').open({ kind = "split_above" }) end, silent = true },
-  --     { '<leader>gp', ':belowright split | terminal git push<cr>',                     silent = true },
-  --     { '<leader>gP', ':belowright split | terminal git push --force<cr>',             silent = true },
-  --     { '<leader>gf', ':belowright split | terminal git pull<cr>',                     silent = true },
-  --     { '<leader>gF', ':belowright split | terminal git fetch<cr>',                    silent = true },
-  --   },
-  -- },
 
   {
     'akinsho/git-conflict.nvim',
@@ -136,11 +117,30 @@ require('lazy').setup({
   {
     'akinsho/toggleterm.nvim',
     version = "*",
-    dependencies = {
-      { 'willothy/flatten.nvim', config = true }
-    },
-    opts = {
-      open_mapping = [[<c-z>]],
+    dependencies = { { 'willothy/flatten.nvim', config = true } },
+    opts = { open_mapping = [[<c-z>]] },
+    init = function()
+      local Terminal = require('toggleterm.terminal').Terminal
+      local lazygit  = Terminal:new({
+        cmd = "lazygit",
+        dir = "git_dir",
+        direction = "tab",
+        float_opts = { border = "double" },
+        on_open = function(term)
+          vim.cmd("startinsert!")
+          vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+        end,
+        on_close = function(_term)
+          vim.cmd("startinsert!")
+        end,
+      })
+
+      function _LAZYGIT_TOGGLE()
+        lazygit:toggle()
+      end
+    end,
+    keys = {
+      { '<leader>gg', "<cmd>lua _LAZYGIT_TOGGLE()<CR>", silent = true },
     }
   },
 
