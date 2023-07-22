@@ -29,7 +29,7 @@ vim.opt.statusline = [[ ]]
 -- Set Keymaps
 local options = { remap = true, silent = true }
 vim.keymap.set('n', ';w', vim.cmd.update, options)
-vim.keymap.set('n', ';q', vim.cmd.bdelete, options)
+vim.keymap.set('n', 'gq', vim.cmd.bdelete, options)
 vim.keymap.set('n', '<C-w>t', vim.cmd.tabnew, options)
 vim.keymap.set('n', '<Tab>', vim.cmd.tabnext, options)
 vim.keymap.set('n', '<S-Tab>', vim.cmd.tabprevious, options)

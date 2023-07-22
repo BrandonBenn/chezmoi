@@ -25,9 +25,11 @@ require('lazy').setup({
 
   { "chrisgrieser/nvim-genghis" },
 
+
   {
     'tamago324/lir.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
+    enable = false,
     lazy = false,
     config = true,
     keys = {
