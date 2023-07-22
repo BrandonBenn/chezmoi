@@ -3,10 +3,10 @@ local M = {}
 local keymap = vim.keymap.set
 local command = vim.api.nvim_create_user_command
 
-function sanitize(title)
+local function sanitize(title)
   local tolower = vim.fn.tolower
-  return tolower(title)-- downcase words
-      :gsub("%p+", "")-- remove punctuation
+  return tolower(title) -- downcase words
+      :gsub("%p+", "")  -- remove punctuation
       :gsub("%s+", "-") -- change spaces to dashes
 end
 

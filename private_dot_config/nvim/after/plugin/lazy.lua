@@ -48,13 +48,9 @@ require('lazy').setup({
         ['Y']     = function() require('lir.actions').yank_path() end,
         ['.']     = function() require('lir.actions').toggle_show_hidden() end,
         ['D']     = function() require('lir.actions').delete() end,
-        ['C']     = function() require('lir.clipboard.actions').copy() end,
-        ['X']     = function() require('lir.clipboard.actions').cut() end,
-        ['P']     = function() require('lir.clipboard.actions').paste() end,
-        ['J']     = function()
-          require('lir.mark.actions').toggle_mark()
-          vim.cmd('normal! j')
-        end,
+        ['y']     = function() require('lir.clipboard.actions').copy() end,
+        ['x']     = function() require('lir.clipboard.actions').cut() end,
+        ['p']     = function() require('lir.clipboard.actions').paste() end,
       }
     },
   },
@@ -70,11 +66,11 @@ require('lazy').setup({
       },
     },
     keys = {
-      { '<c-p><c-o>', function() require('telescope.builtin').oldfiles() end,                        silent = true },
-      { '<c-p><c-w>', function() require('telescope.builtin').grep_string() end,                     silent = true },
-      { '<c-p><c-g>', function() require('telescope.builtin').live_grep() end,                       silent = true },
-      { '<c-p><c-r>', function() require('telescope.builtin').resume() end,                          silent = true },
-      { '<c-p><c-p>', function() require('telescope.builtin').find_files({ previewer = false }) end, silent = true },
+      { '<leader>fo', function() require('telescope.builtin').oldfiles({ previewer = false }) end,   silent = true },
+      { '<leader>fw', function() require('telescope.builtin').grep_string() end,                     silent = true },
+      { '<leader>fg', function() require('telescope.builtin').live_grep() end,                       silent = true },
+      { '<leader>fr', function() require('telescope.builtin').resume() end,                          silent = true },
+      { '<leader>ff', function() require('telescope.builtin').find_files({ previewer = false }) end, silent = true },
     },
   },
 
@@ -130,7 +126,7 @@ require('lazy').setup({
           vim.cmd("startinsert!")
           vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
         end,
-        on_close = function(_term)
+        on_close = function(_)
           vim.cmd("startinsert!")
         end,
       })
@@ -221,31 +217,7 @@ require('lazy').setup({
       require('nvim-treesitter.configs').setup({
         ensure_installed = { 'ruby', 'python', 'lua', 'javascript', 'vue', 'json', 'http', 'go', 'sql' },
       })
-
-      require('nvim-treesitter.configs').setup({
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = '<CR>',
-            node_incremental = '<CR>',
-            scope_incremental = '<S-CR>',
-            node_decremental = '<BS>',
-          },
-        },
-      })
     end
-  },
-
-  {
-    "rest-nvim/rest.nvim",
-    requires = { 'nvim-lua/plenary.nvim' },
-    ft = "http",
-    config = function()
-      require("rest-nvim").setup({ result_split_horizontal = true, result_split_in_place = 'below' })
-    end,
-    keys = {
-      { "<C-c><C-c>", "<Plug>RestNvim", desc = "Run the request under the cursor" },
-    }
   },
 
   {
@@ -253,16 +225,5 @@ require('lazy').setup({
     dependencies = { "ray-x/guihua.lua" },
     config = true,
     ft = { "go", 'gomod' },
-  },
-
-  {
-    -- AI Helper
-    'zbirenbaum/copilot.lua',
-    event = 'BufEnter',
-    config = function()
-      require('copilot').setup({
-        copilot_node_command = vim.fn.expand('~/.local/share/rtx/installs/nodejs/18.15.0/bin/node')
-      })
-    end,
   },
 }, opts)
