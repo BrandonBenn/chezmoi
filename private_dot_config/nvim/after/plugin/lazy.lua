@@ -33,7 +33,8 @@ require('lazy').setup({
     lazy = false,
     config = true,
     keys = {
-      { '-', ':edit %:p:h<cr>', silent = true }
+      { '-',         ':edit %:p:h<cr>',           silent = true },
+      { '<leader>v', ':vsplit | edit  %:p:h<cr>', silent = true },
     },
     opts = {
       mappings = {
