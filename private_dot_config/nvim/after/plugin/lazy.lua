@@ -15,16 +15,14 @@ require('lazy').setup({
       'stevearc/dressing.nvim',
       'nvim-lua/plenary.nvim',
       'vim-test/vim-test',
-      "elixir-editors/vim-elixir",
-      "duane9/nvim-rg",
+      'elixir-editors/vim-elixir',
+      'chrisgrieser/nvim-genghis',
+      'duane9/nvim-rg',
       { 'yorickpeterse/nvim-pqf', config = true },
       { 'numToStr/Comment.nvim',  config = true },
       { 'm4xshen/autoclose.nvim', config = true },
     },
   },
-
-  { "chrisgrieser/nvim-genghis" },
-
 
   {
     'tamago324/lir.nvim',
@@ -191,15 +189,15 @@ require('lazy').setup({
     -- Linter
     'jose-elias-alvarez/null-ls.nvim',
     dependencies = { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
-    config = function()
+    init = function()
       local mason = require('mason-tool-installer')
-      local null_ls = require('null-ls')
-
       mason.setup({
         'black',
         'shellcheck',
       })
-
+    end,
+    config = function()
+      local null_ls = require('null-ls')
       null_ls.setup({
         sources = {
           null_ls.builtins.completion.spell,
@@ -218,7 +216,11 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     config = function()
       require('nvim-treesitter.configs').setup({
-        ensure_installed = { 'ruby', 'python', 'lua', 'javascript', 'vue', 'json', 'http', 'go', 'sql' },
+        ensure_installed = {
+          'ruby', 'python', 'lua',
+          'javascript', 'vue', 'json',
+          'http', 'go', 'sql',
+        },
       })
     end
   },
@@ -226,7 +228,7 @@ require('lazy').setup({
   {
     "ray-x/go.nvim",
     dependencies = { "ray-x/guihua.lua" },
-    config = true,
     ft = { "go", 'gomod' },
+    config = true,
   },
 }, opts)
