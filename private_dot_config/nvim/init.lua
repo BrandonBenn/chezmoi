@@ -28,16 +28,15 @@ vim.opt.statusline = [[ ]]
 
 -- Set Keymaps
 local options = { remap = true, silent = true }
-vim.keymap.set('n', ';;', ':', { remap = true, silent = false })
 vim.keymap.set('n', ';w', vim.cmd.update, options)
-vim.keymap.set('n', ';q', vim.cmd.quitall, options)
+vim.keymap.set('n', ';qa', vim.cmd.quitall, options)
+vim.keymap.set({ 'v', 'n' }, ';;', ':', { silent = false })
 vim.keymap.set('n', 'gq', vim.cmd.bdelete, options)
 vim.keymap.set('n', '<C-w>t', vim.cmd.tabnew, options)
 vim.keymap.set('n', '<Tab>', vim.cmd.tabnext, options)
 vim.keymap.set('n', '<S-Tab>', vim.cmd.tabprevious, options)
 vim.keymap.set('v', '<', '<gv', options)
 vim.keymap.set('v', '>', '>gv', options)
-vim.keymap.set({ 'v', 'n' }, ';', ':', { silent = false })
 vim.keymap.set({ 'n', 'v' }, 'g=', vim.lsp.buf.format, options)
 vim.keymap.set('n', '<C-t><C-t>', ':tabnew | terminal<cr>', options)
 vim.keymap.set('n', '<C-t>v', ':vsplit | terminal<cr>', options)

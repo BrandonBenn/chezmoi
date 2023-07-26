@@ -164,7 +164,6 @@ require('lazy').setup({
     config = function()
       local lsp = require('lsp-zero')
       lsp.preset('recommended')
-
       lsp.ensure_installed({
         'gopls',
         'ruff_lsp',
