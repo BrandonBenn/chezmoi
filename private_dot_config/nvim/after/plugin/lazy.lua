@@ -25,35 +25,38 @@ require('lazy').setup({
   },
 
   {
-    'tamago324/lir.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    enable = false,
-    lazy = false,
+    'stevearc/oil.nvim',
     config = true,
-    keys = {
-      { '-',         ':edit %:p:h<cr>',           silent = true },
-      { '<leader>v', ':vsplit | edit  %:p:h<cr>', silent = true },
-    },
     opts = {
-      mappings = {
-        ['<cr>']  = function() require('lir.actions').edit() end,
-        ['<C-s>'] = function() require('lir.actions').split() end,
-        ['<C-v>'] = function() require('lir.actions').vsplit() end,
-        ['<C-t>'] = function() require('lir.actions').tabedit() end,
-        ['-']     = function() require('lir.actions').up() end,
-        ['q']     = function() require('lir.actions').quit() end,
-        ['a']     = function() require('lir.actions').newfile() end,
-        ['A']     = function() require('lir.actions').mkdir() end,
-        ['r']     = function() require('lir.actions').rename() end,
-        ['@']     = function() require('lir.actions').cd() end,
-        ['Y']     = function() require('lir.actions').yank_path() end,
-        ['.']     = function() require('lir.actions').toggle_show_hidden() end,
-        ['D']     = function() require('lir.actions').delete() end,
-        ['y']     = function() require('lir.clipboard.actions').copy() end,
-        ['x']     = function() require('lir.clipboard.actions').cut() end,
-        ['p']     = function() require('lir.clipboard.actions').paste() end,
+      keymaps = {
+        ["?"] = "actions.show_help",
+        ["<CR>"] = "actions.select",
+        ["<C-v>"] = "actions.select_vsplit",
+        ["<C-s>"] = "actions.select_split",
+        ["<C-t>"] = "actions.select_tab",
+        ["<C-p>"] = "actions.preview",
+        ["<C-l>"] = "actions.refresh",
+        ["."] = "actions.toggle_hidden",
+        ["-"] = "actions.parent",
+        ["_"] = "actions.open_cwd",
+        ["@"] = "actions.cd",
+        ["~"] = "actions.tcd",
+        ["q"] = "actions.close",
+        ["x"] = function()
+          local oil = require('oil')
+          local filename = oil.get_current_dir() .. oil.get_cursor_entry().parsed_name
+
+          if vim.loop.os_uname().sysname == "Linux" then
+            vim.fn.system("xdg-open " .. filename)
+          else
+            vim.fn.system("open " .. filename)
+          end
+        end,
       }
     },
+    keys = {
+      { '-', ':Oil<cr>', desc = 'Open parent directory', silent = true }
+    }
   },
 
   {
