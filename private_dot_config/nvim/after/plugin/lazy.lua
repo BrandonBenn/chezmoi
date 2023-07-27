@@ -27,6 +27,19 @@ require('lazy').setup({
   {
     'stevearc/oil.nvim',
     config = true,
+    init = function()
+      function _EXTERNAL_OPEN()
+        local oil = require('oil')
+        local path = oil.get_current_dir() .. oil.get_cursor_entry().parsed_name
+
+        local cmd = "open"
+        if vim.loop.os_uname().sysname == "Linux" then
+          cmd = "xdg-open"
+        end
+
+        vim.fn.system(cmd .. path)
+      end
+    end,
     opts = {
       keymaps = {
         ["?"] = "actions.show_help",
@@ -42,16 +55,7 @@ require('lazy').setup({
         ["@"] = "actions.cd",
         ["~"] = "actions.tcd",
         ["q"] = "actions.close",
-        ["x"] = function()
-          local oil = require('oil')
-          local filename = oil.get_current_dir() .. oil.get_cursor_entry().parsed_name
-
-          if vim.loop.os_uname().sysname == "Linux" then
-            vim.fn.system("xdg-open " .. filename)
-          else
-            vim.fn.system("open " .. filename)
-          end
-        end,
+        ["x"] = _EXTERNAL_OPEN,
       }
     },
     keys = {
