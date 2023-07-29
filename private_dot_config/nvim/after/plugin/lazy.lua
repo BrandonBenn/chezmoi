@@ -194,14 +194,21 @@ require('lazy').setup({
   {
     -- Linter
     'jose-elias-alvarez/null-ls.nvim',
-    dependencies = { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
-    init = function()
-      local mason = require('mason-tool-installer')
-      mason.setup({
-        'black',
-        'shellcheck',
-      })
-    end,
+    dependencies = {
+      {
+        'WhoIsSethDaniel/mason-tool-installer.nvim',
+        config = true,
+        opts = {
+          ensure_installed = {
+            'black',
+            'ruff',
+            'shellcheck',
+            'eslint_d',
+            'shfmt',
+          },
+        },
+      },
+    },
     config = function()
       local null_ls = require('null-ls')
       null_ls.setup({

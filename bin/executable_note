@@ -5,26 +5,27 @@
 : "${NOTE_DIR:=$HOME/notes}"
 
 yn() {
-    printf '%s [y/n]: ' "$1"
-    stty -icanon
-    answer=$(dd ibs=1 count=1 2>/dev/null)
-    stty icanon
-    printf '\n'
-    glob "$answer" '[yY]'
+	printf '%s [y/n]: ' "$1"
+	stty -icanon
+	answer=$(dd ibs=1 count=1 2>/dev/null)
+	stty icanon
+	printf '\n'
+	glob "$answer" '[yY]'
 }
 
 glob() {
-    case $1 in $2) return 0;
-    esac;
-    return 1;
+	case $1 in $2) return 0 ;;
+	esac
+	return 1
 }
 
 die() {
-    printf "\033[31mError:\033[m %s\n" "$1" >&2
-    exit 1
+	printf "\033[31mError:\033[m %s\n" "$1" >&2
+	exit 1
 }
 
-usage(){ printf "
+usage() {
+	printf "
     SYNOPSIS
 
     note [init|ls|open|rm|grep] [name]
@@ -40,78 +41,78 @@ usage(){ printf "
     file extension: export NOTE_EXT=%s
     Notes Location: export NOTE_DIR=%s
     " "$EDITOR" "$NOTE_EXT" "$NOTE_DIR"
-    exit 0
+	exit 0
 }
 
 note_init() {
-    [ -d "$NOTE_DIR" ] &&
-        die "Notebook already exists at $NOTE_DIR"
+	[ -d "$NOTE_DIR" ] &&
+		die "Notebook already exists at $NOTE_DIR"
 
-    if yn "Create notebook?"; then
-        mkdir -p "$NOTE_DIR"
-        printf 'Notebook created at %s\n' "$NOTE_DIR"
-    else
-        die "Couldn't create notebook."
-    fi
+	if yn "Create notebook?"; then
+		mkdir -p "$NOTE_DIR"
+		printf 'Notebook created at %s\n' "$NOTE_DIR"
+	else
+		die "Couldn't create notebook."
+	fi
 }
 
 note_ls() {
-    printf "\033[35;1mNotebook:\033[m\n"
-    if command -v tree >/dev/null 2>&1; then
-        tree --noreport | sed "s/\.$NOTE_EXT$//"
-    else
-        find . -type f -name \*."$NOTE_EXT" | sed "s/..//;s/\.$NOTE_EXT$//"
-    fi
+	printf "\033[35;1mNotebook:\033[m\n"
+	if command -v tree >/dev/null 2>&1; then
+		tree --noreport | sed "s/\.$NOTE_EXT$//"
+	else
+		find . -type f -name \*."$NOTE_EXT" | sed "s/..//;s/\.$NOTE_EXT$//"
+	fi
 }
 
 note_daily() {
-    note_file="$(date +"%G%m%d").$NOTE_EXT"
-    ${EDITOR:-vi} "$note_file"
-    exit
+	note_file="$(date +"%G%m%d").$NOTE_EXT"
+	${EDITOR:-vi} "$note_file"
+	exit
 }
 
 note_open() {
-    [ "$1" ] || note_daily
-    path="$*"
-    path="${path%/}"
-    path="$(echo "$path" | sed "s/\ /_/g")"
-    mkdir -p -v "$NOTE_DIR/$(dirname -- "$path")"
-    note_file="$NOTE_DIR/$path.$NOTE_EXT"
-    ${EDITOR:-vi} "$note_file"
+	[ "$1" ] || note_daily
+	path="$*"
+	path="${path%/}"
+	path="$(echo "$path" | sed "s/\ /_/g")"
+	mkdir -p -v "$NOTE_DIR/$(dirname -- "$path")"
+	note_file="$NOTE_DIR/$path.$NOTE_EXT"
+	${EDITOR:-vi} "$note_file"
 }
 
 note_rm() {
-    [ "$1" ] || die "note [r]m [note]"
-    yn "are you sure you would like to delete $1?" && {
-        [ -f "$1.$NOTE_EXT" ] && rm -f "$1.$NOTE_EXT"
-        [ -f "$1" ] && rm -f "$1"
+	[ "$1" ] || die "note [r]m [note]"
+	yn "are you sure you would like to delete $1?" && {
+		[ -f "$1.$NOTE_EXT" ] && rm -f "$1.$NOTE_EXT"
+		[ -f "$1" ] && rm -f "$1"
 
-        # Remove empty parent directories of a note
-        # entry. It's fine if this fails as it means that
-        # another entry also lives in the same directory.
-        rmdir -p "${1%/*}" 2>/dev/null
-    }
+		# Remove empty parent directories of a note
+		# entry. It's fine if this fails as it means that
+		# another entry also lives in the same directory.
+		rmdir -p "${1%/*}" 2>/dev/null
+	}
 }
 
 note_grep() {
-    [ "$1" ] || die "note [g]rep <grep options> <search pattern>"
-    grep -i -n --color=always -r --include="*.$NOTE_EXT" "$*"\
-        | sed "s/\.$NOTE_EXT//;s/:/\n/"
+	[ "$1" ] || die "note [g]rep <grep options> <search pattern>"
+	grep -i -n --color=always -r --include="*.$NOTE_EXT" "$*" |
+		sed "s/\.$NOTE_EXT//;s/:/\n/"
 }
 
-main(){
-    [ -d "$NOTE_DIR" ] || note_init
-    cd "$NOTE_DIR" || die "Can't access notebook."
-    input="$1"
-    shift "$(($# ? 1 : 0))"
-    case $input in
-        (i*) note_init  "$@";;
-        (o*) note_open  "$@";;
-        (r*) note_rm    "$@";;
-        (g*) note_grep  "$@";;
-        (l*) note_ls        ;;
-        (*)  usage
-    esac
+main() {
+	[ -d "$NOTE_DIR" ] || note_init
+	cd "$NOTE_DIR" || die "Can't access notebook."
+	input="$1"
+	shift "$(($# ? 1 : 0))"
+	case $input in
+	i*) note_init "$@" ;;
+	o*) note_open "$@" ;;
+	r*) note_rm "$@" ;;
+	g*) note_grep "$@" ;;
+	l*) note_ls ;;
+	*) usage ;;
+	esac
 }
 
 [ "$1" ] || usage && main "$@"

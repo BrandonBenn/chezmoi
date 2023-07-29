@@ -10,22 +10,22 @@ trap clean_up EXIT
 OUTPUT_PATH=$(mktemp)
 
 clean_up() {
-    rm "$OUTPUT_PATH"
-    exit 0
+	rm "$OUTPUT_PATH"
+	exit 0
 }
 
 main() {
-    [ "$1" ] || {
-        printf "Missing operand\n" >&2
-        exit 1
-    }
+	[ "$1" ] || {
+		printf "Missing operand\n" >&2
+		exit 1
+	}
 
-    [ -r "$1" ] || {
-        printf "File %s does not exist or is not readable\n" "$1" >&2
-        exit 1
-    }
+	[ -r "$1" ] || {
+		printf "File %s does not exist or is not readable\n" "$1" >&2
+		exit 1
+	}
 
-    gcc "$1" -o "$OUTPUT_PATH" && "$OUTPUT_PATH"
+	gcc "$1" -o "$OUTPUT_PATH" && "$OUTPUT_PATH"
 }
 
 main "$@"
