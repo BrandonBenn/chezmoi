@@ -59,7 +59,8 @@ require('lazy').setup({
       }
     },
     keys = {
-      { '-', ':Oil<cr>', desc = 'Open parent directory', silent = true }
+      { '-',         ':Oil<cr>',          desc = 'Open parent directory',            silent = true },
+      { '<leader>v', ':vsplit | Oil<cr>', desc = 'Open parent directory in a split', silent = true }
     }
   },
 
@@ -144,7 +145,7 @@ require('lazy').setup({
       end
     end,
     keys = {
-      { '<leader>gg', "<cmd>lua _LAZYGIT_TOGGLE()<CR>", silent = true },
+      { '<leader>gg', _LAZYGIT_TOGGLE, silent = true },
     }
   },
 
