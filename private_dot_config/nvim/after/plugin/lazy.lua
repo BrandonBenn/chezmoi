@@ -107,16 +107,6 @@ require('lazy').setup({
     'akinsho/git-conflict.nvim',
     version = "*",
     config = true,
-    opts = {
-      default_mappings = {
-        ours = 'o',
-        theirs = 't',
-        none = 'x',
-        both = 'b',
-        next = 'n',
-        prev = 'p',
-      },
-    },
   },
 
   {
@@ -145,7 +135,7 @@ require('lazy').setup({
       end
     end,
     keys = {
-      { '<leader>gg', _LAZYGIT_TOGGLE, silent = true },
+      { '<leader>gg', '<cmd>lua _LAZYGIT_TOGGLE()<cr>', silent = true },
     }
   },
 
