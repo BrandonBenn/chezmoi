@@ -6,14 +6,10 @@
   {{ end -}}
     type = "file"
     executable = true
+    refreshPeriod = "168h"
 
 [".local/share/nvim/lazy/lazy.nvim"]
     url = "https://github.com/folke/lazy.nvim.git"
     type = "git-repo"
-
-{{ if eq .chezmoi.os "darwin" -}}
-[".hammerspoon/Spoons/"]
-    url     = "https://github.com/Hammerspoon/Spoons/raw/master/Spoons/SpoonInstall.spoon.zip"
-    type    = "archive"
-    exclude = ["docs.json"]
-{{ end -}}
+    [".local/share/nvim/lazy/lazy.nvim" .clone]
+      args = ["--branch=stable", "--filter=blob:none"]
