@@ -59,13 +59,19 @@ require('lazy').setup({
         layout_strategy = 'center',
         sorting_strategy = "ascending",
       },
+      pickers = {
+        find_files = { theme = "dropdown" },
+        grep_string = { theme = "dropdown" },
+        live_grep = { theme = "dropdown" },
+        oldfiles = { theme = "dropdown" },
+      },
     },
     keys = {
-      { '<leader>fo', function() require('telescope.builtin').oldfiles({ previewer = false }) end,   silent = true },
-      { '<leader>fw', function() require('telescope.builtin').grep_string() end,                     silent = true },
-      { '<leader>fg', function() require('telescope.builtin').live_grep() end,                       silent = true },
-      { '<leader>fr', function() require('telescope.builtin').resume() end,                          silent = true },
       { '<leader>ff', function() require('telescope.builtin').find_files({ previewer = false }) end, silent = true },
+      { '<leader>fg', function() require('telescope.builtin').live_grep() end,                       silent = true },
+      { '<leader>fo', function() require('telescope.builtin').oldfiles({ previewer = false }) end,   silent = true },
+      { '<leader>fr', function() require('telescope.builtin').resume() end,                          silent = true },
+      { '<leader>fw', function() require('telescope.builtin').grep_string() end,                     silent = true },
     },
   },
 
