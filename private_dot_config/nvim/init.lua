@@ -23,7 +23,7 @@ vim.o.mouse = ""
 vim.o.background = 'light'
 vim.o.showmode = false
 vim.o.laststatus = 3
-vim.o.cursorline = true
+vim.o.cursorline = false
 vim.opt.statusline = [[ ]]
 
 -- Set Keymaps

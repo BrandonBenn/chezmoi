@@ -14,10 +14,23 @@ require('lazy').setup({
       'junegunn/vim-easy-align',
       'stevearc/dressing.nvim',
       'nvim-lua/plenary.nvim',
-      'vim-test/vim-test',
       'elixir-editors/vim-elixir',
       'chrisgrieser/nvim-genghis',
-      'duane9/nvim-rg',
+      {
+        'duane9/nvim-rg',
+        init = function()
+          vim.keymap.set('n', '<leader>s', "<cmd>Rg<cr>", { silent = true, desc = "Search files" })
+        end
+      },
+      {
+        'vim-test/vim-test',
+        init = function()
+          vim.keymap.set('n', '<leader>tt', "<cmd>TestNearest<cr>", { silent = true, desc = "Run test nearest cursor" })
+          vim.keymap.set('n', '<leader>tv', "<cmd>TestVisit<cr>", { silent = true, desc = "Visit test file" })
+          vim.keymap.set('n', '<leader>tT', "<cmd>TestFile<cr>",
+            { silent = true, desc = "Run all tests in current file" })
+        end
+      },
       { 'yorickpeterse/nvim-pqf', config = true },
       { 'numToStr/Comment.nvim',  config = true },
       { 'm4xshen/autoclose.nvim', config = true },
