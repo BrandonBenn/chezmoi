@@ -31,7 +31,14 @@ local options = { remap = true, silent = true }
 vim.keymap.set('n', ';w', vim.cmd.update, options)
 vim.keymap.set('n', ';qa', vim.cmd.quitall, options)
 vim.keymap.set({ 'v', 'n' }, ';;', ':', { silent = false })
-vim.keymap.set('n', 'gq', vim.cmd.close, options)
+vim.keymap.set('n', 'gq', function()
+      local multiple_windows, _ = pcall(vim.cmd, "close")
+
+      if not multiple_windows then
+        vim.cmd("bd")
+      end
+    end
+, options)
 vim.keymap.set('n', '<C-w>t', vim.cmd.tabnew, options)
 vim.keymap.set('n', '<Tab>', vim.cmd.tabnext, options)
 vim.keymap.set('n', '<S-Tab>', vim.cmd.tabprevious, options)
