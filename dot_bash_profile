@@ -1,1 +1,2 @@
 [ -f ~/.bashrc ] && . ~/.bashrc
+export PATH="/opt/homebrew/opt/mysql@8.0/bin:$PATH"
