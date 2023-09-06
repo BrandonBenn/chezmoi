@@ -3,7 +3,6 @@ vim.cmd.colorscheme("typograph")
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 vim.g.netrw_banner = 0
-vim.g.netrw_liststyle = 3
 vim.g.netrw_winsize = 20
 vim.o.exrc = true
 vim.o.title = true
@@ -30,7 +29,7 @@ vim.o.completeopt = "menu"
 local keymap = vim.keymap.set
 local autocmd = vim.api.nvim_create_autocmd
 local options = { remap = true, silent = true }
-keymap('n', '<leader>w', vim.cmd.update, options)
+keymap('n', ';w', vim.cmd.update, options)
 keymap('n', '<c-w>q', function()
       local multiple_windows, _ = pcall(vim.cmd, "close")
       if not multiple_windows then
@@ -39,6 +38,8 @@ keymap('n', '<c-w>q', function()
     end
 , options)
 keymap('n', '<C-w>t', vim.cmd.tabnew, options)
+keymap('i', '<C-o>', '<C-x><C-o>', options)
+keymap('i', '<C-f>', '<C-x><C-f>', options)
 keymap('n', '<Tab>', vim.cmd.tabnext, options)
 keymap('n', '<S-Tab>', vim.cmd.tabprevious, options)
 keymap('v', '<', '<gv', options)

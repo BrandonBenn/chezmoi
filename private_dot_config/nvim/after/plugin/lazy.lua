@@ -37,11 +37,13 @@ local packages = {
 			{ "<C-x><C-f>", [[<cmd>lua require("fzf-lua").complete_path()<CR>]], silent = true, mode = "i" },
 		},
 	},
+
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
+			"WhoIsSethDaniel/mason-tool-installer.nvim",
 		},
 		config = function()
 			local lspconfig = require("lspconfig")
@@ -52,13 +54,12 @@ local packages = {
 					lspconfig[server].setup({})
 				end,
 			})
+			require("mason-tool-installer").setup({
+				ensure_installed = { "black", "stylua", "shellcheck", "eslint_d", "shfmt" },
+			})
 		end,
 	},
-	{
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		config = true,
-		opts = { ensure_installed = { "black", "shellcheck", "eslint_d", "shfmt" } },
-	},
+
 	{
 		"dense-analysis/ale",
 		init = function()
@@ -67,8 +68,9 @@ local packages = {
 			vim.g.ale_virtualtext_cursor = 0
 			vim.g.ale_fixers = { lua = { "stylua" }, python = "black", ruby = "rubocop" }
 		end,
-		keys = { { "<leader>f", "<Plug>(ale_fix)", silent = true } },
+		keys = { { "g=", "<cmd>ALEFix<cr>", silent = true } },
 	},
+
 	{
 		"lewis6991/gitsigns.nvim",
 		config = true,
