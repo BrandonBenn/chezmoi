@@ -73,6 +73,7 @@ local packages = {
 
 	{
 		"lewis6991/gitsigns.nvim",
+    cmd = "Gitsigns",
 		config = true,
 		keys = {
 			{ "<leader>gx", ":Gitsigns reset_hunk<cr>", silent = true },
