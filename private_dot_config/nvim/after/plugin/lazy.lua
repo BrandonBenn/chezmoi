@@ -9,30 +9,54 @@ local opts = { install = { missing = true, colorscheme = { "typograph" } } }
 
 local packages = {
   "wbthomason/packer.nvim",
-  "junegunn/vim-easy-align",
   "stevearc/dressing.nvim",
-  "nvim-lua/plenary.nvim",
   "elixir-editors/vim-elixir",
   "chrisgrieser/nvim-genghis",
   { "yorickpeterse/nvim-pqf",    config = true },
   { "numToStr/Comment.nvim",     config = true },
   { "m4xshen/autoclose.nvim",    config = true },
   { "akinsho/git-conflict.nvim", config = true },
+  { "nvim-lua/plenary.nvim",     config = function() vim.g.Job = require("plenary.job") end },
+
   {
-    "duane9/nvim-rg",
-    keys = { { "<leader>s", "<cmd>Rg<cr>", silent = true } },
+    'prichrd/netrw.nvim',
+    opts = {
+      icons = { symlink = '', directory = '', file = '' },
+      mappings = {
+        ["D"] = function(payload)
+          local filename = payload.dir .. "/" .. payload.node
+          local trash_location = vim.fn.stdpath('state') .. "/trash/"
+          local cmd = "trash"
+          local args = { filename }
+          local on_stderr = function(err) vim.notify(err) end
+
+          if vim.fn.executable(cmd) ~= 1 then
+            cmd = "mv"
+            args = { filename, trash_location }
+          end
+
+          vim.ui.input({ prompt = 'Confirm removal (y/N): ' }, function(input)
+            if input ~= "y" then return end
+            vim.notify("Removed file " .. filename)
+            vim.g.Job:new({ command = cmd, args = args, on_stderr = on_stderr }):sync()
+            vim.cmd.mode()
+          end)
+        end,
+      }
+    }
   },
+
   {
     "ibhagwan/fzf-lua",
+    cmd = { "FzfLua" },
     config = true,
     keys = {
-      { "<c-p>",      [[<cmd>lua require('fzf-lua').files()<CR>]],         silent = true },
-      { "<c-y>",      [[<cmd>lua require('fzf-lua').resume()<CR>]],        silent = true },
-      { "<c-k>",      [[<cmd>lua require('fzf-lua').commands()<CR>]],      silent = true },
-      { "<c-.>",      [[<cmd>lua require('fzf-lua').grep_cword()<CR>]],    silent = true },
-      { "<c-g>",      [[<cmd>lua require('fzf-lua').live_grep()<CR>]],     silent = true },
-      { "<c-\\>",     [[<cmd>lua require('fzf-lua').oldfiles()<CR>]],      silent = true },
-      { "<C-x><C-f>", [[<cmd>lua require("fzf-lua").complete_path()<CR>]], silent = true, mode = "i" },
+      { "<c-p>",      [[<cmd>FzfLua files<CR>]],         silent = true },
+      { "<c-y>",      [[<cmd>FzfLua resume<CR>]],        silent = true },
+      { "<c-k>",      [[<cmd>FzfLua commands<CR>]],      silent = true },
+      { "<c-.>",      [[<cmd>FzfLua grep_cword<CR>]],    silent = true },
+      { "<c-g>",      [[<cmd>FzfLua live_grep<CR>]],     silent = true },
+      { "<C-x><C-f>", [[<cmd>FzfLua complete_path<CR>]], silent = true, mode = "i" },
     },
   },
 
@@ -51,13 +75,14 @@ local packages = {
         function(server) lspconfig[server].setup({}) end,
       })
       require("mason-tool-installer").setup({
-        ensure_installed = { "black", "stylua", "shellcheck", "eslint_d", "shfmt" },
+        ensure_installed = { "blue", "stylua", "shellcheck", "eslint_d", "shfmt" },
       })
     end,
   },
 
   {
     "dense-analysis/ale",
+    cmd = { "ALEFix" },
     init = function()
       vim.g.ale_disable_lsp = 1
       vim.g.ale_use_neovim_diagnostics_api = 1

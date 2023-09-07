@@ -36,9 +36,7 @@ end
 keymap("n", ";w", vim.cmd.update)
 keymap("n", "<c-w>q", function()
   local multiple_windows, _ = pcall(vim.cmd, "close")
-  if not multiple_windows then
-    vim.cmd("bd")
-  end
+  if not multiple_windows then vim.cmd("bd") end
 end)
 keymap("n", "<C-w>t", vim.cmd.tabnew)
 keymap("i", "<C-o>", "<C-x><C-o>")
