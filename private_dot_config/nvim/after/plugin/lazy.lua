@@ -50,6 +50,10 @@ local packages = {
     "ibhagwan/fzf-lua",
     cmd = { "FzfLua" },
     config = true,
+    opts = {
+      files = { previewer = false },
+      winopts = { height = 0.35, width = 0.60, },
+    },
     keys = {
       { "<c-p>",      [[<cmd>FzfLua files<CR>]],         silent = true },
       { "<c-y>",      [[<cmd>FzfLua resume<CR>]],        silent = true },
