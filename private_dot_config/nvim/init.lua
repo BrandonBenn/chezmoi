@@ -6,6 +6,7 @@ vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 20
 vim.g.netrw_keepdir = 0
 vim.g.netrw_bufsettings = "noma nomod nu nobl nowrap ro"
+vim.g.netrw_list_hide = "(^|ss)\zs.S+"
 vim.o.exrc = true
 vim.o.title = true
 vim.o.hidden = true
@@ -36,11 +37,11 @@ end
 keymap("n", ";w", vim.cmd.update)
 keymap("n", "<c-w>q", function()
   local multiple_windows, _ = pcall(vim.cmd, "close")
-  if not multiple_windows then vim.cmd("bd") end
+  if not multiple_windows then
+    vim.cmd("bd")
+  end
 end)
 keymap("n", "<C-w>t", vim.cmd.tabnew)
-keymap("i", "<C-o>", "<C-x><C-o>")
-keymap("i", "<C-f>", "<C-x><C-f>")
 keymap("n", "<Tab>", vim.cmd.tabnext)
 keymap("n", "<S-Tab>", vim.cmd.tabprevious)
 keymap("v", "<", "<gv")
@@ -68,5 +69,7 @@ autocmd("LspAttach", {
 })
 keymap("n", "[d", vim.diagnostic.goto_prev)
 keymap("n", "]d", vim.diagnostic.goto_next)
-keymap("n", "gl", function() vim.diagnostic.open_float({ scope = "line" }) end)
+keymap("n", "gl", function()
+  vim.diagnostic.open_float({ scope = "line" })
+end)
 keymap("n", "<leader>q", vim.diagnostic.setqflist)
