@@ -20,7 +20,7 @@ local packages = {
 	{ "akinsho/git-conflict.nvim", config = true },
 	{
 		"lewis6991/gitsigns.nvim",
-		cmd = "Gitsigns",
+		cmd = { "Gitsigns" },
 		config = true,
 		keys = {
 			{ "<leader>gx", ":Gitsigns reset_hunk<cr>", silent = true },
@@ -35,16 +35,15 @@ local packages = {
 		"ibhagwan/fzf-lua",
 		cmd = { "FzfLua" },
 		config = true,
-		opts = {
-			winopts_fn = function() return { width = vim.o.columns > 80 and 0.30 or 0.50 } end,
-			winopts = { height = 0.30, preview = { hidden = "hidden" } },
-		},
+		opts = { winopts = { height = 0.30, width = 0.4, preview = { hidden = "hidden" } } },
 		keys = {
-			{ "<c-p>", function() require("fzf-lua").files() end, silent = true, },
-			{ "<c-k>", function() require("fzf-lua").commands() end, silent = true, },
-			{ "<c-.>", function() require("fzf-lua").grep_cword() end, silent = true, },
+			{ "<leader>ff", function() require("fzf-lua").files() end, silent = true, },
+			{ "<leader>fo", function() require("fzf-lua").oldfiles() end, silent = true, },
+			{ "<leader>fk", function() require("fzf-lua").commands() end, silent = true, },
+			{ "<leader>fw", function() require("fzf-lua").grep_cword() end, silent = true, },
+			{ "<leader>fb", function() require("fzf-lua").buffers() end, silent = true, },
+			{ "<leader>fg", function() require("fzf-lua").live_grep({ continue_last_search = true }) end, silent = true, },
       { "<C-x><C-f>", function() require("fzf-lua").complete_path() end, silent = true, },
-			{ "<c-g>", function() require("fzf-lua").live_grep({ continue_last_search = true }) end, silent = true, },
 		},
 	},
 
