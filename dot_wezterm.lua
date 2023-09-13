@@ -5,7 +5,7 @@ return {
 	enable_tab_bar = false,
 	keys = {
 		{ key = "a", mods = "LEADER|CTRL", action = wezterm.action({ SendString = "\x01" }) },
-		{ key = "t", mods = "LEADER", action = wezterm.action.ShowTabNavigator },
+		{ key = "t", mods = "CTRL|SHIFT", action = wezterm.action.ShowTabNavigator },
 		{ key = "K", mods = "CTRL|SHIFT", action = wezterm.action.ClearScrollback("ScrollbackAndViewport") },
 
 		{
