@@ -15,7 +15,6 @@ local scheme = wezterm.get_builtin_color_schemes()[c.color_scheme]
 c.window_padding = { top = "4%" }
 c.colors = {}
 c.integrated_title_button_color = scheme.foreground
-c.hide_tab_bar_if_only_one_tab = true
 c.colors.tab_bar = {
 	active_tab = {
 		bg_color = scheme.background,
