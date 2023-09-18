@@ -11,7 +11,8 @@ local packages = {
 	"wbthomason/packer.nvim",
 	"nvim-lua/plenary.nvim",
 	"stevearc/dressing.nvim",
-	"tpope/vim-vinegar",
+	"justinmk/vim-dirvish",
+	"tpope/vim-unimpaired",
 	"chrisgrieser/nvim-genghis",
 	{ "elixir-editors/vim-elixir", ft = "elixir" },
 	{ "yorickpeterse/nvim-pqf", config = true },
@@ -20,7 +21,7 @@ local packages = {
 	{ "akinsho/git-conflict.nvim", config = true },
 	{
 		"lewis6991/gitsigns.nvim",
-		cmd = { "Gitsigns" },
+		lazy = false,
 		config = true,
 		keys = {
 			{ "<leader>gx", ":Gitsigns reset_hunk<cr>", silent = true },
@@ -37,13 +38,55 @@ local packages = {
 		config = true,
 		opts = { winopts = { height = 0.30, width = 0.4, preview = { hidden = "hidden" } } },
 		keys = {
-			{ "<leader>ff", function() require("fzf-lua").files() end, silent = true, },
-			{ "<leader>fo", function() require("fzf-lua").oldfiles() end, silent = true, },
-			{ "<leader>fk", function() require("fzf-lua").commands() end, silent = true, },
-			{ "<leader>fw", function() require("fzf-lua").grep_cword() end, silent = true, },
-			{ "<leader>fb", function() require("fzf-lua").buffers() end, silent = true, },
-			{ "<leader>fg", function() require("fzf-lua").live_grep({ continue_last_search = true }) end, silent = true, },
-      { "<C-x><C-f>", function() require("fzf-lua").complete_path() end, silent = true, },
+			{
+				"<leader>ff",
+				function()
+					require("fzf-lua").files()
+				end,
+				silent = true,
+			},
+			{
+				"<leader>fo",
+				function()
+					require("fzf-lua").oldfiles()
+				end,
+				silent = true,
+			},
+			{
+				"<leader>fk",
+				function()
+					require("fzf-lua").commands()
+				end,
+				silent = true,
+			},
+			{
+				"<leader>fw",
+				function()
+					require("fzf-lua").grep_cword()
+				end,
+				silent = true,
+			},
+			{
+				"<leader>fb",
+				function()
+					require("fzf-lua").buffers()
+				end,
+				silent = true,
+			},
+			{
+				"<leader>fg",
+				function()
+					require("fzf-lua").live_grep({ continue_last_search = true })
+				end,
+				silent = true,
+			},
+			{
+				"<C-x><C-f>",
+				function()
+					require("fzf-lua").complete_path()
+				end,
+				silent = true,
+			},
 		},
 	},
 
@@ -84,6 +127,14 @@ local packages = {
 				init_options = { documentFormatting = true, documentRangeFormatting = true },
 			})
 		end,
+	},
+
+	{
+		"nvim-treesitter/nvim-treesitter",
+		config = true,
+		opts = {
+			ensure_installed = { "go", "html", "javascript", "python", "ruby", "sql", "vue" },
+		},
 	},
 }
 

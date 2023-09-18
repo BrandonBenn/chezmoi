@@ -2,11 +2,6 @@
 vim.cmd.colorscheme("typograph")
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
-vim.g.netrw_banner = 0
-vim.g.netrw_winsize = 20
-vim.g.netrw_keepdir = 0
-vim.g.netrw_bufsettings = "noma nomod nu nobl nowrap ro"
-vim.g.netrw_list_hide = "(^|ss)\zs.S+"
 vim.o.exrc = true
 vim.o.title = true
 vim.o.hidden = true
@@ -27,6 +22,8 @@ vim.o.laststatus = 3
 vim.o.cursorline = false
 vim.opt.statusline = [[ ]]
 vim.o.completeopt = "menu"
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_netrw = 1
 
 -- Set Keymaps
 local autocmd = vim.api.nvim_create_autocmd
@@ -47,10 +44,10 @@ keymap("c", "<c-a>", "<home>", { remap = true })
 keymap("c", "<c-e>", "<end>", { remap = true })
 keymap("c", "<c-b>", "<left>", { remap = true })
 keymap("c", "<c-f>", "<right>", { remap = true })
-keymap("n", "<c-j>", "<c-w>j")
-keymap("n", "<c-k>", "<c-w>k")
-keymap("n", "<c-h>", "<c-w>h")
-keymap("n", "<c-l>", "<c-w>l")
+
+keymap("n", "+", '<cmd>resize +10<cr>', { remap = true })
+keymap("n", "_", '<cmd>resize -10<cr>', { remap = true })
+
 keymap("n", "<C-w>t", vim.cmd.tabnew)
 keymap("n", "<Tab>", vim.cmd.tabnext)
 keymap("n", "<S-Tab>", vim.cmd.tabprevious)
@@ -59,8 +56,6 @@ keymap("v", ">", ">gv")
 keymap("n", "<C-t><C-t>", ":tabnew | terminal<cr>")
 keymap("n", "<C-t>v", ":vsplit | terminal<cr>")
 keymap("n", "<C-t>s", ":split | terminal<cr>")
-keymap("n", "-", vim.cmd.Ex)
-keymap("n", "<leader>v", vim.cmd.Lex)
 autocmd("LspAttach", {
 	callback = function(ev)
 		local opts = { buffer = ev.buf, silent = true, remap = true }

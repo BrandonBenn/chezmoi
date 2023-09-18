@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 [ -x "/opt/homebrew/bin/brew" ] && eval "$(/opt/homebrew/bin/brew shellenv)"
-[ -x "$(command -v starship)" ] &&  eval "$(starship init bash)"
+[ -x "$(command -v starship)" ] && eval "$(starship init bash)"
 
 PS1=' $ '
 alias ls='ls -F --color=auto --hyperlink=auto'
@@ -13,7 +13,6 @@ export INPUT_METHOD=fcitx5
 export GTK_IM_MODULE=fcitx5
 export QT_IM_MODULE=fcitx5
 export XMODIFIERS=@im=fcitx5
-export NOTES_DIR=~/Sync/20-29-Personal/20-Notes
 export NNN_TMPFILE=~/.config/nnn/.lastd
 export XDG_DATA_HOME=~/.local/share
 export PAGER='less -SFX'
@@ -24,7 +23,6 @@ export HISTFILE=~/.cache/history
 export HISTSIZE=10000
 export SAVEHIST=10000
 export NO_COLOR=1
-export FZF_DEFAULT_OPTS="--reverse --preview-window up,1,border-horizontal,hidden --bind 'ctrl-/:change-preview-window(50%|hidden)'"
 PATH="$PATH":~/.local/bin
 PATH="$PATH":~/bin
 PATH="$PATH":"$GOPATH"/bin
@@ -35,7 +33,7 @@ export PATH
 
 [ ! -f ~/.bashrc.local ] || . "$HOME"/.bashrc.local
 [ ! -f .env ] || {
-  set -o allexport
-  source .env
-  set +o allexport
+	set -o allexport
+	source .env
+	set +o allexport
 }
