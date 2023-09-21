@@ -30,6 +30,7 @@ PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
 export PATH
 
 [ -x "$(command -v rtx)" ] && eval "$(rtx activate bash)"
+[ -x "$(command -v zoxide)" ] && eval "$(zoxide init bash)"
 
 [ ! -f ~/.bashrc.local ] || . "$HOME"/.bashrc.local
 [ ! -f .env ] || {
