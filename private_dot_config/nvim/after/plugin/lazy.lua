@@ -23,6 +23,11 @@ local packages = {
   },
 
   {
+    "tpope/vim-fugitive",
+    keys = { { "<leader>gg", vim.cmd.Git, silent = true, desc = "Git status" } },
+  },
+
+  {
     "lewis6991/gitsigns.nvim",
     lazy = false,
     config = true,
