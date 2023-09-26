@@ -14,7 +14,42 @@ local packages = {
   { "yorickpeterse/nvim-pqf",    config = true },
   { "numToStr/Comment.nvim",     config = true },
   { "m4xshen/autoclose.nvim",    config = true },
-  { "akinsho/git-conflict.nvim", config = true },
+
+  {
+    'nvim-telescope/telescope.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      local action_layout = require("telescope.actions.layout")
+      local actions = require("telescope.actions")
+      require('telescope').setup {
+        defaults = require('telescope.themes').get_dropdown({
+          mappings = {
+            n = {
+              ["p"] = action_layout.toggle_preview,
+              ["<C-u>"] = false,
+            },
+            i = {
+              ["<C-u>"] = false,
+              ["<esc>"] = actions.close,
+              ["<M-p>"] = action_layout.toggle_preview,
+            },
+          }
+        }),
+        pickers = {
+          buffers = { previewer = false },
+          find_files = { previewer = false },
+          current_buffer_fuzzy_find = { previewer = false },
+        },
+      }
+    end,
+    keys = {
+      { '<leader>fb', '<cmd>Telescope buffers<cr>',                   silent = true },
+      { '<leader>ff', '<cmd>Telescope find_files<cr>',                silent = true },
+      { '<leader>fg', '<cmd>Telescope live_grep<cr>',                 silent = true },
+      { '<leader>fh', '<cmd>Telescope help_tags<cr>',                 silent = true },
+      { '<leader>fs', '<cmd>Telescope current_buffer_fuzzy_find<cr>', silent = true },
+    },
+  },
 
   {
     "stevearc/oil.nvim",
@@ -23,8 +58,13 @@ local packages = {
   },
 
   {
-    "tpope/vim-fugitive",
-    keys = { { "<leader>gg", vim.cmd.Git, silent = true, desc = "Git status" } },
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",
+    },
+    config = true,
+    keys = { { "<leader>gg", vim.cmd.Neogit, silent = true, desc = "Git status" } },
   },
 
   {
@@ -37,29 +77,6 @@ local packages = {
       { "<leader>gs", ":Gitsigns stage_hunk<cr>",      silent = true, desc = "Git stage hunk" },
       { "<leader>gS", ":Gitsigns stage_buffer<cr>",    silent = true, desc = "Git stage buffer" },
       { "<leader>gu", ":Gitsigns undo_stage_hunk<cr>", silent = true, desc = "Git undo stage buffer" },
-    },
-  },
-
-  {
-    "ibhagwan/fzf-lua",
-    cmd = { "FzfLua" },
-    config = true,
-    opts = { winopts = { height = 0.30, width = 0.4, preview = { hidden = "hidden" } } },
-    keys = {
-      { "<leader>ff", "<cmd>FzfLua files<cr>",         silent = true, desc = "Find Files" },
-      { "<leader>fo", "<cmd>FzfLua oldfiles<cr>",      silent = true, desc = "Find Old fles" },
-      { "<leader>fk", "<cmd>FzfLua commands<cr>",      silent = true, desc = "Find commands" },
-      { "<leader>fb", "<cmd>FzfLua buffers<cr>",       silent = true, desc = "Find buffers" },
-      { "<leader>fw", "<cmd>FzfLua grep_cword<cr>",    silent = true, desc = "Grep Word" },
-      { "<C-x><C-f>", "<cmd>FzfLua complete_path<cr>", silent = true, desc = "Complete Path" },
-      {
-        "<leader>fg",
-        function()
-          require("fzf-lua").live_grep({ continue_last_search = true })
-        end,
-        silent = true,
-        desc = "Live Grep",
-      },
     },
   },
 
