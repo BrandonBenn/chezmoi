@@ -3,7 +3,10 @@ if not vim.loop.fs_stat(lazypath) then return end
 vim.opt.rtp:prepend(lazypath)
 local lazy = require("lazy")
 
-local opts = { install = { missing = true, colorscheme = { "typograph" } } }
+local opts = {
+  install = { missing = true, colorscheme = { "typograph" } },
+  border = "single",
+}
 
 local packages = {
   "wbthomason/packer.nvim",
@@ -25,6 +28,12 @@ local packages = {
     "tpope/vim-fugitive",
     cmd = "Git",
     keys = { { '<leader>gg', '<cmd>Git<cr>', silent = true, desc = "[G]it" } },
+  },
+
+  {
+    "dzfrias/arena.nvim",
+    config = true,
+    keys = { { '<leader>a', '<cmd>ArenaToggle<cr>', silent = true, desc = "[A]rena Toggle" } },
   },
 
   {
@@ -88,22 +97,25 @@ local packages = {
       })
 
       require("mason-tool-installer").setup({
-        ensure_installed = { "ruff", "stylua", "shellcheck", "eslint_d", "prettier", "shfmt" },
+        ensure_installed = {
+          "isort", "black", "ruff", "stylua", "shellcheck", "eslint_d", "prettier", "shfmt",
+        },
       })
     end,
   },
 
   {
-    "dense-analysis/ale",
-    init = function()
-      vim.g.ale_fix_on_save = 1
-      vim.g.ale_use_neovim_diagnostics_api = 1
-      vim.g.ale_fixers = {
-        python = { "ruff" },
-        javascript = { "prettier", "eslint_d" },
-        sh = { "shellcheck", "shfmt" }
-      }
-    end
+    'stevearc/conform.nvim',
+    event = "BufEnter",
+    config = true,
+    opts = {
+      formatters_by_ft = {
+        lua = { "stylua" },
+        python = { 'isort', 'black' },
+        sh = { 'shfmt' },
+        javascript = { 'prettier', 'eslint_d' },
+      },
+    },
   },
 
   {
