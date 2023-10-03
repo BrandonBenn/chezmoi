@@ -25,6 +25,20 @@ local packages = {
   },
 
   {
+    "lewis6991/gitsigns.nvim",
+    config = true,
+    event = "BufEnter",
+    keys = {
+      { '<leader>gb', '<cmd>Gitsigns blame_line<cr>',   silent = true, desc = "[G]it [B]lame" },
+      { '<leader>gs', '<cmd>Gitsigns stage_hunk<cr>',   silent = true, desc = "[G]it [S]tage" },
+      { '<leader>gx', '<cmd>Gitsigns reset_hunk<cr>',   silent = true, desc = "[G]it [X]Reset" },
+      { '<leader>gX', '<cmd>Gitsigns reset_buffer<cr>', silent = true, desc = "[G]it [X]Reset Buffer" },
+      { ']c',         '<cmd>Gitsigns next_hunk<cr>',    silent = true, desc = "[G]it [N]ext Hunk" },
+      { '[c',         '<cmd>Gitsigns prev_hunk<cr>',    silent = true, desc = "[G]it [P]rev Hunk" },
+    }
+  },
+
+  {
     "tpope/vim-fugitive",
     cmd = "Git",
     keys = { { '<leader>gg', '<cmd>Git<cr>', silent = true, desc = "[G]it" } },
@@ -33,7 +47,7 @@ local packages = {
   {
     "dzfrias/arena.nvim",
     config = true,
-    keys = { { '<leader>a', '<cmd>ArenaToggle<cr>', silent = true, desc = "[A]rena Toggle" } },
+    keys = { { '<leader><leader>', '<cmd>ArenaToggle<cr>', silent = true, desc = "Arena Toggle" } },
   },
 
   {
