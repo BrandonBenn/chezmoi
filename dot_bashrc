@@ -38,3 +38,4 @@ export PATH
 	source .env
 	set +o allexport
 }
+. "$HOME/.cargo/env"
