@@ -14,6 +14,11 @@ local packages = {
   "stevearc/dressing.nvim",
   "chrisgrieser/nvim-genghis",
 
+  {
+    "ggandor/lightspeed.nvim",
+    dependencies = { "tpope/vim-repeat" }
+  },
+
   { "elixir-editors/vim-elixir", ft = "elixir" },
   { "yorickpeterse/nvim-pqf",    config = true },
   { "numToStr/Comment.nvim",     config = true },
@@ -45,9 +50,18 @@ local packages = {
   },
 
   {
-    "dzfrias/arena.nvim",
+    "MeanderingProgrammer/harpoon-core.nvim",
     config = true,
-    keys = { { '<leader><leader>', '<cmd>ArenaToggle<cr>', silent = true, desc = "Arena Toggle" } },
+    keys = {
+      { 'mm', function() require('harpoon-core.ui').toggle_quick_menu() end, desc = "Harpoon Quick [M]enu" },
+      { 'mz', function() require('harpoon-core.mark').add_file() end,        desc = "Harpoon [A]dd File" },
+      { 'mx', function() require('harpoon-core.mark').rm_file() end,         desc = "Harpoon [R]emove File" },
+      { 'ma', function() require('harpoon-core.ui').nav_file(1) end,         desc = "Harpoon File [1]" },
+      { 'ms', function() require('harpoon-core.ui').nav_file(2) end,         desc = "Harpoon File [2]" },
+      { 'md', function() require('harpoon-core.ui').nav_file(3) end,         desc = "Harpoon File [3]" },
+      { 'mf', function() require('harpoon-core.ui').nav_file(4) end,         desc = "Harpoon File [4]" },
+      { 'mg', function() require('harpoon-core.ui').nav_file(5) end,         desc = "Harpoon File [5]" },
+    },
   },
 
   {
