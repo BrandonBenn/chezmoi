@@ -1,6 +1,7 @@
 local keymap = require("utils").keymap
 
 -- Set Keymaps
+keymap("n", 'gw', '<cmd>grep <cword>.<cr>')
 keymap("n", ";w", vim.cmd.update)
 keymap("n", "<c-w>q", function()
   local multiple_windows, _ = pcall(vim.cmd, "close")
@@ -32,3 +33,4 @@ keymap("n", "gl", function()
   vim.diagnostic.open_float({ scope = "line" })
 end)
 keymap("n", "<leader>q", vim.diagnostic.setqflist)
+keymap({ "n", "v" }, "g=", vim.lsp.buf.format)

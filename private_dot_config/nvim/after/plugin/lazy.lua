@@ -30,6 +30,52 @@ local packages = {
   },
 
   {
+    'hrsh7th/nvim-cmp',
+    dependencies = {
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-cmdline",
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-vsnip",
+      "hrsh7th/vim-vsnip"
+    },
+    config = function()
+      local cmp = require("cmp")
+      cmp.setup({
+        snippet = {
+          expand = function(args) vim.fn["vsnip#anonymous"](args.body) end,
+        },
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
+        mapping = cmp.mapping.preset.insert({
+          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-f>'] = cmp.mapping.scroll_docs(4),
+          ['<C-l>'] = cmp.mapping.complete(),
+          ['<C-e>'] = cmp.mapping.abort(),
+          ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+        }),
+        sources = cmp.config.sources({
+          { name = 'nvim_lsp' },
+          { name = 'vsnip' },
+        }, {
+          { name = 'buffer' },
+        })
+      })
+
+      cmp.setup.cmdline({ '/', '?' }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = { { name = 'buffer' } }
+      })
+      cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({ { name = 'path' } }, { { name = 'cmdline' } })
+      })
+    end,
+  },
+
+  {
     "lewis6991/gitsigns.nvim",
     config = true,
     event = "BufEnter",
@@ -118,10 +164,12 @@ local packages = {
     },
     config = function()
       local lspconfig = require("lspconfig")
+      local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
       require("mason").setup({})
       require("mason-lspconfig").setup()
       require("mason-lspconfig").setup_handlers({
-        function(server) lspconfig[server].setup({}) end,
+        function(server) lspconfig[server].setup({ capabilities = capabilities }) end,
       })
 
       require("mason-tool-installer").setup({
@@ -138,7 +186,7 @@ local packages = {
     config = true,
     opts = {
       formatters_by_ft = {
-        lua = { "stylua" },
+        -- lua = { "stylua" },
         python = { 'isort', 'black' },
         sh = { 'shfmt' },
         javascript = { 'prettier', 'eslint_d' },

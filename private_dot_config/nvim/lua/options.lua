@@ -24,3 +24,8 @@ vim.o.completeopt = "menu"
 vim.g.loaded_netrwPlugin = 1
 vim.g.loaded_netrw = 1
 
+if vim.fn.executable('rg') == 1 then
+  vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case --hidden --glob !.git'
+  vim.o.grepformat = '%f:%l:%c:%m'
+end
+
