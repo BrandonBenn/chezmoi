@@ -14,11 +14,6 @@ local packages = {
   "stevearc/dressing.nvim",
   "chrisgrieser/nvim-genghis",
 
-  {
-    "ggandor/lightspeed.nvim",
-    dependencies = { "tpope/vim-repeat" }
-  },
-
   { "elixir-editors/vim-elixir", ft = "elixir" },
   { "yorickpeterse/nvim-pqf",    config = true },
   { "numToStr/Comment.nvim",     config = true },
@@ -30,50 +25,16 @@ local packages = {
   },
 
   {
-    'hrsh7th/nvim-cmp',
-    dependencies = {
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-cmdline",
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-vsnip",
-      "hrsh7th/vim-vsnip"
-    },
-    config = function()
-      local cmp = require("cmp")
-      cmp.setup({
-        snippet = {
-          expand = function(args) vim.fn["vsnip#anonymous"](args.body) end,
-        },
-        window = {
-          completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered(),
-        },
-        mapping = cmp.mapping.preset.insert({
-          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-f>'] = cmp.mapping.scroll_docs(4),
-          ['<C-l>'] = cmp.mapping.complete(),
-          ['<C-e>'] = cmp.mapping.abort(),
-          ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-        }),
-        sources = cmp.config.sources({
-          { name = 'nvim_lsp' },
-          { name = 'vsnip' },
-        }, {
-          { name = 'buffer' },
-        })
-      })
-
-      cmp.setup.cmdline({ '/', '?' }, {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = { { name = 'buffer' } }
-      })
-      cmp.setup.cmdline(':', {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources({ { name = 'path' } }, { { name = 'cmdline' } })
-      })
-    end,
+    "ggandor/lightspeed.nvim",
+    dependencies = { "tpope/vim-repeat" }
   },
+
+  {
+    "stevearc/oil.nvim",
+    config = true,
+    keys = { { "-", vim.cmd.Oil, silent = true, desc = "Open parent directory" } },
+  },
+
 
   {
     "lewis6991/gitsigns.nvim",
@@ -150,9 +111,49 @@ local packages = {
   },
 
   {
-    "stevearc/oil.nvim",
-    config = true,
-    keys = { { "-", vim.cmd.Oil, silent = true, desc = "Open parent directory" } },
+    'hrsh7th/nvim-cmp',
+    dependencies = {
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-cmdline",
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-vsnip",
+      "hrsh7th/vim-vsnip"
+    },
+    config = function()
+      local cmp = require("cmp")
+      cmp.setup({
+        snippet = {
+          expand = function(args) vim.fn["vsnip#anonymous"](args.body) end,
+        },
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
+        mapping = cmp.mapping.preset.insert({
+          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-f>'] = cmp.mapping.scroll_docs(4),
+          ['<C-l>'] = cmp.mapping.complete(),
+          ['<C-e>'] = cmp.mapping.abort(),
+          ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+        }),
+        sources = cmp.config.sources({
+          { name = 'nvim_lsp' },
+          { name = 'vsnip' },
+        }, {
+          { name = 'buffer' },
+        })
+      })
+
+      cmp.setup.cmdline({ '/', '?' }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = { { name = 'buffer' } }
+      })
+      cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({ { name = 'path' } }, { { name = 'cmdline' } })
+      })
+    end,
   },
 
   {
@@ -186,7 +187,7 @@ local packages = {
     config = true,
     opts = {
       formatters_by_ft = {
-        -- lua = { "stylua" },
+        lua = { "stylua" },
         python = { 'isort', 'black' },
         sh = { 'shfmt' },
         javascript = { 'prettier', 'eslint_d' },
