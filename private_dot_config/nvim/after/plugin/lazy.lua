@@ -35,7 +35,6 @@ local packages = {
     keys = { { "-", vim.cmd.Oil, silent = true, desc = "Open parent directory" } },
   },
 
-
   {
     "lewis6991/gitsigns.nvim",
     config = true,
@@ -165,12 +164,10 @@ local packages = {
     },
     config = function()
       local lspconfig = require("lspconfig")
-      local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
       require("mason").setup({})
       require("mason-lspconfig").setup()
       require("mason-lspconfig").setup_handlers({
-        function(server) lspconfig[server].setup({ capabilities = capabilities }) end,
+        function(server) lspconfig[server].setup({}) end,
       })
 
       require("mason-tool-installer").setup({
