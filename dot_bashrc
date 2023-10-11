@@ -31,6 +31,7 @@ export PATH
 
 [ -x "$(command -v rtx)" ] && eval "$(rtx activate bash)"
 [ -x "$(command -v zoxide)" ] && eval "$(zoxide init bash)"
+[ -x "$(command -v atuin)" ] && eval "$(atuin init bash)"
 
 [ ! -f ~/.bashrc.local ] || . "$HOME"/.bashrc.local
 [ ! -f .env ] || {
