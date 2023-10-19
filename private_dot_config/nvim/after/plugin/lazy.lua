@@ -8,6 +8,7 @@ local opts = {
   border = "single",
 }
 
+
 local packages = {
   "wbthomason/packer.nvim",
   "nvim-lua/plenary.nvim",
@@ -19,15 +20,7 @@ local packages = {
   { "numToStr/Comment.nvim",     config = true },
   { "m4xshen/autoclose.nvim",    config = true },
 
-  {
-    "Exafunction/codeium.vim",
-    event = "BufEnter",
-  },
-
-  {
-    "ggandor/lightspeed.nvim",
-    dependencies = { "tpope/vim-repeat" }
-  },
+  { "Exafunction/codeium.vim",   cmd = "Codeium" },
 
   {
     "stevearc/oil.nvim",
@@ -38,7 +31,7 @@ local packages = {
   {
     "lewis6991/gitsigns.nvim",
     config = true,
-    event = "BufEnter",
+    cmd = "Gitsigns",
     keys = {
       { '<leader>gb', '<cmd>Gitsigns blame_line<cr>',   silent = true, desc = "[G]it [B]lame" },
       { '<leader>gs', '<cmd>Gitsigns stage_hunk<cr>',   silent = true, desc = "[G]it [S]tage" },
@@ -47,27 +40,6 @@ local packages = {
       { ']c',         '<cmd>Gitsigns next_hunk<cr>',    silent = true, desc = "[G]it [N]ext Hunk" },
       { '[c',         '<cmd>Gitsigns prev_hunk<cr>',    silent = true, desc = "[G]it [P]rev Hunk" },
     }
-  },
-
-  {
-    "tpope/vim-fugitive",
-    cmd = "Git",
-    keys = { { '<leader>gg', '<cmd>Git<cr>', silent = true, desc = "[G]it" } },
-  },
-
-  {
-    "MeanderingProgrammer/harpoon-core.nvim",
-    config = true,
-    keys = {
-      { 'mm', function() require('harpoon-core.ui').toggle_quick_menu() end, desc = "Harpoon Quick [M]enu" },
-      { 'mz', function() require('harpoon-core.mark').add_file() end,        desc = "Harpoon [A]dd File" },
-      { 'mx', function() require('harpoon-core.mark').rm_file() end,         desc = "Harpoon [R]emove File" },
-      { 'ma', function() require('harpoon-core.ui').nav_file(1) end,         desc = "Harpoon File [1]" },
-      { 'ms', function() require('harpoon-core.ui').nav_file(2) end,         desc = "Harpoon File [2]" },
-      { 'md', function() require('harpoon-core.ui').nav_file(3) end,         desc = "Harpoon File [3]" },
-      { 'mf', function() require('harpoon-core.ui').nav_file(4) end,         desc = "Harpoon File [4]" },
-      { 'mg', function() require('harpoon-core.ui').nav_file(5) end,         desc = "Harpoon File [5]" },
-    },
   },
 
   {
@@ -107,52 +79,6 @@ local packages = {
       { '<leader>fh', '<cmd>Telescope help_tags<cr>',                 silent = true, desc = "[F]ind [H]elp" },
       { '<leader>fs', '<cmd>Telescope current_buffer_fuzzy_find<cr>', silent = true, desc = "[F]ind [S]earch" },
     },
-  },
-
-  {
-    'hrsh7th/nvim-cmp',
-    dependencies = {
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-cmdline",
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-vsnip",
-      "hrsh7th/vim-vsnip"
-    },
-    config = function()
-      local cmp = require("cmp")
-      cmp.setup({
-        snippet = {
-          expand = function(args) vim.fn["vsnip#anonymous"](args.body) end,
-        },
-        window = {
-          completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered(),
-        },
-        mapping = cmp.mapping.preset.insert({
-          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-f>'] = cmp.mapping.scroll_docs(4),
-          ['<C-l>'] = cmp.mapping.complete(),
-          ['<C-e>'] = cmp.mapping.abort(),
-          ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-        }),
-        sources = cmp.config.sources({
-          { name = 'nvim_lsp' },
-          { name = 'vsnip' },
-        }, {
-          { name = 'buffer' },
-        })
-      })
-
-      cmp.setup.cmdline({ '/', '?' }, {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = { { name = 'buffer' } }
-      })
-      cmp.setup.cmdline(':', {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources({ { name = 'path' } }, { { name = 'cmdline' } })
-      })
-    end,
   },
 
   {
