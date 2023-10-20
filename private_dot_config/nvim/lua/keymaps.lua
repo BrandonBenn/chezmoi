@@ -1,7 +1,6 @@
 local keymap = require("utils").keymap
 
 -- Set Keymaps
-keymap("n", 'gw', '<cmd>grep! <cword>.<cr> | <cmd>copen <cr>')
 keymap("n", ";w", vim.cmd.update)
 keymap("n", "<c-w>q", function()
   local multiple_windows, _ = pcall(vim.cmd, "close")

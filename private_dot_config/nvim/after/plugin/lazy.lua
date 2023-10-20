@@ -21,11 +21,17 @@ local packages = {
   { "m4xshen/autoclose.nvim",    config = true },
 
   {
+    "dzfrias/arena.nvim",
+    config = true,
+    keys = {
+      { '<leader><leader>', function() require("arena").toggle() end, desc = "Toggle Buffer Arena" },
+    },
+  },
+
+  {
     "Exafunction/codeium.vim",
     cmd = "Codeium",
-    init = function()
-      vim.g.codeium_disable_bindings = 1
-    end,
+    init = function() vim.g.codeium_disable_bindings = 1 end,
     keys = {
       { '<C-c>',  function() return vim.fn['codeium#Clear']() end,              expr = true, mode = 'i' },
       { '<M-\\>', function() return vim.fn['codeium#Complete']() end,           expr = true, mode = 'i' },
