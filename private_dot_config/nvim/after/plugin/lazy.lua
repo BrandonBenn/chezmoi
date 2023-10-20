@@ -20,7 +20,20 @@ local packages = {
   { "numToStr/Comment.nvim",     config = true },
   { "m4xshen/autoclose.nvim",    config = true },
 
-  { "Exafunction/codeium.vim",   cmd = "Codeium" },
+  {
+    "Exafunction/codeium.vim",
+    cmd = "Codeium",
+    init = function()
+      vim.g.codeium_disable_bindings = 1
+    end,
+    keys = {
+      { '<C-c>',  function() return vim.fn['codeium#Clear']() end,              expr = true, mode = 'i' },
+      { '<M-\\>', function() return vim.fn['codeium#Complete']() end,           expr = true, mode = 'i' },
+      { '<Tab>',  function() return vim.fn['codeium#Accept']() end,             expr = true, mode = 'i' },
+      { '<M-]>',  function() return vim.fn['codeium#CycleCompletions'](1) end,  expr = true, mode = 'i' },
+      { '<M-[>',  function() return vim.fn['codeium#CycleCompletions'](-1) end, expr = true, mode = 'i' },
+    }
+  },
 
   {
     "stevearc/oil.nvim",
@@ -98,7 +111,14 @@ local packages = {
 
       require("mason-tool-installer").setup({
         ensure_installed = {
-          "isort", "black", "ruff", "stylua", "shellcheck", "eslint_d", "prettier", "shfmt",
+          "black",
+          "eslint_d",
+          "isort",
+          "prettier",
+          "ruff",
+          "shellcheck",
+          "shfmt",
+          "stylua",
         },
       })
     end,

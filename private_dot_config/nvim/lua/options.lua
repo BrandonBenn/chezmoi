@@ -1,31 +1,31 @@
 vim.cmd.colorscheme("typograph")
-vim.g.mapleader = " "
-vim.g.maplocalleader = ","
-vim.o.exrc = true
-vim.o.title = true
-vim.o.hidden = true
-vim.o.number = false
-vim.o.relativenumber = false
-vim.o.scrolloff = 999
-vim.o.shiftwidth = 2
-vim.o.tabstop = 2
-vim.o.shiftwidth = 2
-vim.o.expandtab = true
-vim.o.termguicolors = true
-vim.o.udir = "/tmp/nvim/undo"
-vim.o.undofile = true
-vim.o.wrap = false
-vim.o.mouse = ""
-vim.o.showmode = false
-vim.o.laststatus = 3
-vim.o.cursorline = false
-vim.opt.statusline = [[ ]]
-vim.o.completeopt = "menu"
 vim.g.loaded_netrwPlugin = 1
 vim.g.loaded_netrw = 1
+vim.g.mapleader = " "
+vim.g.maplocalleader = ","
+vim.opt.exrc = true
+vim.opt.title = true
+vim.opt.hidden = true
+vim.opt.number = false
+vim.opt.relativenumber = false
+vim.opt.scrolloff = 999
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
+vim.opt.termguicolors = true
+vim.opt.udir = "/tmp/nvim/undo"
+vim.opt.undofile = true
+vim.opt.wrap = false
+vim.opt.mouse = ""
+vim.opt.showmode = false
+vim.opt.laststatus = 3
+vim.opt.cursorline = false
+vim.opt.statusline = [[ ]]
+vim.opt.completeopt = "menu"
 
 if vim.fn.executable('rg') == 1 then
-  vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case --hidden --glob !.git'
-  vim.o.grepformat = '%f:%l:%c:%m'
+  vim.opt.grepprg = 'rg --vimgrep --no-heading --smart-case --hidden --glob !.git'
+  vim.opt.grepformat = '%f:%l:%c:%m'
 end
 
