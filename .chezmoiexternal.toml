@@ -13,3 +13,7 @@
     type = "git-repo"
     [".local/share/nvim/lazy/lazy.nvim" .clone]
       args = ["--branch=stable", "--filter=blob:none"]
+
+[".local/share/bash/fzf.bash"]
+  url = "https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.bash"
+  type = "file"
