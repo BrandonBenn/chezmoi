@@ -31,6 +31,7 @@ PATH="$PATH":"$GOPATH"/bin
 PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
 export PATH
 
+source "$HOME"/.local/share/bash/fzf.bash
 [ ! -f ~/.bashrc.local ] || . "$HOME"/.bashrc.local
 [ ! -f .env ] || {
 	set -o allexport
