@@ -1,41 +1,37 @@
-local wezterm = require("wezterm")
-return {
-  { key = "a",  mods = "LEADER|CTRL",  action = wezterm.action { SendString = "\x01" } },
-  { key = "c",  mods = "LEADER",       action = wezterm.action { SpawnTab = "CurrentPaneDomain" } },
-  { key = "h",  mods = "LEADER",       action = wezterm.action { ActivatePaneDirection = "Left" } },
-  { key = "j",  mods = "LEADER",       action = wezterm.action { ActivatePaneDirection = "Down" } },
-  { key = "k",  mods = "LEADER",       action = wezterm.action { ActivatePaneDirection = "Up" } },
-  { key = "l",  mods = "LEADER",       action = wezterm.action { ActivatePaneDirection = "Right" } },
-  { key = "n",  mods = "LEADER",       action = wezterm.action.ActivateTabRelative(1) },
-  { key = "p",  mods = "LEADER",       action = wezterm.action.ActivateTabRelative(-1) },
-  { key = "q",  mods = "LEADER",       action = wezterm.action.PaneSelect { alphabet = "asdfghjkl", }, },
-  { key = "w",  mods = "LEADER",       action = wezterm.action.ShowTabNavigator },
-  { key = "x",  mods = "LEADER",       action = wezterm.action { CloseCurrentPane = { confirm = true } } },
-  { key = "z",  mods = "LEADER",       action = "TogglePaneZoomState" },
-  { key = "H",  mods = "LEADER|SHIFT", action = wezterm.action { AdjustPaneSize = { "Left", 5 } } },
-  { key = "J",  mods = "LEADER|SHIFT", action = wezterm.action { AdjustPaneSize = { "Down", 5 } } },
-  { key = "K",  mods = "LEADER|SHIFT", action = wezterm.action { AdjustPaneSize = { "Up", 5 } } },
-  { key = "L",  mods = "LEADER|SHIFT", action = wezterm.action { AdjustPaneSize = { "Right", 5 } } },
-  { key = "R",  mods = "LEADER|SHIFT", action = wezterm.action.ReloadConfiguration },
-  { key = "V",  mods = "SHIFT|CTRL",   action = wezterm.action.PasteFrom("Clipboard") },
-  { key = "C",  mods = "SHIFT|CTRL",   action = wezterm.action.CopyTo("Clipboard") },
-  { key = "v",  mods = "SUPER",        action = wezterm.action.PasteFrom("Clipboard") },
-  { key = "c",  mods = "SUPER",        action = wezterm.action.CopyTo("Clipboard") },
-  { key = "%",  mods = "LEADER",       action = wezterm.action { SplitVertical = { domain = "CurrentPaneDomain" } } },
-  { key = "1",  mods = "LEADER",       action = wezterm.action { ActivateTab = 0 } },
-  { key = "2",  mods = "LEADER",       action = wezterm.action { ActivateTab = 1 } },
-  { key = "3",  mods = "LEADER",       action = wezterm.action { ActivateTab = 2 } },
-  { key = "4",  mods = "LEADER",       action = wezterm.action { ActivateTab = 3 } },
-  { key = "5",  mods = "LEADER",       action = wezterm.action { ActivateTab = 4 } },
-  { key = "6",  mods = "LEADER",       action = wezterm.action { ActivateTab = 5 } },
-  { key = "7",  mods = "LEADER",       action = wezterm.action { ActivateTab = 6 } },
-  { key = "8",  mods = "LEADER",       action = wezterm.action { ActivateTab = 7 } },
-  { key = "9",  mods = "LEADER",       action = wezterm.action { ActivateTab = 8 } },
-  { key = " ",  mods = "LEADER",       action = wezterm.action.QuickSelect },
-  { key = "\"", mods = "LEADER",       action = wezterm.action { SplitHorizontal = { domain = "CurrentPaneDomain" } } },
-  { key = "[",  mods = "LEADER",       action = wezterm.action.ActivateCopyMode },
-  { key = '+',  mods = "SHIFT|CTRL",   action = wezterm.action.IncreaseFontSize },
-  { key = '_',  mods = "SHIFT|CTRL",   action = wezterm.action.DecreaseFontSize },
-  { key = '=',  mods = "SUPER",        action = wezterm.action.IncreaseFontSize },
-  { key = '-',  mods = "SUPER",        action = wezterm.action.DecreaseFontSize },
+local action = require("wezterm").action
+local keys = {}
+
+keys = {
+  { key = "t",     mods = "SHIFT|CTRL", action = action { SpawnTab = "CurrentPaneDomain" } },
+  { key = "Tab",   mods = "CTRL",       action = action.ActivateTabRelative(1) },
+  { key = "Tab",   mods = "SHIFT|CTRL", action = action.ActivateTabRelative(-1) },
+  { key = "y",     mods = "SHIFT|CTRL", action = action.PaneSelect { alphabet = "asdfghjkl", }, },
+  { key = "w",     mods = "SHIFT|CTRL", action = action { CloseCurrentPane = { confirm = true } } },
+  { key = "z",     mods = "SHIFT|CTRL", action = "TogglePaneZoomState" },
+  { key = "h",     mods = "ALT",        action = action { ActivatePaneDirection = "Left" } },
+  { key = "j",     mods = "ALT",        action = action { ActivatePaneDirection = "Down" } },
+  { key = "k",     mods = "ALT",        action = action { ActivatePaneDirection = "Up" } },
+  { key = "l",     mods = "ALT",        action = action { ActivatePaneDirection = "Right" } },
+  { key = "H",     mods = "CTRL|ALT",   action = action { AdjustPaneSize = { "Left", 5 } } },
+  { key = "J",     mods = "CTRL|ALT",   action = action { AdjustPaneSize = { "Down", 5 } } },
+  { key = "K",     mods = "CTRL|ALT",   action = action { AdjustPaneSize = { "Up", 5 } } },
+  { key = "L",     mods = "CTRL|ALT",   action = action { AdjustPaneSize = { "Right", 5 } } },
+  { key = "V",     mods = "SHIFT|CTRL", action = action.PasteFrom("Clipboard") },
+  { key = "C",     mods = "SHIFT|CTRL", action = action.CopyTo("Clipboard") },
+  { key = "v",     mods = "SUPER",      action = action.PasteFrom("Clipboard") },
+  { key = "c",     mods = "SUPER",      action = action.CopyTo("Clipboard") },
+  { key = "u",     mods = "SHIFT|CTRL", action = action.QuickSelect },
+  { key = "Enter", mods = "ALT",        action = action { SplitVertical = { domain = "CurrentPaneDomain" } } },
+  { key = "Enter", mods = "SHIFT|ALT",  action = action { SplitHorizontal = { domain = "CurrentPaneDomain" } } },
+  { key = " ",     mods = "SHIFT|CTRL", action = action.ActivateCopyMode },
+  { key = '=',     mods = "CTRL",       action = action.IncreaseFontSize },
+  { key = '-',     mods = "CTRL",       action = action.DecreaseFontSize },
 }
+
+
+for i = 1, 9 do
+  keys[#keys + 1] = { key = tostring(i), mods = "ALT", action = action { ActivateTab = i - 1 } }
+end
+
+
+return keys
