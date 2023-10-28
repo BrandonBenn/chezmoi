@@ -64,7 +64,7 @@ local packages = {
   {
     'nvim-telescope/telescope.nvim',
     cmd = { 'Telescope' },
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    dependencies = { 'nvim-lua/plenary.nvim', 'prochri/telescope-all-recent.nvim', 'kkharji/sqlite.lua' },
     config = function()
       local action_layout = require("telescope.actions.layout")
       require('telescope').setup {
@@ -86,6 +86,8 @@ local packages = {
           current_buffer_fuzzy_find = { previewer = false },
         },
       }
+
+      require 'telescope-all-recent'.setup {}
     end,
     keys = {
       { '<leader>fb', '<cmd>Telescope buffers<cr>',                   silent = true, desc = "[F]ind [B]uffer" },
