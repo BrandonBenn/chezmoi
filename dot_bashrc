@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 
 [ -x "/opt/homebrew/bin/brew" ] && eval "$(/opt/homebrew/bin/brew shellenv)"
-[ -x "$(command -v rtx)" ] && eval "$(rtx activate bash)"
-[ -x "$(command -v zoxide)" ] && eval "$(zoxide init bash)"
-[ -x "$(command -v starship)" ] && eval "$(starship init bash)"
-
 PS1=' $ '
 alias ls='ls -F --color=auto --hyperlink=auto'
 alias ll='ls -lah'
@@ -24,7 +20,6 @@ export TERM=xterm-256color
 export HISTFILE=~/.cache/history
 export HISTSIZE=10000
 export SAVEHIST=10000
-export NO_COLOR=1
 PATH="$PATH":~/.local/bin
 PATH="$PATH":~/bin
 PATH="$PATH":"$GOPATH"/bin
@@ -38,3 +33,8 @@ source "$HOME"/.local/share/bash/fzf.bash
 	source .env
 	set +o allexport
 }
+
+[ -x "$(command -v rtx)" ] && eval "$(rtx activate bash)"
+[ -x "$(command -v zoxide)" ] && eval "$(zoxide init bash)"
+[ -x "$(command -v starship)" ] && eval "$(starship init bash)"
+

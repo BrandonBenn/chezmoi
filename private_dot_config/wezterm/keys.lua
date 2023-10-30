@@ -1,36 +1,55 @@
-local action = require("wezterm").action
+local wezterm = require("wezterm")
+local action = wezterm.action
 local keys = {}
+local is_macos = wezterm.target_triple == "aarch64-apple-darwin"
+
+
+local mod1 = 'ALT'
+local super = 'SUPER'
+local ctrl_mod1 = 'CTRL|' .. mod1
+local shift_mod1 = 'SHIFT|' .. mod1
+local shift_ctrl = 'SHIFT|CTRL'
+
+local mod4 = (is_macos and super or shift_ctrl)
 
 keys = {
-  { key = "t",     mods = "SHIFT|CTRL", action = action { SpawnTab = "CurrentPaneDomain" } },
-  { key = "Tab",   mods = "CTRL",       action = action.ActivateTabRelative(1) },
-  { key = "Tab",   mods = "SHIFT|CTRL", action = action.ActivateTabRelative(-1) },
-  { key = "y",     mods = "SHIFT|CTRL", action = action.PaneSelect { alphabet = "asdfghjkl", }, },
-  { key = "w",     mods = "SHIFT|CTRL", action = action { CloseCurrentPane = { confirm = true } } },
-  { key = "z",     mods = "SHIFT|CTRL", action = "TogglePaneZoomState" },
-  { key = "h",     mods = "ALT",        action = action { ActivatePaneDirection = "Left" } },
-  { key = "j",     mods = "ALT",        action = action { ActivatePaneDirection = "Down" } },
-  { key = "k",     mods = "ALT",        action = action { ActivatePaneDirection = "Up" } },
-  { key = "l",     mods = "ALT",        action = action { ActivatePaneDirection = "Right" } },
-  { key = "H",     mods = "CTRL|ALT",   action = action { AdjustPaneSize = { "Left", 5 } } },
-  { key = "J",     mods = "CTRL|ALT",   action = action { AdjustPaneSize = { "Down", 5 } } },
-  { key = "K",     mods = "CTRL|ALT",   action = action { AdjustPaneSize = { "Up", 5 } } },
-  { key = "L",     mods = "CTRL|ALT",   action = action { AdjustPaneSize = { "Right", 5 } } },
-  { key = "V",     mods = "SHIFT|CTRL", action = action.PasteFrom("Clipboard") },
-  { key = "C",     mods = "SHIFT|CTRL", action = action.CopyTo("Clipboard") },
-  { key = "v",     mods = "SUPER",      action = action.PasteFrom("Clipboard") },
-  { key = "c",     mods = "SUPER",      action = action.CopyTo("Clipboard") },
-  { key = "u",     mods = "SHIFT|CTRL", action = action.QuickSelect },
-  { key = "Enter", mods = "ALT",        action = action { SplitVertical = { domain = "CurrentPaneDomain" } } },
-  { key = "Enter", mods = "SHIFT|ALT",  action = action { SplitHorizontal = { domain = "CurrentPaneDomain" } } },
-  { key = " ",     mods = "SHIFT|CTRL", action = action.ActivateCopyMode },
-  { key = '=',     mods = "CTRL",       action = action.IncreaseFontSize },
-  { key = '-',     mods = "CTRL",       action = action.DecreaseFontSize },
+  { key = "Tab",   mods = "CTRL",     action = action.ActivateTabRelative(1) },
+  { key = "Tab",   mods = shift_ctrl, action = action.ActivateTabRelative(-1) },
+  { key = "h",     mods = mod1,       action = action { ActivatePaneDirection = "Left" } },
+  { key = "j",     mods = mod1,       action = action { ActivatePaneDirection = "Down" } },
+  { key = "k",     mods = mod1,       action = action { ActivatePaneDirection = "Up" } },
+  { key = "l",     mods = mod1,       action = action { ActivatePaneDirection = "Right" } },
+  { key = "h",     mods = ctrl_mod1,  action = action { AdjustPaneSize = { "Left", 5 } } },
+  { key = "j",     mods = ctrl_mod1,  action = action { AdjustPaneSize = { "Down", 5 } } },
+  { key = "k",     mods = ctrl_mod1,  action = action { AdjustPaneSize = { "Up", 5 } } },
+  { key = "l",     mods = ctrl_mod1,  action = action { AdjustPaneSize = { "Right", 5 } } },
+  { key = "Enter", mods = mod1,       action = action { SplitVertical = { domain = "CurrentPaneDomain" } } },
+  { key = "Enter", mods = shift_mod1, action = action { SplitHorizontal = { domain = "CurrentPaneDomain" } } },
+  { key = " ",     mods = shift_ctrl, action = action.ActivateCopyMode },
+  { key = '=',     mods = mod4,       action = action.IncreaseFontSize },
+  { key = '-',     mods = mod4,       action = action.DecreaseFontSize },
+  { key = "t",     mods = mod4,       action = action { SpawnTab = "CurrentPaneDomain" } },
+  { key = "u",     mods = mod4,       action = action.QuickSelect },
+  { key = "y",     mods = mod4,       action = action.PaneSelect { alphabet = "asdfghjkl", }, },
+  { key = "w",     mods = mod4,       action = action { CloseCurrentPane = { confirm = true } } },
+  { key = "z",     mods = mod4,       action = "TogglePaneZoomState" },
+  { key = '/',     mods = mod4,       action = action.Search("CurrentSelectionOrEmptyString") },
 }
 
+if is_macos then
+  keys[#keys + 1] = { key = "v", mods = mod4, action = action.PasteFrom("Clipboard") }
+  keys[#keys + 1] = { key = "c", mods = mod4, action = action.CopyTo("Clipboard") }
+  keys[#keys + 1] = { key = 'p', mods = mod4, action = action.ActivateCommandPalette }
+  keys[#keys + 1] = { key = 'k', mods = mod4, action = action.ClearScrollback 'ScrollbackAndViewport' }
+else
+  keys[#keys + 1] = { key = "V", mods = shift_ctrl, action = action.PasteFrom("Clipboard") }
+  keys[#keys + 1] = { key = "C", mods = shift_ctrl, action = action.CopyTo("Clipboard") }
+  keys[#keys + 1] = { key = 'P', mods = mod4, action = action.ActivateCommandPalette }
+  keys[#keys + 1] = { key = 'K', mods = shift_ctrl, action = action.ClearScrollback 'ScrollbackAndViewport' }
+end
 
 for i = 1, 9 do
-  keys[#keys + 1] = { key = tostring(i), mods = "ALT", action = action { ActivateTab = i - 1 } }
+  keys[#keys + 1] = { key = tostring(i), mods = (is_macos and mod4 or mod1), action = action { ActivateTab = i - 1 } }
 end
 
 
