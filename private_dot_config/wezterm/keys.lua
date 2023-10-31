@@ -41,11 +41,15 @@ if is_macos then
   keys[#keys + 1] = { key = "c", mods = mod4, action = action.CopyTo("Clipboard") }
   keys[#keys + 1] = { key = 'p', mods = mod4, action = action.ActivateCommandPalette }
   keys[#keys + 1] = { key = 'k', mods = mod4, action = action.ClearScrollback 'ScrollbackAndViewport' }
+  keys[#keys + 1] = { key = '+', mods = mod4, action = action.IncreaseFontSize }
+  keys[#keys + 1] = { key = '-', mods = mod4, action = action.DecreaseFontSize }
 else
-  keys[#keys + 1] = { key = "V", mods = shift_ctrl, action = action.PasteFrom("Clipboard") }
-  keys[#keys + 1] = { key = "C", mods = shift_ctrl, action = action.CopyTo("Clipboard") }
+  keys[#keys + 1] = { key = "V", mods = mod4, action = action.PasteFrom("Clipboard") }
+  keys[#keys + 1] = { key = "C", mods = mod4, action = action.CopyTo("Clipboard") }
   keys[#keys + 1] = { key = 'P', mods = mod4, action = action.ActivateCommandPalette }
   keys[#keys + 1] = { key = 'K', mods = shift_ctrl, action = action.ClearScrollback 'ScrollbackAndViewport' }
+  keys[#keys + 1] = { key = '+', mods = mod4, action = action.IncreaseFontSize }
+  keys[#keys + 1] = { key = '_', mods = mod4, action = action.DecreaseFontSize }
 end
 
 for i = 1, 9 do
